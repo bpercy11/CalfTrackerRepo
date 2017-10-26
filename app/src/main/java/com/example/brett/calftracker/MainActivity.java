@@ -8,6 +8,7 @@ import android.os.Bundle;
 //NEW NEW comment - Brendon
 //New NEW NEW comment - Alex
 //NEW NEW NEW NEW comment - Lisa
+//NEW NEW NEW NEW NEW comment - brendon
 
 public class MainActivity extends AppCompatActivity {
 
