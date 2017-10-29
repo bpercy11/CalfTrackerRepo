@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddCalfActivity" />
+        <activity android:name=".CalfListActivity"></activity>
     </application>
 
 </manifest>
