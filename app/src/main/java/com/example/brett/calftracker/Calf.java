@@ -1,10 +1,10 @@
-import java.awt.Image;
+//import java.awt.Image;
 import java.util.ArrayList;
 
 public class Calf {
 	private int farmId;
 	private int internalId;
-	private Image calfPhoto;
+	//private Image calfPhoto;
 	private String gender;
 	private Easy_Date dateOfBirth;
 	private ArrayList<String> calfAllergies;
@@ -38,7 +38,7 @@ public class Calf {
 		
 		// SET UP REST OF FIELDS FOR LATER USE
 		this.active = true;
-		this.calfPhoto = null;
+		//this.calfPhoto = null;
 		this.calfAllergies = new ArrayList<String>();
 		this.administeredVaccines = new ArrayList<Vaccine_With_Date>();
 		this.illnessHistory = new ArrayList<Calf_Illness>();
@@ -79,16 +79,16 @@ public class Calf {
 	/**
 	 * @return the calfPhoto
 	 */
-	public Image getCalfPhoto() {
+	/*public Image getCalfPhoto() {
 		return calfPhoto;
-	}
+	}*/
 
 	/**
 	 * @param calfPhoto the calfPhoto to set
 	 */
-	public void setCalfPhoto(Image calfPhoto) {
+	/*public void setCalfPhoto(Image calfPhoto) {
 		this.calfPhoto = calfPhoto;
-	}
+	}*/
 
 	/**
 	 * @return the gender
