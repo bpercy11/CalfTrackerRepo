@@ -52,10 +52,9 @@ public class Calf {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
 		this.farmId = farmId;
-		this.internalId = internalId;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
-		this.neededVaccines = neededVaccines;
+		this.neededVaccines = new ArrayList<Vaccine>();
 
 		// SET UP REST OF FIELDS FOR LATER USE
 		this.active = true;

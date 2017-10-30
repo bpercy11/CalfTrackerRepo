@@ -1,8 +1,13 @@
 package com.example.brett.calftracker;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 public class CalfProfileActivity extends AppCompatActivity {
 
@@ -14,6 +19,8 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mWeightValue;
     private TextView mHeightValue;
 
+    private Calf calf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +28,15 @@ public class CalfProfileActivity extends AppCompatActivity {
 
 
         // try and get calf object made by main activity
+        SharedPreferences mPreferences = getSharedPreferences("test", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = mPreferences.getString("newCalf","");
+        calf = gson.fromJson(json, Calf.class);
+
 
         // print to log calf cbject information
-        fillTextViewValues();
-    }
-
-    private void fillTextViewValues() {
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
@@ -35,7 +45,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
 
-        // TEXTVIEW.SETTEXT FOR EACH TEXTVIEW, USING DATA FROM CALF MODEL
-        // PROBABLY OBTAINED FROM SQL DATABASE
+        int farmID = calf.getFarmId();
+        mIDValue.setText(Integer.toString(farmID));
+        mGenderValue.setText(calf.getGender());
     }
 }
