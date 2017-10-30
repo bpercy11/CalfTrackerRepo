@@ -19,6 +19,10 @@ public class CalfProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile);
 
+
+        // try and get calf object made by main activity
+
+        // print to log calf cbject information
         fillTextViewValues();
     }
 

@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // on app start to main activity make a new farm object
+
+        // turn that into json through gson and save to shared preferences
     }
 
     public void clickButton(View view) {

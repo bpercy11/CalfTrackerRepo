@@ -1,11 +1,12 @@
 package com.example.brett.calftracker;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Calf {
 	private int farmId;
 	private int internalId;
 	private String gender;
-	private Easy_Date dateOfBirth;
+	private Calendar dateOfBirth;
 	private ArrayList<String> calfAllergies;
 	private String sire;
 	private String dam;
@@ -25,7 +26,7 @@ public class Calf {
 	 * @param dateOfBirth
 	 * @param neededVaccines
 	 */
-	public Calf(int farmId, int internalId, String gender, Easy_Date dateOfBirth,
+	public Calf(int farmId, int internalId, String gender, Calendar dateOfBirth,
 			ArrayList<Vaccine> neededVaccines) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
@@ -35,6 +36,27 @@ public class Calf {
 		this.dateOfBirth = dateOfBirth;
 		this.neededVaccines = neededVaccines;
 		
+		// SET UP REST OF FIELDS FOR LATER USE
+		this.active = true;
+		this.calfAllergies = new ArrayList<String>();
+		this.administeredVaccines = new ArrayList<Vaccine_With_Date>();
+		this.illnessHistory = new ArrayList<Calf_Illness>();
+		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
+		this.feedingHistory = new Feeding[2];
+
+		this.needToObserveForIllness = false;
+	}
+
+	//LAZY WITHOUT INTERNAL AND USING CALENDAR
+	public Calf(int farmId, String gender, Calendar dateOfBirth) {
+		super();
+		// FROM CONSTRUCTOR ARGUMENTS
+		this.farmId = farmId;
+		this.internalId = internalId;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
+		this.neededVaccines = neededVaccines;
+
 		// SET UP REST OF FIELDS FOR LATER USE
 		this.active = true;
 		this.calfAllergies = new ArrayList<String>();
@@ -91,14 +113,14 @@ public class Calf {
 	/**
 	 * @return the dateOfBirth
 	 */
-	public Easy_Date getDateOfBirth() {
+	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 
 	/**
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
-	public void setDateOfBirth(Easy_Date dateOfBirth) {
+	public void setDateOfBirth(Calendar dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
