@@ -16,8 +16,6 @@ import android.os.Bundle;
 //farm branch test - brendon
 //Another comment
 
-//test
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
