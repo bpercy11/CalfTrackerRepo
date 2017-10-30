@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.example.brett.calftracker.AddCalfActivity">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical10percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical90percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
     <TextView
         android:id="@+id/textViewIDNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="150dp"
         android:text="@string/add_calf_ID_Number"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActivityTitle" />
 
     <TextView
@@ -25,7 +37,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/add_calf_DOB"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewGender"
+        app:layout_constraintStart_toStartOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
     <TextView
@@ -51,34 +63,33 @@
 
     <TextView
         android:id="@+id/textViewDisplayDate"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="@string/add_calf_select_date"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDOB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewDOB"
+        app:layout_constraintEnd_toEndOf="@+id/editTextGetID"
         app:layout_constraintTop_toTopOf="@+id/textViewDOB" />
 
     <EditText
         android:id="@+id/editTextGetID"
         style="@android:style/Widget.AutoCompleteTextView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/add_calf_get_ID"
         android:inputType="number"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewIDNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewDisplayDate"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintStart_toEndOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toTopOf="@+id/textViewIDNumber" />
 
     <Button
@@ -94,15 +105,14 @@
 
     <TextView
         android:id="@+id/textViewSelectGender"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="@string/add_calf_select_gender"
+        android:textAlignment="textEnd"
+        android:gravity="end"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewGender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewDisplayDate"
+        app:layout_constraintEnd_toEndOf="@+id/editTextGetID"
         app:layout_constraintTop_toTopOf="@+id/textViewGender" />
 
 </android.support.constraint.ConstraintLayout>
