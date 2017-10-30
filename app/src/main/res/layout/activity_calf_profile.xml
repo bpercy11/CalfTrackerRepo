@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.brett.calftracker.CalfProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical10percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical50percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <TextView
+                android:id="@+id/textViewIMAGEPLACEHOLDER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:text="IMAGE PLACEHOLDER"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewIDField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:text="@string/calf_profile_ID_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewIMAGEPLACEHOLDER" />
+
+            <TextView
+                android:id="@+id/textViewGenderField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_gender_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewIDField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewIDField" />
+
+            <TextView
+                android:id="@+id/textViewSireField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_sire_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewDOBField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
+
+            <TextView
+                android:id="@+id/textViewDOBField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_DOB_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewGenderField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewGenderField" />
+
+            <TextView
+                android:id="@+id/textViewWeightField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_weight_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewDamField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
+
+            <TextView
+                android:id="@+id/textViewHeightField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_height_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewWeightField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWeightField" />
+
+            <TextView
+                android:id="@+id/textViewDamField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/calf_profile_dam_field"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSireField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSireField" />
+
+            <TextView
+                android:id="@+id/textViewIDValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewIDField"
+                app:layout_constraintEnd_toStartOf="@+id/vertical50percent"
+                app:layout_constraintTop_toTopOf="@+id/textViewIDField" />
+
+            <TextView
+                android:id="@+id/textViewGenderValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GENDER VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewGenderField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewGenderField"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="142dp" />
+
+            <TextView
+                android:id="@+id/textViewDOBValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOB VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewDOBField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewDOBField"
+                tools:layout_editor_absoluteX="142dp" />
+
+            <TextView
+                android:id="@+id/textViewSireValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIRE VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewSireField"
+                tools:layout_editor_absoluteX="142dp" />
+
+            <TextView
+                android:id="@+id/textViewDamValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAM VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewDamField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewDamField" />
+
+            <TextView
+                android:id="@+id/textViewWeightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WEIGHT VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewWeightField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewWeightField"
+                tools:layout_editor_absoluteX="139dp" />
+
+            <TextView
+                android:id="@+id/textViewHeightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HEIGHT VALUE"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewHeightField"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDValue"
+                app:layout_constraintTop_toTopOf="@+id/textViewHeightField"
+                tools:layout_editor_absoluteX="139dp" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

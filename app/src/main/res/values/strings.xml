@@ -1,11 +1,23 @@
 <resources>
     <string name="app_name">Calf Tracker</string>
-    <string name= "add_calf_title">Add a Calf</string>
-    <string name= "add_calf_ID_Number">ID Number</string>
-    <string name= "add_calf_gender">Gender</string>
-    <string name= "add_calf_DOB">Date of Birth</string>
-    <string name= "add_calf_add_button">Add</string>
-    <string name= "add_calf_get_ID">Enter ID Number</string>
-    <string name= "add_calf_select_date">Select a date</string>
-    <string name= "add_calf_select_gender">Select gender</string>
+    <string name="add_calf_title">Add a Calf</string>
+    <string name="add_calf_ID_Number">ID Number</string>
+    <string name="add_calf_gender">Gender</string>
+    <string name="add_calf_DOB">Date of Birth</string>
+    <string name="add_calf_add_button">Add</string>
+    <string name="add_calf_get_ID">Enter ID Number</string>
+    <string name="add_calf_select_date">Select a date</string>
+    <string name="add_calf_select_gender">Select gender</string>
+    <string name="calf_profile_ID_field">ID Number</string>
+    <string name="calf_profile_gender_field">Gender</string>
+    <string name="calf_profile_DOB_field">Date of Birth</string>
+    <string name="calf_profile_sire_field">Sire</string>
+    <string name="calf_profile_dam_field">Dam</string>
+    <string name="calf_profile_weight_field">Weight</string>
+    <string name="calf_profile_height_field">Height</string>
+    <string name="calf_profile_notes_field">Notes</string>
+    <string name="calf_profile_growth_history_button">Growth History</string>
+    <string name="calf_profile_feeding_history_button">Feeding History</string>
+    <string name="calf_profile_medical_history_button">Medical History</string>
+    <string name="action_settings">Action Settings</string>
 </resources>

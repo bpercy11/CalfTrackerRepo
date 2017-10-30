@@ -23,4 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,AddCalfActivity.class);
         startActivity(intent);
     }
+
+    public void clickButton2(View view) {
+        Intent intent = new Intent(this,CalfProfileActivity.class);
+        startActivity(intent);
+    }
 }
