@@ -1,5 +1,6 @@
 package com.example.brett.calftracker;
 
+
 public class Medicine {
 	private String name;
 	private double dosage;
@@ -91,5 +92,10 @@ public class Medicine {
 	 */
 	public void setMethodOfAdministration(String methodOfAdministration) {
 		this.methodOfAdministration = methodOfAdministration;
+	}
+
+	public Medicine createMedicine(String name, Double dosage, String dosage_units, int timeActive,
+								   String methodOfAdministration){
+		return new Medicine(name,dosage,dosage_units,timeActive,methodOfAdministration);
 	}
 }
