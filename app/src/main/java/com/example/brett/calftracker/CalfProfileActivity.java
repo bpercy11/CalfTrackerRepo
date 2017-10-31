@@ -99,7 +99,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         tempHeight = mHeightValue.getText().toString();
 
         // SET UP NOTE LISTVIEW
-        updateNoteListView();
+        updateNoteListView(calf);
 
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -112,9 +112,9 @@ public class CalfProfileActivity extends AppCompatActivity {
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
                 Calendar noteDate = calf.getNoteNdx(position).getDateEntered();
-                int year = calf.getDateOfBirth().get(Calendar.YEAR);
-                int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-                int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+                int year = noteDate.get(Calendar.YEAR);
+                int month = noteDate.get(Calendar.MONTH) + 1;
+                int day = noteDate.get(Calendar.DAY_OF_MONTH);
                 builder.setTitle("Note entered " + month + "/" + day + "/" + year);
                 builder.setView(output);
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -130,13 +130,13 @@ public class CalfProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void updateNoteListView() {
+    public void updateNoteListView(Calf calf) {
         ArrayList<String> allNoteDates = new ArrayList<String>();
         for(int i = 0; i < calf.getNotesSize(); i++) {
             Calendar noteDate = calf.getNoteNdx(i).getDateEntered();
-            int year = calf.getDateOfBirth().get(Calendar.YEAR);
-            int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-            int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+            int year = noteDate.get(Calendar.YEAR);
+            int month = noteDate.get(Calendar.MONTH) + 1;
+            int day = noteDate.get(Calendar.DAY_OF_MONTH);
             allNoteDates.add(month + "/" + day + "/" + year);
         }
 
@@ -456,7 +456,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 prefsEditor.putString("newCalf",json);
                 prefsEditor.apply();
 
-                updateNoteListView();
+                updateNoteListView(calf);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
