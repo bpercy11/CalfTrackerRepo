@@ -218,10 +218,13 @@
 
             <TextView
                 android:id="@+id/textViewSireValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="SIRE VALUE"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="NO SIRE RECORD"
                 android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewSireField"
@@ -229,35 +232,42 @@
 
             <TextView
                 android:id="@+id/textViewDamValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="DAM VALUE"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="NO DAM RECORD"
                 android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDamField"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewDamField" />
 
             <TextView
                 android:id="@+id/textViewWeightValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="WEIGHT VALUE"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="NO WEIGHT RECORD"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewWeightField"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
-                app:layout_constraintTop_toTopOf="@+id/textViewWeightField"
-                tools:layout_editor_absoluteX="139dp" />
+                app:layout_constraintTop_toTopOf="@+id/textViewWeightField" />
 
             <TextView
                 android:id="@+id/textViewHeightValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="HEIGHT VALUE"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="NO HEIGHT RECORD"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewHeightField"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
-                app:layout_constraintTop_toTopOf="@+id/textViewHeightField"
-                tools:layout_editor_absoluteX="139dp" />
+                app:layout_constraintTop_toTopOf="@+id/textViewHeightField" />
 
             <Button
                 android:id="@+id/buttonGrowthHistory"
@@ -297,14 +307,14 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_notes_field"
                 android:textAlignment="textStart"
-                android:layout_gravity="start"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
                 app:layout_constraintStart_toStartOf="parent"
