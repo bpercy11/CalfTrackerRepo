@@ -1,3 +1,5 @@
+package com.example.brett.calftracker;
+
 /**
  * Simple class to save a message and a date entered, used in calf.notes,
  * 
@@ -9,10 +11,8 @@ public class Note {
 	private Easy_Date dateEntered;
 	
 	/**
-	 * @param message
-	 * @param yearEntered
-	 * @param monthEntered
-	 * @param dayEntered
+	 * @param message is the message user enters in the note
+	 * @param dateEntered is the date the message was entered
 	 */
 	public Note(String message, Easy_Date dateEntered) {
 		super();

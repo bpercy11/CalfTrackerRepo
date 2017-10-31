@@ -1,3 +1,5 @@
+package com.example.brett.calftracker;
+import com.example.brett.calftracker.Calf;
 
 public class Vaccine_TODO
 {

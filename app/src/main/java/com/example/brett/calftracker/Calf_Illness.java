@@ -1,3 +1,5 @@
+package com.example.brett.calftracker;
+import com.example.brett.calftracker.Illness;
 
 public class Calf_Illness
 {

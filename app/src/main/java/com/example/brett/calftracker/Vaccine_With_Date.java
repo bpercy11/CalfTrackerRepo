@@ -1,3 +1,6 @@
+package com.example.brett.calftracker;
+import com.example.brett.calftracker.Vaccine;
+import com.example.brett.calftracker.Easy_Date;
 
 public class Vaccine_With_Date {
 	private Vaccine vaccine;
