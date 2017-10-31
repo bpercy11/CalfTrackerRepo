@@ -1,12 +1,12 @@
-//import java.awt.Image;
+package com.example.brett.calftracker;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Calf {
 	private int farmId;
 	private int internalId;
-	//private Image calfPhoto;
 	private String gender;
-	private Easy_Date dateOfBirth;
+	private Calendar dateOfBirth;
 	private ArrayList<String> calfAllergies;
 	private String sire;
 	private String dam;
@@ -26,7 +26,7 @@ public class Calf {
 	 * @param dateOfBirth
 	 * @param neededVaccines
 	 */
-	public Calf(int farmId, int internalId, String gender, Easy_Date dateOfBirth,
+	public Calf(int farmId, int internalId, String gender, Calendar dateOfBirth,
 			ArrayList<Vaccine> neededVaccines) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
@@ -38,12 +38,33 @@ public class Calf {
 		
 		// SET UP REST OF FIELDS FOR LATER USE
 		this.active = true;
-		//this.calfPhoto = null;
 		this.calfAllergies = new ArrayList<String>();
 		this.administeredVaccines = new ArrayList<Vaccine_With_Date>();
 		this.illnessHistory = new ArrayList<Calf_Illness>();
 		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
 		this.feedingHistory = new Feeding[2];
+		this.notes = new ArrayList<Note>();
+
+		this.needToObserveForIllness = false;
+	}
+
+	//LAZY WITHOUT INTERNAL AND USING CALENDAR
+	public Calf(int farmId, String gender, Calendar dateOfBirth) {
+		super();
+		// FROM CONSTRUCTOR ARGUMENTS
+		this.farmId = farmId;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
+		this.neededVaccines = new ArrayList<Vaccine>();
+
+		// SET UP REST OF FIELDS FOR LATER USE
+		this.active = true;
+		this.calfAllergies = new ArrayList<String>();
+		this.administeredVaccines = new ArrayList<Vaccine_With_Date>();
+		this.illnessHistory = new ArrayList<Calf_Illness>();
+		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
+		this.feedingHistory = new Feeding[2];
+		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
 	}
@@ -77,20 +98,6 @@ public class Calf {
 	}
 
 	/**
-	 * @return the calfPhoto
-	 */
-	/*public Image getCalfPhoto() {
-		return calfPhoto;
-	}*/
-
-	/**
-	 * @param calfPhoto the calfPhoto to set
-	 */
-	/*public void setCalfPhoto(Image calfPhoto) {
-		this.calfPhoto = calfPhoto;
-	}*/
-
-	/**
 	 * @return the gender
 	 */
 	public String getGender() {
@@ -107,14 +114,14 @@ public class Calf {
 	/**
 	 * @return the dateOfBirth
 	 */
-	public Easy_Date getDateOfBirth() {
+	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 
 	/**
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
-	public void setDateOfBirth(Easy_Date dateOfBirth) {
+	public void setDateOfBirth(Calendar dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -250,6 +257,17 @@ public class Calf {
 	public ArrayList<Note> getNotes() {
 		return notes;
 	}
+
+	/**
+	 * @param note the note to add
+	 */
+	public void addNote(Note note) {
+		this.notes.add(note);
+	}
+
+	public Note getNoteNdx(int i) { return this.notes.get(i); }
+
+	public int getNotesSize() { return this.notes.size(); }
 
 	/**
 	 * @param notes the notes to set

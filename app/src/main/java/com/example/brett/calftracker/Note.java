@@ -1,20 +1,16 @@
-/**
- * Simple class to save a message and a date entered, used in calf.notes,
- * 
- * @author JT
- *
- */
+package com.example.brett.calftracker;
+
+import java.util.Calendar;
+
 public class Note {
 	private String message;
-	private Easy_Date dateEntered;
+	private Calendar dateEntered;
 	
 	/**
 	 * @param message
-	 * @param yearEntered
-	 * @param monthEntered
-	 * @param dayEntered
+	 * @param dateEntered
 	 */
-	public Note(String message, Easy_Date dateEntered) {
+	public Note(String message, Calendar dateEntered) {
 		super();
 		this.message = message;
 		this.dateEntered = dateEntered;
@@ -37,14 +33,14 @@ public class Note {
 	/**
 	 * @return the dateEntered
 	 */
-	public Easy_Date getDateEntered() {
+	public Calendar getDateEntered() {
 		return dateEntered;
 	}
 
 	/**
 	 * @param dateEntered the dateEntered to set
 	 */
-	public void setDateEntered(Easy_Date dateEntered) {
+	public void setDateEntered(Calendar dateEntered) {
 		this.dateEntered = dateEntered;
 	}
 }

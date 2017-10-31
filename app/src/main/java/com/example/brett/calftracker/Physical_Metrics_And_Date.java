@@ -1,3 +1,4 @@
+package com.example.brett.calftracker;
 
 public class Physical_Metrics_And_Date {
 	private double weight;

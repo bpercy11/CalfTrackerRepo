@@ -1,3 +1,4 @@
+package com.example.brett.calftracker;
 
 public class Vaccine_With_Date {
 	private Vaccine vaccine;
