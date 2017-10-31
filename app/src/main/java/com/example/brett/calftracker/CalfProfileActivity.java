@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,11 +24,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CalfProfileActivity extends AppCompatActivity {
 
@@ -51,6 +57,9 @@ public class CalfProfileActivity extends AppCompatActivity {
     private String tempDam;
     private String tempWeight;
     private String tempHeight;
+    private String tempDOBString;
+    private String tempGender;
+    private Calendar tempDOB;
 
     private AlertDialog alertID;
     private AlertDialog alertGender;
@@ -91,12 +100,16 @@ public class CalfProfileActivity extends AppCompatActivity {
         int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
         int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
+        if (calf.getSire() != null) {mSireValue.setText(calf.getSire());}
+        if (calf.getDam() != null) {mDamValue.setText(calf.getDam());}
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempWeight = mWeightValue.getText().toString();
         tempHeight = mHeightValue.getText().toString();
+        tempDOBString = mDOBValue.getText().toString();
+        tempGender = mGenderValue.getText().toString();
 
         // SET UP NOTE LISTVIEW
         updateNoteListView(calf);
@@ -166,7 +179,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         mWeightValue.setBackgroundColor(Color.RED);
 
         // Edit ID Number
-        // TODO: Figure out a better way to do this AlertDialog...
         mIDValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,6 +194,15 @@ public class CalfProfileActivity extends AppCompatActivity {
         builderID.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                if (inputID.getText().toString().matches("")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Calf ID cannot be left blank";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 mIDValue.setText(inputID.getText().toString());
                 tempCalf.setFarmId(Integer.parseInt(inputID.getText().toString()));
             }
@@ -208,7 +229,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mGenderValue.setText(gender[i]);
-                // TODO: SET TEMP CALF TO NEW GENDER
+                tempCalf.setGender(mGenderValue.getText().toString());
             }
         });
         alertGender = builder.create();
@@ -239,7 +260,8 @@ public class CalfProfileActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = month + "/" + day + "/" + year;
                 mDOBValue.setText(date);
-                // TODO: SET CALF TO NEW DOB
+                tempDOB = new GregorianCalendar(year,month,day);
+                tempCalf.setDateOfBirth(tempDOB);
             }
         };
 
@@ -358,6 +380,11 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void clickApplyButton(View view) {
         calf = tempCalf;
+        Log.i("calf details", "\nID: " + calf.getFarmId() +
+                "\nGender: " + calf.getGender() +
+                "\nDOB: " + calf.getDateOfBirth().get(Calendar.MONTH) + "/" + calf.getDateOfBirth().get(Calendar.DATE) + "/" + calf.getDateOfBirth().get(Calendar.YEAR) +
+                "\nSire: " + calf.getSire() +
+                "\nDam: " + calf.getDam());
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
@@ -370,12 +397,16 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setOnClickListener(null);
         mHeightValue.setOnClickListener(null);
         mWeightValue.setOnClickListener(null);
+        mGenderValue.setOnClickListener(null);
+        mDOBValue.setOnClickListener(null);
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempWeight = mWeightValue.getText().toString();
         tempHeight = mHeightValue.getText().toString();
+        tempGender = mGenderValue.getText().toString();
+        tempDOBString = mDOBValue.getText().toString();
 
         mIDValue.setBackgroundColor(Color.TRANSPARENT);
         mGenderValue.setBackgroundColor(Color.TRANSPARENT);
@@ -406,6 +437,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setOnClickListener(null);
         mHeightValue.setOnClickListener(null);
         mWeightValue.setOnClickListener(null);
+        mGenderValue.setOnClickListener(null);
+        mDOBValue.setOnClickListener(null);
 
         mIDValue.setBackgroundColor(Color.TRANSPARENT);
         mGenderValue.setBackgroundColor(Color.TRANSPARENT);
@@ -420,14 +453,13 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setText(tempDam);
         mWeightValue.setText(tempWeight);
         mHeightValue.setText(tempHeight);
+        mGenderValue.setText(tempGender);
+        mDOBValue.setText(tempDOBString);
 
-        // WHAT JT DID
-        mGenderValue.setText(calf.getGender());
-
-        int year = calf.getDateOfBirth().get(Calendar.YEAR);
-        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
-        mDOBValue.setText(month + "/" + day + "/" + year);
+//        int year = calf.getDateOfBirth().get(Calendar.YEAR);
+//        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
+//        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+//        mDOBValue.setText(month + "/" + day + "/" + year);
     }
 
     public void clickNewNoteButton(View view) {

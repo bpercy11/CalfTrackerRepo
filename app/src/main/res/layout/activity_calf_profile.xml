@@ -120,6 +120,7 @@
                 android:layout_marginTop="75dp"
                 android:text="@string/calf_profile_ID_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIMAGEPLACEHOLDER" />
 
@@ -130,6 +131,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_gender_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIDField" />
 
@@ -140,6 +142,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_sire_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
 
@@ -150,6 +153,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_DOB_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGenderField" />
 
@@ -160,6 +164,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_weight_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
 
@@ -170,6 +175,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_height_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWeightField" />
 
@@ -180,6 +186,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_dam_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSireField" />
 
