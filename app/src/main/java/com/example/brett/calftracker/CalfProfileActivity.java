@@ -332,10 +332,11 @@ public class CalfProfileActivity extends AppCompatActivity {
         SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(calf);
+        String json = gson.toJson(tempCalf);
         prefsEditor.putString("newCalf",json);
         prefsEditor.apply();
     }
+
     public void clickCancelButton(View view) {
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);

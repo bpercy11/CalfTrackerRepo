@@ -1,5 +1,6 @@
 package com.example.brett.calftracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,19 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(DashboardActivity.this, "You Clicked at " +dashboard_items[+ position], Toast.LENGTH_SHORT).show();
+                Intent intent;
+                switch(position) {
+                    case 0: intent = new Intent(DashboardActivity.this,CalfProfileActivity.class);
+                            startActivity(intent);
+                            break;
+                    case 1: intent = new Intent(DashboardActivity.this,AddCalfActivity.class);
+                            startActivity(intent);
+                            break;
+                    case 2: break;
+                    case 3: break;
+                    case 4: break;
+                    case 5: break;
+                }
             }
         });
     }
