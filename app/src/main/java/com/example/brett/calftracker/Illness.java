@@ -1,3 +1,4 @@
+package com.example.brett.calftracker;
 
 public class Illness {
 	private String name;

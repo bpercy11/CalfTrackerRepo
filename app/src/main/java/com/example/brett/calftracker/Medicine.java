@@ -1,3 +1,5 @@
+package com.example.brett.calftracker;
+
 
 public class Medicine {
 	private String name;
