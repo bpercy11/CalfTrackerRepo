@@ -2,9 +2,12 @@ package com.example.brett.calftracker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -33,7 +37,9 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mWeightValue;
     private TextView mHeightValue;
 
+    private Dialog mGenderListDialog;
     private String[] gender = {"Male","Female"};
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     private ListView mNoteListView;
 
@@ -47,6 +53,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private String tempHeight;
 
     private AlertDialog alertID;
+    private AlertDialog alertGender;
     private AlertDialog alertSire;
     private AlertDialog alertDam;
     private AlertDialog alertWeight;
@@ -186,6 +193,55 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         alertID = builderID.create();
+
+        // EDIT GENDERVALUE
+        mGenderValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertGender.show();
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Gender");
+        builder.setItems(gender, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mGenderValue.setText(gender[i]);
+                // TODO: SET TEMP CALF TO NEW GENDER
+            }
+        });
+        alertGender = builder.create();
+
+        // CREATE DIALOG WHEN USER CLICKS DOBVALUE
+        mDOBValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        CalfProfileActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        // this happens when the user has selected a date in the dialog and presses "OK"
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = month + "/" + day + "/" + year;
+                mDOBValue.setText(date);
+                // TODO: SET CALF TO NEW DOB
+            }
+        };
 
         // Edit Sire ID Number
         mSireValue.setOnClickListener(new View.OnClickListener() {
@@ -364,6 +420,12 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setText(tempDam);
         mWeightValue.setText(tempWeight);
         mHeightValue.setText(tempHeight);
+        mGenderValue.setText(calf.getGender());
+
+        int year = calf.getDateOfBirth().get(Calendar.YEAR);
+        int month = calf.getDateOfBirth().get(Calendar.MONTH);
+        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+        mDOBValue.setText(month + "/" + day + "/" + year);
     }
 
     public void clickNewNoteButton(View view) {
