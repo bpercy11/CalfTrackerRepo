@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "796825638526",
+    "firebase_url": "https://calftrackerdatabase.firebaseio.com",
+    "project_id": "calftrackerdatabase",
+    "storage_bucket": "calftrackerdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796825638526:android:c3f6d4512dacef10",
+        "android_client_info": {
+          "package_name": "com.example.brett.calftracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796825638526-5eup6p2bjc4ci1c6stjhdvmfme9thjb9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brett.calftracker",
+            "certificate_hash": "f42a0337e803f40156220467066962d358755f51"
+          }
+        },
+        {
+          "client_id": "796825638526-9sslf9qgjafh56mtutnbon3v6im10pdm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brett.calftracker",
+            "certificate_hash": "3c5fd45904614f2523c337a822c77949832e8794"
+          }
+        },
+        {
+          "client_id": "796825638526-kmettqu8qasb5558mbdh1dk0cbmkjopg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brett.calftracker",
+            "certificate_hash": "34db7a2d0c68e6b7de1fb6fcc152c4f8e43bfc37"
+          }
+        },
+        {
+          "client_id": "796825638526-ugris95jjohkca4s8hc34q471dtaqi53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brett.calftracker",
+            "certificate_hash": "b1df6d1f142f4859f667591c2cd63e68f5ea2b20"
+          }
+        },
+        {
+          "client_id": "796825638526-ce2467mjh8dquae0g525b5j4vgfjj7tk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brett.calftracker",
+            "certificate_hash": "9607abe2cd2d3b652d02300866f16e069a853115"
+          }
+        },
+        {
+          "client_id": "796825638526-0265dkt3kaf5qel884d1k2ip7rremfu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvWVxOUSfQO1zBeyGUHi4MoA9KrokF8Co"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796825638526-0265dkt3kaf5qel884d1k2ip7rremfu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
