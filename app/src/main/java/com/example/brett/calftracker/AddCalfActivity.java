@@ -113,4 +113,9 @@ public class AddCalfActivity extends AppCompatActivity {
         Intent intent = new Intent(this,CalfProfileActivity.class);
         startActivity(intent);
     }
+
+    public void clickCancelButton(View view) {
+        Intent intent = new Intent(this,DashboardActivity.class);
+        startActivity(intent);
+    }
 }
