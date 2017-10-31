@@ -13,17 +13,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/vaccineButton"
-        tools:layout_editor_absoluteY="62dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/vaccineButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:background="@color/colorIcon"
         android:text="Vaccine"
         app:layout_constraintEnd_toStartOf="@+id/medicineButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="62dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <TableLayout
         android:layout_width="325dp"
@@ -40,6 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_weight="1"
+                android:background="@color/colorBackground"
                 android:text="Name" />
 
             <TextView
