@@ -9,6 +9,7 @@ import java.util.HashMap;
  * Created by BrendonLapp on 10/30/17.
  */
 
+
 public class Farm {
     private String name;
     private String owner;
