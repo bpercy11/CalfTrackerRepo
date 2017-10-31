@@ -6,7 +6,69 @@
     android:layout_height="match_parent"
     tools:context="com.example.brett.calftracker.CalfProfileActivity">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical33percentparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical66percentparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonEDIT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:onClick="clickEditButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:rippleColor="@color/common_google_signin_btn_text_light_pressed"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:text="Cancel"
+        android:visibility="invisible"
+        android:onClick="clickCancelButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical33percentparent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonApply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Apply"
+        android:visibility="invisible"
+        android:onClick="clickApplyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical66percentparent" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,14 +91,14 @@
                 app:layout_constraintGuide_percent="0.55" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/vertical33percent"
+                android:id="@+id/vertical33percentchild"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.33" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/vertical66percent"
+                android:id="@+id/vertical66percentchild"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -59,6 +121,7 @@
                 android:layout_marginTop="75dp"
                 android:text="@string/calf_profile_ID_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIMAGEPLACEHOLDER" />
 
@@ -69,6 +132,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_gender_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIDField" />
 
@@ -79,6 +143,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_sire_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
 
@@ -89,6 +154,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_DOB_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGenderField" />
 
@@ -99,6 +165,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_weight_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
 
@@ -109,6 +176,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_height_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWeightField" />
 
@@ -119,6 +187,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_dam_field"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSireField" />
 
@@ -199,31 +268,31 @@
                 tools:layout_editor_absoluteX="139dp" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/buttonGrowthHistory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_growth_history_button"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical33percentchild"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/buttonFeedingHistory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_feeding_history_button"
-                app:layout_constraintEnd_toStartOf="@+id/vertical66percent"
-                app:layout_constraintStart_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical66percentchild"
+                app:layout_constraintStart_toStartOf="@+id/vertical33percentchild"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/buttonMedicalHistory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -231,7 +300,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/calf_profile_medical_history_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintStart_toStartOf="@+id/vertical66percentchild"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
 
             <TextView
@@ -240,8 +309,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
-                app:layout_constraintTop_toBottomOf="@+id/button6" />
+                app:layout_constraintEnd_toStartOf="@+id/vertical33percentchild"
+                app:layout_constraintTop_toBottomOf="@+id/buttonGrowthHistory" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
