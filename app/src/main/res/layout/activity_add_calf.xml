@@ -41,6 +41,7 @@
         android:layout_marginTop="150dp"
         android:text="@string/add_calf_ID_Number"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActivityTitle" />
 
@@ -51,6 +52,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/add_calf_DOB"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
@@ -61,6 +63,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/add_calf_gender"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewIDNumber" />
 

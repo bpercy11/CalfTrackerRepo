@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,6 +24,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -190,6 +194,15 @@ public class CalfProfileActivity extends AppCompatActivity {
         builderID.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                if (inputID.getText().toString().matches("")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Calf ID cannot be left blank";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 mIDValue.setText(inputID.getText().toString());
                 tempCalf.setFarmId(Integer.parseInt(inputID.getText().toString()));
             }
