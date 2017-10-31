@@ -43,6 +43,7 @@ public class Calf {
 		this.illnessHistory = new ArrayList<Calf_Illness>();
 		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
 		this.feedingHistory = new Feeding[2];
+		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
 	}
@@ -63,6 +64,7 @@ public class Calf {
 		this.illnessHistory = new ArrayList<Calf_Illness>();
 		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
 		this.feedingHistory = new Feeding[2];
+		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
 	}
@@ -254,6 +256,13 @@ public class Calf {
 	 */
 	public ArrayList<Note> getNotes() {
 		return notes;
+	}
+
+	/**
+	 * @param note the note to add
+	 */
+	public void addNote(Note note) {
+		this.notes.add(note);
 	}
 
 	/**

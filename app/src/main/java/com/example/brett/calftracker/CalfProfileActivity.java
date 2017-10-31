@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
@@ -145,5 +146,44 @@ public class CalfProfileActivity extends AppCompatActivity {
         mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
+    }
+
+    public void clickNewNoteButton(View view) {
+        AlertDialog newNoteAlert;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint("Enter Note Here");
+        builder.setTitle("Create a New Note");
+        builder.setView(input);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String noteMessage = input.getText().toString();
+                Calendar noteDate = Calendar.getInstance();
+
+                Note newNote = new Note(noteMessage,noteDate);
+
+                calf.addNote(newNote);
+
+                SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(calf);
+                prefsEditor.putString("newCalf",json);
+                prefsEditor.apply();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        newNoteAlert = builder.create();
+
+        newNoteAlert.show();
     }
 }

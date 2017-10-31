@@ -19,5 +19,6 @@
     <string name="calf_profile_growth_history_button">Growth History</string>
     <string name="calf_profile_feeding_history_button">Feeding History</string>
     <string name="calf_profile_medical_history_button">Medical History</string>
+    <string name="calf_profile_create_note_button">Create a New Note</string>
     <string name="action_settings">Action Settings</string>
 </resources>
