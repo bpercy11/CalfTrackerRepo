@@ -36,8 +36,8 @@ public class Farm {
         this.currInternalID = 0;
         passcode = -1;
         employees = new ArrayList<Employee>();
-        calfProfileMap = new HashMap<ID, Calf>();
-        todoList = new TODO();
+        calfProfileMap = new HashMap<Integer, Calf>();
+        todoList = null;
 
         //TODO set up anything else we need
     }
@@ -65,7 +65,7 @@ public class Farm {
      *
      * @param calf
      */
-    public void addCalf(Calf calf) { calfProfileMap.put(currInternalID++ , Calf); }
+    public void addCalf(Calf calf) { calfProfileMap.put(currInternalID++ , calf); }
 
     //public void removeCalf()
 
