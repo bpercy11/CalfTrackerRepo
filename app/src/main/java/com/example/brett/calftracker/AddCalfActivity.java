@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class AddCalfActivity extends AppCompatActivity {
     private static final String TAG = "AddCalfActivity";
@@ -66,6 +67,9 @@ public class AddCalfActivity extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calfYear = year;
+                calfMonth = month;
+                calfDay = day;
                 month = month + 1;
                 String date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
@@ -98,8 +102,8 @@ public class AddCalfActivity extends AppCompatActivity {
         EditText ID = (EditText) findViewById(R.id.editTextGetID);
 
         // MAKE NEW CALF OBJECT
-        // TODO: FIX CALENDAR THING
-        Calf newCalf = new Calf(Integer.parseInt(ID.getText().toString()),calfGender, Calendar.getInstance());
+        Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
+        Calf newCalf = new Calf(Integer.parseInt(ID.getText().toString()),calfGender, calfCal);
 
         // SAVE NEW CALF
         SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);

@@ -88,7 +88,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         mIDValue.setText(Integer.toString(farmID));
         mGenderValue.setText(calf.getGender());
         int year = calf.getDateOfBirth().get(Calendar.YEAR);
-        int month = calf.getDateOfBirth().get(Calendar.MONTH);
+        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
         int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
 
