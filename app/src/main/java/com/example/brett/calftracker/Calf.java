@@ -265,6 +265,10 @@ public class Calf {
 		this.notes.add(note);
 	}
 
+	public Note getNoteNdx(int i) { return this.notes.get(i); }
+
+	public int getNotesSize() { return this.notes.size(); }
+
 	/**
 	 * @param notes the notes to set
 	 */
