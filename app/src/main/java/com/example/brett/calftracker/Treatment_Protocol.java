@@ -3,31 +3,31 @@ package com.example.brett.calftracker;
 import java.util.ArrayList;
 
 public class Treatment_Protocol {
-	private ArrayList<Medicine> medicines;
+	private Medicine medicine;
 	private String notes;
 	
 	/**
-	 * @param medicines
+	 * @param medicine
 	 * @param notes
 	 */
-	public Treatment_Protocol(ArrayList<Medicine> medicines, String notes) {
+	public Treatment_Protocol(Medicine medicine, String notes) {
 		super();
-		this.medicines = medicines;
+		this.medicine = medicine;
 		this.notes = notes;
 	}
 	
 	/**
-	 * @return the medicines
+	 * @return the medicine
 	 */
-	public ArrayList<Medicine> getMedicines() {
-		return medicines;
+	public Medicine getMedicine() {
+		return medicine;
 	}
 
 	/**
-	 * @param medicines the medicines to set
+	 * @param medicine the medicine to set
 	 */
-	public void setMedicines(ArrayList<Medicine> medicines) {
-		this.medicines = medicines;
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
 	}
 
 	/**
@@ -43,25 +43,16 @@ public class Treatment_Protocol {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
+
 	/**
-	 * @param medicine the medicine to add
+	 * creates and returns a new treatment protocol for an illness
+	 *
+	 * @param medicine the medicine used to treat the corresponding illness
+	 * @param notes the notes detailing the treatment protocol for this calf
+	 * @return Treatment_Protocol the new treatment protocol that was created
 	 */
-	public void addMedicine(Medicine medicine) {
-		this.medicines.add(medicine);
+	public Treatment_Protocol createTreatmentProtocol(Medicine medicine, String notes){
+		return new Treatment_Protocol(medicine,notes);
 	}
-	
-	/**
-	 * @param medicine the medicine to delete
-	 */
-	public void deleteMedicine(Medicine medicine) {
-		for(int i = 0; i < this.medicines.size(); i++)
-		{
-			if(medicine.getName().equals(this.medicines.get(i).getName()))
-			{
-				this.medicines.remove(i);
-				return;
-			}
-		}
-	}
+
 }
