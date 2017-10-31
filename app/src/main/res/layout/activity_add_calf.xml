@@ -20,6 +20,20 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical33percentparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical66percentparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
     <TextView
         android:id="@+id/textViewIDNumber"
         android:layout_width="wrap_content"
@@ -27,6 +41,7 @@
         android:layout_marginTop="150dp"
         android:text="@string/add_calf_ID_Number"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActivityTitle" />
 
@@ -37,6 +52,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/add_calf_DOB"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
@@ -47,6 +63,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/add_calf_gender"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textViewIDNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewIDNumber" />
 
@@ -93,16 +110,34 @@
         app:layout_constraintTop_toTopOf="@+id/textViewIDNumber" />
 
     <Button
-        android:id="@+id/buttonAddCalf"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonCancel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:onClick="clickAddCalfButton"
-        android:text="@string/add_calf_add_button"
-        android:textSize="24sp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:text="Cancel"
+        android:onClick="clickCancelButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/vertical33percentparent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAddCalf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Add"
+        android:onClick="clickAddCalfButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical66percentparent" />
 
     <TextView
         android:id="@+id/textViewSelectGender"
