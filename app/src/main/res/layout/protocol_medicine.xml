@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,36 +19,43 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Medicine"
-        tools:layout_editor_absoluteY="44dp"
+        app:layout_constraintLeft_toRightOf="@+id/vaccineButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/vaccineButton" />
+        tools:layout_editor_absoluteY="44dp" />
 
     <TableLayout
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="118dp">
+        android:background="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="120dp">
 
-        <TableRow
-            <TextView android:text="Name"
+        <TableRow>
+
+        <TextView
             android:layout_width="101dp"
+            android:layout_height="match_parent"
             android:layout_column="0"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Name" />
 
-            <TextView android:text="Medicine"
-            android:layout_width="112dp"
-            android:layout_column="1"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@color/colorIcon"
+                android:text="Medicine" />
 
-            <TextView android:text="Frequency"
+        <TextView
             android:layout_width="112dp"
-            android:layout_column="2"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
-            />
+            android:layout_Row="2"
+            android:layout_weight="1"
+            android:text="Frequency" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
