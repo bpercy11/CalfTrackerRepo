@@ -32,15 +32,25 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mDamValue;
     private TextView mWeightValue;
     private TextView mHeightValue;
-    private TextView mEditID;
+
+    private String[] gender = {"Male","Female"};
 
     private ListView mNoteListView;
 
     private Calf calf;
+
     private Calf tempCalf;
     private String tempID;
+    private String tempSire;
+    private String tempDam;
+    private String tempWeight;
+    private String tempHeight;
 
-    private AlertDialog alert;
+    private AlertDialog alertID;
+    private AlertDialog alertSire;
+    private AlertDialog alertDam;
+    private AlertDialog alertWeight;
+    private AlertDialog alertHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = mPreferences.getString("newCalf","");
         calf = gson.fromJson(json, Calf.class);
+        tempCalf = gson.fromJson(json, Calf.class);
 
 
         // print to log calf cbject information
@@ -75,6 +86,10 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDOBValue.setText(month + "/" + day + "/" + year);
 
         tempID = mIDValue.getText().toString();
+        tempSire = mSireValue.getText().toString();
+        tempDam = mDamValue.getText().toString();
+        tempWeight = mWeightValue.getText().toString();
+        tempHeight = mHeightValue.getText().toString();
 
         // SET UP NOTE LISTVIEW
         updateNoteListView();
@@ -124,17 +139,17 @@ public class CalfProfileActivity extends AppCompatActivity {
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allNoteDates);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
+
     }
 
     public void clickEditButton(View view) {
-        mEditID = (TextView) findViewById(R.id.textViewIDValue);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.INVISIBLE);
-        tempCalf = calf;
+
         mIDValue.setBackgroundColor(Color.RED);
         mGenderValue.setBackgroundColor(Color.RED);
         mDOBValue.setBackgroundColor(Color.RED);
@@ -142,28 +157,147 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setBackgroundColor(Color.RED);
         mHeightValue.setBackgroundColor(Color.RED);
         mWeightValue.setBackgroundColor(Color.RED);
-        mEditID.setOnClickListener(new View.OnClickListener() {
+
+        // Edit ID Number
+        // TODO: Figure out a better way to do this AlertDialog...
+        mIDValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert.show();
+                alertID.show();
             }
         });
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        input.setHint("ID Number");
-        builder.setTitle("Enter new ID");
-        builder.setView(input);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builderID = new AlertDialog.Builder(this);
+        final EditText inputID = new EditText(this);
+        inputID.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputID.setHint("ID Number");
+        builderID.setTitle("Enter new ID");
+        builderID.setView(inputID);
+        builderID.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mIDValue.setText(input.getText().toString());
-                tempCalf.setFarmId(Integer.parseInt(input.getText().toString()));
+                mIDValue.setText(inputID.getText().toString());
+                tempCalf.setFarmId(Integer.parseInt(inputID.getText().toString()));
             }
         });
+        builderID.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
-        alert = builder.create();
+            }
+        });
+        alertID = builderID.create();
+
+        // Edit Sire ID Number
+        mSireValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertSire.show();
+            }
+        });
+        AlertDialog.Builder builderSire = new AlertDialog.Builder(this);
+        final EditText inputSire = new EditText(this);
+        inputSire.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputSire.setHint("Sire ID Number");
+        builderSire.setTitle("Enter Sire ID");
+        builderSire.setView(inputSire);
+        builderSire.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mSireValue.setText(inputSire.getText().toString());
+                tempCalf.setSire(inputSire.getText().toString());
+            }
+        });
+        builderSire.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertSire = builderSire.create();
+
+        // Edit Dam ID Number
+        mDamValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDam.show();
+            }
+        });
+        AlertDialog.Builder builderDam = new AlertDialog.Builder(this);
+        final EditText inputDam = new EditText(this);
+        inputDam.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputDam.setHint("Dam ID Number");
+        builderDam.setTitle("Enter Dam ID");
+        builderDam.setView(inputDam);
+        builderDam.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mDamValue.setText(inputDam.getText().toString());
+                tempCalf.setDam(inputDam.getText().toString());
+            }
+        });
+        builderDam.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertDam = builderDam.create();
+
+        // Edit Weight
+        mWeightValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertWeight.show();
+            }
+        });
+        AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
+        final EditText inputWeight = new EditText(this);
+        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputWeight.setHint("Weight");
+        builderWeight.setTitle("Enter calf weight");
+        builderWeight.setView(inputWeight);
+        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mWeightValue.setText(inputWeight.getText().toString());
+                //tempCalf.setWeight();
+            }
+        });
+        builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertWeight = builderWeight.create();
+
+        // Edit Height
+        mHeightValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertHeight.show();
+            }
+        });
+        AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
+        final EditText inputHeight = new EditText(this);
+        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputHeight.setHint("Height");
+        builderHeight.setTitle("Enter calf height");
+        builderHeight.setView(inputHeight);
+        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mHeightValue.setText(inputHeight.getText().toString());
+                //tempCalf.setHeight();
+            }
+        });
+        builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertHeight = builderHeight.create();
     }
 
     public void clickApplyButton(View view) {
@@ -171,8 +305,21 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
+
+        mIDValue.setOnClickListener(null);
+        mSireValue.setOnClickListener(null);
+        mDamValue.setOnClickListener(null);
+        mHeightValue.setOnClickListener(null);
+        mWeightValue.setOnClickListener(null);
 
         tempID = mIDValue.getText().toString();
+        tempSire = mSireValue.getText().toString();
+        tempDam = mDamValue.getText().toString();
+        tempWeight = mWeightValue.getText().toString();
+        tempHeight = mHeightValue.getText().toString();
 
         mIDValue.setBackgroundColor(Color.TRANSPARENT);
         mGenderValue.setBackgroundColor(Color.TRANSPARENT);
@@ -193,6 +340,16 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
+
+        mIDValue.setOnClickListener(null);
+        mSireValue.setOnClickListener(null);
+        mDamValue.setOnClickListener(null);
+        mHeightValue.setOnClickListener(null);
+        mWeightValue.setOnClickListener(null);
+
         mIDValue.setBackgroundColor(Color.TRANSPARENT);
         mGenderValue.setBackgroundColor(Color.TRANSPARENT);
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
@@ -202,6 +359,10 @@ public class CalfProfileActivity extends AppCompatActivity {
         mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
+        mSireValue.setText(tempSire);
+        mDamValue.setText(tempDam);
+        mWeightValue.setText(tempWeight);
+        mHeightValue.setText(tempHeight);
     }
 
     public void clickNewNoteButton(View view) {
