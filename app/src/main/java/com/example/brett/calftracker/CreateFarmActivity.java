@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -46,6 +48,10 @@ public class CreateFarmActivity extends AppCompatActivity {
     private EditText farmLocation;
     private EditText farmOwner;
 
+    private TextView farmNameRequired;
+    private TextView farmLocationRequired;
+    private TextView farmOwnerRequired;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +64,44 @@ public class CreateFarmActivity extends AppCompatActivity {
         farmLocation = (EditText) findViewById(R.id.Farm_Location_txt);
         farmOwner = (EditText) findViewById(R.id.Farm_Owner_txt);
 
+        farmNameRequired = (TextView) findViewById(R.id.FarmName_Required_tv);
+        farmLocationRequired = (TextView) findViewById(R.id.FarmLocation_Required_tv);
+        farmOwnerRequired = (TextView) findViewById(R.id.FarmOwner_Required_tv);
+
 
         doneButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
 
-                Farm farm = new Farm(farmName.toString(), farmOwner.toString(), farmLocation.toString());
+                boolean requirementsNotMet = false;
 
+                if(farmName.getText().toString().equals("")){
+                    requirementsNotMet = true;
+                    farmNameRequired.setVisibility(View.VISIBLE);
+                }else{
+                    farmNameRequired.setVisibility(View.INVISIBLE);
+                }
+                if(farmOwner.getText().toString().equals("")){
+                    requirementsNotMet = true;
+                    farmOwnerRequired.setVisibility(View.VISIBLE);
+                }else{
+                    farmOwnerRequired.setVisibility(View.INVISIBLE);
+                }
+                if(farmLocation.getText().toString().equals("")){
+                    requirementsNotMet = true;
+                    farmLocationRequired.setVisibility(View.VISIBLE);
+                }else{
+                    farmLocationRequired.setVisibility(View.INVISIBLE);
+                }
+
+
+
+                //dialogBox();
+
+                if(!requirementsNotMet) {
+                    Farm farm = new Farm(farmName.toString(), farmOwner.toString(), farmLocation.toString());
+                    callDashboard();
+               }
 
 
 
@@ -73,5 +110,48 @@ public class CreateFarmActivity extends AppCompatActivity {
 
 
     }
+
+    private void callDashboard() {
+
+        Intent intent = new Intent(this, DashboardActivity.class);
+        finish();
+        startActivity(intent);
+
+    }
+
+    /* EXAMPLE Dialog Box code for later
+    private void dialogBox(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set title
+        alertDialogBuilder.setTitle(farmLocation.getText().toString());
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(farmLocation.getText().toString())
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        // MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+    }
+    */
 
 }
