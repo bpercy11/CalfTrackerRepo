@@ -3,13 +3,15 @@ package com.example.brett.calftracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends BaseActivity {
     GridView grid;
     String[] dashboard_items = {
             "Calf List",
@@ -31,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        getLayoutInflater().inflate(R.layout.activity_dashboard, frameLayout);
 
         CustomGrid adapter = new CustomGrid(DashboardActivity.this, dashboard_items, imageId);
         grid=(GridView)findViewById(R.id.grid);
