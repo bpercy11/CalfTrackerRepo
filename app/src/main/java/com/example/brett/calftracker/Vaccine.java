@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Vaccine
 {
 	private String name;
-	private ArrayList<Vacc_Range> toBeAdministered;
+	private int toBeAdministered;
 	private double dosage;
 	private String dosageUnits;
 	private String methodOfAdministration;
@@ -14,8 +14,9 @@ public class Vaccine
 	 * @param dosage
 	 * @param dosageUnits
 	 * @param methodOfAdministration
+	 * @param toBeAdministered
 	 */
-	public Vaccine(String name, ArrayList<Vacc_Range> toBeAdministered, double dosage,
+	public Vaccine(String name, int toBeAdministered, double dosage,
 				   String dosageUnits, String methodOfAdministration) {
 		super();
 		this.name = name;
@@ -25,17 +26,13 @@ public class Vaccine
 		this.methodOfAdministration = methodOfAdministration;
 	}
 
-	public Vaccine(String name, double dosage, String dosageUnits, String methodOfAdministration){
+	/*public Vaccine(String name, double dosage, String dosageUnits, String methodOfAdministration){
 		this.name = name;
-		this.toBeAdministered = new ArrayList<>();
+		this.toBeAdministered = toBeAdministered;
 		this.dosage = dosage;
 		this.dosageUnits = dosageUnits;
 		this.methodOfAdministration = methodOfAdministration;
-	}
-
-	public Vaccine() {
-		this.toBeAdministered = new ArrayList<>();
-	} // default no-arg constructor
+	}*/
 
 	/**
 	 * @return the name
@@ -54,14 +51,14 @@ public class Vaccine
 	/**
 	 * @return the toBeAdministered
 	 */
-	public ArrayList<Vacc_Range> getToBeAdministered() {
+	public int getToBeAdministered() {
 		return toBeAdministered;
 	}
 
 	/**
 	 * @param toBeAdministered the toBeAdministered to set
 	 */
-	public void setToBeAdministered(ArrayList<Vacc_Range> toBeAdministered) {
+	public void setToBeAdministered(int toBeAdministered) {
 		this.toBeAdministered = toBeAdministered;
 	}
 
@@ -117,7 +114,7 @@ public class Vaccine
 	 * @return Vaccine the new vaccine created
 	 */
 	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
-								 ArrayList<Vacc_Range> toBeAdministeredAt, String methodOfAdministration){
+								 int toBeAdministeredAt, String methodOfAdministration){
 		return new Vaccine(name,toBeAdministeredAt,dosage,dosageUnits,methodOfAdministration);
 	}
 }
