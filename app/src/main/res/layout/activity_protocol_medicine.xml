@@ -9,58 +9,75 @@
         android:id="@+id/vaccineButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
-        android:onClick="onVaccineButtonClick"
         android:text="Vaccine"
-        app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
-        app:layout_constraintEnd_toStartOf="@+id/medicineButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/medicineButton"
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/medicineButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorIcon"
-        android:onClick="onMedicineButtonClick"
+        android:background="@color/colorIcon"
         android:text="Medicine"
-        app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
+        app:layout_constraintLeft_toRightOf="@+id/vaccineButton"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TableLayout
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/vaccineButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="120dp">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="101dp"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_weight="1"
+                android:text="Name" />
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@color/colorIcon"
+                android:text="Medicine" />
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text="Frequency" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
 
     <Button
         android:id="@+id/editIllness"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onEditIllnessButtonClick"
         android:text="Edit Illness"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listview_medicine" />
-
-    <ListView
-        android:id="@+id/listview_medicine"
-        android:layout_width="364dp"
-        android:layout_height="364dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:divider="#d1d1d1"
-        android:dividerHeight="5dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/editIllness"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="446dp" />
 </android.support.constraint.ConstraintLayout>

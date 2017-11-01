@@ -19,6 +19,7 @@
         android:id="@+id/medicineButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:onClick="onMedicineButtonClick"
         android:background="@color/colorIcon"
         android:text="Medicine"
         app:layout_constraintLeft_toRightOf="@+id/vaccineButton"
@@ -76,9 +77,8 @@
         android:id="@+id/editIllness"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:onClick="onEditIllnessButtonClick"
         android:text="Edit Illness"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="117dp"
         tools:layout_editor_absoluteY="446dp" />
 </android.support.constraint.ConstraintLayout>

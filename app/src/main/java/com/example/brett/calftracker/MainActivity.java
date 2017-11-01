@@ -38,4 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,CalfProfileActivity.class);
         startActivity(intent);
     }
-}
+
+    public void clickButton3(View view) {
+        Intent intent = new Intent(MainActivity.this,ProtocolActivity.class );
+    }
+
+    public void clickButton4(View view) {
+        Intent intent = new Intent(MainActivity.this, EditIllnessActivity.class );
+    }
+
+    }

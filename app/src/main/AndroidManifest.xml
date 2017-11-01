@@ -23,7 +23,8 @@
             android:name=".menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProtocolActivity"></activity>
+        <activity android:name=".ProtocolActivity" />
+        <activity android:name=".EditIllnessActivity"></activity>
     </application>
 
 </manifest>

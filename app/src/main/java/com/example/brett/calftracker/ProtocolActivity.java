@@ -27,6 +27,7 @@ public class ProtocolActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_protocol_medicine);
+    }
 /*
         // try and get Medicine object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -38,7 +39,7 @@ public class ProtocolActivity extends AppCompatActivity {
         tempMedicine = gson.fromJson(json, Medicine.class);
 */
 
-        lvMedicine = (ListView)findViewById(R.id.listview_medicine);
+     /*   lvMedicine = (ListView)findViewById(R.id.listview_medicine);
         //sample data
 
         mAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
@@ -67,7 +68,7 @@ public class ProtocolActivity extends AppCompatActivity {
 
 */
 
-        lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
+ /*       lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
         //sample data
         vaccineList.add(new Vaccine("POOP",5,15,"ml","needle"));
         vaccineList.add(new Vaccine("alex",6,10,"ml","pill"));
@@ -85,7 +86,7 @@ public class ProtocolActivity extends AppCompatActivity {
     }
     public void onMedicineButtonClick(View view) {
         //Do nothing since it is already on the page.
-    }
+    }*/
     public void onEditVaccineButtonClick(View view) {
 /*
         //Write to local device
