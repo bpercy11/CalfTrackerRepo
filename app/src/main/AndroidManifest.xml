@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashboardActivity">
+        <activity android:name=".CreateFarmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".AddCalfActivity" />
         <activity android:name=".CalfListActivity" />
-        <activity android:name=".CalfProfileActivity"></activity>
+        <activity android:name=".CalfProfileActivity"/>
+        <activity android:name=".DashboardActivity">
+        </activity>
         <activity
             android:name=".menu"
             android:label="@string/title_activity_menu"
