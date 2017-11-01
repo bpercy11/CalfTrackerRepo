@@ -43,7 +43,7 @@ public class DashboardActivity extends AppCompatActivity {
                                     int position, long id) {
                 Intent intent;
                 switch(position) {
-                    case 0: intent = new Intent(DashboardActivity.this,CalfProfileActivity.class);
+                    case 0: intent = new Intent(DashboardActivity.this,CalfListActivity.class);
                             startActivity(intent);
                             break;
                     case 1: intent = new Intent(DashboardActivity.this,AddCalfActivity.class);
