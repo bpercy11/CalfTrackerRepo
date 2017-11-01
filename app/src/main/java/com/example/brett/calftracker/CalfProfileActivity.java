@@ -75,11 +75,11 @@ public class CalfProfileActivity extends AppCompatActivity {
 
 
         // try and get calf object made by main activity
-        SharedPreferences mPreferences = getSharedPreferences("test", Activity.MODE_PRIVATE);
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
 
         Gson gson = new Gson();
-        String json = mPreferences.getString("newCalf","");
+        String json = mPreferences.getString("Calf","");
         calf = gson.fromJson(json, Calf.class);
         tempCalf = gson.fromJson(json, Calf.class);
 
@@ -93,8 +93,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
 
-        int farmID = calf.getFarmId();
-        mIDValue.setText(Integer.toString(farmID));
+        String farmID = calf.getFarmId();
+        mIDValue.setText(farmID);
         mGenderValue.setText(calf.getGender());
         int year = calf.getDateOfBirth().get(Calendar.YEAR);
         int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
@@ -203,8 +203,16 @@ public class CalfProfileActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
+                if (inputID.length() > 9 || inputID.length() < 1) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "ID number must be between 1 and 9 digits";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 mIDValue.setText(inputID.getText().toString());
-                tempCalf.setFarmId(Integer.parseInt(inputID.getText().toString()));
+                tempCalf.setFarmId(inputID.getText().toString());
             }
         });
         builderID.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -380,11 +388,11 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void clickApplyButton(View view) {
         calf = tempCalf;
-        Log.i("calf details", "\nID: " + calf.getFarmId() +
-                "\nGender: " + calf.getGender() +
-                "\nDOB: " + calf.getDateOfBirth().get(Calendar.MONTH) + "/" + calf.getDateOfBirth().get(Calendar.DATE) + "/" + calf.getDateOfBirth().get(Calendar.YEAR) +
-                "\nSire: " + calf.getSire() +
-                "\nDam: " + calf.getDam());
+//        Log.i("calf details", "\nID: " + calf.getFarmId() +
+//                "\nGender: " + calf.getGender() +
+//                "\nDOB: " + calf.getDateOfBirth().get(Calendar.MONTH) + "/" + calf.getDateOfBirth().get(Calendar.DATE) + "/" + calf.getDateOfBirth().get(Calendar.YEAR) +
+//                "\nSire: " + calf.getSire() +
+//                "\nDam: " + calf.getDam());
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
@@ -416,11 +424,11 @@ public class CalfProfileActivity extends AppCompatActivity {
         mHeightValue.setBackgroundColor(Color.TRANSPARENT);
         mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
-        SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(tempCalf);
-        prefsEditor.putString("newCalf",json);
+        String json = gson.toJson(calf);
+        prefsEditor.putString("Calf",json);
         prefsEditor.apply();
     }
 
@@ -455,11 +463,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         mHeightValue.setText(tempHeight);
         mGenderValue.setText(tempGender);
         mDOBValue.setText(tempDOBString);
-
-//        int year = calf.getDateOfBirth().get(Calendar.YEAR);
-//        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-//        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
-//        mDOBValue.setText(month + "/" + day + "/" + year);
     }
 
     public void clickNewNoteButton(View view) {
@@ -481,11 +484,11 @@ public class CalfProfileActivity extends AppCompatActivity {
 
                 calf.addNote(newNote);
 
-                SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(calf);
-                prefsEditor.putString("newCalf",json);
+                prefsEditor.putString("Calf",json);
                 prefsEditor.apply();
 
                 updateNoteListView(calf);
