@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_begin="39dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/vertical90percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_begin="346dp" />
 
     <TextView
         android:id="@+id/textViewIDNumber"
@@ -65,13 +65,14 @@
         android:id="@+id/textViewDisplayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="end"
         android:hint="@string/add_calf_select_date"
         android:textAlignment="textEnd"
-        android:gravity="end"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDOB"
         app:layout_constraintEnd_toEndOf="@+id/editTextGetID"
-        app:layout_constraintTop_toTopOf="@+id/textViewDOB" />
+        app:layout_constraintTop_toTopOf="@+id/textViewDOB"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextGetID"

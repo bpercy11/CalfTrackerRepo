@@ -26,4 +26,19 @@
     <string name="calf_profile_medical_history_button">Medical History</string>
     <string name="calf_profile_create_note_button">Create a New Note</string>
     <string name="action_settings">Action Settings</string>
+    <string name="edit_illness">Edit Illness</string>
+    <string name="illness_name">Illness</string>
+    <string name="treatment_name">Treatment</string>
+    <string name="dosage">Dosage</string>
+    <string name="time_active">Time Active</string>
+    <string name="administration_method">Administration</string>
+    <string name="enter_illness">Enter Illness</string>
+    <string name="enter_treatment">Enter Treatment</string>
+    <string name="enter_dosage">Enter Dosage and Units</string>
+    <string name="enter_number_of_days">Enter Number of Days</string>
+    <string name="enter_admin_method">Enter Admin Method</string>
+    <string name="add_illness">Add</string>
+    <string name="error_login_message">Please fill any empty fields</string>
+    <string name="add_illness_successful_message">Add Illness Successful</string>
+    <string name="empty_fields_message">Please fill any empty fields</string>
 </resources>
