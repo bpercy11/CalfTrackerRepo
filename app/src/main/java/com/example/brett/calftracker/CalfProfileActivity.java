@@ -67,7 +67,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         calf = gson.fromJson(json, Calf.class);
         tempCalf = gson.fromJson(json, Calf.class);
 
-
         // print to log calf cbject information
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
