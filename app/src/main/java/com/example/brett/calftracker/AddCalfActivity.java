@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AddCalfActivity extends AppCompatActivity {
+public class AddCalfActivity extends BaseActivity {
 
     private static final String TAG = "AddCalfActivity";
 
@@ -49,7 +49,7 @@ public class AddCalfActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_calf);
+        getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
 
         // Load the calfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
