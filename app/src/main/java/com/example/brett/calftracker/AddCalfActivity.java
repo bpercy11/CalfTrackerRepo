@@ -51,15 +51,16 @@ public class AddCalfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_calf);
 
-        calfList = new ArrayList<Calf>();
-
         // Load the calfList
-//        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = mPreferences.edit();
-//
-//        Gson gson = new Gson();
-//        String json = mPreferences.getString("CalfList","");
-//        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("CalfList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("CalfList", "");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
+            }.getType());
+        } else { calfList = new ArrayList<Calf>(); }
 
         // Sets the default date to be today in case this field is left blank
         Calendar today = Calendar.getInstance();
