@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import static com.example.brett.calftracker.CalfListActivity.arrayExists;
+
 public class CalfListRecyclerAdapter extends RecyclerView.Adapter<CalfListRecyclerAdapter.ViewHolder> {
     private List<String> values;
     private Context mCon;
@@ -77,14 +79,19 @@ public class CalfListRecyclerAdapter extends RecyclerView.Adapter<CalfListRecycl
         holder.calfID.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences mPrefs = mCon.getSharedPreferences("CalfTracker",Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(CalfListActivity.calfList.get(position).getFarmId());
-                prefsEditor.putString("calfToViewInProfile",json);
-                prefsEditor.apply();
-                Intent intent = new Intent(mCon,CalfProfileActivity.class);
-                mCon.startActivity(intent);
+                if(!arrayExists) {
+                    Intent intent = new Intent(mCon,AddCalfActivity.class);
+                    mCon.startActivity(intent);
+                } else {
+                    SharedPreferences mPrefs = mCon.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(CalfListActivity.calfList.get(position).getFarmId());
+                    prefsEditor.putString("calfToViewInProfile", json);
+                    prefsEditor.apply();
+                    Intent intent = new Intent(mCon, CalfProfileActivity.class);
+                    mCon.startActivity(intent);
+                }
             }
         });
     }

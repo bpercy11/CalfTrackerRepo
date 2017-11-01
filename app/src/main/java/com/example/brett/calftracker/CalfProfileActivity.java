@@ -280,10 +280,10 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                tempDOB = new GregorianCalendar(year,month,day);
                 month = month + 1;
                 String date = month + "/" + day + "/" + year;
                 mDOBValue.setText(date);
-                tempDOB = new GregorianCalendar(year,month,day);
                 tempCalf.setDateOfBirth(tempDOB);
             }
         };
