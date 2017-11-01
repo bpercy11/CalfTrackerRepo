@@ -56,9 +56,9 @@ public class EditIllnessActivity extends AppCompatActivity {
                 }
             }
         });
-        mCancel.setOnClickListener(new View.OnClickListener(){
+        //mCancel.setOnClickListener(new View.OnClickListener(){
 
-        });
+        //});
 
         mBuilder.setView(mView);
         android.app.AlertDialog dialog = mBuilder.create();
