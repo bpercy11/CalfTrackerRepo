@@ -38,4 +38,7 @@
     <string name="enter_number_of_days">Enter Number of Days</string>
     <string name="enter_admin_method">Enter Admin Method</string>
     <string name="add_illness">Add</string>
+    <string name="error_login_message">Please fill any empty fields</string>
+    <string name="add_illness_successful_message">Add Illness Successful</string>
+    <string name="empty_fields_message">Please fill any empty fields</string>
 </resources>
