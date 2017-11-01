@@ -34,7 +34,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class CalfProfileActivity extends AppCompatActivity {
+public class CalfProfileActivity extends BaseActivity {
 
     private TextView mIDValue;
     private TextView mGenderValue;
@@ -74,7 +74,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calf_profile);
+        getLayoutInflater().inflate(R.layout.activity_calf_profile, frameLayout);
 
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
