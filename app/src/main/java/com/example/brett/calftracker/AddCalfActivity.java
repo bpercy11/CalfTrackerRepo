@@ -110,34 +110,35 @@ public class AddCalfActivity extends AppCompatActivity {
     public void clickAddCalfButton(View view) {
         // GET USER INPUT FOR ID NUMBER FROM EDITTEXT
         EditText ID = (EditText) findViewById(R.id.editTextGetID);
-        String idString = ID.getText().toString();
+        String calfID = ID.getText().toString();
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
 
         // Go here if the user does not enter a Calf ID
-        if (idString.matches("") || mGender.getText().toString().matches("")) {
-            Context context = getApplicationContext();
+        if (calfID.matches("") || mGender.getText().toString().matches("")) {
             CharSequence text = "Please complete all fields";
-            int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             return;
         }
-
+        if (calfID.length() > 9 || calfID.length() < 1) {
+            CharSequence text = "ID number must be between 1 and 9 digits";
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
         // MAKE NEW CALF OBJECT
         Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
-        Calf newCalf = new Calf(Integer.parseInt(ID.getText().toString()),calfGender, calfCal);
+        Calf calf = new Calf(calfID,calfGender, calfCal);
 
         // SAVE NEW CALF
-        SharedPreferences mPrefs = getSharedPreferences("test", Activity.MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(newCalf);
-        prefsEditor.putString("newCalf",json);
+        String json = gson.toJson(calf);
+        prefsEditor.putString("Calf",json);
         prefsEditor.apply();
         // GO TO NEWLWY CREATED CALF PROFILE
-
-//        CharSequence text = "Calf " + ID.getText() + " created successfully";
-//        Toast toast = Toast.makeText(context, text, duration);
-//        toast.show();
 
         Intent intent = new Intent(this,CalfProfileActivity.class);
         startActivity(intent);

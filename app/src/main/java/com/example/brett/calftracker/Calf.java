@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Calf {
-	private int farmId;
+	private String farmId;
 	private int internalId;
 	private String gender;
 	private Calendar dateOfBirth;
@@ -26,7 +26,7 @@ public class Calf {
 	 * @param dateOfBirth
 	 * @param neededVaccines
 	 */
-	public Calf(int farmId, int internalId, String gender, Calendar dateOfBirth,
+	public Calf(String farmId, int internalId, String gender, Calendar dateOfBirth,
 			ArrayList<Vaccine> neededVaccines) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
@@ -49,7 +49,7 @@ public class Calf {
 	}
 
 	//LAZY WITHOUT INTERNAL AND USING CALENDAR
-	public Calf(int farmId, String gender, Calendar dateOfBirth) {
+	public Calf(String farmId, String gender, Calendar dateOfBirth) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
 		this.farmId = farmId;
@@ -72,14 +72,14 @@ public class Calf {
 	/**
 	 * @return the farmId
 	 */
-	public int getFarmId() {
+	public String getFarmId() {
 		return farmId;
 	}
 
 	/**
 	 * @param farmId the farmId to set
 	 */
-	public void setFarmId(int farmId) {
+	public void setFarmId(String farmId) {
 		this.farmId = farmId;
 	}
 
