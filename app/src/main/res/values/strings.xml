@@ -16,8 +16,8 @@
     <string name="calf_profile_ID_field">ID Number</string>
     <string name="calf_profile_gender_field">Gender</string>
     <string name="calf_profile_DOB_field">Date of Birth</string>
-    <string name="calf_profile_sire_field">Sire</string>
-    <string name="calf_profile_dam_field">Dam</string>
+    <string name="calf_profile_sire_field">Sire ID</string>
+    <string name="calf_profile_dam_field">Dam ID</string>
     <string name="calf_profile_weight_field">Current Weight</string>
     <string name="calf_profile_height_field">Current Height</string>
     <string name="calf_profile_notes_field">Notes</string>

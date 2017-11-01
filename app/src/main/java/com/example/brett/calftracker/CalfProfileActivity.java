@@ -29,6 +29,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -50,6 +51,8 @@ public class CalfProfileActivity extends AppCompatActivity {
     private ListView mNoteListView;
 
     private Calf calf;
+    private String calfID;
+    private ArrayList<Calf> calfList;
 
     private Calf tempCalf;
     private String tempID;
@@ -73,16 +76,28 @@ public class CalfProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile);
 
-
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
 
         Gson gson = new Gson();
-        String json = mPreferences.getString("Calf","");
-        calf = gson.fromJson(json, Calf.class);
-        tempCalf = gson.fromJson(json, Calf.class);
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
 
+        json = mPreferences.getString("calfToViewInProfile","");
+        calfID = gson.fromJson(json, String.class);
+
+        // Search through the calfList to find the correct calf by ID
+        for (int i = 0; i < calfList.size(); i++) {
+            if (calfList.get(i).getFarmId().equals(calfID)) {
+                calf = calfList.get(i);
+                tempCalf = calfList.get(i);
+            }
+        }
+//        if (calf == null) {
+//            Intent intent = new Intent(this,DashboardActivity.class);
+//            startActivity(intent);
+//        }
 
         // print to log calf cbject information
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
@@ -205,7 +220,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 }
                 if (inputID.length() > 9 || inputID.length() < 1) {
                     Context context = getApplicationContext();
-                    CharSequence text = "ID number must be between 1 and 9 digits";
+                    CharSequence text = "ID must be 9 digits or less";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -289,6 +304,14 @@ public class CalfProfileActivity extends AppCompatActivity {
         builderSire.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if (inputSire.length() > 9 || inputSire.length() < 1) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "ID must be 9 digits or less";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 mSireValue.setText(inputSire.getText().toString());
                 tempCalf.setSire(inputSire.getText().toString());
             }
@@ -317,6 +340,14 @@ public class CalfProfileActivity extends AppCompatActivity {
         builderDam.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if (inputDam.length() > 9 || inputDam.length() < 1) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "ID must be 9 digits or less";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 mDamValue.setText(inputDam.getText().toString());
                 tempCalf.setDam(inputDam.getText().toString());
             }
@@ -388,11 +419,19 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void clickApplyButton(View view) {
         calf = tempCalf;
+
+        for (int i = 0; i < calfList.size(); i++) {
+            if (calfList.get(i).getFarmId().equals(calfID)) {
+                calfList.set(i, calf);
+            }
+        }
+
 //        Log.i("calf details", "\nID: " + calf.getFarmId() +
 //                "\nGender: " + calf.getGender() +
 //                "\nDOB: " + calf.getDateOfBirth().get(Calendar.MONTH) + "/" + calf.getDateOfBirth().get(Calendar.DATE) + "/" + calf.getDateOfBirth().get(Calendar.YEAR) +
 //                "\nSire: " + calf.getSire() +
 //                "\nDam: " + calf.getDam());
+
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
@@ -427,8 +466,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(calf);
-        prefsEditor.putString("Calf",json);
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
     }
 
@@ -484,11 +523,17 @@ public class CalfProfileActivity extends AppCompatActivity {
 
                 calf.addNote(newNote);
 
+                for (int j = 0; j < calfList.size(); j++) {
+                    if (calfList.get(j).getFarmId().equals(calfID)) {
+                        calfList.set(j, calf);
+                    }
+                }
+
                 SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
                 Gson gson = new Gson();
-                String json = gson.toJson(calf);
-                prefsEditor.putString("Calf",json);
+                String json = gson.toJson(calfList);
+                prefsEditor.putString("CalfList",json);
                 prefsEditor.apply();
 
                 updateNoteListView(calf);

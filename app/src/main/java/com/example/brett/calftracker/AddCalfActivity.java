@@ -20,7 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -42,12 +44,24 @@ public class AddCalfActivity extends AppCompatActivity {
 
     private String calfGender;
 
+    private ArrayList<Calf> calfList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_calf);
 
-        // Sets the default date to be today in case these fields are left blank
+        //calfList = new ArrayList<Calf>();
+
+        // Load the calfList
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+
+        // Sets the default date to be today in case this field is left blank
         Calendar today = Calendar.getInstance();
         calfYear = today.get(Calendar.YEAR);
         calfMonth = today.get(Calendar.MONTH);
@@ -127,19 +141,25 @@ public class AddCalfActivity extends AppCompatActivity {
             toast.show();
             return;
         }
-        // MAKE NEW CALF OBJECT
+        // Make new calf object and add it to the calfList
         Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
         Calf calf = new Calf(calfID,calfGender, calfCal);
+        calfList.add(calf);
 
-        // SAVE NEW CALF
+        // Save the calfList to local storage
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(calf);
-        prefsEditor.putString("Calf",json);
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
-        // GO TO NEWLWY CREATED CALF PROFILE
 
+        prefsEditor = mPrefs.edit();
+        json = gson.toJson(calf.getFarmId());
+        prefsEditor.putString("calfToViewInProfile",json);
+        prefsEditor.apply();
+
+        // GO TO NEWLWY CREATED CALF PROFILE
         Intent intent = new Intent(this,CalfProfileActivity.class);
         startActivity(intent);
     }
