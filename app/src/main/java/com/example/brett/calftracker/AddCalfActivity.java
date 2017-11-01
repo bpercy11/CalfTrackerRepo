@@ -161,7 +161,7 @@ public class AddCalfActivity extends BaseActivity {
         prefsEditor.apply();
 
         // GO TO NEWLWY CREATED CALF PROFILE
-        Intent intent = new Intent(this,CalfProfileActivity.class);
+        Intent intent = new Intent(this,NewCalfVaccineSelectionActivity.class);
         startActivity(intent);
     }
 
