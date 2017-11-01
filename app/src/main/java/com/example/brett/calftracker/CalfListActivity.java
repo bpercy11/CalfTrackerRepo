@@ -61,10 +61,4 @@ public class CalfListActivity extends BaseActivity {
         mAdapter = new CalfListRecyclerAdapter(this,input);
         recyclerView.setAdapter(mAdapter);
     }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,DashboardActivity.class);
-        startActivity(intent);
-    }
 }
