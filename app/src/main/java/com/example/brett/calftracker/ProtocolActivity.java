@@ -2,6 +2,7 @@ package com.example.brett.calftracker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiConfiguration;
 import android.support.v7.app.AppCompatActivity;
@@ -37,37 +38,11 @@ public class ProtocolActivity extends AppCompatActivity {
         editIllness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProtocolActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.activity_edit_illness, null);
-
-                final EditText mName = (EditText) mView.findViewById(R.id.editTextIllness);
-                final EditText mTreatment = (EditText) mView.findViewById(R.id.editTextTreatment);
-                final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
-                final EditText mTimeActive = (EditText) mView.findViewById(R.id.editTextTimeActive);
-                final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
-                final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddIllness);
-
-                mAddIllness.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!mName.getText().toString().isEmpty() && !mTreatment.getText().toString().isEmpty() &&
-                                !mDosage.getText().toString().isEmpty() && !mTimeActive.getText().toString().isEmpty()
-                                &&  !mTimeActive.getText().toString().isEmpty() && !mAdminMethod.getText().toString().isEmpty()){
-                            Toast.makeText(ProtocolActivity.this, R.string.add_illness_successful_message,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(ProtocolActivity.this, R.string.empty_fields_message,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
+                Intent intent = new Intent(ProtocolActivity.this, EditIllnessActivity.class);
+                startActivity(intent);
             }
-        });
-    }
+
+
 /*
         // try and get Medicine object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -111,45 +86,26 @@ public class ProtocolActivity extends AppCompatActivity {
 
 */
 
- /*       lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-        //sample data
-        vaccineList.add(new Vaccine("POOP",5,15,"ml","needle"));
-        vaccineList.add(new Vaccine("alex",6,10,"ml","pill"));
+            /*       lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
+                   //sample data
+                   vaccineList.add(new Vaccine("POOP",5,15,"ml","needle"));
+                   vaccineList.add(new Vaccine("alex",6,10,"ml","pill"));
 
-        vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
-        lvVaccine.setAdapter(vAdapter);
+                   vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
+                   lvVaccine.setAdapter(vAdapter);
 
-        lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                   lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                       @Override
+                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                           //Do something
 
-            }
-        });
-    }
-    public void onMedicineButtonClick(View view) {
-        //Do nothing since it is already on the page.
-    }*/
-    public void onEditVaccineButtonClick(View view) {
-/*
-        //Write to local device
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tempIllness);
-        prefsEditor.putString("newIllness",json);
-        prefsEditor.apply();
-*/
-    }
-    public void onEditIllnessButtonClick(View view) {
-/*
-        //Write to local device
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tempMedicine);
-        prefsEditor.putString("newMedicine",json);
-        prefsEditor.apply();
-*/
+                       }
+                   });
+               }
+               public void onMedicineButtonClick(View view) {
+                   //Do nothing since it is already on the page.
+               }*/
+
+        }
     }
 }

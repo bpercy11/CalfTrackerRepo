@@ -41,4 +41,7 @@
     <string name="error_login_message">Please fill any empty fields</string>
     <string name="add_illness_successful_message">Add Illness Successful</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
+    <string name="enter_days">Enter Days</string>
+    <string name="enter_method">Enter Method</string>
+    <string name="cancel_button">Cancel</string>
 </resources>
