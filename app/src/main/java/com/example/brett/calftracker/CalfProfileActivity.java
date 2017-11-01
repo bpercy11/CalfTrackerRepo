@@ -550,4 +550,10 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         newNoteAlert.show();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,CalfListActivity.class);
+        startActivity(intent);
+    }
 }

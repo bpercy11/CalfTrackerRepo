@@ -1,5 +1,6 @@
 package com.example.brett.calftracker;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,5 +60,11 @@ public class CalfListActivity extends AppCompatActivity {
         } else { input.add("No calfs exist. Click here to get started!"); }
         mAdapter = new CalfListRecyclerAdapter(this,input);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,DashboardActivity.class);
+        startActivity(intent);
     }
 }
