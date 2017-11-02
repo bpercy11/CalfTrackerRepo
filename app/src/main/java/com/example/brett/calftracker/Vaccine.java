@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Vaccine
 {
 	private String name;
-	private int toBeAdministered;
+	private ArrayList<Vacc_Range> toBeAdministered;
 	private double dosage;
 	private String dosageUnits;
 	private String methodOfAdministration;
@@ -16,7 +16,7 @@ public class Vaccine
 	 * @param methodOfAdministration
 	 * @param toBeAdministered
 	 */
-	public Vaccine(String name, int toBeAdministered, double dosage,
+	public Vaccine(String name, ArrayList<Vacc_Range> toBeAdministered, double dosage,
 				   String dosageUnits, String methodOfAdministration) {
 		super();
 		this.name = name;
@@ -51,14 +51,14 @@ public class Vaccine
 	/**
 	 * @return the toBeAdministered
 	 */
-	public int getToBeAdministered() {
+	public ArrayList<Vacc_Range> getToBeAdministered() {
 		return toBeAdministered;
 	}
 
 	/**
 	 * @param toBeAdministered the toBeAdministered to set
 	 */
-	public void setToBeAdministered(int toBeAdministered) {
+	public void setToBeAdministered(ArrayList<Vacc_Range> toBeAdministered) {
 		this.toBeAdministered = toBeAdministered;
 	}
 
@@ -113,8 +113,8 @@ public class Vaccine
 	 * @param methodOfAdministration
 	 * @return Vaccine the new vaccine created
 	 */
-	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
-								 int toBeAdministeredAt, String methodOfAdministration){
-		return new Vaccine(name,toBeAdministeredAt,dosage,dosageUnits,methodOfAdministration);
-	}
+//	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
+//								 ArrayList<Vacc_Range> toBeAdministeredAt, String methodOfAdministration){
+//		return new Vaccine(name,toBeAdministeredAt,dosage,dosageUnits,methodOfAdministration);
+//	}
 }

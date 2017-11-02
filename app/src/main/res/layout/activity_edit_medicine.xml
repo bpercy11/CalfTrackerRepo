@@ -177,6 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:onClick="clickCancelButton"
         android:text="@string/cancel_button"
         app:layout_constraintBottom_toBottomOf="@+id/buttonAddMedicine"

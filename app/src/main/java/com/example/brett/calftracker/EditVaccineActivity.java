@@ -77,16 +77,16 @@ public class EditVaccineActivity extends AppCompatActivity {
         String adminMethodString = adminMethod.getText().toString();
 
         // MAKE A NEW VACCINE OBJECT
-        Vaccine newVaccine = new Vaccine(vaccineStr,activeDaysInt,dosageDbl,dosageUnitsStr,
-                adminMethodString);
+//        Vaccine newVaccine = new Vaccine(vaccineStr,activeDaysInt,dosageDbl,dosageUnitsStr,
+//                adminMethodString);
 
         // SAVE NEW VACCINE
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(newVaccine);
-        prefsEditor.putString("newVaccine",json);
-        prefsEditor.apply();
+//        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+//        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(newVaccine);
+//        prefsEditor.putString("newVaccine",json);
+//        prefsEditor.apply();
 
         Intent intent = new Intent(this,EditVaccineActivity.class);
         startActivity(intent);

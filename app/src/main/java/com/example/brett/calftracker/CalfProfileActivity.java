@@ -192,6 +192,12 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonAddWeight).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonAddHeight).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonCreateNewNote).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewNotes).setVisibility(View.INVISIBLE);
+//        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
 
         mIDValue.setBackgroundColor(Color.RED);
         mGenderValue.setBackgroundColor(Color.RED);
@@ -368,61 +374,6 @@ public class CalfProfileActivity extends BaseActivity {
         });
         alertDam = builderDam.create();
 
-//        // Edit Weight
-//        mWeightValue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertWeight.show();
-//            }
-//        });
-//        AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
-//        final EditText inputWeight = new EditText(this);
-//        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
-//        inputWeight.setHint("Weight");
-//        builderWeight.setTitle("Enter calf weight");
-//        builderWeight.setView(inputWeight);
-//        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                mWeightValue.setText(inputWeight.getText().toString());
-//                //tempCalf.setWeight();
-//            }
-//        });
-//        builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//            }
-//        });
-//        alertWeight = builderWeight.create();
-//
-//        // Edit Height
-//        mHeightValue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertHeight.show();
-//            }
-//        });
-//        AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
-//        final EditText inputHeight = new EditText(this);
-//        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
-//        inputHeight.setHint("Height");
-//        builderHeight.setTitle("Enter calf height");
-//        builderHeight.setView(inputHeight);
-//        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                mHeightValue.setText(inputHeight.getText().toString());
-//                //tempCalf.setHeight();
-//            }
-//        });
-//        builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//            }
-//        });
-//        alertHeight = builderHeight.create();
     }
 
     public void clickApplyButton(View view) {
@@ -446,6 +397,12 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
+//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -468,8 +425,8 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
+//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
+//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -482,10 +439,17 @@ public class CalfProfileActivity extends BaseActivity {
     public void clickCancelButton(View view) {
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
+//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
+
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
