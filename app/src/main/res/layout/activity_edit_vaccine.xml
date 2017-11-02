@@ -146,5 +146,31 @@
         app:layout_constraintTop_toTopOf="@+id/textViewAdminMethod"
         app:layout_constraintVertical_bias="0.551" />
 
+    <Button
+        android:id="@+id/buttonAddVaccine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="100dp"
+        android:onClick="clickAddVaccineButton"
+        android:text="ADD"
+        app:layout_constraintStart_toStartOf="@+id/textViewVaccineName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdminMethod" />
+
+    <Button
+        android:id="@+id/buttonVaccineCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="clickCancelVaccineButton"
+        android:text="@string/cancel_button"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddVaccine"
+        app:layout_constraintEnd_toEndOf="@+id/editTextVaccineName"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddVaccine" />
+
 
 </android.support.constraint.ConstraintLayout>
