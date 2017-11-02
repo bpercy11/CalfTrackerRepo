@@ -1,20 +1,12 @@
 package com.example.brett.calftracker;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.wifi.WifiConfiguration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,13 +75,13 @@ public class ProtocolActivity extends AppCompatActivity {
         });
 
     }
-    public void onEditIllnessButtonClick(View view){
-        Button editIllness = (Button) findViewById(R.id.editIllness);
+    public void onEditVaccineButtonClick(View view){
+        Button editVaccine = (Button) findViewById(R.id.editVaccine);
 
-        editIllness.setOnClickListener(new View.OnClickListener() {
+        editVaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProtocolActivity.this, EditIllnessActivity.class);
+                Intent intent = new Intent(ProtocolActivity.this, EditMedicineActivity.class);
                 startActivity(intent);
             }
         });

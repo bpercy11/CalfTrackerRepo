@@ -60,13 +60,13 @@ public class MedicineActivity extends AppCompatActivity {
         });
 
     }
-    public void onEditIllnessButtonClick(View view){
-        Button editIllness = (Button) findViewById(R.id.editIllness);
+    public void onEditMedicineButton(View view){
+        Button editMedicine = (Button) findViewById(R.id.editMedicine);
 
-        editIllness.setOnClickListener(new View.OnClickListener() {
+        editMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MedicineActivity.this, EditIllnessActivity.class);
+                Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
                 startActivity(intent);
             }
         });

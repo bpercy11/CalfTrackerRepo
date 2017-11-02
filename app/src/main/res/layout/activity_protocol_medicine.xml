@@ -35,13 +35,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/editIllness"
+        android:id="@+id/editMedicine"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="8dp"
-        android:onClick="onEditIllnessButtonClick"
-        android:text="Edit Illness"
+        android:onClick="onEditMedicineButtonClick"
+        android:text="Edit Medicine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,7 +59,7 @@
         android:divider="#d1d1d1"
         android:dividerHeight="5dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/editIllness"
+        app:layout_constraintBottom_toTopOf="@+id/editMedicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
