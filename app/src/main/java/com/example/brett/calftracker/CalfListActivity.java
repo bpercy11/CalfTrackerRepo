@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,6 +61,11 @@ public class CalfListActivity extends BaseActivity {
         } else { input.add("No calfs exist. Click here to get started!"); }
         mAdapter = new CalfListRecyclerAdapter(this,input);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    public void clickAdd(View view) {
+        Intent intent = new Intent(this,AddCalfActivity.class);
+        startActivity(intent);
     }
 
     @Override
