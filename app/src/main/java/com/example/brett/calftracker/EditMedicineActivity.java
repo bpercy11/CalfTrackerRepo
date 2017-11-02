@@ -36,7 +36,7 @@ public class EditMedicineActivity extends AppCompatActivity {
         final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
         final EditText mTimeActive = (EditText) mView.findViewById(R.id.editTextTimeActive);
         final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
-        final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddVaccine);
+        final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddMedicine);
         final Button mCancel = (Button) mView.findViewById(R.id.buttonCancel);
 
         mAddIllness.setOnClickListener(new View.OnClickListener() {
