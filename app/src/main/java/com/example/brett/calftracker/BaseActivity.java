@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,7 +20,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerLayout;
     protected FrameLayout frameLayout;
-    private NavigationView mNavigationView;
+    protected NavigationView mNavigationView;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -33,6 +34,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
         frameLayout = (FrameLayout) findViewById(R.id.content_frame);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -89,7 +92,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,27 +99,28 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-
         Intent intent;
         switch(item.getItemId()) {
             case R.id.nav_home: intent = new Intent(BaseActivity.this,DashboardActivity.class);
                 if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
                     startActivity(intent);
                 }
                 break;
             case R.id.nav_list: intent = new Intent(BaseActivity.this,CalfListActivity.class);
                 if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
                     startActivity(intent);
                 }
                 break;
             case R.id.nav_add: intent = new Intent(BaseActivity.this,AddCalfActivity.class);
                 if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
                     startActivity(intent);
                 }
                 break;
             // TODO add cases for other menu options as they are implemented
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

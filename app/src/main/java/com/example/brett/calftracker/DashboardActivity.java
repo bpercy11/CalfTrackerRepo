@@ -34,6 +34,7 @@ public class DashboardActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_dashboard, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
         CustomGrid adapter = new CustomGrid(DashboardActivity.this, dashboard_items, imageId);
         grid=(GridView)findViewById(R.id.grid);
