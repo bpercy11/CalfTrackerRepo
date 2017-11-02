@@ -551,9 +551,48 @@ public class CalfProfileActivity extends BaseActivity {
         newNoteAlert.show();
     }
 
+    public void clickDeleteCalf(View view) {
+        AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
+        builderDelete.setMessage("Are you sure you want to delete this calf?")
+                .setTitle("Delete Calf");
+        builderDelete.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Remove the calf from the list and save the new list to local storage
+                calfList.remove(calf);
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(calfList);
+                prefsEditor.putString("CalfList",json);
+                prefsEditor.apply();
+
+                // Show a toast saying that the calf was removed
+                Context context = getApplicationContext();
+                CharSequence text = "Calf " + calfID + " successfully removed";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                // Go back to the CalfList View
+                Intent intent = new Intent(CalfProfileActivity.this, CalfListActivity.class);
+                startActivity(intent);
+            }
+        });
+        builderDelete.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing
+            }
+        });
+
+        AlertDialog alertDelete = builderDelete.create();
+        alertDelete.show();
+    }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,CalfListActivity.class);
+        Intent intent = new Intent(this, CalfListActivity.class);
         startActivity(intent);
     }
 }
