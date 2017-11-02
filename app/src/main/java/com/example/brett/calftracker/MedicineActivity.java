@@ -60,7 +60,7 @@ public class MedicineActivity extends AppCompatActivity {
         });
 
     }
-    public void onEditMedicineButton(View view){
+    public void onEditMedicineButtonClick(View view){
         Button editMedicine = (Button) findViewById(R.id.editMedicine);
 
         editMedicine.setOnClickListener(new View.OnClickListener() {

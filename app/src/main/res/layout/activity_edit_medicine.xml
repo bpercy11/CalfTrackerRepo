@@ -38,7 +38,7 @@
         android:id="@+id/textViewEditMedicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="25dp"
         android:text="@string/illness_name"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
@@ -164,11 +164,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginTop="100dp"
         android:onClick="clickAddMedicineButton"
         android:text="ADD"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewEditMedicine" />
+        app:layout_constraintStart_toStartOf="@+id/textViewEditMedicine"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdminMethod" />
 
     <Button
         android:id="@+id/buttonCancel"

@@ -93,7 +93,7 @@ public class EditMedicineActivity extends AppCompatActivity {
         prefsEditor.apply();
         // GO TO NEWLWY CREATED CALF PROFILE
 
-        Intent intent = new Intent(this,ProtocolActivity.class);
+        Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }
     public void clickCancelButton(View view){

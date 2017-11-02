@@ -81,7 +81,7 @@ public class ProtocolActivity extends AppCompatActivity {
         editVaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProtocolActivity.this, EditMedicineActivity.class);
+                Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
                 startActivity(intent);
             }
         });
