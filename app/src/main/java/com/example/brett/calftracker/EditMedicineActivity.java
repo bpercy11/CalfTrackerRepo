@@ -36,7 +36,7 @@ public class EditMedicineActivity extends AppCompatActivity {
         final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
         final EditText mTimeActive = (EditText) mView.findViewById(R.id.editTextTimeActive);
         final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
-        final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddIllness);
+        final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddMedicine);
         final Button mCancel = (Button) mView.findViewById(R.id.buttonCancel);
 
         mAddIllness.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,7 @@ public class EditMedicineActivity extends AppCompatActivity {
                 if (!mName.getText().toString().isEmpty() && !mTreatment.getText().toString().isEmpty() &&
                         !mDosage.getText().toString().isEmpty() && !mTimeActive.getText().toString().isEmpty()
                         &&  !mTimeActive.getText().toString().isEmpty() && !mAdminMethod.getText().toString().isEmpty()){
-                    Toast.makeText(EditMedicineActivity.this, R.string.add_illness_successful_message,
+                    Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
                             Toast.LENGTH_SHORT).show();
                     clickAddMedicineButton(view);
                 }
