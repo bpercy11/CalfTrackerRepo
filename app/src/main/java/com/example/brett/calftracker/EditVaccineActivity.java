@@ -39,7 +39,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         final EditText mAdminDays = (EditText) mView.findViewById(R.id.editTextAdminDate);
         final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
         final Button mAddVaccine = (Button) mView.findViewById(R.id.buttonAddVaccine);
-        final Button mCancel = (Button) mView.findViewById(R.id.buttonCancelVaccine);
+        final Button mCancel = (Button) mView.findViewById(R.id.buttonVaccineCancel);
 
         mAddVaccine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +91,8 @@ public class EditVaccineActivity extends AppCompatActivity {
         Intent intent = new Intent(this,EditVaccineActivity.class);
         startActivity(intent);
     }
-    public void clickCancelButton(View view){
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancelVaccine);
+    public void clickCancelVaccineButton(View view){
+        Button buttonCancel = (Button) findViewById(R.id.buttonVaccineCancel);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -24,11 +24,15 @@
         android:id="@+id/editVaccine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textSize="30sp"
         android:text="@string/edit_vaccine"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewVaccineName"
@@ -165,6 +169,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
         android:onClick="clickCancelVaccineButton"
         android:text="@string/cancel_button"
