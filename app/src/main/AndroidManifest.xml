@@ -27,6 +27,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NewCalfVaccineSelectionActivity" />
         <activity android:name=".CalfProfileMedicalHistoryActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProtocolActivity" />
+        <activity android:name=".EditMedicineActivity" />
+        <activity android:name=".EditVaccineActivity" />
+        <activity android:name=".MedicineActivity" />
     </application>
 
 </manifest>

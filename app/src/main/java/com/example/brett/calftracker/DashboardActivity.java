@@ -53,7 +53,9 @@ public class DashboardActivity extends BaseActivity {
                             startActivity(intent);
                             break;
                     case 2: break;
-                    case 3: break;
+                    case 3: intent = new Intent(DashboardActivity.this,ProtocolActivity.class);
+                            startActivity(intent);
+                            break;
                     case 4: break;
                     case 5: break;
                 }
