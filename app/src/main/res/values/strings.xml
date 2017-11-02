@@ -44,4 +44,14 @@
     <string name="enter_method">Enter Method</string>
     <string name="cancel_button">Cancel</string>
     <string name="edit_medicine">Edit Medicine</string>
+    <string name="edit_vaccine">Edit Vaccine</string>
+    <string name="vaccine_name">Vaccine</string>
+    <string name="enter_vaccine">Enter Vaccine</string>
+    <string name="administration_date">Administer</string>
+    <string name="administration_days">Enter Number Days</string>
+    <string name="vaccine_dosage">Dosage</string>
+    <string name="enter_vaccine_dosage">Enter Dosage</string>
+    <string name="dosage_units_vaccine">Dosage Units</string>
+    <string name="admin_method_vaccine">Administration</string>
+    <string name="enter_admin_method_vaccine">Enter Method</string>
 </resources>
