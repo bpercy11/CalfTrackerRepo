@@ -19,13 +19,14 @@
         <activity android:name=".AddCalfActivity" />
         <activity android:name=".CalfListActivity" />
         <activity android:name=".CalfProfileActivity" />
-        <activity android:name=".DashboardActivity"></activity>
-        <activity android:name=".CreateFarmActivity"></activity>
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".CreateFarmActivity" />
         <activity
             android:name=".menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewCalfVaccineSelectionActivity"></activity>
+        <activity android:name=".NewCalfVaccineSelectionActivity" />
+        <activity android:name=".CalfProfileMedicalHistoryActivity"></activity>
     </application>
 
 </manifest>

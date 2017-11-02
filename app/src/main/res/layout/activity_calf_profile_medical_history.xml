@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.brett.calftracker.CalfProfileMedicalHistoryActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical50percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/buttonVaccines"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical50percent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/calf_profile_medical_history_vaccine_button" />
+
+    <Button
+        android:id="@+id/buttonIllneses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/vertical50percent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/calf_profile_medical_history_illness_button" />
+</android.support.constraint.ConstraintLayout>

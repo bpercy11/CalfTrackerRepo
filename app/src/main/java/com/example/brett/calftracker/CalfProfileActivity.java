@@ -590,6 +590,11 @@ public class CalfProfileActivity extends BaseActivity {
         alertDelete.show();
     }
 
+    public void onClickMedicalHistory(View view) {
+        Intent intent = new Intent(this,CalfProfileMedicalHistoryActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, CalfListActivity.class);
