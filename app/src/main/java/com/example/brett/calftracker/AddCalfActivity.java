@@ -50,6 +50,7 @@ public class AddCalfActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_add).setChecked(true);
 
         // Load the calfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);

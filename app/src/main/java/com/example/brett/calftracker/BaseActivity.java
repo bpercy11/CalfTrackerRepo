@@ -9,19 +9,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import java.security.acl.Group;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    FrameLayout frameLayout;
-    NavigationView navigationView;
-    ActionBarDrawerToggle toggle;
+    private DrawerLayout mDrawerLayout;
+    protected FrameLayout frameLayout;
+    protected NavigationView mNavigationView;
+    private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
@@ -32,11 +32,15 @@ public class BaseActivity extends AppCompatActivity {
 
         mTitle = mDrawerTitle = getTitle();
 
-        frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+        mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
+        frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
@@ -53,7 +57,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         };
 
-        drawerLayout.addDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
@@ -62,25 +66,13 @@ public class BaseActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        toggle.syncState();
+        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        toggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle your other action bar items...
-
-        return super.onOptionsItemSelected(item);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -91,5 +83,46 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        Intent intent;
+        switch(item.getItemId()) {
+            case R.id.nav_home: intent = new Intent(BaseActivity.this,DashboardActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.nav_list: intent = new Intent(BaseActivity.this,CalfListActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.nav_add: intent = new Intent(BaseActivity.this,AddCalfActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
+                    startActivity(intent);
+                }
+                break;
+            // TODO add cases for other menu options as they are implemented
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
