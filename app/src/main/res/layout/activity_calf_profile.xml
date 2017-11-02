@@ -124,6 +124,13 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.66" />
 
+            <android.support.constraint.Guideline
+                android:id="@+id/CenterLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
             <TextView
                 android:id="@+id/textViewIMAGEPLACEHOLDER"
                 android:layout_width="wrap_content"
@@ -252,8 +259,8 @@
                 android:layout_marginRight="8dp"
                 android:text="NO SIRE RECORD"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewSireField"
                 tools:layout_editor_absoluteX="142dp" />
@@ -266,8 +273,8 @@
                 android:layout_marginRight="8dp"
                 android:text="NO DAM RECORD"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDamField"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewDamField" />
 
@@ -303,11 +310,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/calf_profile_growth_history_button"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
 
             <Button
                 android:id="@+id/buttonFeedingHistory"
@@ -315,11 +322,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/calf_profile_feeding_history_button"
                 app:layout_constraintEnd_toStartOf="@+id/vertical66percent"
                 app:layout_constraintStart_toStartOf="@+id/vertical33percent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
 
             <Button
                 android:id="@+id/buttonMedicalHistory"
@@ -327,12 +334,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="24dp"
                 android:onClick="onClickMedicalHistory"
                 android:text="@string/calf_profile_medical_history_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
 
             <TextView
                 android:id="@+id/textView"
@@ -375,6 +382,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewNote" />
+
+            <Button
+                android:id="@+id/buttonAddWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="50dp"
+                android:onClick="onClickAddWeight"
+                android:text="Record Weight"
+                app:layout_constraintEnd_toStartOf="@+id/CenterLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
+
+            <Button
+                android:id="@+id/buttonAddHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="50dp"
+                android:onClick="onClickAddHeight"
+                android:text="Record Height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/CenterLine"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

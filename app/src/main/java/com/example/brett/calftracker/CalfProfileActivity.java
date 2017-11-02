@@ -117,6 +117,14 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setText(month + "/" + day + "/" + year);
         if (calf.getSire() != null) {mSireValue.setText(calf.getSire());}
         if (calf.getDam() != null) {mDamValue.setText(calf.getDam());}
+        if (!calf.getPhysicalHistory().isEmpty() && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() != -1) {
+            mWeightValue.setText(Double.toString(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight()) + " lbs");
+        }
+        if (!calf.getPhysicalHistory().isEmpty() && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1) {
+            mHeightValue.setText(Double.toString(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight()) + " in");
+        }
+
+
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
@@ -190,8 +198,8 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.RED);
         mSireValue.setBackgroundColor(Color.RED);
         mDamValue.setBackgroundColor(Color.RED);
-        mHeightValue.setBackgroundColor(Color.RED);
-        mWeightValue.setBackgroundColor(Color.RED);
+//        mHeightValue.setBackgroundColor(Color.RED);
+//        mWeightValue.setBackgroundColor(Color.RED);
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -360,61 +368,61 @@ public class CalfProfileActivity extends BaseActivity {
         });
         alertDam = builderDam.create();
 
-        // Edit Weight
-        mWeightValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertWeight.show();
-            }
-        });
-        AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
-        final EditText inputWeight = new EditText(this);
-        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputWeight.setHint("Weight");
-        builderWeight.setTitle("Enter calf weight");
-        builderWeight.setView(inputWeight);
-        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mWeightValue.setText(inputWeight.getText().toString());
-                //tempCalf.setWeight();
-            }
-        });
-        builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        alertWeight = builderWeight.create();
-
-        // Edit Height
-        mHeightValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertHeight.show();
-            }
-        });
-        AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
-        final EditText inputHeight = new EditText(this);
-        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputHeight.setHint("Height");
-        builderHeight.setTitle("Enter calf height");
-        builderHeight.setView(inputHeight);
-        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mHeightValue.setText(inputHeight.getText().toString());
-                //tempCalf.setHeight();
-            }
-        });
-        builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        alertHeight = builderHeight.create();
+//        // Edit Weight
+//        mWeightValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertWeight.show();
+//            }
+//        });
+//        AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
+//        final EditText inputWeight = new EditText(this);
+//        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        inputWeight.setHint("Weight");
+//        builderWeight.setTitle("Enter calf weight");
+//        builderWeight.setView(inputWeight);
+//        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                mWeightValue.setText(inputWeight.getText().toString());
+//                //tempCalf.setWeight();
+//            }
+//        });
+//        builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        alertWeight = builderWeight.create();
+//
+//        // Edit Height
+//        mHeightValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertHeight.show();
+//            }
+//        });
+//        AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
+//        final EditText inputHeight = new EditText(this);
+//        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        inputHeight.setHint("Height");
+//        builderHeight.setTitle("Enter calf height");
+//        builderHeight.setView(inputHeight);
+//        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                mHeightValue.setText(inputHeight.getText().toString());
+//                //tempCalf.setHeight();
+//            }
+//        });
+//        builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        alertHeight = builderHeight.create();
     }
 
     public void clickApplyButton(View view) {
@@ -492,8 +500,8 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
+//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
+//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
@@ -595,9 +603,113 @@ public class CalfProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    public void onClickAddWeight(View view) {
+        AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
+        builderWeight.setTitle("Record Weight Measurement");
+        final EditText inputWeight = new EditText(this);
+        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputWeight.setHint("Weight (lbs)");
+        builderWeight.setView(inputWeight);
+        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                double weight = Double.parseDouble(inputWeight.getText().toString());
+                Calendar today = Calendar.getInstance();
+                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
+                if (!calf.getPhysicalHistory().isEmpty()
+                        && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() == -1
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                    calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setWeight(weight);
+
+                } else {
+                    calf.getPhysicalHistory().add(size);
+                }
+                mWeightValue.setText(Double.toString(weight) + " lbs");
+
+                for (int j = 0; j < calfList.size(); j++) {
+                    if (calfList.get(j).getFarmId().equals(calfID)) {
+                        calfList.set(j, calf);
+                    }
+                }
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(calfList);
+                prefsEditor.putString("CalfList",json);
+                prefsEditor.apply();
+            }
+        });
+        builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertWeight = builderWeight.create();
+        alertWeight.show();
+
+    }
+
+    public void onClickAddHeight(View view) {
+        AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
+        builderHeight.setTitle("Record Height Measurement");
+        final EditText inputHeight = new EditText(this);
+        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputHeight.setHint("Height (in)");
+        builderHeight.setView(inputHeight);
+        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                double height = Double.parseDouble(inputHeight.getText().toString());
+                Calendar today = Calendar.getInstance();
+                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
+
+                if (!calf.getPhysicalHistory().isEmpty()
+                        && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() == -1
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                    calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setHeight(height);
+
+                } else {
+                    calf.getPhysicalHistory().add(size);
+                }
+                mHeightValue.setText(Double.toString(height) + " in");
+
+                for (int j = 0; j < calfList.size(); j++) {
+                    if (calfList.get(j).getFarmId().equals(calfID)) {
+                        calfList.set(j, calf);
+                    }
+                }
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(calfList);
+                prefsEditor.putString("CalfList",json);
+                prefsEditor.apply();
+            }
+        });
+        builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertHeight = builderHeight.create();
+        alertHeight.show();
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, CalfListActivity.class);
         startActivity(intent);
     }
+
+    //Calendar.getInstance().after(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded())
 }

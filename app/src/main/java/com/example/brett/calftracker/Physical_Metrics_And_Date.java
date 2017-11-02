@@ -1,17 +1,27 @@
 package com.example.brett.calftracker;
 
+import java.util.Calendar;
+
 public class Physical_Metrics_And_Date {
 	private double weight;
 	private double height;
-	private Easy_Date dateRecorded;
+	private Calendar dateRecorded;
 	
 	/**
 	 * @param weight
 	 * @param dateRecorded
 	 */
-	public Physical_Metrics_And_Date(double weight, Easy_Date dateRecorded) {
+	public Physical_Metrics_And_Date(double weight, Calendar dateRecorded) {
 		super();
 		this.weight = weight;
+		this.height = -1;
+		this.dateRecorded = dateRecorded;
+	}
+
+	public Physical_Metrics_And_Date(Calendar dateRecorded, double height) {
+		super();
+		this.height = height;
+		this.weight = -1;
 		this.dateRecorded = dateRecorded;
 	}
 
@@ -20,7 +30,7 @@ public class Physical_Metrics_And_Date {
 	 * @param height
 	 * @param dateRecorded
 	 */
-	public Physical_Metrics_And_Date(double weight, double height, Easy_Date dateRecorded) {
+	public Physical_Metrics_And_Date(double weight, double height, Calendar dateRecorded) {
 		super();
 		this.weight = weight;
 		this.height = height;
@@ -58,14 +68,14 @@ public class Physical_Metrics_And_Date {
 	/**
 	 * @return the dateRecorded
 	 */
-	public Easy_Date getDateRecorded() {
+	public Calendar getDateRecorded() {
 		return dateRecorded;
 	}
 
 	/**
 	 * @param dateRecorded the dateRecorded to set
 	 */
-	public void setDateRecorded(Easy_Date dateRecorded) {
+	public void setDateRecorded(Calendar dateRecorded) {
 		this.dateRecorded = dateRecorded;
 	}
 }
