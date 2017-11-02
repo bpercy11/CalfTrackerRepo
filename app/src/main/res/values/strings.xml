@@ -31,7 +31,7 @@
     <string name="dosage">Dosage</string>
     <string name="time_active">Time Active</string>
     <string name="administration_method">Administration</string>
-    <string name="enter_medicine">Enter Illness</string>
+    <string name="enter_illness">Enter Illness</string>
     <string name="enter_treatment">Enter Treatment</string>
     <string name="enter_dosage">Enter Dosage and Units</string>
     <string name="enter_number_of_days">Enter Number of Days</string>

@@ -24,8 +24,9 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ProtocolActivity" />
-        <activity android:name=".EditIllnessActivity" />
-        <activity android:name=".EditMedicineActivity"></activity>
+        <activity android:name=".EditMedicineActivity" />
+        <activity android:name=".EditVaccineActivity" />
+        <activity android:name=".MedicineActivity" />
     </application>
 
 </manifest>
