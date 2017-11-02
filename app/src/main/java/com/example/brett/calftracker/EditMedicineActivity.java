@@ -96,15 +96,8 @@ public class EditMedicineActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void clickCancelButton(View view){
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
+        startActivity(intent);
     }
 
 }

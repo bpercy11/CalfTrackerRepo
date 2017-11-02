@@ -26,7 +26,6 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorIcon"
-        android:onClick="onMedicineButtonClick"
         android:text="Medicine"
         app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
         app:layout_constraintEnd_toEndOf="parent"

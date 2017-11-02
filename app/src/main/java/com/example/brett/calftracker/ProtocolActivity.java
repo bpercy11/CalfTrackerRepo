@@ -64,27 +64,17 @@ public class ProtocolActivity extends AppCompatActivity {
         });
     }
     public void onMedicineButtonClick(View view) {
-        Button Medicine = findViewById(R.id.medicineButton);
-
-        Medicine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View Medicine) {
-                Intent intent = new Intent(ProtocolActivity.this,MedicineActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        Intent intent = new Intent(ProtocolActivity.this,MedicineActivity.class);
+        startActivity(intent);
     }
     public void onEditVaccineButtonClick(View view){
-        Button editVaccine = (Button) findViewById(R.id.editVaccine);
+        Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
+        startActivity(intent);
+    }
 
-        editVaccine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
-                startActivity(intent);
-            }
-        });
+    public void onBackPressed() {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 }
 

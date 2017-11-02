@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,ProtocolActivity.class );
     }
 
-    public void clickButton4(View view) {
-        Intent intent = new Intent(MainActivity.this, EditIllnessActivity.class );
-    }
+//    public void clickButton4(View view) {
+//        Intent intent = new Intent(MainActivity.this, EditIllnessActivity.class );
+//    }
 
     }

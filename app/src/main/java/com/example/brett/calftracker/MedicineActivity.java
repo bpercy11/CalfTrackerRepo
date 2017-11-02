@@ -50,25 +50,18 @@ public class MedicineActivity extends AppCompatActivity {
         });
     }
     public void onVaccineButtonClick(View view) {
-        Button Vaccine = findViewById(R.id.vaccineButton);
-        Vaccine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MedicineActivity.this,ProtocolActivity.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(MedicineActivity.this,ProtocolActivity.class);
+        startActivity(intent);
 
     }
     public void onEditMedicineButtonClick(View view){
-        Button editMedicine = (Button) findViewById(R.id.editMedicine);
+        Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
+        startActivity(intent);
+    }
 
-        editMedicine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 }

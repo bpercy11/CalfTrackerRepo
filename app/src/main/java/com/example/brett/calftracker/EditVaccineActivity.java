@@ -92,14 +92,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void clickCancelVaccineButton(View view){
-        Button buttonCancel = (Button) findViewById(R.id.buttonVaccineCancel);
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EditVaccineActivity.this,ProtocolActivity.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(EditVaccineActivity.this,ProtocolActivity.class);
+        startActivity(intent);
     }
 }
