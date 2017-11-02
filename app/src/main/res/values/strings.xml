@@ -54,4 +54,6 @@
     <string name="dosage_units_vaccine">Dosage Units</string>
     <string name="admin_method_vaccine">Administration</string>
     <string name="enter_admin_method_vaccine">Enter Method</string>
+    <string name="vaccine_successful">Add Vaccine Successful</string>
+    <string name="enter_units_vaccine">Enter Units</string>
 </resources>

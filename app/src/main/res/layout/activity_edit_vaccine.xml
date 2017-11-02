@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/vaccine_name"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/editVaccine" />
 
@@ -109,12 +109,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewVaccineDosage" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextDosageUnits"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Enter Units"
+        android:hint="@string/enter_units_vaccine"
         android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDosageUnits"
