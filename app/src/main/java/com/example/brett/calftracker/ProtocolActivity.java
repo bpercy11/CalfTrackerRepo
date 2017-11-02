@@ -22,12 +22,11 @@ import java.util.List;
 public class ProtocolActivity extends AppCompatActivity {
 
     private ListView lvVaccine;
-    private ListView lvMedicine;
+
     private VaccineAdapter vAdapter;
-    private MedicineAdapter mAdapter;
-    private List<Vaccine> vaccineList;
-    private List<Illness> illnessList;
-    private List<Medicine> medicineList;
+
+    private List<String> vaccineList;
+
 
     // TODO: Fix listview vaccine, implement edit of UI vaccines and local storage
 
@@ -50,51 +49,50 @@ public class ProtocolActivity extends AppCompatActivity {
         ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
         vaccineList = new ArrayList<>();
         //sample data
-        vaccineList.add(new Vaccine("POOP",5,15,"ml","needle"));
-        vaccineList.add(new Vaccine("alex",6,10,"ml","pill"));
-
+        //vaccineList.add(new Vaccine("POOP",10,5,"ml","needle"));
+        //vaccineList.add(new Vaccine("alex",6,15,"ml","pill"));
+        vaccineList.add("Parainfluenza-3");
+        vaccineList.add("Respiratory Syncytical Virus");
+        vaccineList.add("Haemophilus Somnus");
+        vaccineList.add("Needle");
+        vaccineList.add("Powder");
+        vaccineList.add("Pill");
+        vaccineList.add("Liquid");
+        vaccineList.add("Gas");
+        vaccineList.add("Food");
         VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 
-
-        //App crashes on setOnItemClickListener
         lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Do something
-               /* Button editIllness = (Button) findViewById(R.id.editIllness);
-                editIllness.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(ProtocolActivity.this, EditIllnessActivity.class);
-                        startActivity(intent);
-                    }
-                });*/
             }
         });
     }
-
-    public void onVaccineButtonClick(View view) {
-       // setContentView(R.layout.activity_protocol_vaccine);
-
-                /* lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-                   //sample data
-                   vaccineList.add(new Vaccine("POOP",5,15,"ml","needle"));
-                   vaccineList.add(new Vaccine("alex",6,10,"ml","pill"));
-
-                   vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
-                   lvVaccine.setAdapter(vAdapter);
-
-                   lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                       @Override
-                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                           //Do something
-
-                       }
-                   });*/
-               }
     public void onMedicineButtonClick(View view) {
-        //Do nothing since it is already on the page.
+        Button Medicine = findViewById(R.id.medicineButton);
+
+        Medicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View Medicine) {
+                Intent intent = new Intent(ProtocolActivity.this,MedicineActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+    public void onEditIllnessButtonClick(View view){
+        Button editIllness = (Button) findViewById(R.id.editIllness);
+
+        editIllness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProtocolActivity.this, EditIllnessActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
 

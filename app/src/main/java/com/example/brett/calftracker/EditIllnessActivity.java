@@ -29,7 +29,7 @@ public class EditIllnessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness);
 
-    android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(EditIllnessActivity.this);
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(EditIllnessActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.activity_edit_illness, null);
 
         final EditText mName = (EditText) mView.findViewById(R.id.editTextIllness);
