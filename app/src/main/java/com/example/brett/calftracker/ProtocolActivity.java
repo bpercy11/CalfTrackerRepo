@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtocolActivity extends AppCompatActivity {
+public class ProtocolActivity extends BaseActivity {
 
     private ListView lvVaccine;
 
@@ -25,7 +25,8 @@ public class ProtocolActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_protocol_vaccine);
+        getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         //Only use if you change 'BaseAdapter' to 'ArrayAdapter'
 /*      ArrayAdapter adapter construct

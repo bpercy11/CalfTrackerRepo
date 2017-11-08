@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicineActivity extends AppCompatActivity {
+public class MedicineActivity extends BaseActivity {
 
     private List<String> illnessList;
     private ListView lvIllness;
@@ -20,7 +20,8 @@ public class MedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_protocol_medicine);
+        getLayoutInflater().inflate(R.layout.activity_protocol_medicine, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         ListView lvIllness = (ListView) findViewById(R.id.listview_medicine);
         illnessList = new ArrayList<>();
