@@ -27,8 +27,8 @@
     <string name="calf_profile_create_note_button">Create a New Note</string>
     <string name="calf_list_search_bar_hint">Search</string>
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
-    <string name="new_calf_vaccine_instructions_title">Select Vaccines Calf Needs</string>
-    <string name="new_calf_vaccine_selection_confirm">Confirm Needed Vaccines</string>
+    <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
+    <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
     <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
     <string name="calf_profile_medical_history_illness_button">Illnesses</string>
     <string name="action_settings">Action Settings</string>
