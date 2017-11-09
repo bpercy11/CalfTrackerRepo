@@ -176,7 +176,7 @@ public class CalfProfileActivity extends BaseActivity {
     }
 
     public void updateNoteListView(Calf calf) {
-        ArrayList<String> allNoteDates = new ArrayList<String>();
+        ArrayList<String> allNoteDates = new ArrayList<>();
         for(int i = 0; i < calf.getNotesSize(); i++) {
             Calendar noteDate = calf.getNoteNdx(i).getDateEntered();
             int year = noteDate.get(Calendar.YEAR);
@@ -188,7 +188,7 @@ public class CalfProfileActivity extends BaseActivity {
         if(calf.getNotesSize() == 0)
             allNoteDates.add("No Notes!");
 
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allNoteDates);
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNoteDates);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
     }
