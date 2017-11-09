@@ -71,6 +71,9 @@ public class CalfProfileActivity extends BaseActivity {
     private AlertDialog alertWeight;
     private AlertDialog alertHeight;
 
+    private double mostRecentWeight;
+    private double mostRecentHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,12 +97,8 @@ public class CalfProfileActivity extends BaseActivity {
                 tempCalf = calfList.get(i);
             }
         }
-//        if (calf == null) {
-//            Intent intent = new Intent(this,DashboardActivity.class);
-//            startActivity(intent);
-//        }
 
-        // print to log calf cbject information
+        // Set up the text to be displayed
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
@@ -107,6 +106,12 @@ public class CalfProfileActivity extends BaseActivity {
         mDamValue = (TextView) findViewById(R.id.textViewDamValue);
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
+
+        // Create these variables for code readability
+        if (!calf.getPhysicalHistory().isEmpty()) {
+            mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
+            mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
+        }
 
         String farmID = calf.getFarmId();
         mIDValue.setText(farmID);
@@ -117,15 +122,16 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setText(month + "/" + day + "/" + year);
         if (calf.getSire() != null) {mSireValue.setText(calf.getSire());}
         if (calf.getDam() != null) {mDamValue.setText(calf.getDam());}
-        if (!calf.getPhysicalHistory().isEmpty() && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() != -1) {
-            mWeightValue.setText(Double.toString(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight()) + " lbs");
+
+        // Display weight and/or height information only if there has been a recording
+        if (!calf.getPhysicalHistory().isEmpty() && mostRecentWeight != -1) {
+            mWeightValue.setText(Double.toString(mostRecentWeight) + " lbs");
         }
-        if (!calf.getPhysicalHistory().isEmpty() && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1) {
-            mHeightValue.setText(Double.toString(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight()) + " in");
+        if (!calf.getPhysicalHistory().isEmpty() && mostRecentHeight != -1) {
+            mHeightValue.setText(Double.toString(mostRecentHeight) + " in");
         }
 
-
-
+        // Set up temporary values, will be updated and applied to the current calf upon user clicking apply
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
         tempDam = mDamValue.getText().toString();
@@ -137,6 +143,9 @@ public class CalfProfileActivity extends BaseActivity {
         // SET UP NOTE LISTVIEW
         updateNoteListView(calf);
 
+//        if (!calf.getNotes().isEmpty()) {
+//
+//        }
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,7 +153,7 @@ public class CalfProfileActivity extends BaseActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
                 final TextView output = new TextView(CalfProfileActivity.this);
-                output.setText(calf.getNoteNdx(position).getMessage());
+                output.setText(" " + calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
                 Calendar noteDate = calf.getNoteNdx(position).getDateEntered();
@@ -182,22 +191,24 @@ public class CalfProfileActivity extends BaseActivity {
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allNoteDates);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
-
     }
 
     public void clickEditButton(View view) {
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonFeedingHistory).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonGrowthHistory).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonMedicalHistory).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonCreateNewNote).setVisibility(View.INVISIBLE);
-        findViewById(R.id.textViewNotes).setVisibility(View.INVISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonFeedingHistory).setVisibility(View.GONE);
+        findViewById(R.id.buttonGrowthHistory).setVisibility(View.GONE);
+        findViewById(R.id.buttonMedicalHistory).setVisibility(View.GONE);
+        findViewById(R.id.buttonAddWeight).setVisibility(View.GONE);
+        findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
+        findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
+        findViewById(R.id.textViewNotes).setVisibility(View.GONE);
+        findViewById(R.id.listViewNotes).setVisibility(View.GONE);
+//        for (int i = 0; i < calf.getNotes().size(); i++) {
+//            mNoteListView.getChildAt(i).setVisibility(View.GONE);
+//        }
 
         mIDValue.setBackgroundColor(Color.RED);
         mGenderValue.setBackgroundColor(Color.RED);
@@ -247,7 +258,6 @@ public class CalfProfileActivity extends BaseActivity {
         builderID.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
             }
         });
         alertID = builderID.create();
@@ -259,17 +269,16 @@ public class CalfProfileActivity extends BaseActivity {
                 alertGender.show();
             }
         });
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Gender");
-        builder.setItems(gender, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builderGender = new AlertDialog.Builder(this);
+        builderGender.setTitle("Select Gender");
+        builderGender.setItems(gender, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mGenderValue.setText(gender[i]);
                 tempCalf.setGender(mGenderValue.getText().toString());
             }
         });
-        alertGender = builder.create();
+        alertGender = builderGender.create();
 
         // CREATE DIALOG WHEN USER CLICKS DOBVALUE
         mDOBValue.setOnClickListener(new View.OnClickListener() {
@@ -373,23 +382,15 @@ public class CalfProfileActivity extends BaseActivity {
             }
         });
         alertDam = builderDam.create();
-
     }
 
     public void clickApplyButton(View view) {
         calf = tempCalf;
-
         for (int i = 0; i < calfList.size(); i++) {
             if (calfList.get(i).getFarmId().equals(calfID)) {
                 calfList.set(i, calf);
             }
         }
-
-//        Log.i("calf details", "\nID: " + calf.getFarmId() +
-//                "\nGender: " + calf.getGender() +
-//                "\nDOB: " + calf.getDateOfBirth().get(Calendar.MONTH) + "/" + calf.getDateOfBirth().get(Calendar.DATE) + "/" + calf.getDateOfBirth().get(Calendar.YEAR) +
-//                "\nSire: " + calf.getSire() +
-//                "\nDam: " + calf.getDam());
 
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
@@ -402,7 +403,10 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
+        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
+//        for (int i = 0; i < calf.getNotes().size(); i++) {
+//            mNoteListView.getChildAt(i).setVisibility(View.VISIBLE);
+//        }
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -444,12 +448,14 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-
+        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
+//        for (int i = 0; i < calf.getNotes().size(); i++) {
+//            mNoteListView.getChildAt(i).setVisibility(View.VISIBLE);
+//        }
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -519,14 +525,13 @@ public class CalfProfileActivity extends BaseActivity {
         });
 
         newNoteAlert = builder.create();
-
         newNoteAlert.show();
     }
 
     public void clickDeleteCalf(View view) {
         AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
-        builderDelete.setMessage("Are you sure you want to delete this calf?")
-                .setTitle("Delete Calf");
+        builderDelete.setMessage("Are you sure you want to remove this calf? This action cannot be undone.")
+                .setTitle("Remove Calf");
         builderDelete.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
