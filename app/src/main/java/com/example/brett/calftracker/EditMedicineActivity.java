@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditMedicineActivity extends AppCompatActivity {
 
@@ -21,13 +25,25 @@ public class EditMedicineActivity extends AppCompatActivity {
     private TextView treatment;
     private TextView dosage;
     private TextView timeActive;
-    private TextView adminMethod;
+    private TextView frequency;
+    private List<Illness> illnessList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medicine);
 
+/*
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("IllnessList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("VaccineList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+            }.getType());
+        } else { illnessList = new ArrayList<Illness>(); }
+ */
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(EditMedicineActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.activity_edit_medicine, null);
 
@@ -35,7 +51,7 @@ public class EditMedicineActivity extends AppCompatActivity {
         final EditText mTreatment = (EditText) mView.findViewById(R.id.editTextTreatment);
         final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
         final EditText mTimeActive = (EditText) mView.findViewById(R.id.editTextTimeActive);
-        final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
+        final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextMedicineFrequency);
         final Button mAddIllness = (Button) mView.findViewById(R.id.buttonAddMedicine);
         final Button mCancel = (Button) mView.findViewById(R.id.buttonCancel);
 
@@ -71,16 +87,16 @@ public class EditMedicineActivity extends AppCompatActivity {
         EditText treatment = (EditText) findViewById(R.id.editTextTreatment);
         EditText dosage = (EditText) findViewById(R.id.editTextDosage);
         EditText timeActive = (EditText) findViewById(R.id.editTextTimeActive);
-        EditText adminMethod = (EditText) findViewById(R.id.editTextAdminMethod);
+        EditText frequency = (EditText) findViewById(R.id.editTextMedicineFrequency);
 
         String treatmentStr = treatment.getText().toString();
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         int timeActiveInt = Integer.parseInt(timeActive.getText().toString());
-        String adminMethodString = adminMethod.getText().toString();
+        String frequencyString = frequency.getText().toString();
         String nameStr = name.getText().toString();
-
+/*
         // MAKE A NEW ILLNESS OBJECT
-        Medicine medicine = new Medicine(treatmentStr,dosageDbl,null,timeActiveInt,adminMethodString);
+        Medicine medicine = new Medicine(treatmentStr,dosageDbl,"null",timeActiveInt,new ArrayList<MedicineFrequency>());
         Treatment_Protocol tp = new Treatment_Protocol(medicine, "");
         Illness newIllness = new Illness(nameStr,tp);
 
@@ -89,9 +105,9 @@ public class EditMedicineActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(newIllness);
-        prefsEditor.putString("newIllness",json);
+        prefsEditor.putString("IllnessList",json);
         prefsEditor.apply();
-
+*/
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }

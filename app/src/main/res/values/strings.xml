@@ -36,7 +36,7 @@
     <string name="treatment_name">Treatment</string>
     <string name="dosage">Dosage</string>
     <string name="time_active">Time Active</string>
-    <string name="administration_method">Administration</string>
+    <string name="medicine_frequency">Frequency</string>
     <string name="enter_illness">Enter Illness</string>
     <string name="enter_treatment">Enter Treatment</string>
     <string name="enter_dosage">Enter Dosage and Units</string>
@@ -47,7 +47,7 @@
     <string name="add_medicine_successful_message">Add Illness Successful</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
     <string name="enter_days">Enter Days</string>
-    <string name="enter_method">Enter Method</string>
+    <string name="enter_frequency">Enter Frequency</string>
     <string name="cancel_button">Cancel</string>
     <string name="edit_medicine">Edit Medicine</string>
     <string name="edit_vaccine">Edit Vaccine</string>

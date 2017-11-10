@@ -15,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditVaccineActivity extends AppCompatActivity {
 
@@ -24,12 +28,23 @@ public class EditVaccineActivity extends AppCompatActivity {
     private TextView dosageUnits;
     private TextView adminDays;
     private TextView adminMethod;
+    private List<Vaccine> vaccineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_vaccine);
+/*
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("VaccineList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
 
+            Gson gson = new Gson();
+            String json = mPreferences.getString("VaccineList", "");
+            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
+            }.getType());
+        } else { vaccineList = new ArrayList<Vaccine>(); }
+*/
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(EditVaccineActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.activity_edit_vaccine, null);
 
@@ -37,7 +52,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
         final EditText mDosageUnits = (EditText) mView.findViewById(R.id.editTextDosage);
         final EditText mAdminDays = (EditText) mView.findViewById(R.id.editTextAdminDate);
-        final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextAdminMethod);
+        final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextVaccineAdminMethod);
         final Button mAddVaccine = (Button) mView.findViewById(R.id.buttonAddVaccine);
         final Button mCancel = (Button) mView.findViewById(R.id.buttonVaccineCancel);
 
@@ -68,7 +83,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         EditText dosage = (EditText) findViewById(R.id.editTextVaccineDosage);
         EditText dosageUnits = (EditText) findViewById(R.id.editTextDosageUnits);
         EditText activeDays = (EditText) findViewById(R.id.editTextTimeActive);
-        EditText adminMethod = (EditText) findViewById(R.id.editTextAdminMethod);
+        EditText adminMethod = (EditText) findViewById(R.id.editTextVaccineAdminMethod);
 
         String vaccineStr = vaccine.getText().toString();
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
@@ -76,20 +91,23 @@ public class EditVaccineActivity extends AppCompatActivity {
         int activeDaysInt = Integer.parseInt(activeDays.getText().toString());
         String adminMethodString = adminMethod.getText().toString();
 
+        /*
         // MAKE A NEW VACCINE OBJECT
-//        Vaccine newVaccine = new Vaccine(vaccineStr,activeDaysInt,dosageDbl,dosageUnitsStr,
-//                adminMethodString);
-
+        Vaccine newVaccine = new Vaccine(vaccineStr,activeDaysInt,dosageDbl,dosageUnitsStr,
+               adminMethodString);
+               */
+        /*
         // SAVE NEW VACCINE
-//        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-//        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(newVaccine);
-//        prefsEditor.putString("newVaccine",json);
-//        prefsEditor.apply();
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(vaccineList);
+        prefsEditor.putString("VaccineList",json);
+        prefsEditor.apply();
 
-        Intent intent = new Intent(this,EditVaccineActivity.class);
+        Intent intent = new Intent(this,ProtocolActivity.class);
         startActivity(intent);
+        */
     }
     public void clickCancelVaccineButton(View view){
         Intent intent = new Intent(EditVaccineActivity.this,ProtocolActivity.class);

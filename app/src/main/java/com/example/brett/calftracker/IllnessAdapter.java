@@ -15,9 +15,9 @@ import java.util.List;
 public class IllnessAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> illnessList;
+    private List<Illness> illnessList;
 
-    public IllnessAdapter(Context context, List<String> illnessList) {
+    public IllnessAdapter(Context context, List<Illness> illnessList) {
         this.context = context;
         this.illnessList = illnessList;
     }
@@ -25,7 +25,7 @@ public class IllnessAdapter extends BaseAdapter {
     public int getCount() {
         return illnessList.size();
     }
-    public String getItem(int position) {
+    public Illness getItem(int position) {
         return illnessList.get(position);
     }
     public long getItemId(int position) {
@@ -34,9 +34,11 @@ public class IllnessAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.medicine_list, null);
         TextView illnessIllness = (TextView)v.findViewById(R.id.illness_name);
+        TextView illnessMedicine = (TextView)v.findViewById(R.id.medicine_name);
 
         //Set text for TextView
-        illnessIllness.setText(illnessList.get(position));
+        illnessIllness.setText(illnessList.get(position).getName());
+        illnessMedicine.setText(illnessList.get(position).getTreatmentProtocol().getMedicine().getName());
 
         return v;
     }

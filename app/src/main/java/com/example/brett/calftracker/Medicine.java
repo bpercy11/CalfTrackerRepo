@@ -1,27 +1,29 @@
 package com.example.brett.calftracker;
 
 
+import java.util.ArrayList;
+
 public class Medicine {
 	private String name;
 	private double dosage;
 	private String dosage_units;
 	private int timeActive;
-	private String methodOfAdministration;
+	private ArrayList<MedicineFrequency> frequency;
 	
 	/**
 	 * @param name
 	 * @param dosage
 	 * @param dosage_units
 	 * @param timeActive
-	 * @param methodOfAdministration
+	 * @param frequency
 	 */
-	public Medicine(String name, double dosage, String dosage_units, int timeActive, String methodOfAdministration) {
+	public Medicine(String name, double dosage, String dosage_units, int timeActive, ArrayList<MedicineFrequency> frequency) {
 		super();
 		this.name = name;
 		this.dosage = dosage;
 		this.dosage_units = dosage_units;
 		this.timeActive = timeActive;
-		this.methodOfAdministration = methodOfAdministration;
+		this.frequency = frequency;
 	}
 
 	/**
@@ -81,21 +83,21 @@ public class Medicine {
 	}
 
 	/**
-	 * @return the methodOfAdministration
+	 * @return the frequency
 	 */
-	public String getMethodOfAdministration() {
-		return methodOfAdministration;
+	public ArrayList<MedicineFrequency> getFrequency() {
+		return frequency;
 	}
 
 	/**
-	 * @param methodOfAdministration the methodOfAdministration to set
+	 * @param frequency the frequency to set
 	 */
-	public void setMethodOfAdministration(String methodOfAdministration) {
-		this.methodOfAdministration = methodOfAdministration;
+	public void setToBeAdministered(ArrayList<MedicineFrequency> frequency) {
+		this.frequency = frequency;
 	}
 
 	public Medicine createMedicine(String name, Double dosage, String dosage_units, int timeActive,
-								   String methodOfAdministration){
-		return new Medicine(name,dosage,dosage_units,timeActive,methodOfAdministration);
+								   ArrayList<MedicineFrequency> frequency){
+		return new Medicine(name,dosage,dosage_units,timeActive,frequency);
 	}
 }

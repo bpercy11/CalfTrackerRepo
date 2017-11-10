@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MedicineActivity extends BaseActivity {
 
-    private List<String> illnessList;
+    private List<Illness> illnessList;
     private ListView lvIllness;
     private IllnessAdapter iAdapter;
 
@@ -27,15 +27,18 @@ public class MedicineActivity extends BaseActivity {
         illnessList = new ArrayList<>();
 
         //sample data
-        illnessList.add("Liquid");
-        illnessList.add("Gas");
-        illnessList.add("Food");
-        illnessList.add("Parainfluenza-3");
-        illnessList.add("Needle");
-        illnessList.add("Powder");
-        illnessList.add("Pill");
-        illnessList.add("Respiratory Syncytical Virus");
-        illnessList.add("Haemophilus Somnus");
+        illnessList.add(new Illness("Illness1",new Treatment_Protocol(new Medicine(
+                "Medicine1",15,"ml",25,new ArrayList<MedicineFrequency>(8))
+                ,"hi")));
+        illnessList.add(new Illness("Illness2",new Treatment_Protocol(new Medicine(
+                "Medicine2",10,"ml",50,new ArrayList<MedicineFrequency>(7))
+                ,"hello")));
+        illnessList.add(new Illness("Illness3",new Treatment_Protocol(new Medicine(
+                "Medicine3",15,"ml",25,new ArrayList<MedicineFrequency>(6))
+                ,"hi")));
+        illnessList.add(new Illness("Illness4",new Treatment_Protocol(new Medicine(
+                "Medicine4",10,"ml",50,new ArrayList<MedicineFrequency>(5))
+                ,"hello")));
 
 
         iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);

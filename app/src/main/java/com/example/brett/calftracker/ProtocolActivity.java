@@ -1,12 +1,17 @@
 package com.example.brett.calftracker;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +22,8 @@ public class ProtocolActivity extends BaseActivity {
 
     private VaccineAdapter vAdapter;
 
-    private List<String> vaccineList;
+    private List<Vaccine> vaccineList;
+
 
 
     // TODO: Fix listview vaccine, implement edit of UI vaccines and local storage
@@ -38,21 +44,26 @@ public class ProtocolActivity extends BaseActivity {
         ListView listView = (ListView) findViewById(R.id.listview_vaccine);
         listView.setAdapter(adapter);
 */
+/*
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("VaccineList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
 
+            Gson gson = new Gson();
+            String json = mPreferences.getString("VaccineList", "");
+            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<String>>() {
+            }.getType());
+        } else { vaccineList = new ArrayList<String>(); }
+*/
         ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-        vaccineList = new ArrayList<>();
+        vaccineList = new ArrayList<Vaccine>();
+
         //sample data
-        //vaccineList.add(new Vaccine("POOP",10,5,"ml","needle"));
-        //vaccineList.add(new Vaccine("alex",6,15,"ml","pill"));
-        vaccineList.add("Parainfluenza-3");
-        vaccineList.add("Respiratory Syncytical Virus");
-        vaccineList.add("Haemophilus Somnus");
-        vaccineList.add("Needle");
-        vaccineList.add("Powder");
-        vaccineList.add("Pill");
-        vaccineList.add("Liquid");
-        vaccineList.add("Gas");
-        vaccineList.add("Food");
+        vaccineList.add(new Vaccine("vaccine1", new ArrayList<Vacc_Range>(), 5,"ml","needle"));
+        vaccineList.add(new Vaccine("vaccine2", new ArrayList<Vacc_Range>(5), 15,"ml","pill"));
+        vaccineList.add(new Vaccine("vaccine3", new ArrayList<Vacc_Range>(6), 5,"ml","needle"));
+        vaccineList.add(new Vaccine("vaccine4", new ArrayList<Vacc_Range>(7), 15,"ml","pill"));
+
         VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 
