@@ -34,36 +34,27 @@ public class ProtocolActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
-        //Only use if you change 'BaseAdapter' to 'ArrayAdapter'
-/*      ArrayAdapter adapter construct
-        // Construct the data source
-        ArrayList<Vaccine> arrayOfVaccines = new ArrayList<Vaccine>();
-        // Create the adapter to convert the array to views
-        VaccineAdapter adapter = new VaccineAdapter(this, arrayOfVaccines);
-        // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.listview_vaccine);
-        listView.setAdapter(adapter);
-*/
-/*
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
             String json = mPreferences.getString("VaccineList", "");
-            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<String>>() {
+            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
-        } else { vaccineList = new ArrayList<String>(); }
-*/
+        } else { vaccineList = new ArrayList<Vaccine>(); }
+
         ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
         vaccineList = new ArrayList<Vaccine>();
 
+        /*
         //sample data
         vaccineList.add(new Vaccine("vaccine1", new ArrayList<Vacc_Range>(), 5,"ml","needle"));
         vaccineList.add(new Vaccine("vaccine2", new ArrayList<Vacc_Range>(5), 15,"ml","pill"));
         vaccineList.add(new Vaccine("vaccine3", new ArrayList<Vacc_Range>(6), 5,"ml","needle"));
         vaccineList.add(new Vaccine("vaccine4", new ArrayList<Vacc_Range>(7), 15,"ml","pill"));
-
+*/
         VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 

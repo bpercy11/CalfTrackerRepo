@@ -40,7 +40,9 @@
     <string name="enter_illness">Enter Illness</string>
     <string name="enter_treatment">Enter Treatment</string>
     <string name="enter_dosage">Enter Dosage and Units</string>
-    <string name="enter_number_of_days">Enter Number of Days</string>
+
+    <string name="enter_range">Range</string>
+
     <string name="enter_admin_method">Enter Admin Method</string>
     <string name="add_medicine">Add</string>
     <string name="error_login_message">Please fill any empty fields</string>
@@ -53,8 +55,12 @@
     <string name="edit_vaccine">Edit Vaccine</string>
     <string name="vaccine_name">Vaccine</string>
     <string name="enter_vaccine">Enter Vaccine</string>
-    <string name="administration_date">Administer</string>
-    <string name="administration_days">Enter Number Days</string>
+
+    <string name="administration_start">Start</string>
+    <string name="administration_end">End</string>
+    <string name="administration_hint_start">Calf Age</string>
+    <string name="administration_hint_end">Calf Age</string>
+
     <string name="vaccine_dosage">Dosage</string>
     <string name="enter_vaccine_dosage">Enter Dosage</string>
     <string name="dosage_units_vaccine">Dosage Units</string>
@@ -62,4 +68,9 @@
     <string name="enter_admin_method_vaccine">Enter Method</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="enter_units_vaccine">Enter Units</string>
+    <string-array name="vacc_range_spinner">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
 </resources>

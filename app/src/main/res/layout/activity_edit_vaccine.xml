@@ -57,26 +57,98 @@
         app:layout_constraintVertical_bias="0.526" />
 
     <TextView
-        android:id="@+id/textViewAdminDate"
+        android:id="@+id/textViewVaccineRange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/administration_date"
+        android:text="Vaccine Range"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/textViewVaccineName"
         app:layout_constraintTop_toBottomOf="@+id/textViewVaccineName" />
 
-    <EditText
-        android:id="@+id/editTextAdminDate"
-        android:layout_width="191dp"
+    <TextView
+        android:id="@+id/textViewAdminDateStart"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/administration_start"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewVaccineName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVaccineRange" />
+
+    <EditText
+        android:id="@+id/editTextAdminDateStart"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/administration_days"
+        android:hint="@string/administration_hint_start"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewAdminDate"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAdminDateStart"
+        app:layout_constraintStart_toEndOf="@+id/textViewAdminDateStart"
+        app:layout_constraintTop_toTopOf="@+id/textViewAdminDateStart"
+        app:layout_constraintVertical_bias="0.296" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAdminDateStart"
         app:layout_constraintEnd_toEndOf="@+id/editTextVaccineName"
-        app:layout_constraintTop_toTopOf="@+id/textViewAdminDate" />
+        app:layout_constraintStart_toEndOf="@+id/editTextAdminDateStart"
+        app:layout_constraintTop_toTopOf="@+id/editTextAdminDateStart"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/textViewAdminDateEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/administration_end"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewVaccineName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdminDateStart" />
+
+    <EditText
+        android:id="@+id/editTextAdminDateEnd"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/administration_hint_end"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAdminDateEnd"
+        app:layout_constraintStart_toEndOf="@+id/textViewAdminDateEnd"
+        app:layout_constraintTop_toTopOf="@+id/textViewAdminDateEnd"
+        app:layout_constraintVertical_bias="0.148" />
+
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAdminDateEnd"
+        app:layout_constraintEnd_toEndOf="@+id/editTextVaccineName"
+        app:layout_constraintStart_toEndOf="@+id/editTextAdminDateEnd"
+        app:layout_constraintTop_toTopOf="@+id/editTextAdminDateEnd" />
 
     <TextView
         android:id="@+id/textViewVaccineDosage"
@@ -86,19 +158,22 @@
         android:text="@string/vaccine_dosage"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewVaccineName"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAdminDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdminDateEnd" />
 
     <EditText
         android:id="@+id/editTextVaccineDosage"
-        android:layout_width="196dp"
+        android:layout_width="221dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:hint="@string/enter_vaccine_dosage"
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewVaccineDosage"
         app:layout_constraintEnd_toEndOf="@+id/editTextVaccineName"
+        app:layout_constraintStart_toEndOf="@+id/textViewVaccineDosage"
         app:layout_constraintTop_toTopOf="@+id/textViewVaccineDosage"
         app:layout_constraintVertical_bias="0.241" />
 
@@ -116,6 +191,8 @@
         android:id="@+id/editTextDosageUnits"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_units_vaccine"
@@ -123,6 +200,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDosageUnits"
         app:layout_constraintEnd_toEndOf="@+id/editTextVaccineName"
+        app:layout_constraintStart_toEndOf="@+id/textViewDosageUnits"
         app:layout_constraintTop_toTopOf="@+id/textViewDosageUnits" />
 
     <TextView
@@ -139,6 +217,8 @@
         android:id="@+id/editTextVaccineAdminMethod"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_admin_method_vaccine"
