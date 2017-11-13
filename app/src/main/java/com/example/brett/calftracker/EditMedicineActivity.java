@@ -35,7 +35,6 @@ public class EditMedicineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medicine);
 
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();

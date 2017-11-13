@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,6 +45,9 @@ public class EditVaccineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_vaccine);
 
+        EditText dosage = (EditText) findViewById(R.id.editTextVaccineDosage);
+        dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         if(mPreferences.contains("VaccineList")) {
@@ -64,6 +68,8 @@ public class EditVaccineActivity extends AppCompatActivity {
         EditText adminEnd = (EditText) findViewById(R.id.editTextAdminDateEnd);
         EditText adminMethod = (EditText) findViewById(R.id.editTextVaccineAdminMethod);
 
+        //dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
                 || adminMethod.getText().toString().matches("")){
@@ -81,7 +87,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         String adminMethodString = adminMethod.getText().toString();
-
+/*
         //get the spinner from the xml.
         dropDown = (Spinner)findViewById(R.id.spinner);
      // dropDown1 = (Spinner)findViewById(R.id.spinner1);
@@ -99,7 +105,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
        // dropDown.setAdapter(adapter);
     //    dropDown1.setAdapter(adapter1);
-
+*/
         range = new int[] {adminStartInt,adminEndInt};
 
         vaccRange = new ArrayList<Vacc_Range>();
@@ -121,8 +127,8 @@ public class EditVaccineActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,ProtocolActivity.class);
         startActivity(intent);
-
     }
+
     public void clickCancelVaccineButton(View view){
         Intent intent = new Intent(EditVaccineActivity.this,ProtocolActivity.class);
         startActivity(intent);

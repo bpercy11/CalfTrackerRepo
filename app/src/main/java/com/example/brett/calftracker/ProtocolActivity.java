@@ -25,9 +25,6 @@ public class ProtocolActivity extends BaseActivity {
     private List<Vaccine> vaccineList;
 
 
-
-    // TODO: Implement add to local storage
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
