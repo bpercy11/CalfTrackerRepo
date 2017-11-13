@@ -60,7 +60,7 @@ public class EditVaccineActivity extends AppCompatActivity {
 
         final EditText mVaccine = (EditText) mView.findViewById(R.id.editTextVaccineName);
         final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
-        final EditText mDosageUnits = (EditText) mView.findViewById(R.id.editTextDosage);
+        final EditText mDosageUnits = (EditText) mView.findViewById(R.id.editTextDosageUnits);
         final EditText mAdminStart = (EditText) mView.findViewById(R.id.editTextAdminDateStart);
         final EditText mAdminEnd = (EditText) mView.findViewById(R.id.editTextAdminDateEnd);
         final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextVaccineAdminMethod);
@@ -70,12 +70,13 @@ public class EditVaccineActivity extends AppCompatActivity {
         mAddVaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mVaccine.getText().toString().isEmpty() && !mDosage.getText().toString().isEmpty() &&
-                        !mDosageUnits.getText().toString().isEmpty() && !mAdminStart.getText().toString().isEmpty()
-                        && !mAdminEnd.getText().toString().isEmpty() && !mAdminMethod.getText().toString().isEmpty()){
-                    Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
-                            Toast.LENGTH_SHORT).show();
-                    clickAddVaccineButton(view);
+
+                if (mVaccine.getText().toString().matches("") || mDosage.getText().toString().matches("")
+                    || mAdminStart.getText().toString().matches("") || mAdminEnd.getText().toString().matches("")
+                    || mAdminMethod.getText().toString().matches("")){
+                        Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+                                Toast.LENGTH_SHORT).show();
+                        clickAddVaccineButton(view);
                 }
                 else {
                     Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
@@ -111,10 +112,15 @@ public class EditVaccineActivity extends AppCompatActivity {
         dropDownItems = new String[]{"Day", "Week", "Month"};
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vacc_range_spinner, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropDown.setAdapter(adapter);
+
+        //  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems);
      //   ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems);
         //set the spinners adapter to the previously created one.
-        dropDown.setAdapter(adapter);
+       // dropDown.setAdapter(adapter);
     //    dropDown1.setAdapter(adapter1);
 
         range = new int[] {adminStartInt,adminEndInt};
