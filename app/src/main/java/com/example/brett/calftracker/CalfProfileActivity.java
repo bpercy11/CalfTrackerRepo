@@ -96,6 +96,7 @@ public class CalfProfileActivity extends BaseActivity {
             if (calfList.get(i).getFarmId().equals(calfID)) {
                 calf = calfList.get(i);
                 tempCalf = calfList.get(i);
+                break;
             }
         }
 //        if (calf == null) {
