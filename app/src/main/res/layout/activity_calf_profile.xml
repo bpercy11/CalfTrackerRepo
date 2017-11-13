@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <android.support.constraint.Guideline
         android:id="@+id/vertical66percentparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonEDIT"
@@ -29,11 +29,44 @@
         android:layout_marginRight="16dp"
         android:clickable="true"
         android:onClick="clickEditButton"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_edit_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:rippleColor="@color/common_google_signin_btn_text_light_pressed"
-        app:srcCompat="@android:drawable/ic_menu_edit" android:focusable="true" />
+        app:rippleColor="@color/common_google_signin_btn_text_light_pressed" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:text="Cancel"
+        android:visibility="invisible"
+        android:onClick="clickCancelButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical33percentparent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonApply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Apply"
+        android:visibility="invisible"
+        android:onClick="clickApplyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical66percentparent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -44,51 +77,19 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/buttonApply"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="50dp"
-                android:onClick="clickApplyButton"
-                android:text="@string/calf_profile_apply_button"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
-
-            <Button
-                android:id="@+id/buttonCancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
-                android:onClick="clickCancelButton"
-                android:text="@string/calf_profile_cancel_button"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
-
-            <Button
                 android:id="@+id/buttonDeleteCalf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="32dp"
-                android:background="@color/colorAccent"
+
+                android:background="@color/colorPrimaryDark"
                 android:elevation="0dp"
                 android:onClick="clickDeleteCalf"
-                android:text="@string/calf_profile_delete_button"
+                android:text="@string/delete_calf"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +97,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listViewNotes" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/vertical10percent"
@@ -137,7 +138,7 @@
                 android:id="@+id/textViewIMAGEPLACEHOLDER"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="40dp"
                 android:text="IMAGE PLACEHOLDER"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -147,9 +148,10 @@
                 android:id="@+id/textViewIDField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/calf_profile_ID_field"
-                android:textSize="24sp"
+                android:textAlignment="center"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIMAGEPLACEHOLDER" />
@@ -158,9 +160,9 @@
                 android:id="@+id/textViewGenderField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_gender_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIDField" />
@@ -169,9 +171,9 @@
                 android:id="@+id/textViewSireField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_sire_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
@@ -180,9 +182,9 @@
                 android:id="@+id/textViewDOBField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_DOB_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGenderField" />
@@ -191,9 +193,9 @@
                 android:id="@+id/textViewWeightField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_weight_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
@@ -202,9 +204,9 @@
                 android:id="@+id/textViewHeightField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_height_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWeightField" />
@@ -213,9 +215,9 @@
                 android:id="@+id/textViewDamField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/calf_profile_dam_field"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSireField" />
@@ -225,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID VALUE"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewIDField"
                 app:layout_constraintStart_toStartOf="@+id/vertical50percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewIDField" />
@@ -235,48 +237,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GENDER VALUE"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewGenderField"
-                app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewGenderField"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteX="142dp" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textViewDOBValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DOB VALUE"
-                android:textSize="24sp"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDOBField"
-                app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
-                app:layout_constraintTop_toTopOf="@+id/textViewDOBField"
-                tools:layout_editor_absoluteX="142dp" />
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
+                app:layout_constraintTop_toTopOf="@+id/textViewDOBField" />
 
             <TextView
                 android:id="@+id/textViewSireValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="NO SIRE RECORD"
-                android:textSize="24sp"
+                android:text="@string/no_sire"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
-                app:layout_constraintTop_toTopOf="@+id/textViewSireField"
-                tools:layout_editor_absoluteX="142dp" />
+                app:layout_constraintTop_toTopOf="@+id/textViewSireField" />
 
             <TextView
                 android:id="@+id/textViewDamValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="NO DAM RECORD"
-                android:textSize="24sp"
+                android:text="@string/no_dam"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDamField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewDamField" />
 
@@ -284,12 +278,9 @@
                 android:id="@+id/textViewWeightValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="NO WEIGHT RECORD"
-                android:textSize="24sp"
+                android:text="@string/no_weight"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewWeightField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewWeightField" />
 
@@ -297,12 +288,9 @@
                 android:id="@+id/textViewHeightValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="NO HEIGHT RECORD"
-                android:textSize="24sp"
+                android:text="@string/no_height"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewHeightField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewHeightField" />
 
@@ -311,9 +299,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/calf_profile_growth_history_button"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
@@ -324,8 +313,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/calf_profile_feeding_history_button"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@+id/vertical66percent"
                 app:layout_constraintStart_toStartOf="@+id/vertical33percent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
@@ -334,11 +324,12 @@
                 android:id="@+id/buttonMedicalHistory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="30dp"
                 android:onClick="onClickMedicalHistory"
                 android:text="@string/calf_profile_medical_history_button"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
@@ -349,11 +340,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/calf_profile_notes_field"
                 android:textAlignment="textStart"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonGrowthHistory" />
@@ -362,11 +353,12 @@
                 android:id="@+id/buttonCreateNewNote"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:onClick="clickNewNoteButton"
                 android:text="@string/calf_profile_create_note_button"
+                android:textAllCaps="false"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -380,6 +372,7 @@
                 android:layout_height="270dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -395,6 +388,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="50dp"
                 android:onClick="onClickAddWeight"
+                android:textAllCaps="false"
                 android:text="@string/calf_profile_record_weight_button"
                 app:layout_constraintEnd_toStartOf="@+id/CenterLine"
                 app:layout_constraintStart_toStartOf="parent"
@@ -410,6 +404,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="50dp"
                 android:onClick="onClickAddHeight"
+                android:textAllCaps="false"
                 android:text="@string/calf_profile_record_height_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/CenterLine"

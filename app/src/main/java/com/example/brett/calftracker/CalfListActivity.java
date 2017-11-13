@@ -59,7 +59,7 @@ public class CalfListActivity extends BaseActivity {
             for (int i = 0; i < calfList.size(); i++) {
                 input.add(calfList.get(i).getFarmId());
             }
-        } else { input.add("No calfs exist. Click here to get started!"); }
+        } else { input.add("No calves exist. Click here to get started!"); }
         mAdapter = new CalfListRecyclerAdapter(this,input);
         recyclerView.setAdapter(mAdapter);
     }

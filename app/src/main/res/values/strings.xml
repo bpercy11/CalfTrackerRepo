@@ -24,7 +24,7 @@
     <string name="calf_profile_growth_history_button">Growth History</string>
     <string name="calf_profile_feeding_history_button">Feeding History</string>
     <string name="calf_profile_medical_history_button">Medical History</string>
-    <string name="calf_profile_create_note_button">Create a New Note</string>
+    <string name="calf_profile_create_note_button">Add Note</string>
     <string name="calf_profile_cancel_button">Cancel</string>
     <string name="calf_profile_apply_button">Apply</string>
     <string name="calf_profile_delete_button">Remove Calf</string>
@@ -67,4 +67,9 @@
     <string name="enter_admin_method_vaccine">Enter Method</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="enter_units_vaccine">Enter Units</string>
+    <string name="no_sire">No Record</string>
+    <string name="no_dam">No Record</string>
+    <string name="no_weight">No Record</string>
+    <string name="no_height">No Record</string>
+    <string name="delete_calf">Delete Calf</string>
 </resources>

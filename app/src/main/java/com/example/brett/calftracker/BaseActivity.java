@@ -121,8 +121,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_protocols: intent = new Intent(BaseActivity.this,ProtocolActivity.class);
                 if (!getIntent().filterEquals(intent)) {
-                    item.setChecked(true);
-                    startActivity(intent);
+                    Intent medicalIntent = new Intent(BaseActivity.this, MedicineActivity.class);
+                    if (!getIntent().filterEquals(intent) && !getIntent().filterEquals(medicalIntent)) {
+                        item.setChecked(true);
+                        startActivity(intent);
+                    }
                 }
                 break;
             // TODO add cases for other menu options as they are implemented

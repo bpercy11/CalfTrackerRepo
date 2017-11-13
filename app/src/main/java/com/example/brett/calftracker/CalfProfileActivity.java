@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -97,8 +98,12 @@ public class CalfProfileActivity extends BaseActivity {
                 tempCalf = calfList.get(i);
             }
         }
+//        if (calf == null) {
+//            Intent intent = new Intent(this,DashboardActivity.class);
+//            startActivity(intent);
+//        }
 
-        // Set up the text to be displayed
+        // print to log calf cbject information
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
@@ -143,9 +148,6 @@ public class CalfProfileActivity extends BaseActivity {
         // SET UP NOTE LISTVIEW
         updateNoteListView(calf);
 
-//        if (!calf.getNotes().isEmpty()) {
-//
-//        }
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,6 +155,7 @@ public class CalfProfileActivity extends BaseActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
                 final TextView output = new TextView(CalfProfileActivity.this);
+                // Space at the start to make notes easier to read
                 output.setText(" " + calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
@@ -191,6 +194,7 @@ public class CalfProfileActivity extends BaseActivity {
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNoteDates);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
+
     }
 
     public void clickEditButton(View view) {
@@ -202,21 +206,24 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.GONE);
         findViewById(R.id.buttonAddWeight).setVisibility(View.GONE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
         findViewById(R.id.textViewNotes).setVisibility(View.GONE);
         findViewById(R.id.listViewNotes).setVisibility(View.GONE);
 //        for (int i = 0; i < calf.getNotes().size(); i++) {
 //            mNoteListView.getChildAt(i).setVisibility(View.GONE);
 //        }
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
 
-        mIDValue.setBackgroundColor(Color.RED);
-        mGenderValue.setBackgroundColor(Color.RED);
-        mDOBValue.setBackgroundColor(Color.RED);
-        mSireValue.setBackgroundColor(Color.RED);
-        mDamValue.setBackgroundColor(Color.RED);
-//        mHeightValue.setBackgroundColor(Color.RED);
-//        mWeightValue.setBackgroundColor(Color.RED);
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mWeightValue.setVisibility(View.INVISIBLE);
+        mHeightValue.setVisibility(View.INVISIBLE);
+        mNoteListView.setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.INVISIBLE);
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -382,10 +389,12 @@ public class CalfProfileActivity extends BaseActivity {
             }
         });
         alertDam = builderDam.create();
+
     }
 
     public void clickApplyButton(View view) {
         calf = tempCalf;
+
         for (int i = 0; i < calfList.size(); i++) {
             if (calfList.get(i).getFarmId().equals(calfID)) {
                 calfList.set(i, calf);
@@ -400,13 +409,24 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
-//        for (int i = 0; i < calf.getNotes().size(); i++) {
-//            mNoteListView.getChildAt(i).setVisibility(View.VISIBLE);
-//        }
+
+        // This line causes the snap
+        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mWeightValue.setVisibility(View.VISIBLE);
+        mHeightValue.setVisibility(View.VISIBLE);
+        mNoteListView.setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
+
+        // Check here if shits fucked up
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -429,8 +449,6 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -445,17 +463,24 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
+        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
-//        for (int i = 0; i < calf.getNotes().size(); i++) {
-//            mNoteListView.getChildAt(i).setVisibility(View.VISIBLE);
-//        }
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mWeightValue.setVisibility(View.VISIBLE);
+        mHeightValue.setVisibility(View.VISIBLE);
+        mNoteListView.setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -470,8 +495,6 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
@@ -488,8 +511,8 @@ public class CalfProfileActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("Enter Note Here");
-        builder.setTitle("Create a New Note");
+        input.setHint("Enter Text");
+        builder.setTitle("Add Note");
         builder.setView(input);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -525,6 +548,7 @@ public class CalfProfileActivity extends BaseActivity {
         });
 
         newNoteAlert = builder.create();
+
         newNoteAlert.show();
     }
 
