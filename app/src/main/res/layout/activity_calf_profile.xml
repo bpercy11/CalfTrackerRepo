@@ -29,11 +29,12 @@
         android:layout_marginRight="16dp"
         android:clickable="true"
         android:onClick="clickEditButton"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_edit_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:rippleColor="@color/common_google_signin_btn_text_light_pressed"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:rippleColor="@color/common_google_signin_btn_text_light_pressed" />
 
     <Button
         android:id="@+id/buttonCancel"
