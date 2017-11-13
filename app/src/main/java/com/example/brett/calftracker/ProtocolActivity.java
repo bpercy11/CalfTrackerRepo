@@ -26,14 +26,13 @@ public class ProtocolActivity extends BaseActivity {
 
 
 
-    // TODO: Fix listview vaccine, implement edit of UI vaccines and local storage
+    // TODO: Implement add to local storage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
-
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineList")) {
@@ -46,15 +45,7 @@ public class ProtocolActivity extends BaseActivity {
         } else { vaccineList = new ArrayList<Vaccine>(); }
 
         ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-        vaccineList = new ArrayList<Vaccine>();
 
-        /*
-        //sample data
-        vaccineList.add(new Vaccine("vaccine1", new ArrayList<Vacc_Range>(), 5,"ml","needle"));
-        vaccineList.add(new Vaccine("vaccine2", new ArrayList<Vacc_Range>(5), 15,"ml","pill"));
-        vaccineList.add(new Vaccine("vaccine3", new ArrayList<Vacc_Range>(6), 5,"ml","needle"));
-        vaccineList.add(new Vaccine("vaccine4", new ArrayList<Vacc_Range>(7), 15,"ml","pill"));
-*/
         VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 

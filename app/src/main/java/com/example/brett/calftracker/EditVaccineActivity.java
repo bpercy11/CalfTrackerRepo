@@ -54,40 +54,6 @@ public class EditVaccineActivity extends AppCompatActivity {
             vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
         } else { vaccineList = new ArrayList<Vaccine>(); }
-
-        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(EditVaccineActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.activity_edit_vaccine, null);
-
-        final EditText mVaccine = (EditText) mView.findViewById(R.id.editTextVaccineName);
-        final EditText mDosage = (EditText) mView.findViewById(R.id.editTextDosage);
-        final EditText mDosageUnits = (EditText) mView.findViewById(R.id.editTextDosageUnits);
-        final EditText mAdminStart = (EditText) mView.findViewById(R.id.editTextAdminDateStart);
-        final EditText mAdminEnd = (EditText) mView.findViewById(R.id.editTextAdminDateEnd);
-        final EditText mAdminMethod = (EditText) mView.findViewById(R.id.editTextVaccineAdminMethod);
-        final Button mAddVaccine = (Button) mView.findViewById(R.id.buttonAddVaccine);
-        final Button mCancel = (Button) mView.findViewById(R.id.buttonVaccineCancel);
-
-        mAddVaccine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mVaccine.getText().toString().matches("") || mDosage.getText().toString().matches("")
-                    || mAdminStart.getText().toString().matches("") || mAdminEnd.getText().toString().matches("")
-                    || mAdminMethod.getText().toString().matches("")){
-                        Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
-                                Toast.LENGTH_SHORT).show();
-                        clickAddVaccineButton(view);
-                }
-                else {
-                    Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        mBuilder.setView(mView);
-        android.app.AlertDialog dialog = mBuilder.create();
-        dialog.show();
     }
 
     public void clickAddVaccineButton(View view){
@@ -98,11 +64,22 @@ public class EditVaccineActivity extends AppCompatActivity {
         EditText adminEnd = (EditText) findViewById(R.id.editTextAdminDateEnd);
         EditText adminMethod = (EditText) findViewById(R.id.editTextVaccineAdminMethod);
 
+        if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
+                || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
+                || adminMethod.getText().toString().matches("")){
+            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+                Toast.LENGTH_SHORT).show();
+        }
+
         String vaccineStr = vaccine.getText().toString();
-        Double dosageDbl = Double.parseDouble(dosage.getText().toString());
-        String dosageUnitsStr = dosageUnits.getText().toString();
         int adminStartInt = Integer.parseInt(adminStart.getText().toString());
         int adminEndInt = Integer.parseInt(adminEnd.getText().toString());
+        Double dosageDbl = Double.parseDouble(dosage.getText().toString());
+        String dosageUnitsStr = dosageUnits.getText().toString();
         String adminMethodString = adminMethod.getText().toString();
 
         //get the spinner from the xml.
@@ -139,7 +116,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(vaccineList);
-        prefsEditor.putString("VaccineToViewInList",json);
+        prefsEditor.putString("VaccineList",json);
         prefsEditor.apply();
 
         Intent intent = new Intent(this,ProtocolActivity.class);
