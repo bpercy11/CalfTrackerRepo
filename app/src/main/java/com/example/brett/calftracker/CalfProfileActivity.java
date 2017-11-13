@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -108,6 +109,8 @@ public class CalfProfileActivity extends BaseActivity {
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
 
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
+
         String farmID = calf.getFarmId();
         mIDValue.setText(farmID);
         mGenderValue.setText(calf.getGender());
@@ -192,20 +195,22 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
+        //findViewById(R.id.buttonAddWeight).setVisibility(View.INVISIBLE);
+        //findViewById(R.id.buttonAddHeight).setVisibility(View.INVISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.INVISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.INVISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
 
-        mIDValue.setBackgroundColor(Color.RED);
-        mGenderValue.setBackgroundColor(Color.RED);
-        mDOBValue.setBackgroundColor(Color.RED);
-        mSireValue.setBackgroundColor(Color.RED);
-        mDamValue.setBackgroundColor(Color.RED);
-//        mHeightValue.setBackgroundColor(Color.RED);
-//        mWeightValue.setBackgroundColor(Color.RED);
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mWeightValue.setVisibility(View.INVISIBLE);
+        mHeightValue.setVisibility(View.INVISIBLE);
+        mNoteListView.setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.INVISIBLE);
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -397,12 +402,22 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
+        //findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
+        //findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
+        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mWeightValue.setVisibility(View.VISIBLE);
+        mHeightValue.setVisibility(View.VISIBLE);
+        mNoteListView.setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -425,8 +440,6 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -439,17 +452,26 @@ public class CalfProfileActivity extends BaseActivity {
     public void clickCancelButton(View view) {
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
+        //findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
+        //findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-//        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
+        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mWeightValue.setVisibility(View.VISIBLE);
+        mHeightValue.setVisibility(View.VISIBLE);
+        mNoteListView.setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
@@ -464,8 +486,6 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setBackgroundColor(Color.TRANSPARENT);
         mSireValue.setBackgroundColor(Color.TRANSPARENT);
         mDamValue.setBackgroundColor(Color.TRANSPARENT);
-//        mHeightValue.setBackgroundColor(Color.TRANSPARENT);
-//        mWeightValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
@@ -482,8 +502,8 @@ public class CalfProfileActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("Enter Note Here");
-        builder.setTitle("Create a New Note");
+        input.setHint("Enter Text");
+        builder.setTitle("Add Note");
         builder.setView(input);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

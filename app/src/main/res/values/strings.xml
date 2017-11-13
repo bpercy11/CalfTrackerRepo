@@ -18,13 +18,13 @@
     <string name="calf_profile_DOB_field">Date of Birth</string>
     <string name="calf_profile_sire_field">Sire ID</string>
     <string name="calf_profile_dam_field">Dam ID</string>
-    <string name="calf_profile_weight_field">Current Weight</string>
-    <string name="calf_profile_height_field">Current Height</string>
+    <string name="calf_profile_weight_field">Weight</string>
+    <string name="calf_profile_height_field">Height</string>
     <string name="calf_profile_notes_field">Notes</string>
     <string name="calf_profile_growth_history_button">Growth History</string>
     <string name="calf_profile_feeding_history_button">Feeding History</string>
     <string name="calf_profile_medical_history_button">Medical History</string>
-    <string name="calf_profile_create_note_button">Create a New Note</string>
+    <string name="calf_profile_create_note_button">Add Note</string>
     <string name="calf_list_search_bar_hint">Search</string>
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
@@ -62,4 +62,9 @@
     <string name="enter_admin_method_vaccine">Enter Method</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="enter_units_vaccine">Enter Units</string>
+    <string name="no_sire">No Record</string>
+    <string name="no_dam">No Record</string>
+    <string name="no_weight">No Record</string>
+    <string name="no_height">No Record</string>
+    <string name="delete_calf">Delete</string>
 </resources>
