@@ -39,7 +39,7 @@
     <string name="medicine_frequency">Frequency</string>
     <string name="enter_illness">Enter Illness</string>
     <string name="enter_treatment">Enter Treatment</string>
-    <string name="enter_dosage">Enter Dosage and Units</string>
+    <string name="enter_dosage">Enter Dosage</string>
 
     <string name="enter_range">Range</string>
 
@@ -68,6 +68,8 @@
     <string name="enter_admin_method_vaccine">Enter Method</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="enter_units_vaccine">Enter Units</string>
+    <string name="enter_units_medicine">Enter Units</string>
+    <string name="dosage_units_medicine">Dosage Units</string>
     <string-array name="vacc_range_spinner">
         <item>Day</item>
         <item>Week</item>
