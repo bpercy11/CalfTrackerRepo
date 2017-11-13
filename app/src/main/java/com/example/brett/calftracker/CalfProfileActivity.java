@@ -198,6 +198,7 @@ public class CalfProfileActivity extends BaseActivity {
     }
 
     public void clickEditButton(View view) {
+        findViewById(R.id.listViewNotes).setVisibility(View.GONE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
@@ -208,7 +209,7 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
         findViewById(R.id.textViewNotes).setVisibility(View.GONE);
-        findViewById(R.id.listViewNotes).setVisibility(View.GONE);
+
 //        for (int i = 0; i < calf.getNotes().size(); i++) {
 //            mNoteListView.getChildAt(i).setVisibility(View.GONE);
 //        }
@@ -219,11 +220,11 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mWeightValue.setVisibility(View.INVISIBLE);
-        mHeightValue.setVisibility(View.INVISIBLE);
-        mNoteListView.setVisibility(View.INVISIBLE);
-        findViewById(R.id.textViewWeightField).setVisibility(View.INVISIBLE);
-        findViewById(R.id.textViewHeightField).setVisibility(View.INVISIBLE);
+        mWeightValue.setVisibility(View.GONE);
+        mHeightValue.setVisibility(View.GONE);
+        //mNoteListView.setVisibility(View.GONE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.GONE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.GONE);
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -401,6 +402,7 @@ public class CalfProfileActivity extends BaseActivity {
             }
         }
 
+        mNoteListView.setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
@@ -410,10 +412,7 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
-        findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
 
-        // This line causes the snap
-        findViewById(R.id.listViewNotes).setVisibility(View.INVISIBLE);
         mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
@@ -421,11 +420,9 @@ public class CalfProfileActivity extends BaseActivity {
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mWeightValue.setVisibility(View.VISIBLE);
         mHeightValue.setVisibility(View.VISIBLE);
-        mNoteListView.setVisibility(View.VISIBLE);
         findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
 
-        // Check here if shits fucked up
         findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
 
         mIDValue.setOnClickListener(null);
@@ -444,12 +441,6 @@ public class CalfProfileActivity extends BaseActivity {
         tempGender = mGenderValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
 
-        mIDValue.setBackgroundColor(Color.TRANSPARENT);
-        mGenderValue.setBackgroundColor(Color.TRANSPARENT);
-        mDOBValue.setBackgroundColor(Color.TRANSPARENT);
-        mSireValue.setBackgroundColor(Color.TRANSPARENT);
-        mDamValue.setBackgroundColor(Color.TRANSPARENT);
-
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -459,6 +450,7 @@ public class CalfProfileActivity extends BaseActivity {
     }
 
     public void clickCancelButton(View view) {
+        mNoteListView.setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
         findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
@@ -466,7 +458,6 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-        findViewById(R.id.listViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
@@ -478,7 +469,7 @@ public class CalfProfileActivity extends BaseActivity {
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mWeightValue.setVisibility(View.VISIBLE);
         mHeightValue.setVisibility(View.VISIBLE);
-        mNoteListView.setVisibility(View.VISIBLE);
+        //
         findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
 
@@ -489,12 +480,6 @@ public class CalfProfileActivity extends BaseActivity {
         mWeightValue.setOnClickListener(null);
         mGenderValue.setOnClickListener(null);
         mDOBValue.setOnClickListener(null);
-
-        mIDValue.setBackgroundColor(Color.TRANSPARENT);
-        mGenderValue.setBackgroundColor(Color.TRANSPARENT);
-        mDOBValue.setBackgroundColor(Color.TRANSPARENT);
-        mSireValue.setBackgroundColor(Color.TRANSPARENT);
-        mDamValue.setBackgroundColor(Color.TRANSPARENT);
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
