@@ -119,6 +119,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                 }
                 break;
+            case R.id.nav_protocols: intent = new Intent(BaseActivity.this,ProtocolActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
+                    startActivity(intent);
+                }
+                break;
             // TODO add cases for other menu options as they are implemented
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
