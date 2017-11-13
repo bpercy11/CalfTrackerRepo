@@ -80,25 +80,23 @@
                 android:id="@+id/buttonDeleteCalf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="32dp"
-                android:background="@color/colorPrimaryDark"
 
+                android:background="@color/colorPrimaryDark"
                 android:elevation="0dp"
                 android:onClick="clickDeleteCalf"
                 android:text="@string/delete_calf"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listViewNotes"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/vertical10percent"
@@ -240,7 +238,7 @@
                 android:text="GENDER VALUE"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewGenderField"
-                app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewGenderField"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -248,23 +246,20 @@
                 android:id="@+id/textViewDOBValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="57dp"
                 android:text="DOB VALUE"
+                android:textAlignment="textStart"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDOBField"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewDOBField" />
 
             <TextView
                 android:id="@+id/textViewSireValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:text="@string/no_sire"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewSireField" />
 
@@ -272,11 +267,9 @@
                 android:id="@+id/textViewDamValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
                 android:text="@string/no_dam"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDamField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewDamField" />
 
@@ -284,11 +277,9 @@
                 android:id="@+id/textViewWeightValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:text="@string/no_weight"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewWeightField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewWeightField" />
 
@@ -296,11 +287,9 @@
                 android:id="@+id/textViewHeightValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:text="@string/no_height"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewHeightField"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewHeightField" />
 
@@ -382,10 +371,11 @@
                 android:layout_height="270dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewNote" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
 
             <!--<Button
                 android:id="@+id/buttonAddWeight"

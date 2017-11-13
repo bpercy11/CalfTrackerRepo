@@ -66,5 +66,5 @@
     <string name="no_dam">No Record</string>
     <string name="no_weight">No Record</string>
     <string name="no_height">No Record</string>
-    <string name="delete_calf">Delete</string>
+    <string name="delete_calf">Delete Calf</string>
 </resources>
