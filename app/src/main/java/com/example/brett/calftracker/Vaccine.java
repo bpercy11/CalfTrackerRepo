@@ -16,6 +16,7 @@ public class Vaccine
 	 * @param methodOfAdministration
 	 * @param toBeAdministered
 	 */
+
 	public Vaccine(String name, ArrayList<Vacc_Range> toBeAdministered, double dosage,
 				   String dosageUnits, String methodOfAdministration) {
 		super();
@@ -25,6 +26,7 @@ public class Vaccine
 		this.dosageUnits = dosageUnits;
 		this.methodOfAdministration = methodOfAdministration;
 	}
+
 
 	/*public Vaccine(String name, double dosage, String dosageUnits, String methodOfAdministration){
 		this.name = name;

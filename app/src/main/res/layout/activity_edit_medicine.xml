@@ -72,14 +72,14 @@
         android:text="@string/time_active"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMedicineDosageUnits" />
 
     <TextView
-        android:id="@+id/textViewAdminMethod"
+        android:id="@+id/textViewMedicineFrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/administration_method"
+        android:text="@string/medicine_frequency"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTimeActive" />
@@ -100,7 +100,7 @@
 
     <EditText
         android:id="@+id/editTextTreatment"
-        android:layout_width="219dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
@@ -115,7 +115,7 @@
 
     <EditText
         android:id="@+id/editTextDosage"
-        android:layout_width="229dp"
+        android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
@@ -130,7 +130,7 @@
 
     <EditText
         android:id="@+id/editTextTimeActive"
-        android:layout_width="211dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -144,19 +144,19 @@
         app:layout_constraintTop_toTopOf="@+id/textViewTimeActive" />
 
     <EditText
-        android:id="@+id/editTextAdminMethod"
-        android:layout_width="193dp"
+        android:id="@+id/editTextMedicineFrequency"
+        android:layout_width="211dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="@string/enter_method"
+        android:hint="@string/enter_frequency"
         android:layout_gravity="end"
         android:textAlignment="textEnd"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewAdminMethod"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMedicineFrequency"
         app:layout_constraintEnd_toEndOf="@+id/editTextIllness"
-        app:layout_constraintTop_toTopOf="@+id/textViewAdminMethod" />
+        app:layout_constraintTop_toTopOf="@+id/textViewMedicineFrequency" />
 
     <Button
         android:id="@+id/buttonAddMedicine"
@@ -165,12 +165,12 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="65dp"
         android:onClick="clickAddMedicineButton"
         android:text="ADD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewEditMedicine"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAdminMethod" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMedicineFrequency" />
 
     <Button
         android:id="@+id/buttonCancel"
@@ -183,6 +183,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/buttonAddMedicine"
         app:layout_constraintEnd_toEndOf="@+id/editTextIllness"
         app:layout_constraintTop_toTopOf="@+id/buttonAddMedicine" />
+
+    <TextView
+        android:id="@+id/textViewMedicineDosageUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/dosage_units_medicine"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewEditMedicine"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
+
+    <EditText
+        android:id="@+id/editTextMedicineDosageUnits"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:ems="10"
+        android:hint="@string/enter_units_medicine"
+        android:inputType="textPersonName"
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMedicineDosageUnits"
+        app:layout_constraintEnd_toEndOf="@+id/editTextIllness"
+        app:layout_constraintTop_toTopOf="@+id/textViewMedicineDosageUnits" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -14,9 +14,9 @@ import java.util.List;
 
 public class VaccineAdapter extends BaseAdapter {
     private Context context;
-    private List<String> vaccineList;
+    private List<Vaccine> vaccineList;
 
-    public VaccineAdapter(Context context, List<String> vaccineList) {
+    public VaccineAdapter(Context context, List<Vaccine> vaccineList) {
         this.context = context;
         this.vaccineList = vaccineList;
     }
@@ -26,7 +26,7 @@ public class VaccineAdapter extends BaseAdapter {
         return vaccineList.size();
     }
     @Override
-    public String getItem(int position){
+    public Vaccine getItem(int position){
         return vaccineList.get(position);
     }
     @Override
@@ -36,10 +36,10 @@ public class VaccineAdapter extends BaseAdapter {
     public View getView(int position, View courtView, ViewGroup parent){
         View v = View.inflate(context, R.layout.vaccine_list,null);
         TextView vaccineName = (TextView)v.findViewById(R.id.vaccine_name);
-        //TextView vaccineAge = (TextView)v.findViewById(R.id.vaccine_toBeAdministered);
+        //   TextView vaccineAge = (TextView)v.findViewById(R.id.vaccine_age);
 
-        vaccineName.setText(vaccineList.get(position));
-       // vaccineAge.setText(vaccineList.get(position).getToBeAdministered());
+        vaccineName.setText(vaccineList.get(position).getName());
+     //    vaccineAge.setText(vaccineList.get(position).getToBeAdministered());
 
         return v;
     }

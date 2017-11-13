@@ -1,12 +1,17 @@
 package com.example.brett.calftracker;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +22,8 @@ public class ProtocolActivity extends BaseActivity {
 
     private VaccineAdapter vAdapter;
 
-    private List<String> vaccineList;
+    private List<Vaccine> vaccineList;
 
-
-    // TODO: Fix listview vaccine, implement edit of UI vaccines and local storage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,31 +31,18 @@ public class ProtocolActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
-        //Only use if you change 'BaseAdapter' to 'ArrayAdapter'
-/*      ArrayAdapter adapter construct
-        // Construct the data source
-        ArrayList<Vaccine> arrayOfVaccines = new ArrayList<Vaccine>();
-        // Create the adapter to convert the array to views
-        VaccineAdapter adapter = new VaccineAdapter(this, arrayOfVaccines);
-        // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.listview_vaccine);
-        listView.setAdapter(adapter);
-*/
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("VaccineList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("VaccineList", "");
+            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
+            }.getType());
+        } else { vaccineList = new ArrayList<Vaccine>(); }
 
         ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-        vaccineList = new ArrayList<>();
-        //sample data
-        //vaccineList.add(new Vaccine("POOP",10,5,"ml","needle"));
-        //vaccineList.add(new Vaccine("alex",6,15,"ml","pill"));
-        vaccineList.add("Parainfluenza-3");
-        vaccineList.add("Respiratory Syncytical Virus");
-        vaccineList.add("Haemophilus Somnus");
-        vaccineList.add("Needle");
-        vaccineList.add("Powder");
-        vaccineList.add("Pill");
-        vaccineList.add("Liquid");
-        vaccineList.add("Gas");
-        vaccineList.add("Food");
+
         VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 
