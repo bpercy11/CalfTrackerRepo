@@ -59,8 +59,6 @@ public class CalfProfileActivity extends BaseActivity {
     private String tempID;
     private String tempSire;
     private String tempDam;
-    private String tempWeight;
-    private String tempHeight;
     private String tempDOBString;
     private String tempGender;
     private Calendar tempDOB;
@@ -69,8 +67,6 @@ public class CalfProfileActivity extends BaseActivity {
     private AlertDialog alertGender;
     private AlertDialog alertSire;
     private AlertDialog alertDam;
-    private AlertDialog alertWeight;
-    private AlertDialog alertHeight;
 
     private double mostRecentWeight;
     private double mostRecentHeight;
@@ -99,10 +95,6 @@ public class CalfProfileActivity extends BaseActivity {
                 break;
             }
         }
-//        if (calf == null) {
-//            Intent intent = new Intent(this,DashboardActivity.class);
-//            startActivity(intent);
-//        }
 
         // print to log calf cbject information
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
@@ -141,8 +133,6 @@ public class CalfProfileActivity extends BaseActivity {
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
         tempDam = mDamValue.getText().toString();
-        tempWeight = mWeightValue.getText().toString();
-        tempHeight = mHeightValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
 
@@ -200,9 +190,11 @@ public class CalfProfileActivity extends BaseActivity {
 
     public void clickEditButton(View view) {
         findViewById(R.id.listViewNotes).setVisibility(View.GONE);
-        findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
+        findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.GONE);
+        mWeightValue.setVisibility(View.GONE);
+        mHeightValue.setVisibility(View.GONE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.GONE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.GONE);
         findViewById(R.id.buttonFeedingHistory).setVisibility(View.GONE);
         findViewById(R.id.buttonGrowthHistory).setVisibility(View.GONE);
         findViewById(R.id.buttonMedicalHistory).setVisibility(View.GONE);
@@ -210,10 +202,8 @@ public class CalfProfileActivity extends BaseActivity {
         findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
         findViewById(R.id.textViewNotes).setVisibility(View.GONE);
-
-//        for (int i = 0; i < calf.getNotes().size(); i++) {
-//            mNoteListView.getChildAt(i).setVisibility(View.GONE);
-//        }
+        findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonDeleteCalf).setVisibility(View.VISIBLE);
 
         mIDValue.setPaintFlags(mIDValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -221,11 +211,7 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mWeightValue.setVisibility(View.GONE);
-        mHeightValue.setVisibility(View.GONE);
-        //mNoteListView.setVisibility(View.GONE);
-        findViewById(R.id.textViewWeightField).setVisibility(View.GONE);
-        findViewById(R.id.textViewHeightField).setVisibility(View.GONE);
+
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -403,42 +389,11 @@ public class CalfProfileActivity extends BaseActivity {
             }
         }
 
-        mNoteListView.setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
-        findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
-
-        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mWeightValue.setVisibility(View.VISIBLE);
-        mHeightValue.setVisibility(View.VISIBLE);
-        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
-        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
-
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
-
-        mIDValue.setOnClickListener(null);
-        mSireValue.setOnClickListener(null);
-        mDamValue.setOnClickListener(null);
-        mHeightValue.setOnClickListener(null);
-        mWeightValue.setOnClickListener(null);
-        mGenderValue.setOnClickListener(null);
-        mDOBValue.setOnClickListener(null);
+        resetVisibility();
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
         tempDam = mDamValue.getText().toString();
-        tempWeight = mWeightValue.getText().toString();
-        tempHeight = mHeightValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
 
@@ -451,42 +406,11 @@ public class CalfProfileActivity extends BaseActivity {
     }
 
     public void clickCancelButton(View view) {
-        mNoteListView.setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonApply).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonCancel).setVisibility(View.INVISIBLE);
-        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
-        findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
-        findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
-        findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
-        findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
-        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
-        mWeightValue.setVisibility(View.VISIBLE);
-        mHeightValue.setVisibility(View.VISIBLE);
-        //
-        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
-        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
-
-        mIDValue.setOnClickListener(null);
-        mSireValue.setOnClickListener(null);
-        mDamValue.setOnClickListener(null);
-        mHeightValue.setOnClickListener(null);
-        mWeightValue.setOnClickListener(null);
-        mGenderValue.setOnClickListener(null);
-        mDOBValue.setOnClickListener(null);
+        resetVisibility();
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
         mDamValue.setText(tempDam);
-        mWeightValue.setText(tempWeight);
-        mHeightValue.setText(tempHeight);
         mGenderValue.setText(tempGender);
         mDOBValue.setText(tempDOBString);
     }
@@ -690,5 +614,34 @@ public class CalfProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    //Calendar.getInstance().after(calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded())
+    public void resetVisibility() {
+        mNoteListView.setVisibility(View.VISIBLE);
+        mWeightValue.setVisibility(View.VISIBLE);
+        mHeightValue.setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonApply).setVisibility(View.GONE);
+        findViewById(R.id.buttonCancel).setVisibility(View.GONE);
+        findViewById(R.id.buttonDeleteCalf).setVisibility(View.GONE);
+        findViewById(R.id.buttonAddWeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonAddHeight).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonCreateNewNote).setVisibility(View.VISIBLE);
+        findViewById(R.id.floatingActionButtonEDIT).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonFeedingHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonGrowthHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonMedicalHistory).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
+
+        mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+
+        mIDValue.setOnClickListener(null);
+        mSireValue.setOnClickListener(null);
+        mDamValue.setOnClickListener(null);
+        mGenderValue.setOnClickListener(null);
+        mDOBValue.setOnClickListener(null);
+    }
 }
