@@ -9,10 +9,12 @@
     <string name="add_calf_ID_Number">ID Number</string>
     <string name="add_calf_gender">Gender</string>
     <string name="add_calf_DOB">Date of Birth</string>
-    <string name="add_calf_add_button">Add</string>
+    <string name="add_calf_add_button">Next</string>
     <string name="add_calf_get_ID">Enter ID Number</string>
     <string name="add_calf_select_date">Select a date</string>
     <string name="add_calf_select_gender">Select gender</string>
+
+
     <string name="calf_profile_ID_field">ID Number</string>
     <string name="calf_profile_gender_field">Gender</string>
     <string name="calf_profile_DOB_field">Date of Birth</string>
@@ -30,56 +32,64 @@
     <string name="calf_profile_delete_button">Remove Calf</string>
     <string name="calf_profile_record_weight_button">Record Weight</string>
     <string name="calf_profile_record_height_button">Record Height</string>
+    <string name="calf_profile_no_sire">No Record</string>
+    <string name="calf_profile_no_dam">No Record</string>
+    <string name="calf_profile_no_weight">No Record</string>
+    <string name="calf_profile_no_height">No Record</string>
+    <string name="calf_profile_delete_calf">Delete Calf</string>
+    <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
+    <string name="calf_profile_medical_history_illness_button">Illnesses</string>
+
+
     <string name="calf_list_search_bar_hint">Search</string>
-    <string name="no_sire">No Record</string>
-    <string name="no_dam">No Record</string>
-    <string name="no_weight">No Record</string>
-    <string name="no_height">No Record</string>
-    <string name="delete_calf">Delete Calf</string>
+
+
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
     <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
-    <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
-    <string name="calf_profile_medical_history_illness_button">Illnesses</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
+    <string name="new_calf_vaccine_back_button">Back</string>
+
+
     <string name="action_settings">Action Settings</string>
-    <string name="illness_name">Illness</string>
-    <string name="treatment_name">Treatment</string>
-    <string name="dosage">Dosage</string>
-    <string name="time_active">Time Active</string>
-    <string name="medicine_frequency">Frequency</string>
-    <string name="enter_illness">Enter Illness</string>
-    <string name="enter_treatment">Enter Treatment</string>
-    <string name="enter_dosage">Enter Dosage</string>
+
+    <string name="edit_medicine_medicine_name">Medicine</string>
+    <string name="edit_medicine_treatment_name">Treatment</string>
+    <string name="edit_medicine_dosage">Dosage</string>
+    <string name="edit_medicine_dosage_units">Dosage Units</string>
+    <string name="edit_medicine_time_active">Time Active</string>
+    <string name="edit_medicine_enter_medicine">Enter Medicine</string>
+    <string name="edit_medicine_enter_treatment">Enter Treatment</string>
+    <string name="edit_medicine_cancel_button">Cancel</string>
+    <string name="edit_medicine_enter_dosage">Enter Dosage</string>
+    <string name="edit_medicine_enter_units">Enter Units</string>
+
 
     <string name="enter_range">Range</string>
 
-    <string name="enter_admin_method">Enter Admin Method</string>
-    <string name="add_medicine">Add</string>
+    <string name="edit_vaccine_enter_admin_method">Enter Method</string>
+    <string name="edit_medicine_add_medicine">Add</string>
     <string name="error_login_message">Please fill any empty fields</string>
     <string name="add_medicine_successful_message">Add Illness Successful</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
-    <string name="enter_days">Enter Days</string>
-    <string name="enter_frequency">Enter Frequency</string>
-    <string name="cancel_button">Cancel</string>
+    <string name="edit_medicine_enter_days">Enter Days</string>
+    <string name="edit_vaccine_cancel_button">Cancel</string>
     <string name="edit_medicine">Edit Medicine</string>
-    <string name="edit_vaccine">Edit Vaccine</string>
-    <string name="vaccine_name">Vaccine</string>
-    <string name="enter_vaccine">Enter Vaccine</string>
+    <string name="edit_vaccine_edit_vaccine">Edit Vaccine</string>
+    <string name="edit_vaccine_vaccine_name">Vaccine</string>
+    <string name="edit_vaccine_enter_vaccine">Enter Vaccine</string>
 
-    <string name="administration_start">Start</string>
-    <string name="administration_end">End</string>
-    <string name="administration_hint_start">Calf Age</string>
-    <string name="administration_hint_end">Calf Age</string>
-
-    <string name="vaccine_dosage">Dosage</string>
-    <string name="enter_vaccine_dosage">Enter Dosage</string>
-    <string name="dosage_units_vaccine">Dosage Units</string>
-    <string name="admin_method_vaccine">Administration</string>
-    <string name="enter_admin_method_vaccine">Enter Method</string>
+    <string name="edit_vaccine_administration_start">Start</string>
+    <string name="edit_vaccine_administration_end">End</string>
+    <string name="edit_vaccine_administration_hint_start">Calf Age</string>
+    <string name="edit_vaccine_administration_hint_end">Calf Age</string>
+    <string name="edit_vaccine_vaccine_dosage">Dosage</string>
+    <string name="edit_vaccine_enter_vaccine_dosage">Enter Dosage</string>
+    <string name="edit_vaccine_dosage_units">Dosage Units</string>
+    <string name="edit_vaccine_admin_method">Administration</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
-    <string name="enter_units_vaccine">Enter Units</string>
-    <string name="enter_units_medicine">Enter Units</string>
-    <string name="dosage_units_medicine">Dosage Units</string>
+    <string name="edit_vaccine_enter_units">Enter Units</string>
+
     <string-array name="vacc_range_spinner">
         <item>Day</item>
         <item>Week</item>

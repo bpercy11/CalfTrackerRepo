@@ -11,14 +11,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/medicine_list_editTextMedicine"
-        android:text="Medicine"
+        android:id="@+id/illness_name"
+        android:text="Name"
         android:textSize="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/medicine_list_editTextTimeActive"
-        android:text="Time Active"
+        android:id="@+id/treatment_protocol"
+        android:text="Treatment Protocol"
         android:textSize="18dp"/>
 
 </LinearLayout>
