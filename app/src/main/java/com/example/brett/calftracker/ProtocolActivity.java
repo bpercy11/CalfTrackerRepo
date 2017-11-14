@@ -19,11 +19,8 @@ import java.util.List;
 public class ProtocolActivity extends BaseActivity {
 
     private ListView lvVaccine;
-
     private VaccineAdapter vAdapter;
-
     private List<Vaccine> vaccineList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +38,8 @@ public class ProtocolActivity extends BaseActivity {
             }.getType());
         } else { vaccineList = new ArrayList<Vaccine>(); }
 
-        ListView lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-
-        VaccineAdapter vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
+        lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
+        vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
         lvVaccine.setAdapter(vAdapter);
 
         lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,23 +50,22 @@ public class ProtocolActivity extends BaseActivity {
             }
         });
     }
-    public void onMedicineButtonClick(View view) {
-        Intent intent = new Intent(ProtocolActivity.this,MedicineActivity.class);
+    public void onVaccine_MedicineButtonClick(View view) {
+        Intent intent = new Intent(ProtocolActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
-    public void onVaccineButtonClick(View view){
+    public void onVaccine_VaccineButtonClick(View view){
         Intent intent = new Intent(ProtocolActivity.this, ProtocolActivity.class);
         startActivity(intent);
     }
-    public void onIllnessButtonClick(View view){
+    public void onVaccine_IllnessButtonClick(View view){
         Intent intent = new Intent(ProtocolActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onEditVaccineButtonClick(View view){
+    public void onVaccine_EditVaccineButtonClick(View view){
         Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
         startActivity(intent);
     }
-
     public void onBackPressed() {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);

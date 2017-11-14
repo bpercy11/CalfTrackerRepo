@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,19 +16,20 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IllnessActivity extends AppCompatActivity {
-    private List<Illness> illnessList;
+public class IllnessActivity extends BaseActivity {
+
     private ListView lvIllness;
     private IllnessAdapter iAdapter;
+    private List<Illness> illnessList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getLayoutInflater().inflate(R.layout.activity_protocol_illness, frameLayout);
-       // mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        getLayoutInflater().inflate(R.layout.activity_protocol_illness, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessList")) {
+        if (mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
@@ -36,41 +38,42 @@ public class IllnessActivity extends AppCompatActivity {
             }.getType());
         } else { illnessList = new ArrayList<Illness>(); }
 
-        ListView lvIllness = (ListView) findViewById(R.id.listview_illness);
-
-        IllnessAdapter iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
+        lvIllness = (ListView) findViewById(R.id.listview_illness);
+        iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
         lvIllness.setAdapter(iAdapter);
 
-        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                //Do Something
             }
         });
+    }
 
-    }
-    public void onVaccineButtonClick(View view) {
-        Intent intent = new Intent(IllnessActivity.this,ProtocolActivity.class);
-        startActivity(intent);
-
-    }
-    public void onIllnessButtonClick(View view){
-        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
-        startActivity(intent);
-    }
-    public void onMedicineButtonClick(View view){
+    public void onIllness_MedicineButtonClick(View view) {
         Intent intent = new Intent(IllnessActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
-  /*  public void onEditIllnessButtonClick(View view){
+    public void onIllness_VaccineButtonClick(View view) {
+        Intent intent = new Intent(IllnessActivity.this, ProtocolActivity.class);
+        startActivity(intent);
+    }
+    public void onIllness_IllnessButtonClick(View view){
+        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
+        startActivity(intent);
+    }
+    public void onIllness_EditIllnessButtonClick(View view) {
         Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
         startActivity(intent);
-    }*/
-
-    @Override
+    }
     public void onBackPressed() {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
+
+
 }
+
+
+
+

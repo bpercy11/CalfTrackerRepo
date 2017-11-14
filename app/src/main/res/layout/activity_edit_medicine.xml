@@ -73,17 +73,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewDosageUnits" />
-<!--
-    <TextView
-        android:id="@+id/edit_medicine_textViewMedicineFrequency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/medicine_frequency"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewTimeActive" />
--->
+
     <EditText
         android:id="@+id/edit_medicine_editTextMedicine"
         android:layout_width="wrap_content"
@@ -143,23 +133,9 @@
         app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextMedicine"
         app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewTimeActive" />
 
-  <!--  <EditText
-        android:id="@+id/edit_medicine_editTextFrequency"
-        android:layout_width="211dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/enter_frequency"
-        android:layout_gravity="end"
-        android:textAlignment="textEnd"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewMedicineFrequency"
-        app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextIllness"
-        app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewMedicineFrequency" />
--->
+
     <Button
-        android:id="@+id/buttonAddMedicine"
+        android:id="@+id/edit_medicine_buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -179,10 +155,10 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:onClick="clickCancelButton"
-        android:text="@string/cancel_button"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonAddMedicine"
+        android:text="@string/edit_medicine_cancel_button"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextMedicine"
-        app:layout_constraintTop_toTopOf="@+id/buttonAddMedicine" />
+        app:layout_constraintTop_toTopOf="@+id/edit_medicine_buttonAdd" />
 
     <TextView
         android:id="@+id/edit_medicine_textViewDosageUnits"
