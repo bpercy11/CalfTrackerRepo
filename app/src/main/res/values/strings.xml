@@ -9,7 +9,7 @@
     <string name="add_calf_ID_Number">ID Number</string>
     <string name="add_calf_gender">Gender</string>
     <string name="add_calf_DOB">Date of Birth</string>
-    <string name="add_calf_add_button">Add</string>
+    <string name="add_calf_add_button">Next</string>
     <string name="add_calf_get_ID">Enter ID Number</string>
     <string name="add_calf_select_date">Select a date</string>
     <string name="add_calf_select_gender">Select gender</string>
@@ -46,7 +46,9 @@
 
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
+    <string name="new_calf_vaccine_back_button">Back</string>
     <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
 
 
     <string name="action_settings">Action Settings</string>

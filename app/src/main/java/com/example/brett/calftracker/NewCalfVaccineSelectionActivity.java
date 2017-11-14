@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
@@ -20,8 +23,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     VaccineSelectionListViewAdapter adapter;
 
     private Calf calf;
-    private String calfID;
     private ArrayList<Calf> calfList;
+    private String calfID;
+    private Calendar calfCal;
+    private String calfGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,27 +34,34 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_calf_vaccine_selection);
 
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
+        TextView mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
+        Button mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
 
         ArrayList<Vaccine> vaccineList;
 
-        // get calf list and calf to add needed vaccines to
+        // set up shared preference variables
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
-
         Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        String json;
 
-        json = mPreferences.getString("calfToViewInProfile","");
+        // check if there's an existing calf list and store it for use
+        // create a new list if existing not found
+        if(mPreferences.contains("CalfList")) {
+            json = mPreferences.getString("CalfList", "");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
+            }.getType());
+        } else { calfList = new ArrayList<Calf>(); }
+
+        json = mPreferences.getString("newCalfID","");
         calfID = gson.fromJson(json, String.class);
 
-        // Search through the calfList to find the correct calf by ID
-        for (int i = 0; i < calfList.size(); i++) {
-            if (calfList.get(i).getFarmId().equals(calfID)) {
-                calf = calfList.get(i);
-                break;
-            }
-        }
+        json = mPreferences.getString("newCalfCal","");
+        calfCal = gson.fromJson(json, new TypeToken<Calendar>() {
+        }.getType());
+
+        json = mPreferences.getString("newCalfGender","");
+        calfGender = gson.fromJson(json, String.class);
 
         // get vaccine list from shared preferences
         if(mPreferences.contains("VaccineList")) {
@@ -61,47 +73,42 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             for(int i = 0; i < vaccineList.size(); i++) {
                 adapterArray.add(new VaccineSelectionItem(vaccineList.get(i),false));
             }
-        } else { adapterArray = new ArrayList<VaccineSelectionItem>(); }
+            adapter = new VaccineSelectionListViewAdapter(adapterArray, getApplicationContext());
 
-//        VaccineSelectionItem item = new VaccineSelectionItem(new Vaccine("derp",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        VaccineSelectionItem item2 = new VaccineSelectionItem(new Vaccine("derp1",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        VaccineSelectionItem item3 = new VaccineSelectionItem(new Vaccine("derp2",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        VaccineSelectionItem item4 = new VaccineSelectionItem(new Vaccine("derp3",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        VaccineSelectionItem item5 = new VaccineSelectionItem(new Vaccine("derp4",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        VaccineSelectionItem item6 = new VaccineSelectionItem(new Vaccine("derp5",new ArrayList<Vacc_Range>(),12,"herp","merp"), false);
-//        adapterArray = new ArrayList<VaccineSelectionItem>();
-//
-//        adapterArray.add(item);
-//        adapterArray.add(item2);
-//        adapterArray.add(item3);
-//        adapterArray.add(item4);
-//        adapterArray.add(item5);
-//        adapterArray.add(item6);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-        adapter = new VaccineSelectionListViewAdapter(adapterArray, getApplicationContext());
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-
-                VaccineSelectionItem dataModel= adapterArray.get(position);
-                dataModel.setChecked(!dataModel.getChecked());
-                adapter.notifyDataSetChanged();
+                    VaccineSelectionItem dataModel= adapterArray.get(position);
+                    dataModel.setChecked(!dataModel.getChecked());
+                    adapter.notifyDataSetChanged();
 
 
-            }
-        });
+                }
+            });
+        } else {
+            listView.setVisibility(View.GONE);
+            mNoVaccines.setVisibility(View.VISIBLE);
+            mNextButton.setText("Continue");
+        }
+
+
     }
 
     public void onConfirmVaccines(View view) {
 
-        for(int i = 0; i < adapterArray.size(); i++) {
-            if(adapterArray.get(i).getChecked()) {
-                calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
+        calf = new Calf(calfID,calfGender,calfCal);
+
+        if(adapterArray != null) {
+            for (int i = 0; i < adapterArray.size(); i++) {
+                if (adapterArray.get(i).getChecked()) {
+                    calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
+                }
             }
         }
 
+        calfList.add(calf);
 
         // Save the calfList to local storage
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -118,6 +125,12 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         // go to calf profile for new calf
         Intent intent = new Intent(this,CalfProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickBack(View view) {
+        // go back to add new calf screen
+        Intent intent = new Intent(this,AddCalfActivity.class);
         startActivity(intent);
     }
 

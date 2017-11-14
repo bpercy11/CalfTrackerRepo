@@ -44,24 +44,11 @@ public class AddCalfActivity extends BaseActivity {
 
     private String calfGender;
 
-    private ArrayList<Calf> calfList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_add).setChecked(true);
-
-        // Load the calfList
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("CalfList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("CalfList", "");
-            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
-            }.getType());
-        } else { calfList = new ArrayList<Calf>(); }
 
         // Sets the default date to be today in case this field is left blank
         Calendar today = Calendar.getInstance();
@@ -145,23 +132,27 @@ public class AddCalfActivity extends BaseActivity {
         }
         // Make new calf object and add it to the calfList
         Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
-        Calf calf = new Calf(calfID,calfGender, calfCal);
-        calfList.add(calf);
 
         // Save the calfList to local storage
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
+        String json;
 
         prefsEditor = mPrefs.edit();
-        json = gson.toJson(calf.getFarmId());
-        prefsEditor.putString("calfToViewInProfile",json);
+        json = gson.toJson(calfID);
+        prefsEditor.putString("newCalfID",json);
         prefsEditor.apply();
 
-        // GO TO NEWLWY CREATED CALF PROFILE
+        json = gson.toJson(calfGender);
+        prefsEditor.putString("newCalfGender",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(calfCal);
+        prefsEditor.putString("newCalfCal",json);
+        prefsEditor.apply();
+
+        // GO TO SELECT VACCINES ACTIVITY
         Intent intent = new Intent(this,NewCalfVaccineSelectionActivity.class);
         startActivity(intent);
     }
