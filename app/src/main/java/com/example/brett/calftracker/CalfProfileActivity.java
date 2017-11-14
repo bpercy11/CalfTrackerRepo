@@ -377,7 +377,6 @@ public class CalfProfileActivity extends BaseActivity {
             }
         });
         alertDam = builderDam.create();
-
     }
 
     public void clickApplyButton(View view) {
@@ -510,7 +509,7 @@ public class CalfProfileActivity extends BaseActivity {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
         builderWeight.setTitle("Record Weight Measurement");
         final EditText inputWeight = new EditText(this);
-        inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputWeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         inputWeight.setHint("Weight (lbs)");
         builderWeight.setView(inputWeight);
         builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -561,7 +560,7 @@ public class CalfProfileActivity extends BaseActivity {
         AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
         builderHeight.setTitle("Record Height Measurement");
         final EditText inputHeight = new EditText(this);
-        inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        inputHeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         inputHeight.setHint("Height (in)");
         builderHeight.setView(inputHeight);
         builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
