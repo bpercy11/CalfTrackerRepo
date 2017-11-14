@@ -39,9 +39,8 @@ public class MedicineActivity extends BaseActivity {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
 
-        ListView lvMedicine = (ListView)findViewById(R.id.listview_medicine);
-
-        MedicineAdapter mAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
+        lvMedicine = (ListView)findViewById(R.id.listview_medicine);
+        mAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
         lvMedicine.setAdapter(mAdapter);
 
         lvMedicine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,25 +50,23 @@ public class MedicineActivity extends BaseActivity {
             }
         });
     }
-    public void onVaccineButtonClick(View view) {
+    public void onMedicine_VaccineButtonClick(View view) {
         Intent intent = new Intent(MedicineActivity.this,ProtocolActivity.class);
         startActivity(intent);
 
     }
-    public void onMedicineButtonClick(View view){
+    public void onMedicine_MedicineButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
-    public void onIllnessButtonClick(View view){
+    public void onMedicine_IllnessButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onEditMedicineButtonClick(View view){
+    public void onMedicine_EditMedicineButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
         startActivity(intent);
     }
-
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, DashboardActivity.class);

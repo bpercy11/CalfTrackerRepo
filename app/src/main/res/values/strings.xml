@@ -60,20 +60,20 @@
     <string name="edit_medicine_time_active">Time Active</string>
     <string name="edit_medicine_enter_medicine">Enter Medicine</string>
     <string name="edit_medicine_enter_treatment">Enter Treatment</string>
-
+    <string name="edit_medicine_cancel_button">Cancel</string>
     <string name="edit_medicine_enter_dosage">Enter Dosage</string>
     <string name="edit_medicine_enter_units">Enter Units</string>
 
 
     <string name="enter_range">Range</string>
 
-    <string name="edit_vaccine_enter_admin_method">Enter Admin Method</string>
-    <string name="add_medicine">Add</string>
+    <string name="edit_vaccine_enter_admin_method">Enter Method</string>
+    <string name="edit_medicine_add_medicine">Add</string>
     <string name="error_login_message">Please fill any empty fields</string>
     <string name="add_medicine_successful_message">Add Illness Successful</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
     <string name="edit_medicine_enter_days">Enter Days</string>
-    <string name="cancel_button">Cancel</string>
+    <string name="edit_vaccine_cancel_button">Cancel</string>
     <string name="edit_medicine">Edit Medicine</string>
     <string name="edit_vaccine_edit_vaccine">Edit Vaccine</string>
     <string name="edit_vaccine_vaccine_name">Vaccine</string>
@@ -83,7 +83,6 @@
     <string name="edit_vaccine_administration_end">End</string>
     <string name="edit_vaccine_administration_hint_start">Calf Age</string>
     <string name="edit_vaccine_administration_hint_end">Calf Age</string>
-
     <string name="edit_vaccine_vaccine_dosage">Dosage</string>
     <string name="edit_vaccine_enter_vaccine_dosage">Enter Dosage</string>
     <string name="edit_vaccine_dosage_units">Dosage Units</string>

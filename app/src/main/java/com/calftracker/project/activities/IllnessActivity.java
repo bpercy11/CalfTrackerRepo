@@ -1,4 +1,4 @@
-package com.calftracker.project.activities;
+package com.example.brett.calftracker;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,7 +32,7 @@ public class IllnessActivity extends BaseActivity {
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessList")) {
+        if (mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
@@ -41,37 +41,42 @@ public class IllnessActivity extends BaseActivity {
             }.getType());
         } else { illnessList = new ArrayList<Illness>(); }
 
-        ListView lvIllness = (ListView) findViewById(R.id.listview_illness);
-
-        IllnessAdapter iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
+        lvIllness = (ListView) findViewById(R.id.listview_illness);
+        iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
         lvIllness.setAdapter(iAdapter);
 
-        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                //Do Something
             }
         });
-
     }
 
-    public void onIllnessButtonClick(View view){
-        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
-        startActivity(intent);
-    }
-    public void onMedicineButtonClick(View view){
+    public void onIllness_MedicineButtonClick(View view) {
         Intent intent = new Intent(IllnessActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
-  /*  public void onEditIllnessButtonClick(View view){
+    public void onIllness_VaccineButtonClick(View view) {
+        Intent intent = new Intent(IllnessActivity.this, ProtocolActivity.class);
+        startActivity(intent);
+    }
+    public void onIllness_IllnessButtonClick(View view){
+        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
+        startActivity(intent);
+    }
+    public void onIllness_EditIllnessButtonClick(View view) {
         Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
         startActivity(intent);
-    }*/
-
-    @Override
+    }
     public void onBackPressed() {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
+
+
 }
+
+
+
+
