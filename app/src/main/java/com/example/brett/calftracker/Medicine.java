@@ -8,23 +8,20 @@ public class Medicine {
 	private double dosage;
 	private String dosage_units;
 	private int timeActive;
-	//private ArrayList<MedicineFrequency> frequency;
-	private String frequency;
+
 	
 	/**
 	 * @param name
 	 * @param dosage
 	 * @param dosage_units
 	 * @param timeActive
-	 * @param frequency
 	 */
-	public Medicine(String name, double dosage, String dosage_units, int timeActive, String frequency) {
+	public Medicine(String name, double dosage, String dosage_units, int timeActive) {
 		super();
 		this.name = name;
 		this.dosage = dosage;
 		this.dosage_units = dosage_units;
 		this.timeActive = timeActive;
-		this.frequency = frequency;
 	}
 
 	/**
@@ -83,23 +80,8 @@ public class Medicine {
 		this.timeActive = timeActive;
 	}
 
-	/**
-	 * @return the frequency
-	 */
-		public String getFrequency() {
-			return frequency;
-		}
-
-		/**
-	 * @param frequency the frequency to set
-	 */
-		public void setFrequency(String frequency) {
-			this.frequency = frequency;
-		}
-
-
 	public Medicine createMedicine(String name, Double dosage, String dosage_units, int timeActive,
 								   String frequency){
-		return new Medicine(name,dosage,dosage_units,timeActive,frequency);
+		return new Medicine(name,dosage,dosage_units,timeActive);
 	}
 }

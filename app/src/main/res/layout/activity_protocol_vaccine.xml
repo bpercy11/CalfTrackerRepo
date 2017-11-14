@@ -6,31 +6,52 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/medicineButton"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onMedicineButtonClick"
-        android:text="Medicine"
-        app:layout_constraintBottom_toTopOf="@+id/listview_vaccine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/vaccineButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/vaccineButton"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorIcon"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorIcon"
+        android:onClick="onVaccineButtonClick"
         android:text="Vaccine"
         app:layout_constraintBottom_toTopOf="@+id/listview_vaccine"
         app:layout_constraintEnd_toStartOf="@+id/medicineButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/medicineButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onMedicineButtonClick"
+        android:text="Medicine"
+        app:layout_constraintBottom_toTopOf="@+id/listview_vaccine"
+        app:layout_constraintEnd_toStartOf="@+id/illnessButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/vaccineButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/illnessButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onIllnessButtonClick"
+        android:text="Illness"
+        app:layout_constraintBottom_toTopOf="@+id/listview_vaccine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/medicineButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

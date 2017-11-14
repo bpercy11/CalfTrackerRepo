@@ -58,6 +58,14 @@ public class ProtocolActivity extends BaseActivity {
         Intent intent = new Intent(ProtocolActivity.this,MedicineActivity.class);
         startActivity(intent);
     }
+    public void onVaccineButtonClick(View view){
+        Intent intent = new Intent(ProtocolActivity.this, ProtocolActivity.class);
+        startActivity(intent);
+    }
+    public void onIllnessButtonClick(View view){
+        Intent intent = new Intent(ProtocolActivity.this, IllnessActivity.class);
+        startActivity(intent);
+    }
     public void onEditVaccineButtonClick(View view){
         Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
         startActivity(intent);

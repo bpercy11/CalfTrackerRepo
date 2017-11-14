@@ -18,9 +18,9 @@ import java.util.List;
 
 public class MedicineActivity extends BaseActivity {
 
-    private List<Illness> illnessList;
-    private ListView lvIllness;
-    private IllnessAdapter iAdapter;
+    private List<Medicine> medicineList;
+    private ListView lvMedicine;
+    private MedicineAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,38 +29,45 @@ public class MedicineActivity extends BaseActivity {
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessList")) {
+        if(mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+            String json = mPreferences.getString("MedicineList", "");
+            medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
-        } else { illnessList = new ArrayList<Illness>(); }
+        } else { medicineList = new ArrayList<Medicine>(); }
 
-        ListView lvIllness = (ListView) findViewById(R.id.listview_medicine);
+        ListView lvMedicine = (ListView)findViewById(R.id.listview_medicine);
 
-        IllnessAdapter iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
-        lvIllness.setAdapter(iAdapter);
+        MedicineAdapter mAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
+        lvMedicine.setAdapter(mAdapter);
 
-        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        lvMedicine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Do something
             }
         });
-
     }
     public void onVaccineButtonClick(View view) {
         Intent intent = new Intent(MedicineActivity.this,ProtocolActivity.class);
         startActivity(intent);
 
     }
+    public void onMedicineButtonClick(View view){
+        Intent intent = new Intent(MedicineActivity.this, MedicineActivity.class);
+        startActivity(intent);
+    }
+    public void onIllnessButtonClick(View view){
+        Intent intent = new Intent(MedicineActivity.this, IllnessActivity.class);
+        startActivity(intent);
+    }
     public void onEditMedicineButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
         startActivity(intent);
     }
+
 
     @Override
     public void onBackPressed() {

@@ -23,9 +23,7 @@ import java.util.List;
 
 public class MedicineAdapter extends BaseAdapter {
     private Context context;
-    private List<Illness> illnessList;
     private List<Medicine> medicineList;
-    private Treatment_Protocol treatment_protocol;
 
     //Constructor
     public MedicineAdapter(Context applicationContext, List<Medicine> medicineList) {
@@ -33,29 +31,22 @@ public class MedicineAdapter extends BaseAdapter {
         this.medicineList = medicineList;
     }
 
-    public void IllnessAdapter (Context applicationContext, List<Illness> medicineList){
-        this.context = context;
-        this.illnessList = illnessList;
-    }
-
 
     public int getCount() {
-        return illnessList.size();
+        return medicineList.size();
     }
-    public Object getItem(int position) {
-        return illnessList.get(position);
+    public Medicine getItem(int position) {
+        return medicineList.get(position);
     }
     public long getItemId(int position) {
         return position;
     }
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.medicine_list, null);
-        TextView illnessIllness = (TextView)v.findViewById(R.id.illness_name);
-        TextView medicineName = (TextView)v.findViewById(R.id.medicine_name);
-        TextView medicineTimeActive = (TextView)v.findViewById(R.id.medicine_frequency);
+        TextView medicineName = (TextView)v.findViewById(R.id.medicine_list_editTextMedicine);
+        TextView medicineTimeActive = (TextView)v.findViewById(R.id.medicine_list_editTextTimeActive);
 
         //Set text for TextView
-        illnessIllness.setText(illnessList.get(position).getName());
         medicineName.setText(medicineList.get(position).getName());
         medicineTimeActive.setText(medicineList.get(position).getTimeActive());
 
