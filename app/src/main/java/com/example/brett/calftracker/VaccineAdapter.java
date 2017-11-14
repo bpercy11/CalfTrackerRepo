@@ -35,11 +35,9 @@ public class VaccineAdapter extends BaseAdapter {
     }
     public View getView(int position, View courtView, ViewGroup parent){
         View v = View.inflate(context, R.layout.vaccine_list,null);
-        TextView vaccineName = (TextView)v.findViewById(R.id.vaccine_name);
-        //   TextView vaccineAge = (TextView)v.findViewById(R.id.vaccine_age);
+        TextView vaccineName = (TextView)v.findViewById(R.id.vaccine_list_vaccine_name);
 
         vaccineName.setText(vaccineList.get(position).getName());
-     //    vaccineAge.setText(vaccineList.get(position).getToBeAdministered());
 
         return v;
     }

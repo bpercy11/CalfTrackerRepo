@@ -32,13 +32,13 @@ public class IllnessAdapter extends BaseAdapter {
         return position;
     }
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(context, R.layout.medicine_list, null);
+        View v = View.inflate(context, R.layout.illness_list, null);
         TextView illnessIllness = (TextView)v.findViewById(R.id.illness_name);
-        TextView illnessMedicine = (TextView)v.findViewById(R.id.medicine_name);
+        TextView illnessTreatment = (TextView)v.findViewById(R.id.treatment_protocol);
 
         //Set text for TextView
         illnessIllness.setText(illnessList.get(position).getName());
-        illnessMedicine.setText(illnessList.get(position).getTreatmentProtocol().getMedicine().getName());
+        illnessTreatment.setText(illnessList.get(position).getTreatmentProtocol().getMedicine().getName());
 
         return v;
     }

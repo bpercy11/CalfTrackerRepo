@@ -29,8 +29,6 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorIcon"
-        android:onClick="onMedicineButtonClick"
         android:text="Medicine"
         app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
         app:layout_constraintEnd_toStartOf="@+id/illnessButton"
@@ -42,26 +40,24 @@
         android:id="@+id/illnessButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:onClick="onIllnessButtonClick"
+        android:backgroundTint="@color/colorIcon"
         android:text="Illness"
-        app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/medicineButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/edit_medicine_editMedicine"
+        android:id="@+id/illness_EditIllness"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="8dp"
         android:onClick="onEditMedicineButtonClick"
-        android:text="Edit Medicine"
+        android:text="Edit Illness"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -69,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/listview_medicine" />
 
     <ListView
-        android:id="@+id/listview_medicine"
+        android:id="@+id/listview_illness"
         android:layout_width="364dp"
         android:layout_height="364dp"
         android:layout_marginBottom="5dp"
@@ -79,7 +75,7 @@
         android:divider="#d1d1d1"
         android:dividerHeight="5dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/edit_medicine_editMedicine"
+        app:layout_constraintBottom_toTopOf="@+id/illness_EditIllness"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

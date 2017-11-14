@@ -45,7 +45,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_vaccine);
 
-        EditText dosage = (EditText) findViewById(R.id.editTextVaccineDosage);
+        EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
         dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -61,12 +61,12 @@ public class EditVaccineActivity extends AppCompatActivity {
     }
 
     public void clickAddVaccineButton(View view){
-        EditText vaccine = (EditText) findViewById(R.id.editTextVaccineName);
-        EditText dosage = (EditText) findViewById(R.id.editTextVaccineDosage);
-        EditText dosageUnits = (EditText) findViewById(R.id.editTextDosageUnits);
-        EditText adminStart = (EditText) findViewById(R.id.editTextAdminDateStart);
-        EditText adminEnd = (EditText) findViewById(R.id.editTextAdminDateEnd);
-        EditText adminMethod = (EditText) findViewById(R.id.editTextVaccineAdminMethod);
+        EditText vaccine = (EditText) findViewById(R.id.edit_vaccine_editTextName);
+        EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
+        EditText dosageUnits = (EditText) findViewById(R.id.edit_vaccine_editTextDosageUnits);
+        EditText adminStart = (EditText) findViewById(R.id.edit_vaccine_editTextAdminDateStart);
+        EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminDateEnd);
+        EditText adminMethod = (EditText) findViewById(R.id.edit_vaccine_editTextAdminMethod);
 
         //dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
 

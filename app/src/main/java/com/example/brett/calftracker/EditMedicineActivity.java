@@ -21,14 +21,11 @@ import java.util.List;
 public class EditMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
-    private TextView illnessName;
-    private TextView treatment;
+    private TextView medicineName;
     private TextView dosage;
     private TextView dosageUnits;
     private TextView timeActive;
-    private TextView frequency;
-    private List<Illness> illnessList;
-  //  private List<MedicineFrequency> medicineFrequency;
+    private List<Medicine> medicineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,28 +33,26 @@ public class EditMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_medicine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessList")) {
+        if(mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+            String json = mPreferences.getString("MedicineList", "");
+            medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
-        } else { illnessList = new ArrayList<Illness>(); }
+        } else { medicineList = new ArrayList<Medicine>(); }
     }
 
     public void clickAddMedicineButton(View view){
-        EditText name = (EditText) findViewById(R.id.editTextIllness);
-        EditText treatment = (EditText) findViewById(R.id.editTextTreatment);
-        EditText dosage = (EditText) findViewById(R.id.editTextDosage);
-        EditText dosageUnits = (EditText) findViewById(R.id.editTextMedicineDosageUnits);
-        EditText timeActive = (EditText) findViewById(R.id.editTextTimeActive);
-        EditText frequency = (EditText) findViewById(R.id.editTextMedicineFrequency);
+        EditText name = (EditText) findViewById(R.id.edit_medicine_editTextMedicine);
+        EditText treatment = (EditText) findViewById(R.id.edit_medicine_editTextTreatment);
+        EditText dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
+        EditText dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
+        EditText timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
 
         if (name.getText().toString().matches("") || treatment.getText().toString().matches("")
                 || dosage.getText().toString().matches("") || dosageUnits.getText().toString().matches("")
-                || timeActive.getText().toString().matches("")
-                || frequency.getText().toString().matches("")){
+                || timeActive.getText().toString().matches("")){
             Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
         }
@@ -71,21 +66,19 @@ public class EditMedicineActivity extends AppCompatActivity {
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         int timeActiveInt = Integer.parseInt(timeActive.getText().toString());
-        String frequencyStr = frequency.getText().toString();
 
-        // MAKE A NEW ILLNESS OBJECT
-        Medicine medicine = new Medicine(treatmentStr,dosageDbl,dosageUnitsStr,timeActiveInt,frequencyStr);
+        // MAKE A NEW Medicine OBJECT
+        Medicine medicine = new Medicine(treatmentStr,dosageDbl,dosageUnitsStr,timeActiveInt);
         Treatment_Protocol tp = new Treatment_Protocol(medicine, "");
-        Illness newIllness = new Illness(nameStr,tp);
 
-        illnessList.add(newIllness);
+        medicineList.add(medicine);
 
-        // SAVE NEW ILLNESS
+        // SAVE NEW Medicine
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
+        String json = gson.toJson(medicineList);
+        prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
 
         Intent intent = new Intent(this,MedicineActivity.class);

@@ -27,15 +27,6 @@ public class Vaccine
 		this.methodOfAdministration = methodOfAdministration;
 	}
 
-
-	/*public Vaccine(String name, double dosage, String dosageUnits, String methodOfAdministration){
-		this.name = name;
-		this.toBeAdministered = toBeAdministered;
-		this.dosage = dosage;
-		this.dosageUnits = dosageUnits;
-		this.methodOfAdministration = methodOfAdministration;
-	}*/
-
 	/**
 	 * @return the name
 	 */
@@ -111,12 +102,12 @@ public class Vaccine
 	 * @param name
 	 * @param dosage
 	 * @param dosageUnits
-	 * @param toBeAdministeredAt
+	 * @param toBeAdministered
 	 * @param methodOfAdministration
 	 * @return Vaccine the new vaccine created
 	 */
-//	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
-//								 ArrayList<Vacc_Range> toBeAdministeredAt, String methodOfAdministration){
-//		return new Vaccine(name,toBeAdministeredAt,dosage,dosageUnits,methodOfAdministration);
-//	}
+	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
+								 ArrayList<Vacc_Range> toBeAdministered, String methodOfAdministration){
+		return new Vaccine(name,toBeAdministered,dosage,dosageUnits,methodOfAdministration);
+	}
 }
