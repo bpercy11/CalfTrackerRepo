@@ -1,4 +1,4 @@
-package com.example.brett.calftracker;
+package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.calftracker.project.activities.BaseActivity;
 import com.calftracker.project.adapters.IllnessAdapter;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;

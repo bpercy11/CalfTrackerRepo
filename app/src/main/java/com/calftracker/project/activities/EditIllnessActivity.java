@@ -1,7 +1,8 @@
-package com.example.brett.calftracker;
+package com.calftracker.project.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.calftracker.project.calftracker.R;
 
 public class EditIllnessActivity extends AppCompatActivity {
 
