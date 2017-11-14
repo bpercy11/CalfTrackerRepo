@@ -515,6 +515,15 @@ public class CalfProfileActivity extends BaseActivity {
         builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if(inputWeight.getText().toString().matches("")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "No weight entered";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+
                 double weight = Double.parseDouble(inputWeight.getText().toString());
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
@@ -566,6 +575,15 @@ public class CalfProfileActivity extends BaseActivity {
         builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if(inputHeight.getText().toString().matches("")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "No weight entered";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+
                 double height = Double.parseDouble(inputHeight.getText().toString());
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);

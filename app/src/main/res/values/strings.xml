@@ -48,6 +48,7 @@
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
     <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
     <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
+    <string name="new_calf_vaccine_back_button">Back</string>
 
 
     <string name="action_settings">Action Settings</string>
