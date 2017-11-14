@@ -81,6 +81,37 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796825638526:android:23f303ce88bc9158",
+        "android_client_info": {
+          "package_name": "com.calftracker.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796825638526-0265dkt3kaf5qel884d1k2ip7rremfu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvWVxOUSfQO1zBeyGUHi4MoA9KrokF8Co"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
