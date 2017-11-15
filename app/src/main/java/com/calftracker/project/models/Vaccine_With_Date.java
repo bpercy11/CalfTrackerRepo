@@ -1,14 +1,16 @@
 package com.calftracker.project.models;
 
+import java.util.Calendar;
+
 public class Vaccine_With_Date {
 	private Vaccine vaccine;
-	private Easy_Date date;
+	private Calendar date;
 	
 	/**
 	 * @param vaccine
 	 * @param date
 	 */
-	public Vaccine_With_Date(Vaccine vaccine, Easy_Date date) {
+	public Vaccine_With_Date(Vaccine vaccine, Calendar date) {
 		super();
 		this.vaccine = vaccine;
 		this.date = date;
@@ -31,14 +33,14 @@ public class Vaccine_With_Date {
 	/**
 	 * @return the date
 	 */
-	public Easy_Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Easy_Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 }
