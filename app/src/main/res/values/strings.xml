@@ -40,6 +40,9 @@
     <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
     <string name="calf_profile_medical_history_illness_button">Illnesses</string>
 
+    <string name="options_menu_calf_list_search">Search</string>
+    <string name="options_menu_calf_list_search_hint">Search</string>
+
 
     <string name="calf_list_search_bar_hint">Search</string>
 
