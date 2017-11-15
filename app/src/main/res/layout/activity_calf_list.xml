@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.brett.calftracker.CalfListActivity">
+    tools:context="com.calftracker.project.activities.CalfListActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton2"
@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/recyclerViewCalfList"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,3 +48,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="com.calftracker.project.activities.CalfListActivity">-->
+
+    <!--<EditText-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:hint="@string/calf_list_search_bar_hint"-->
+    <!--android:id="@+id/edit"-->
+    <!--android:layout_height="wrap_content" />-->
+    <!--<ListView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:id="@+id/list"-->
+    <!--android:layout_height="match_parent"/>-->
+    <!--</LinearLayout>-->

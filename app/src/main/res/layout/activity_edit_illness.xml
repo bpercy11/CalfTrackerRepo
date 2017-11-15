@@ -76,8 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
+        android:onClick="clickAddIllnessButton"
         android:text="@string/EditIllness_AddButton"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/listViewEditIllness" />
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:onClick="clickEditIllnessCancelButton"
         android:text="@string/EditIllness_cancelButton"
         app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
         app:layout_constraintTop_toTopOf="@+id/EditIllnessAddButton" />

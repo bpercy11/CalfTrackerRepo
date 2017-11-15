@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.brett.calftracker">
+    package="com.calftracker.project.calftracker">
 
     <application
         android:allowBackup="true"
@@ -9,31 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.calftracker.project.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddCalfActivity" />
-        <activity android:name=".CalfListActivity" />
-        <activity android:name=".CalfProfileActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".CreateFarmActivity" />
+        <activity android:name="com.calftracker.project.activities.AddCalfActivity" />
+        <activity android:name="com.calftracker.project.activities.CalfListActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.DashboardActivity" />
+        <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
         <!-- <activity -->
         <!-- android:name=".menu" -->
         <!-- android:label="@string/title_activity_menu" -->
         <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-        <activity android:name=".NewCalfVaccineSelectionActivity" />
-        <activity android:name=".CalfProfileMedicalHistoryActivity" />
+        <activity android:name="com.calftracker.project.activities.NewCalfVaccineSelectionActivity" />
+        <activity android:name="com.calftracker.project.activities.CalfProfileMedicalHistoryActivity" />
         android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProtocolActivity" />
-        <activity android:name=".EditMedicineActivity" />
-        <activity android:name=".EditVaccineActivity" />
-        <activity android:name=".MedicineActivity" />
-        <activity android:name=".IllnessActivity" />
-        <activity android:name=".EditIllnessActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.ProtocolActivity" />
+        <activity android:name="com.calftracker.project.activities.EditMedicineActivity" />
+        <activity android:name="com.calftracker.project.activities.EditVaccineActivity" />
+        <activity android:name="com.calftracker.project.activities.MedicineActivity" />
+        <activity android:name="com.calftracker.project.activities.IllnessActivity" />
+        <activity android:name="com.calftracker.project.activities.EditIllnessActivity" />
     </application>
 
 </manifest>

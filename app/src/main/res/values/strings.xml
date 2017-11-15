@@ -9,10 +9,12 @@
     <string name="add_calf_ID_Number">ID Number</string>
     <string name="add_calf_gender">Gender</string>
     <string name="add_calf_DOB">Date of Birth</string>
-    <string name="add_calf_add_button">Add</string>
+    <string name="add_calf_add_button">Next</string>
     <string name="add_calf_get_ID">Enter ID Number</string>
     <string name="add_calf_select_date">Select a date</string>
     <string name="add_calf_select_gender">Select gender</string>
+
+
     <string name="calf_profile_ID_field">ID Number</string>
     <string name="calf_profile_gender_field">Gender</string>
     <string name="calf_profile_DOB_field">Date of Birth</string>
@@ -30,17 +32,34 @@
     <string name="calf_profile_delete_button">Remove Calf</string>
     <string name="calf_profile_record_weight_button">Record Weight</string>
     <string name="calf_profile_record_height_button">Record Height</string>
+    <string name="calf_profile_no_sire">No Record</string>
+    <string name="calf_profile_no_dam">No Record</string>
+    <string name="calf_profile_no_weight">No Record</string>
+    <string name="calf_profile_no_height">No Record</string>
+    <string name="calf_profile_delete_calf">Delete Calf</string>
+
+
+    <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
+    <string name="calf_profile_medical_history_illness_button">Illnesses</string>
+    <string name="calf_profile_medical_history_vac_administered_button">Administered</string>
+    <string name="calf_profile_medical_history_vac_needed_button">Needed</string>
+
+    <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administer</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">View</string>
+
+    <string name="options_menu_calf_list_search">Search</string>
+    <string name="options_menu_calf_list_search_hint">Search</string>
+
+
     <string name="calf_list_search_bar_hint">Search</string>
-    <string name="no_sire">No Record</string>
-    <string name="no_dam">No Record</string>
-    <string name="no_weight">No Record</string>
-    <string name="no_height">No Record</string>
-    <string name="delete_calf">Delete Calf</string>
+
+
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
     <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
-    <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
-    <string name="calf_profile_medical_history_illness_button">Illnesses</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
+    <string name="new_calf_vaccine_back_button">Back</string>
+
 
     <string name="action_settings">Action Settings</string>
 
