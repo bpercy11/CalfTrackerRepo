@@ -77,6 +77,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:divider="#d1d1d1"
+        android:scrollbars="vertical"
         android:dividerHeight="5dp"
         app:layout_constraintBottom_toTopOf="@+id/vaccine_editVaccine"
         app:layout_constraintEnd_toEndOf="parent"

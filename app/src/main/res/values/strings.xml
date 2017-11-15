@@ -80,6 +80,13 @@
     <string name="edit_vaccine_admin_method">Administration</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="edit_vaccine_enter_units">Enter Units</string>
+    <string name="EditIllness_editIllness">Edit Illness</string>
+    <string name="EditIllness_enterName">Enter Name</string>
+    <string name="EditIllness_illnessName">Illness</string>
+    <string name="EditIllness_TreatmentProtocol">Treatment Protocol</string>
+    <string name="EditIllness_cancelButton">Cancel</string>
+    <string name="EditIllness_AddButton">Add</string>
+    <string name="EditIllnessActivity_emptyFieldMsg">Please enter illness name</string>
 
     <string-array name="vacc_range_spinner">
         <item>Day</item>

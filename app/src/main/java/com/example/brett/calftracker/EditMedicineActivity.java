@@ -21,10 +21,11 @@ import java.util.List;
 public class EditMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
-    private TextView medicineName;
-    private TextView dosage;
-    private TextView dosageUnits;
-    private TextView timeActive;
+    private EditText medicineName;
+    private EditText treatment;
+    private EditText dosage;
+    private EditText dosageUnits;
+    private EditText timeActive;
     private List<Medicine> medicineList;
 
     @Override
@@ -44,13 +45,13 @@ public class EditMedicineActivity extends AppCompatActivity {
     }
 
     public void clickAddMedicineButton(View view){
-        EditText name = (EditText) findViewById(R.id.edit_medicine_editTextMedicine);
-        EditText treatment = (EditText) findViewById(R.id.edit_medicine_editTextTreatment);
-        EditText dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
-        EditText dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
-        EditText timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
+        medicineName = (EditText) findViewById(R.id.edit_medicine_editTextMedicine);
+        treatment = (EditText) findViewById(R.id.edit_medicine_editTextTreatment);
+        dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
+        dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
+        timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
 
-        if (name.getText().toString().matches("") || treatment.getText().toString().matches("")
+        if (medicineName.getText().toString().matches("") || treatment.getText().toString().matches("")
                 || dosage.getText().toString().matches("") || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
             Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
@@ -61,7 +62,7 @@ public class EditMedicineActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
 
-        String nameStr = name.getText().toString();
+        String nameStr = medicineName.getText().toString();
         String treatmentStr = treatment.getText().toString();
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
@@ -69,7 +70,6 @@ public class EditMedicineActivity extends AppCompatActivity {
 
         // MAKE A NEW Medicine OBJECT
         Medicine medicine = new Medicine(treatmentStr,dosageDbl,dosageUnitsStr,timeActiveInt);
-        Treatment_Protocol tp = new Treatment_Protocol(medicine, "");
 
         medicineList.add(medicine);
 

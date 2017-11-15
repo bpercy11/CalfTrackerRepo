@@ -1,58 +1,59 @@
 package com.example.brett.calftracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Treatment_Protocol {
-	private Medicine medicine;
-	private String notes;
+	private List<Medicine> medicines;
+	private List<String> notes;
 	
 	/**
-	 * @param medicine
+	 * @param medicines
 	 * @param notes
 	 */
-	public Treatment_Protocol(Medicine medicine, String notes) {
+	public Treatment_Protocol(List<Medicine> medicines, List<String> notes) {
 		super();
-		this.medicine = medicine;
-		this.notes = notes;
+		this.medicines = new ArrayList<Medicine>();
+		this.notes = new ArrayList<String>();
 	}
 	
 	/**
-	 * @return the medicine
+	 * @return the medicines
 	 */
-	public Medicine getMedicine() {
-		return medicine;
+	public List<Medicine> getMedicines() {
+		return medicines;
 	}
 
 	/**
-	 * @param medicine the medicine to set
+	 * @param medicines the medicines to set
 	 */
-	public void setMedicine(Medicine medicine) {
-		this.medicine = medicine;
+	public void setMedicine(List<Medicine> medicines) {
+		this.medicines = medicines;
 	}
 
 	/**
 	 * @return the notes
 	 */
-	public String getNotes() {
+	public List<String> getNotes() {
 		return notes;
 	}
 
 	/**
 	 * @param notes the notes to set
 	 */
-	public void setNotes(String notes) {
+	public void setNotes(ArrayList<String> notes) {
 		this.notes = notes;
 	}
 
 	/**
 	 * creates and returns a new treatment protocol for an illness
 	 *
-	 * @param medicine the medicine used to treat the corresponding illness
+	 * @param medicines the medicine used to treat the corresponding illness
 	 * @param notes the notes detailing the treatment protocol for this calf
 	 * @return Treatment_Protocol the new treatment protocol that was created
 	 */
-	public Treatment_Protocol createTreatmentProtocol(Medicine medicine, String notes){
-		return new Treatment_Protocol(medicine,notes);
+	public Treatment_Protocol createTreatmentProtocol(List<Medicine> medicines, List<String> notes){
+		return new Treatment_Protocol(medicines,notes);
 	}
 
 }
