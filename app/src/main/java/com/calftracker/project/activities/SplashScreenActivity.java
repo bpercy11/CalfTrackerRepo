@@ -16,7 +16,7 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
+        setContentView(R.layout.activity_splash_screen);
 
         //final SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
         //final SharedPreferences.Editor editor = sharedPref.edit();

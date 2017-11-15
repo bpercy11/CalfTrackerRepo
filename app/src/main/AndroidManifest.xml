@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.calftracker.project.activities.AddCalfActivity" />
-        <activity android:name="com.calftracker.project.activities.CalfListActivity" />
+        <activity android:name="com.calftracker.project.activities.CalfListActivity"></activity>
         <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
         <activity android:name="com.calftracker.project.activities.DashboardActivity" />
         <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
