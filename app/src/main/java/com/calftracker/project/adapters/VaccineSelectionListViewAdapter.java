@@ -26,7 +26,7 @@ public class VaccineSelectionListViewAdapter extends ArrayAdapter {
     }
 
     public VaccineSelectionListViewAdapter(ArrayList data, Context context) {
-        super(context, R.layout.calf_list_vaccine_row_item, data);
+        super(context, R.layout.new_calf_vaccine_selection_vaccine_row_item, data);
         this.dataSet = data;
         this.mContext = context;
 
@@ -50,7 +50,7 @@ public class VaccineSelectionListViewAdapter extends ArrayAdapter {
 
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.calf_list_vaccine_row_item, parent, false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_calf_vaccine_selection_vaccine_row_item, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.txtName);
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
 

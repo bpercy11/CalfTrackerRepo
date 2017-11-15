@@ -302,7 +302,7 @@ public class Calf {
 	 * @param vaccine
 	 * @param dateAdministered
 	 */
-	public void addAdministeredVaccine(Vaccine vaccine, Easy_Date dateAdministered)
+	public void addAdministeredVaccine(Vaccine vaccine, Calendar dateAdministered)
 	{
 		if(this.neededVaccines.contains(vaccine))
 			for(int i = 0; i < this.neededVaccines.size(); i++)
