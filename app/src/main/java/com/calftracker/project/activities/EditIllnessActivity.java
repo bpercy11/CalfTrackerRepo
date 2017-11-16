@@ -8,8 +8,10 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -66,19 +68,30 @@ public class EditIllnessActivity extends AppCompatActivity {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
 
-        tempMedicineList = medicineList;
         lvTreatmentProtocolMedicines = (ListView) findViewById(R.id.listViewEditIllness);
-        medicineAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
-        lvTreatmentProtocolMedicines.setAdapter(medicineAdapter);
+      /*  medicineAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
+        lvTreatmentProtocolMedicines.setAdapter(medicineAdapter); */
+
+        lvTreatmentProtocolMedicines.setAdapter(new ArrayAdapter<Medicine>(this, android.R.layout.simple_list_item_multiple_choice, medicineList));
+        lvTreatmentProtocolMedicines.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL); // user HAS to interact with window before continuing
+        //lvTreatmentProtocolMedicines.setItemChecked();
 
         lvTreatmentProtocolMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(view.isSelected()) {
+                /*if(view.isSelected()) {
                     view.setSelected(true);
-                    tempMedicineList.add(medicineList.get(position));
+                    tempMedicineList.add(medicineList.get(position)); */
+                String selected = "";
+                int countChoice = lvTreatmentProtocolMedicines.getCount();
+                SparseBooleanArray sparseBooleanArray = lvTreatmentProtocolMedicines.getCheckedItemPositions();
+                for (int i = 0; i < countChoice; i++){
+                    if (sparseBooleanArray.get(i)){
+                        selected += lvTreatmentProtocolMedicines.getItemAtPosition(i).toString() + "\n";
+                    }
                 }
+                Toast.makeText(EditIllnessActivity.this, selected, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -160,3 +173,4 @@ public class EditIllnessActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
