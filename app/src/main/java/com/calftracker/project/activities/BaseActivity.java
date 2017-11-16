@@ -118,9 +118,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                 }
                 break;
-            case R.id.nav_protocols: intent = new Intent(BaseActivity.this,ProtocolActivity.class);
+            case R.id.nav_protocols: intent = new Intent(BaseActivity.this,ProtocolsVaccineActivity.class);
                 if (!getIntent().filterEquals(intent)) {
-                    Intent medicalIntent = new Intent(BaseActivity.this, MedicineActivity.class);
+                    Intent medicalIntent = new Intent(BaseActivity.this, ProtocolsMedicineActivity.class);
                     if (!getIntent().filterEquals(intent) && !getIntent().filterEquals(medicalIntent)) {
                         item.setChecked(true);
                         startActivity(intent);

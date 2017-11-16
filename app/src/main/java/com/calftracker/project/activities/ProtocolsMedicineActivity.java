@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicineActivity extends BaseActivity {
+public class ProtocolsMedicineActivity extends BaseActivity {
 
     private List<Medicine> medicineList;
     private ListView lvMedicine;
@@ -51,20 +51,20 @@ public class MedicineActivity extends BaseActivity {
         });
     }
     public void onMedicine_VaccineButtonClick(View view) {
-        Intent intent = new Intent(MedicineActivity.this,ProtocolActivity.class);
+        Intent intent = new Intent(ProtocolsMedicineActivity.this,ProtocolsVaccineActivity.class);
         startActivity(intent);
 
     }
     public void onMedicine_MedicineButtonClick(View view){
-        Intent intent = new Intent(MedicineActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(ProtocolsMedicineActivity.this, ProtocolsMedicineActivity.class);
         startActivity(intent);
     }
     public void onMedicine_IllnessButtonClick(View view){
-        Intent intent = new Intent(MedicineActivity.this, IllnessActivity.class);
+        Intent intent = new Intent(ProtocolsMedicineActivity.this, ProtocolsIllnessActivity.class);
         startActivity(intent);
     }
     public void onMedicine_EditMedicineButtonClick(View view){
-        Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
+        Intent intent = new Intent(ProtocolsMedicineActivity.this, ProtocolsEditMedicineActivity.class);
         startActivity(intent);
     }
     @Override

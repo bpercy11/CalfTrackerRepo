@@ -43,9 +43,11 @@
     <string name="calf_profile_medical_history_illness_button">Illnesses</string>
     <string name="calf_profile_medical_history_vac_administered_button">Administered</string>
     <string name="calf_profile_medical_history_vac_needed_button">Needed</string>
-
     <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administer</string>
     <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">View</string>
+
+    <string name="calf_profile_growth_history_weight_button">Weight</string>
+    <string name="calf_profile_growth_history_height_button">Height</string>
 
     <string name="options_menu_calf_list_search">Search</string>
     <string name="options_menu_calf_list_search_hint">Search</string>
@@ -88,6 +90,9 @@
     <string name="edit_vaccine_edit_vaccine">Edit Vaccine</string>
     <string name="edit_vaccine_vaccine_name">Vaccine</string>
     <string name="edit_vaccine_enter_vaccine">Enter Vaccine</string>
+
+    <string name="medicine_list_medicine">Medicine</string>
+    <string name="medicine_list_time_active">Time Active</string>
 
     <string name="edit_vaccine_administration_start">Start</string>
     <string name="edit_vaccine_administration_end">End</string>

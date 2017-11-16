@@ -142,6 +142,9 @@ public class CalfProfileActivity extends BaseActivity {
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(calf.getNotesSize() == 0)
+                    return;
+
                 AlertDialog noteContentPopup;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
@@ -623,6 +626,11 @@ public class CalfProfileActivity extends BaseActivity {
 
         AlertDialog alertHeight = builderHeight.create();
         alertHeight.show();
+    }
+
+    public void onClickGrowthHistory(View view) {
+        Intent intent = new Intent(this, CalfProfileGrowthHistoryActivity.class);
+        startActivity(intent);
     }
 
     @Override

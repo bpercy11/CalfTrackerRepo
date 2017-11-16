@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.calftracker.project.calftracker.R;
 
-public class EditIllnessActivity extends AppCompatActivity {
+public class ProtocolsEditIllnessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_illness);
+        setContentView(R.layout.activity_protocols_edit_illness);
     }
 }

@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/medicine_list_editTextMedicine"
-        android:text="Medicine"
+        android:text="@string/medicine_list_medicine"
         android:textSize="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/medicine_list_editTextTimeActive"
-        android:text="Time Active"
+        android:text="@string/medicine_list_time_active"
         android:textSize="18dp"/>
 
 </LinearLayout>
