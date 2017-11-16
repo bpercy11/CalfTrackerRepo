@@ -55,7 +55,9 @@ public class DashboardActivity extends BaseActivity {
                             startActivity(intent);
                             break;
                     case 4: break;
-                    case 5: break;
+                    case 5: intent = new Intent(DashboardActivity.this,SettingsActivity.class);
+                            startActivity(intent);
+                            break;
                 }
             }
         });
