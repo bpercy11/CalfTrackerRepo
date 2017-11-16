@@ -21,20 +21,20 @@ public class IllnessAdapter extends BaseAdapter {
 
     private Context context;
     private List<Illness> illnessList;
-    private Treatment_Protocol treatmentProtocol;
     private LayoutInflater layoutInflater;
+    private Treatment_Protocol treatmentProtocol;
 
     public IllnessAdapter(Context context, List<Illness> illnessList) {
         this.context = context;
         this.illnessList = illnessList;
         this.layoutInflater = LayoutInflater.from(context);
-     //   this.treatmentProtocol = treatmentProtocol;
+        this.treatmentProtocol = treatmentProtocol;
 
     }
 
     public class ViewHolder {
         public TextView illnessName;
-        public TextView treatmentName;
+        public TextView treatmentNotes;
     }
 
     public int getCount() {
@@ -52,16 +52,14 @@ public class IllnessAdapter extends BaseAdapter {
             holder =  new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.illness_list, null);
             holder.illnessName = (TextView) convertView.findViewById(R.id.illness_name);
-            holder.treatmentName = (TextView) convertView.findViewById(R.id.treatment_protocol);
+            holder.treatmentNotes = (TextView) convertView.findViewById(R.id.treatment_notes);
             convertView.setTag(holder);
         }
         else{
             holder = (ViewHolder) convertView.getTag();
         }
         holder.illnessName.setText(illnessList.get(position).getName());
-        for (int i = 0; i < illnessList.get(position).getTreatmentProtocol().getMedicines().size(); i++){
-            holder.treatmentName.setText(illnessList.get(position).getTreatmentProtocol().getMedicines().get(i).getName());
-        }
+        holder.treatmentNotes.setText(illnessList.get(position).getTreatmentProtocol().getNotes());
         return convertView;
     }
 }

@@ -1,6 +1,8 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +32,14 @@ public class EditIllnessActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private EditText illnessName;
+    private String illnessNotes;
     private ListView lvTreatmentProtocolMedicines;
     private List<Illness> illnessList;
     private List<Medicine> medicineList;
     private List<Medicine> tempMedicineList;
     private MedicineAdapter medicineAdapter;
+    private Button addNotesButton;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +75,61 @@ public class EditIllnessActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.setSelected(true);
-                tempMedicineList.add(medicineList.get(position));
+                if(view.isSelected()) {
+                    view.setSelected(true);
+                    tempMedicineList.add(medicineList.get(position));
+                }
+            }
+        });
+
+        addNotesButton = (Button) findViewById(R.id.EditIllnessAddNotesButton);
+        // add button listener
+        addNotesButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set title
+                alertDialogBuilder.setTitle("Please enter a note");
+                final EditText input = new EditText(EditIllnessActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialogBuilder.setView(input);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Done",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                illnessNotes = input.getText().toString();
+                                // if this button is clicked, close
+                                // current activity
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
     }
 
     public void clickAddIllnessButton(View view){
+
         illnessName = (EditText) findViewById(R.id.editTextIllnessEnterName);
 
         if (illnessName.getText().toString().matches("")){
@@ -84,7 +138,7 @@ public class EditIllnessActivity extends AppCompatActivity {
 
         // Make a new illness object
         String name = illnessName.getText().toString();
-        Illness newIllness = new Illness(name, new Treatment_Protocol(tempMedicineList,null));
+        Illness newIllness = new Illness(name, new Treatment_Protocol(tempMedicineList, illnessNotes));
 
         illnessList.add(newIllness);
 
@@ -93,10 +147,10 @@ public class EditIllnessActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
+        prefsEditor.putString("IllnessList", json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(this,IllnessActivity.class);
+        Intent intent = new Intent(this, IllnessActivity.class);
         startActivity(intent);
 
     }

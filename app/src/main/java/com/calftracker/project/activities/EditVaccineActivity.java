@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_vaccine);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
-        dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -65,7 +66,6 @@ public class EditVaccineActivity extends AppCompatActivity {
         EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminDateEnd);
         EditText adminMethod = (EditText) findViewById(R.id.edit_vaccine_editTextAdminMethod);
 
-        //dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
@@ -84,25 +84,41 @@ public class EditVaccineActivity extends AppCompatActivity {
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         String adminMethodString = adminMethod.getText().toString();
-/*
-        //get the spinner from the xml.
-        dropDown = (Spinner)findViewById(R.id.spinner);
-     // dropDown1 = (Spinner)findViewById(R.id.spinner1);
-        //create a list of items for the spinner.
-        dropDownItems = new String[]{"Day", "Week", "Month"};
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
 
+        //get the spinner from the xml.
+        dropDown = (Spinner)findViewById(R.id.edit_vaccine_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vacc_range_spinner, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         dropDown.setAdapter(adapter);
 
-        //  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems);
-     //   ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems);
-        //set the spinners adapter to the previously created one.
-       // dropDown.setAdapter(adapter);
-    //    dropDown1.setAdapter(adapter1);
-*/
+        switch(dropDown.getSelectedItem().toString()){
+            case "Day":
+                adminStartInt = adminStartInt*1;
+                break;
+            case "Week":
+                adminStartInt = adminStartInt*7;
+                break;
+            case "Month":
+                adminStartInt = adminStartInt*30;
+                break;
+        }
+
+        dropDown1 = (Spinner)findViewById(R.id.edit_vaccine_spinner1);
+        dropDown1.setAdapter(adapter);
+
+        switch(dropDown.getSelectedItem().toString()){
+            case "Day":
+                adminEndInt = adminEndInt*1;
+                break;
+            case "Week":
+                adminEndInt = adminEndInt*7;
+                break;
+            case "Month":
+                adminEndInt = adminEndInt*30;
+                break;
+        }
+
         range = new int[] {adminStartInt,adminEndInt};
 
         vaccRange = new ArrayList<Vacc_Range>();

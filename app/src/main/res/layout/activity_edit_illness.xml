@@ -75,9 +75,9 @@
         android:id="@+id/EditIllnessAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
         android:onClick="clickAddIllnessButton"
         android:text="@string/EditIllness_AddButton"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
@@ -89,6 +89,7 @@
         android:layout_height="247dp"
         android:layout_marginTop="130dp"
         android:choiceMode="multipleChoiceModal"
+        android:clickable="true"
         android:divider="#d1d1d1"
         android:dividerHeight="5dp"
         android:scrollbars="vertical"
@@ -106,6 +107,19 @@
         android:onClick="clickEditIllnessCancelButton"
         android:text="@string/EditIllness_cancelButton"
         app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintTop_toTopOf="@+id/EditIllnessAddButton" />
+
+    <Button
+        android:id="@+id/EditIllnessAddNotesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="onIllness_Notes_AddButton"
+        android:text="Add Notes"
+        app:layout_constraintEnd_toStartOf="@+id/EditIllnessCancelButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/EditIllnessAddButton"
         app:layout_constraintTop_toTopOf="@+id/EditIllnessAddButton" />
 
 </android.support.constraint.ConstraintLayout>

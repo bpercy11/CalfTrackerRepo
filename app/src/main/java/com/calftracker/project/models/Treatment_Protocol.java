@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Treatment_Protocol {
 	private List<Medicine> medicines;
-	private List<String> notes;
+	private String notes;
 	
 	/**
 	 * @param medicines
 	 * @param notes
 	 */
-	public Treatment_Protocol(List<Medicine> medicines, List<String> notes) {
+	public Treatment_Protocol(List<Medicine> medicines, String notes) {
 		super();
 		this.medicines = new ArrayList<Medicine>();
-		this.notes = new ArrayList<String>();
+		this.notes = notes;
 	}
 	
 	/**
@@ -36,14 +36,14 @@ public class Treatment_Protocol {
 	/**
 	 * @return the notes
 	 */
-	public List<String> getNotes() {
+	public String getNotes() {
 		return notes;
 	}
 
 	/**
 	 * @param notes the notes to set
 	 */
-	public void setNotes(ArrayList<String> notes) {
+	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
@@ -54,7 +54,7 @@ public class Treatment_Protocol {
 	 * @param notes the notes detailing the treatment protocol for this calf
 	 * @return Treatment_Protocol the new treatment protocol that was created
 	 */
-	public Treatment_Protocol createTreatmentProtocol(List<Medicine> medicines, List<String> notes){
+	public Treatment_Protocol createTreatmentProtocol(List<Medicine> medicines, String notes){
 		return new Treatment_Protocol(medicines,notes);
 	}
 
