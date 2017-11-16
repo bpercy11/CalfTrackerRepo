@@ -14,10 +14,7 @@ import com.calftracker.project.activities.AddCalfActivity;
 import com.calftracker.project.activities.CalfListActivity;
 import com.calftracker.project.activities.CalfProfileActivity;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.CalfID;
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,23 +36,26 @@ public class CalfListListViewAdapter extends BaseAdapter {
     public int getCount() {
         return calfIDList.size();
     }
-
     @Override
     public Object getItem(int i) {
         return calfIDList.get(i);
     }
-
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    // Constructor
     public CalfListListViewAdapter(Context con, List<String> calfIDs) {
         mCon = con;
         calfIDList = calfIDs;
         this.layoutInflater = LayoutInflater.from(mCon);
         this.calfIDArray = new ArrayList<String>();
         this.calfIDArray.addAll(calfIDs);
+    }
+
+    public class ViewHolder  {
+        public TextView calfID;
     }
 
     @Override
@@ -90,10 +90,6 @@ public class CalfListListViewAdapter extends BaseAdapter {
             }
         });
         return convertView;
-    }
-
-    public class ViewHolder  {
-        public TextView calfID;
     }
 
     public void add(int position, String item) {
