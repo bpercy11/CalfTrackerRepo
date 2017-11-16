@@ -1,5 +1,6 @@
 package com.calftracker.project.adapters;
 
+import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import android.content.Context;
@@ -19,13 +20,19 @@ import java.util.List;
 public class MedicineAdapter extends BaseAdapter {
     private Context context;
     private List<Medicine> medicineList;
+    private LayoutInflater layoutInflater;
 
     //Constructor
     public MedicineAdapter(Context applicationContext, List<Medicine> medicineList) {
-        this.context = context;
+        this.context = applicationContext;
         this.medicineList = medicineList;
+        this.layoutInflater = LayoutInflater.from(context);
     }
 
+    public class ViewHolder  {
+        public TextView medicineName;
+        public TextView medicineTimeActive;
+    }
 
     public int getCount() {
         return medicineList.size();
@@ -37,15 +44,19 @@ public class MedicineAdapter extends BaseAdapter {
         return position;
     }
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(context, R.layout.medicine_list, null);
-        TextView medicineName = (TextView)v.findViewById(R.id.medicine_list_editTextMedicine);
-        TextView medicineTimeActive = (TextView)v.findViewById(R.id.medicine_list_editTextTimeActive);
-
-        //Set text for TextView
-        medicineName.setText(medicineList.get(position).getName());
-        medicineTimeActive.setText(medicineList.get(position).getTimeActive());
-
-        return v;
+        final ViewHolder holder;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = layoutInflater.inflate(R.layout.medicine_list, null);
+            holder.medicineName = (TextView) convertView.findViewById(R.id.medicine_list_editTextMedicine);
+            holder.medicineTimeActive = (TextView) convertView.findViewById(R.id.medicine_list_editTextTimeActive);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.medicineName.setText(medicineList.get(position).getName());
+        holder.medicineTimeActive.setText(Integer.toString(medicineList.get(position).getTimeActive()));
+        return convertView;
     }
 }
 

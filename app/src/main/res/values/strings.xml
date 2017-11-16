@@ -89,6 +89,9 @@
     <string name="edit_vaccine_vaccine_name">Vaccine</string>
     <string name="edit_vaccine_enter_vaccine">Enter Vaccine</string>
 
+    <string name="medicine_list_medicine">Medicine</string>
+    <string name="medicine_list_time_active">Time Active</string>
+
     <string name="edit_vaccine_administration_start">Start</string>
     <string name="edit_vaccine_administration_end">End</string>
     <string name="edit_vaccine_administration_hint_start">Calf Age</string>
