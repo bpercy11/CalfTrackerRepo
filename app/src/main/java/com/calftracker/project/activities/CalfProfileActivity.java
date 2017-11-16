@@ -526,16 +526,12 @@ public class CalfProfileActivity extends BaseActivity {
 
                 double weight = Double.parseDouble(inputWeight.getText().toString());
                 Calendar today = Calendar.getInstance();
-                int calfYear = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR);
-                int calfMonth = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH);
-                int calfDate = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE);
-
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
                 if (!calf.getPhysicalHistory().isEmpty()
                         && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() == -1
-                        && today.get(Calendar.YEAR) == calfYear
-                        && today.get(Calendar.MONTH) == calfMonth
-                        && today.get(Calendar.DATE) == calfDate) {
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
                     calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setWeight(weight);
 
                 } else {
@@ -590,27 +586,16 @@ public class CalfProfileActivity extends BaseActivity {
 
                 double height = Double.parseDouble(inputHeight.getText().toString());
                 Calendar today = Calendar.getInstance();
-                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(today, height);
-                int calfYear = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR);
-                int calfMonth = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH);
-                int calfDate = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE);
+                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
 
                 if (!calf.getPhysicalHistory().isEmpty()
                         && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() == -1
-                        && today.get(Calendar.YEAR) == calfYear
-                        && today.get(Calendar.MONTH) == calfMonth
-                        && today.get(Calendar.DATE) == calfDate) {
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
                     calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setHeight(height);
 
-                }
-//                else if (!calf.getPhysicalHistory().isEmpty()
-//                        && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1
-//                        && today.get(Calendar.YEAR) == calfYear
-//                        && today.get(Calendar.MONTH) == calfMonth
-//                        && today.get(Calendar.DATE) == calfDate) {
-//                    TODO: This statements checks if there has already been a height recorded today, figure out what to do in that situation...
-//                }
-                else {
+                } else {
                     calf.getPhysicalHistory().add(size);
                 }
                 mHeightValue.setText(Double.toString(height) + " in");
