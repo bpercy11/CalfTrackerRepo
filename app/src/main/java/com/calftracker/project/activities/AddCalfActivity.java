@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,21 +27,21 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddCalfActivity extends BaseActivity {
-
+    // honestly not sure what this does -JT
     private static final String TAG = "AddCalfActivity";
 
+    // variables related to date selection
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-    private TextView mGender;
-    private Dialog mGenderListDialog;
-    private String[] gender = {"Male","Female"};
-    private AlertDialog alert;
-
     private int calfYear;
     private int calfMonth;
     private int calfDay;
 
+    // variables related to gender selection
+    private TextView mGender;
+    private Dialog mGenderListDialog;
+    private String[] gender = {"Male","Female"};
+    private AlertDialog alert;
     private String calfGender;
 
     @Override
@@ -47,14 +50,21 @@ public class AddCalfActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_add).setChecked(true);
 
+        // set UI to hide keyboard when user clicks anywhere off the keyboard
+        setupUI(findViewById(R.id.addCalfParent));
+
         // Sets the default date to be today in case this field is left blank
         Calendar today = Calendar.getInstance();
         calfYear = today.get(Calendar.YEAR);
         calfMonth = today.get(Calendar.MONTH);
         calfDay = today.get(Calendar.DATE);
 
+        // get needed UI elements
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
+        mGender = (TextView) findViewById(R.id.textViewSelectGender);
 
+        // when the date entry field is clicked open a dialog for the user
+        // to select a date, using the android datepicker fragment
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,8 +96,7 @@ public class AddCalfActivity extends BaseActivity {
             }
         };
 
-        mGender = (TextView) findViewById(R.id.textViewSelectGender);
-
+        // build an alert for selecting the gender input field
         mGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +104,7 @@ public class AddCalfActivity extends BaseActivity {
             }
         });
 
+        // display a dialog that prompted the user to selected "male" or "female"
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Gender");
         builder.setItems(gender, new DialogInterface.OnClickListener() {
@@ -105,6 +115,35 @@ public class AddCalfActivity extends BaseActivity {
             }
         });
         alert = builder.create();
+    }
+
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(AddCalfActivity.this);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     public void clickAddCalfButton(View view) {
@@ -121,30 +160,38 @@ public class AddCalfActivity extends BaseActivity {
             toast.show();
             return;
         }
+
+        // error checking on calf id input length
         if (calfID.length() > 9 || calfID.length() < 1) {
             CharSequence text = "ID number must be between 1 and 9 digits";
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             return;
         }
-        // Make new calf object and add it to the calfList
+
+        // make a calendar object out of the user input to be used in
+        // new calf object in next view (vaccine selection)
         Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
 
-        // Save the calfList to local storage
+        // Save the calf information to shared prefences so the vaccine selection view
+        // can get the user input
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json;
-
         prefsEditor = mPrefs.edit();
+
+        // save calf ID
         json = gson.toJson(calfID);
         prefsEditor.putString("newCalfID",json);
         prefsEditor.apply();
 
+        // save calf gender
         json = gson.toJson(calfGender);
         prefsEditor.putString("newCalfGender",json);
         prefsEditor.apply();
 
+        // save calf calendar
         json = gson.toJson(calfCal);
         prefsEditor.putString("newCalfCal",json);
         prefsEditor.apply();
@@ -154,6 +201,8 @@ public class AddCalfActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    // cancel just brings you back to the dashboard and no information entered by the
+    // user is saved
     public void clickCancelButton(View view) {
         Intent intent = new Intent(this,DashboardActivity.class);
         startActivity(intent);
