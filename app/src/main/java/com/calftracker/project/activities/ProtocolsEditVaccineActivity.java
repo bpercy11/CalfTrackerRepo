@@ -40,7 +40,7 @@ public class ProtocolsEditVaccineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_vaccine);
+        setContentView(R.layout.activity_protocols_edit_vaccine);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
         dosage.setInputType(InputType.TYPE_CLASS_NUMBER);

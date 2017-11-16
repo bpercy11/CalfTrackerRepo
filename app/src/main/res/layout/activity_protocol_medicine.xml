@@ -30,7 +30,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorIcon"
-        android:onClick="onMedicine_MedicineButtonClick"
         android:text="Medicine"
         app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
         app:layout_constraintEnd_toStartOf="@+id/medicine_illnessButton"

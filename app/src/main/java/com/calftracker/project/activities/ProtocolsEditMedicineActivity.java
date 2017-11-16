@@ -32,7 +32,7 @@ public class ProtocolsEditMedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_medicine);
+        setContentView(R.layout.activity_protocols_edit_medicine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
