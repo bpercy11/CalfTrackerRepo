@@ -43,9 +43,11 @@
     <string name="calf_profile_medical_history_illness_button">Illnesses</string>
     <string name="calf_profile_medical_history_vac_administered_button">Administered</string>
     <string name="calf_profile_medical_history_vac_needed_button">Needed</string>
-
     <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administer</string>
     <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">View</string>
+
+    <string name="calf_profile_growth_history_weight_button">Weight</string>
+    <string name="calf_profile_growth_history_height_button">Height</string>
 
     <string name="options_menu_calf_list_search">Search</string>
     <string name="options_menu_calf_list_search_hint">Search</string>
