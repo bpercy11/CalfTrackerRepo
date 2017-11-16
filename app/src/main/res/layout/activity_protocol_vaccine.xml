@@ -14,7 +14,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorIcon"
-        android:onClick="onVaccine_VaccineButtonClick"
         android:text="Vaccine"
         app:layout_constraintBottom_toTopOf="@+id/listview_vaccine"
         app:layout_constraintEnd_toStartOf="@+id/vaccine_medicineButton"
