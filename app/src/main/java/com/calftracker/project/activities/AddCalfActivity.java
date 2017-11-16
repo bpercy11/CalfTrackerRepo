@@ -24,21 +24,21 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddCalfActivity extends BaseActivity {
-
+    // honestly not sure what this does -JT
     private static final String TAG = "AddCalfActivity";
 
+    // variables related to date selection
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-    private TextView mGender;
-    private Dialog mGenderListDialog;
-    private String[] gender = {"Male","Female"};
-    private AlertDialog alert;
-
     private int calfYear;
     private int calfMonth;
     private int calfDay;
 
+    // variables related to gender selection
+    private TextView mGender;
+    private Dialog mGenderListDialog;
+    private String[] gender = {"Male","Female"};
+    private AlertDialog alert;
     private String calfGender;
 
     @Override
@@ -53,8 +53,12 @@ public class AddCalfActivity extends BaseActivity {
         calfMonth = today.get(Calendar.MONTH);
         calfDay = today.get(Calendar.DATE);
 
+        // get needed UI elements
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
+        mGender = (TextView) findViewById(R.id.textViewSelectGender);
 
+        // when the date entry field is clicked open a dialog for the user
+        // to select a date, using the android datepicker fragment
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,8 +90,7 @@ public class AddCalfActivity extends BaseActivity {
             }
         };
 
-        mGender = (TextView) findViewById(R.id.textViewSelectGender);
-
+        // build an alert for selecting the gender input field
         mGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +98,7 @@ public class AddCalfActivity extends BaseActivity {
             }
         });
 
+        // display a dialog that prompted the user to selected "male" or "female"
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Gender");
         builder.setItems(gender, new DialogInterface.OnClickListener() {
@@ -121,30 +125,38 @@ public class AddCalfActivity extends BaseActivity {
             toast.show();
             return;
         }
+
+        // error checking on calf id input length
         if (calfID.length() > 9 || calfID.length() < 1) {
             CharSequence text = "ID number must be between 1 and 9 digits";
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             return;
         }
-        // Make new calf object and add it to the calfList
+
+        // make a calendar object out of the user input to be used in
+        // new calf object in next view (vaccine selection)
         Calendar calfCal = new GregorianCalendar(calfYear,calfMonth,calfDay);
 
-        // Save the calfList to local storage
+        // Save the calf information to shared prefences so the vaccine selection view
+        // can get the user input
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json;
-
         prefsEditor = mPrefs.edit();
+
+        // save calf ID
         json = gson.toJson(calfID);
         prefsEditor.putString("newCalfID",json);
         prefsEditor.apply();
 
+        // save calf gender
         json = gson.toJson(calfGender);
         prefsEditor.putString("newCalfGender",json);
         prefsEditor.apply();
 
+        // save calf calendar
         json = gson.toJson(calfCal);
         prefsEditor.putString("newCalfCal",json);
         prefsEditor.apply();
@@ -154,6 +166,8 @@ public class AddCalfActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    // cancel just brings you back to the dashboard and no information entered by the
+    // user is saved
     public void clickCancelButton(View view) {
         Intent intent = new Intent(this,DashboardActivity.class);
         startActivity(intent);
