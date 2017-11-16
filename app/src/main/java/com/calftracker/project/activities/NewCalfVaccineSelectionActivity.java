@@ -38,6 +38,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_calf_vaccine_selection);
 
+        // get needed UI elements
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
         TextView mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
         Button mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
@@ -58,13 +59,16 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             }.getType());
         } else { calfList = new ArrayList<Calf>(); }
 
+        // get calf ID, this field comes from the user input in add calf activity
         json = mPreferences.getString("newCalfID","");
         calfID = gson.fromJson(json, String.class);
 
+        // get calf calendar, this field comes from the user input in add calf activity
         json = mPreferences.getString("newCalfCal","");
         calfCal = gson.fromJson(json, new TypeToken<Calendar>() {
         }.getType());
 
+        // get calf gender, this field comes from the user input in add calf activity
         json = mPreferences.getString("newCalfGender","");
         calfGender = gson.fromJson(json, String.class);
 
@@ -93,6 +97,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
                 }
             });
         } else {
+            // if there's no vaccines defined the user needs to know that
+            // change button to say continue instead of add needed vaccines
             listView.setVisibility(View.GONE);
             mNoVaccines.setVisibility(View.VISIBLE);
             mNextButton.setText("Continue");
@@ -102,10 +108,16 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     }
 
     public void onConfirmVaccines(View view) {
-
+        // make a new calf object from user input from add calf activity
         calf = new Calf(calfID,calfGender,calfCal);
 
+        // this is kind of dumb but I'm using the same onclick method for
+        // when there are no vaccines defined or when there are vaccines
+        // defined. Since its the same onclick for both we need to check
+        // if the adapter array has anything in it or else it'll try to access a null list
         if(adapterArray != null) {
+            // run through the adapterarray and find the vaccines that have been check marked
+            // by the user and add those vaccines to the calf object
             for (int i = 0; i < adapterArray.size(); i++) {
                 if (adapterArray.get(i).getChecked()) {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
@@ -113,6 +125,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             }
         }
 
+        // gotta add it to the list
         calfList.add(calf);
 
         // Save the calfList to local storage
@@ -123,6 +136,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
 
+        // this is a lazy way to pass the newly created calf to the calf profile but whatever
+        // in calf profile we use the string in this shared preference object to iterate through
+        // the master calf list until this string matches a calf object to display.
+        // this could cause problems if there are mutliple calves with the same ID
         prefsEditor = mPrefs.edit();
         json = gson.toJson(calf.getFarmId());
         prefsEditor.putString("calfToViewInProfile",json);
@@ -139,6 +156,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // if the select all button is pressed iterate through the adapter array
+    // to make all objects in array checked and notify adapter
     public void onClickSelectAll(View view) {
         for(int i = 0; i < adapterArray.size(); i++) {
             adapterArray.get(i).setChecked(true);
