@@ -32,6 +32,7 @@ public class EditIllnessActivity extends AppCompatActivity {
     private ListView lvTreatmentProtocolMedicines;
     private List<Illness> illnessList;
     private List<Medicine> medicineList;
+    private List<Medicine> tempMedicineList;
     private MedicineAdapter medicineAdapter;
 
     @Override
@@ -48,14 +49,18 @@ public class EditIllnessActivity extends AppCompatActivity {
             illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
             }.getType());
         } else { illnessList = new ArrayList<Illness>(); }
-    }
 
-    public void clickAddIllnessButton(View view){
-        illnessName = (EditText) findViewById(R.id.editTextIllnessEnterName);
+        SharedPreferences mPreferences1 = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences1.contains("MedicineList")) {
+            SharedPreferences.Editor editor = mPreferences1.edit();
 
-        if (illnessName.getText().toString().matches("")){
-            Toast.makeText(EditIllnessActivity.this, R.string.EditIllnessActivity_emptyFieldMsg, Toast.LENGTH_SHORT).show();
-        }
+            Gson gson1 = new Gson();
+            String json1 = mPreferences1.getString("MedicineList", "");
+            medicineList = gson1.fromJson(json1, new TypeToken<ArrayList<Medicine>>() {
+            }.getType());
+        } else { medicineList = new ArrayList<Medicine>(); }
+
+        tempMedicineList = medicineList;
         lvTreatmentProtocolMedicines = (ListView) findViewById(R.id.listViewEditIllness);
         medicineAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
         lvTreatmentProtocolMedicines.setAdapter(medicineAdapter);
@@ -64,13 +69,22 @@ public class EditIllnessActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                view.setSelected(true);
+                tempMedicineList.add(medicineList.get(position));
             }
         });
+    }
+
+    public void clickAddIllnessButton(View view){
+        illnessName = (EditText) findViewById(R.id.editTextIllnessEnterName);
+
+        if (illnessName.getText().toString().matches("")){
+            Toast.makeText(EditIllnessActivity.this, R.string.EditIllnessActivity_emptyFieldMsg, Toast.LENGTH_SHORT).show();
+        }
 
         // Make a new illness object
         String name = illnessName.getText().toString();
-        Illness newIllness = new Illness(name, new Treatment_Protocol(medicineList,null));
+        Illness newIllness = new Illness(name, new Treatment_Protocol(tempMedicineList,null));
 
         illnessList.add(newIllness);
 
