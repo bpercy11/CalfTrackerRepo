@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtocolActivity extends BaseActivity {
+public class ProtocolsVaccineActivity extends BaseActivity {
 
     private ListView lvVaccine;
     private VaccineAdapter vAdapter;
@@ -52,19 +52,19 @@ public class ProtocolActivity extends BaseActivity {
         });
     }
     public void onVaccine_MedicineButtonClick(View view) {
-        Intent intent = new Intent(ProtocolActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsMedicineActivity.class);
         startActivity(intent);
     }
     public void onVaccine_VaccineButtonClick(View view){
-        Intent intent = new Intent(ProtocolActivity.this, ProtocolActivity.class);
+        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsVaccineActivity.class);
         startActivity(intent);
     }
     public void onVaccine_IllnessButtonClick(View view){
-        Intent intent = new Intent(ProtocolActivity.this, IllnessActivity.class);
+        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsIllnessActivity.class);
         startActivity(intent);
     }
     public void onVaccine_EditVaccineButtonClick(View view){
-        Intent intent = new Intent(ProtocolActivity.this, EditVaccineActivity.class);
+        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsEditVaccineActivity.class);
         startActivity(intent);
     }
     public void onBackPressed() {

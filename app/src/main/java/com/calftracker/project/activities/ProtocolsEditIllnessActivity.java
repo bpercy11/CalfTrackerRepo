@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.calftracker.project.calftracker.R;
 
-public class EditIllnessActivity extends AppCompatActivity {
+public class ProtocolsEditIllnessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

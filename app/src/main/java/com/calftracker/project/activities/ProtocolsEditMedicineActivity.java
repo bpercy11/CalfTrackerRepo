@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMedicineActivity extends AppCompatActivity {
+public class ProtocolsEditMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private TextView medicineName;
@@ -55,11 +55,11 @@ public class EditMedicineActivity extends AppCompatActivity {
         if (name.getText().toString().matches("") || treatment.getText().toString().matches("")
                 || dosage.getText().toString().matches("") || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
-            Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(ProtocolsEditMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
+            Toast.makeText(ProtocolsEditMedicineActivity.this, R.string.add_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -83,12 +83,12 @@ public class EditMedicineActivity extends AppCompatActivity {
         prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(this,MedicineActivity.class);
+        Intent intent = new Intent(this,ProtocolsMedicineActivity.class);
         startActivity(intent);
     }
 
     public void clickCancelButton(View view){
-        Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(ProtocolsEditMedicineActivity.this, ProtocolsMedicineActivity.class);
         startActivity(intent);
     }
 

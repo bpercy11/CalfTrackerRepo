@@ -3,14 +3,11 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.activities.BaseActivity;
 import com.calftracker.project.adapters.IllnessAdapter;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;
@@ -20,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IllnessActivity extends BaseActivity {
+public class ProtocolsIllnessActivity extends BaseActivity {
     private List<Illness> illnessList;
     private ListView lvIllness;
     private IllnessAdapter iAdapter;
@@ -55,19 +52,19 @@ public class IllnessActivity extends BaseActivity {
     }
 
     public void onIllness_MedicineButtonClick(View view) {
-        Intent intent = new Intent(IllnessActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(ProtocolsIllnessActivity.this, ProtocolsMedicineActivity.class);
         startActivity(intent);
     }
     public void onIllness_VaccineButtonClick(View view) {
-        Intent intent = new Intent(IllnessActivity.this, ProtocolActivity.class);
+        Intent intent = new Intent(ProtocolsIllnessActivity.this, ProtocolsVaccineActivity.class);
         startActivity(intent);
     }
     public void onIllness_IllnessButtonClick(View view){
-        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
+        Intent intent = new Intent(ProtocolsIllnessActivity.this, ProtocolsIllnessActivity.class);
         startActivity(intent);
     }
     public void onIllness_EditIllnessButtonClick(View view) {
-        Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
+        Intent intent = new Intent(ProtocolsIllnessActivity.this, ProtocolsEditIllnessActivity.class);
         startActivity(intent);
     }
     public void onBackPressed() {
