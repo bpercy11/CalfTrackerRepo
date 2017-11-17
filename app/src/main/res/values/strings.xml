@@ -48,6 +48,16 @@
     <string name="calf_profile_growth_history_weight_button">Weight</string>
     <string name="calf_profile_growth_history_height_button">Height</string>
 
+    <string name="calf_profile_feeding_history_title">Feeding History</string>
+    <string name="calf_profile_feeding_history_first_feeding">First Feeding</string>
+    <string name="calf_profile_feeding_history_second_feeding">Second Feeding</string>
+    <string name="calf_profile_feeding_history_feeder">Feeder</string>
+    <string name="calf_profile_feeding_history_method">Method</string>
+    <string name="calf_profile_feeding_history_liters">Liters</string>
+    <string name="calf_profile_feeding_history_first_button">Add First Feeding</string>
+    <string name="calf_profile_feeding_history_second_button">Add Second Feeding</string>
+    <string name="calf_profile_feeding_history_no_data">No Data Entered</string>
+
     <string name="options_menu_calf_list_search">Search</string>
     <string name="options_menu_calf_list_search_hint">Search</string>
 
