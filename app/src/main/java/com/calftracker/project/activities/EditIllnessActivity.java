@@ -72,7 +72,9 @@ public class EditIllnessActivity extends AppCompatActivity {
       /*  medicineAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
         lvTreatmentProtocolMedicines.setAdapter(medicineAdapter); */
 
-        lvTreatmentProtocolMedicines.setAdapter(new ArrayAdapter<Medicine>(this, android.R.layout.simple_list_item_multiple_choice, medicineList));
+        medicineAdapter = new MedicineAdapter(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, medicineList);
+        lvTreatmentProtocolMedicines.setAdapter(medicineAdapter);
+       // lvTreatmentProtocolMedicines.setAdapter(new ArrayAdapter<Medicine>(this, android.R.layout.simple_list_item_multiple_choice, medicineList));
         lvTreatmentProtocolMedicines.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL); // user HAS to interact with window before continuing
         //lvTreatmentProtocolMedicines.setItemChecked();
 

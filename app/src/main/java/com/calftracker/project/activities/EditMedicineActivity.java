@@ -35,8 +35,6 @@ public class EditMedicineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medicine);
 
-        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -46,6 +44,8 @@ public class EditMedicineActivity extends AppCompatActivity {
             medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
+
+        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void clickAddMedicineButton(View view){

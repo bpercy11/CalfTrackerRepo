@@ -47,7 +47,8 @@ public class ProtocolActivity extends BaseActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                Intent intent = new Intent(ProtocolActivity.this, VaccineProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

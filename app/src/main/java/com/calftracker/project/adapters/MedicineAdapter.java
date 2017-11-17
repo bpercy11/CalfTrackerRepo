@@ -21,12 +21,14 @@ public class MedicineAdapter extends BaseAdapter {
     private Context context;
     private List<Medicine> medicineList;
     private LayoutInflater layoutInflater;
+    private int viewReourceID;
 
     //Constructor
-    public MedicineAdapter(Context applicationContext, List<Medicine> medicineList) {
+    public MedicineAdapter(Context applicationContext, int viewResourceID, List<Medicine> medicineList) {
         this.context = applicationContext;
         this.medicineList = medicineList;
         this.layoutInflater = LayoutInflater.from(context);
+        this.viewReourceID = viewResourceID;
     }
 
     public class ViewHolder  {

@@ -49,7 +49,8 @@ public class IllnessActivity extends BaseActivity {
         lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do Something
+                Intent intent = new Intent(IllnessActivity.this, IllnessProfileActivity.class);
+                startActivity(intent);
             }
         });
     }
