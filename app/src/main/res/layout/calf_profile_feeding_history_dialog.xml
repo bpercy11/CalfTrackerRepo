@@ -111,10 +111,14 @@
 
         <EditText
             android:id="@+id/editTextLitersDialog"
+            android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
             android:hint="@string/calf_profile_feeding_history_dialog_liters_hint"
-            android:textSize="0sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/textViewLitersUnitDialog"
             app:layout_constraintTop_toTopOf="@+id/constraintForLiters"
             app:layout_constraintBottom_toBottomOf="@+id/constraintForLiters"
