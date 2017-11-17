@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import com.calftracker.project.calftracker.R;
 
@@ -26,6 +27,11 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
+        Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
+        Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
+        Button spanishButton = (Button) findViewById(R.id.settingsFarmButton);
 
 
     }
