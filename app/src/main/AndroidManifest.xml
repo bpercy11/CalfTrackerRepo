@@ -21,6 +21,9 @@
         <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
         <activity android:name="com.calftracker.project.activities.DashboardActivity" />
         <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity" />
         <!-- <activity -->
         <!-- android:name=".menu" -->
         <!-- android:label="@string/title_activity_menu" -->
@@ -34,7 +37,9 @@
         <activity android:name="com.calftracker.project.activities.ProtocolsMedicineActivity" />
         <activity android:name="com.calftracker.project.activities.ProtocolsIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.ProtocolsEditIllnessActivity" />
-        <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity"></activity>
     </application>
 
 </manifest>

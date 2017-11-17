@@ -91,6 +91,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "796825638526-t5pmlaps8sr1pvevotsiuj9m3025d17n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.calftracker.project",
+            "certificate_hash": "9607abe2cd2d3b652d02300866f16e069a853115"
+          }
+        },
+        {
           "client_id": "796825638526-0265dkt3kaf5qel884d1k2ip7rremfu9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -105,8 +113,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796825638526-0265dkt3kaf5qel884d1k2ip7rremfu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
