@@ -503,11 +503,6 @@ public class CalfProfileActivity extends BaseActivity {
         alertDelete.show();
     }
 
-    public void onClickMedicalHistory(View view) {
-        Intent intent = new Intent(this,CalfProfileMedicalHistoryActivity.class);
-        startActivity(intent);
-    }
-
     public void onClickAddWeight(View view) {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
         builderWeight.setTitle("Record Weight Measurement");
@@ -630,6 +625,16 @@ public class CalfProfileActivity extends BaseActivity {
 
     public void onClickGrowthHistory(View view) {
         Intent intent = new Intent(this, CalfProfileGrowthHistoryActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickFeedingHistory(View view) {
+        Intent intent = new Intent(this,CalfProfileFeedingHistoryActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickMedicalHistory(View view) {
+        Intent intent = new Intent(this,CalfProfileMedicalHistoryActivity.class);
         startActivity(intent);
     }
 

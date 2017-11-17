@@ -28,27 +28,28 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.55" />
 
-    <TextView
-        android:id="@+id/textViewFeedingTitle"
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontal10percentfeeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_title"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontal60percentfeeding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.60" />
 
     <TextView
         android:id="@+id/textViewFirstFeeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/calf_profile_feeding_history_first_feeding"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFeedingTitle" />
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal10percentfeeding" />
 
     <TextView
         android:id="@+id/textViewFirstFeeder"
@@ -58,17 +59,15 @@
         android:text="@string/calf_profile_feeding_history_feeder"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/textViewFirstFeeding"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
 
     <TextView
         android:id="@+id/textViewFirstFeederValue"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:text="@string/calf_profile_feeding_history_no_data"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstFeeder"
+        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
         app:layout_constraintTop_toTopOf="@+id/textViewFirstFeeder"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFirstFeeder"/>
 
@@ -102,17 +101,15 @@
         android:text="@string/calf_profile_feeding_history_liters"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/textViewFirstMethod"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
 
     <TextView
         android:id="@+id/textViewFirstLitersValue"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:text="@string/calf_profile_feeding_history_no_data"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstLiters"
+        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
         app:layout_constraintTop_toTopOf="@+id/textViewFirstLiters"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLiters"/>
 
@@ -122,9 +119,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/calf_profile_feeding_history_second_feeding"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
         app:layout_constraintTop_toBottomOf="@+id/textViewFirstLiters" />
 
     <TextView
@@ -135,17 +131,15 @@
         android:text="@string/calf_profile_feeding_history_feeder"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/textViewSecondFeeding"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
 
     <TextView
         android:id="@+id/textViewSecondFeederValue"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:text="@string/calf_profile_feeding_history_no_data"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewSecondFeeder"
+        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
         app:layout_constraintTop_toTopOf="@+id/textViewSecondFeeder"
         app:layout_constraintBottom_toBottomOf="@+id/textViewSecondFeeder"/>
 
@@ -179,17 +173,15 @@
         android:text="@string/calf_profile_feeding_history_liters"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/textViewSecondMethod"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
 
     <TextView
         android:id="@+id/textViewSecondLitersValue"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:text="@string/calf_profile_feeding_history_no_data"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewSecondLiters"
+        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
         app:layout_constraintTop_toTopOf="@+id/textViewSecondLiters"
         app:layout_constraintBottom_toBottomOf="@+id/textViewSecondLiters"/>
 

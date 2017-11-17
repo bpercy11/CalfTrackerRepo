@@ -316,6 +316,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="30dp"
+                android:onClick="onClickFeedingHistory"
                 android:text="@string/calf_profile_feeding_history_button"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@+id/vertical66percent"
