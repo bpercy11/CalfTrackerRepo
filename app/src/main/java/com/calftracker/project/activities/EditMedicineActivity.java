@@ -45,7 +45,7 @@ public class EditMedicineActivity extends AppCompatActivity {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
 
-        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+       // dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void clickAddMedicineButton(View view){
