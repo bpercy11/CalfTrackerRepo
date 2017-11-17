@@ -74,19 +74,19 @@ public class SettingsActivity extends BaseActivity {
 
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
+        //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         //Map<String, ?> allEntries = mPrefs.getAll();
         //for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             //Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
          //   mDatabase.child("child").setValue(entry.getKey() + ": " + entry.getValue().toString());
         //}
-        ArrayList<Calf> calfList;
-        String json;
-        Gson gson = new Gson();
-        json = mPrefs.getString("CalfList", "");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
-        mDatabase.child("Root").child("key").setValue("test");
+        //ArrayList<Calf> calfList;
+        //String json;
+        //Gson gson = new Gson();
+        //json = mPrefs.getString("CalfList", "");
+        //calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+        //mDatabase.child("Root").child("key").setValue("test");
 
 
         //mDatabaseRead = FirebaseDatabase.getInstance().getReference().child("Farm Name");
