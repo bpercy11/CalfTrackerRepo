@@ -1,6 +1,8 @@
 package com.calftracker.project.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +77,12 @@ public class CreateFarmActivity extends AppCompatActivity {
 
                 if(!requirementsNotMet) {
                     Farm farm = new Farm(farmName.toString(), farmOwner.toString(), farmLocation.toString());
+                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("farmName", farmName.toString());
+                    editor.putString("farmOwner", farmOwner.toString());
+                    editor.putString("farmLocation", farmLocation.toString());
+
                     callDashboard();
                }
 

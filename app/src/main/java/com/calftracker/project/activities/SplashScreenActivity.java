@@ -31,7 +31,7 @@ public class SplashScreenActivity extends Activity {
                     e.printStackTrace();
                 }finally{
 
-                    SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
+                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker",Activity.MODE_PRIVATE);
                     boolean hasBeenUsed = sharedPref.getBoolean("usedApp", false);
 
                     if(!hasBeenUsed) {
