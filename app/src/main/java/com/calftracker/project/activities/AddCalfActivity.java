@@ -8,15 +8,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +48,11 @@ public class AddCalfActivity extends BaseActivity {
     private AlertDialog alert;
     private String calfGender;
 
+    // variables related to taking a photo
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Button mAddPhoto;
+    private ImageView mImageCaptured;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,11 @@ public class AddCalfActivity extends BaseActivity {
         // get needed UI elements
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
         mGender = (TextView) findViewById(R.id.textViewSelectGender);
+        mAddPhoto = (Button) findViewById(R.id.buttonTakePhoto);
+        mImageCaptured = (ImageView) findViewById(R.id.imageViewCaptured);
+
+        // hide unneeded UI elements
+        mImageCaptured.setVisibility(View.GONE);
 
         // when the date entry field is clicked open a dialog for the user
         // to select a date, using the android datepicker fragment
@@ -206,5 +220,28 @@ public class AddCalfActivity extends BaseActivity {
     public void clickCancelButton(View view) {
         Intent intent = new Intent(this,DashboardActivity.class);
         startActivity(intent);
+    }
+
+    // Take a photo
+    public void clickPhotoButton(View view) {
+        dispatchTakePictureIntent();
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            mAddPhoto.setVisibility(View.GONE);
+            mImageCaptured.setVisibility(View.VISIBLE);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageCaptured.setImageBitmap(imageBitmap);
+        }
     }
 }

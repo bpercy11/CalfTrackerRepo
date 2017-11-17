@@ -13,6 +13,7 @@
     <string name="add_calf_get_ID">Enter ID Number</string>
     <string name="add_calf_select_date">Select a date</string>
     <string name="add_calf_select_gender">Select gender</string>
+    <string name="add_calf_take_photo">Take a photo</string>
 
 
     <string name="calf_profile_ID_field">ID Number</string>
