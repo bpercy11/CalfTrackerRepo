@@ -26,6 +26,7 @@ public class GrowthHistoryWeightAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView weight;
         TextView date;
+        TextView empty;
     }
 
     public GrowthHistoryWeightAdapter(Context context, ArrayList<Physical_Metrics_And_Date> sizes) {
@@ -67,6 +68,13 @@ public class GrowthHistoryWeightAdapter extends BaseAdapter {
             holder.weight.setVisibility(View.GONE);
             holder.date.setVisibility(View.GONE);
         }
+
+//        if (sizes.size() == 0) {
+//            holder.empty = (TextView) convertView.findViewById(R.id.textViewWeight);
+//            holder.empty.setText("No weight recordings have been made for this calf.");
+//            holder.weight.setVisibility(View.GONE);
+//            holder.date.setVisibility(View.GONE);
+//        }
 
         return convertView;
     }

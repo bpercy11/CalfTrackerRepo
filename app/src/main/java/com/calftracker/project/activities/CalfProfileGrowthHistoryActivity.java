@@ -21,10 +21,12 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
 
     String calfID;
     ArrayList<Calf> calfList;
-    Calf calf;
+    private Calf calf;
 
     GrowthHistoryWeightAdapter weightAdapter;
     GrowthHistoryHeightAdapter heightAdapter;
+    private boolean noWeights = true;
+    private boolean noHeights = true;
 
     ListView listview;
 
@@ -51,8 +53,16 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
                 break;
             }
         }
+        noRecordingsCheck();
 
         listview = (ListView) findViewById(R.id.listViewGrowthHistory);
+        if (calf.getPhysicalHistory().isEmpty() || noWeights) {
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.VISIBLE);
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+        }
 
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
@@ -60,12 +70,39 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
     }
 
     public void onClickWeightButton(View view) {
+        noRecordingsCheck();
+        if (calf.getPhysicalHistory().isEmpty() || noWeights) {
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.VISIBLE);
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+        }
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
     }
 
     public void onClickHeightButton(View view) {
+        noRecordingsCheck();
+        if (calf.getPhysicalHistory().isEmpty() || noHeights) {
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.VISIBLE);
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+        }
         heightAdapter = new GrowthHistoryHeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(heightAdapter);
+    }
+
+    public void noRecordingsCheck() {
+        for (int i = 0; i < calf.getPhysicalHistory().size(); i++) {
+            if (calf.getPhysicalHistory().get(i).getWeight() != -1) {
+                noWeights = false;
+            }
+            if (calf.getPhysicalHistory().get(i).getHeight() != -1) {
+                noHeights = false;
+            }
+        }
     }
 }
