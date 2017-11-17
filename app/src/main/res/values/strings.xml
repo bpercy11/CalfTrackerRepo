@@ -58,7 +58,7 @@
     <string name="calf_profile_feeding_history_second_button_no_data">Add Second Feeding</string>
     <string name="calf_profile_feeding_history_first_button_data">Edit First Feeding</string>
     <string name="calf_profile_feeding_history_second_button_data">Edit Second Feeding</string>
-    <string name="calf_profile_feeding_history_no_data">No Data Entered</string>
+    <string name="calf_profile_feeding_history_no_data">No Record</string>
     <string name="calf_profile_feeding_history_dialog_liters_hint">Enter Liters Fed</string>
     <string name="calf_profile_feeding_history_dialog_liters_unit">L</string>
 

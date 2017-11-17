@@ -80,7 +80,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
             Feeding feeding1 = calf.getFeedingHistory()[0];
             mFirstFeeder.setText(feeding1.getFedBy().getName());
             mFirstMethod.setText(feeding1.getMethodOfFeeding());
-            mFirstLiters.setText("" + feeding1.getLitersFed());
+            mFirstLiters.setText(feeding1.getLitersFed() + " L");
             mFirstFeedingButton.setText(R.string.calf_profile_feeding_history_first_button_data);
         }
 
@@ -88,7 +88,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
             Feeding feeding2 = calf.getFeedingHistory()[1];
             mSecondFeeder.setText(feeding2.getFedBy().getName());
             mSecondMethod.setText(feeding2.getMethodOfFeeding());
-            mSecondLiters.setText("" + feeding2.getLitersFed());
+            mSecondLiters.setText(feeding2.getLitersFed() + " L");
             mSecondFeedingButton.setText(R.string.calf_profile_feeding_history_second_button_data);
         }
 
@@ -127,7 +127,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                                 mFirstFeeder.setText(calf.getFeedingHistory()[0].getFedBy().getName());
                                 mFirstMethod.setText(calf.getFeedingHistory()[0].getMethodOfFeeding());
-                                mFirstLiters.setText("" + calf.getFeedingHistory()[0].getLitersFed());
+                                mFirstLiters.setText(calf.getFeedingHistory()[0].getLitersFed() + " L");
 
                                 // Save the calfList to local storage
                                 SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -181,7 +181,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                                 mSecondFeeder.setText(calf.getFeedingHistory()[1].getFedBy().getName());
                                 mSecondMethod.setText(calf.getFeedingHistory()[1].getMethodOfFeeding());
-                                mSecondLiters.setText("" + calf.getFeedingHistory()[1].getLitersFed());
+                                mSecondLiters.setText(calf.getFeedingHistory()[1].getLitersFed() + " L");
 
                                 // Save the calfList to local storage
                                 SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
