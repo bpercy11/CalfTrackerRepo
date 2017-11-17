@@ -1,9 +1,13 @@
 package com.calftracker.project.models;
 
+import java.util.Calendar;
+
 public class Vaccine_TODO
 {
 	private Calf calf;
 	private Vaccine vaccine;
+	private Calendar dueDate;
+
 	
 	/**
 	 * @param calf

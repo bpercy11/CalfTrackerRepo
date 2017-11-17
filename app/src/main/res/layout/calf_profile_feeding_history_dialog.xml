@@ -119,6 +119,7 @@
             android:gravity="end"
             android:hint="@string/calf_profile_feeding_history_dialog_liters_hint"
             android:textSize="20sp"
+            android:inputType="numberDecimal"
             app:layout_constraintEnd_toStartOf="@+id/textViewLitersUnitDialog"
             app:layout_constraintTop_toTopOf="@+id/constraintForLiters"
             app:layout_constraintBottom_toBottomOf="@+id/constraintForLiters"
