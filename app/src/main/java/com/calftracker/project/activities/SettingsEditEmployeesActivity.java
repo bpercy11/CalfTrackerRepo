@@ -14,6 +14,7 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
 
 
     private ListView mListView;
+    private ArrayList<Employee> employeeArrayList;//Employee.getRecipesFromFile("recipes.json", this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +22,15 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_edit_employees);
 
         mListView = (ListView) findViewById(R.id.employeesList);
-// 1
-        final ArrayList<Employee> employeeArrayList = new ArrayList<Employee>();//Employee.getRecipesFromFile("recipes.json", this);
-        for(int i = 0; i < 9; i++){
-            Employee emp = new Employee("employee"+i);
-            employeeArrayList.add(emp);
+        employeeArrayList = new ArrayList<Employee>();
+
+        if(employeeArrayList.size() == 0){
         }
+// 1
+        //for(int i = 0; i < 9; i++){
+        //    Employee emp = new Employee("employee"+i);
+        //    employeeArrayList.add(emp);
+        //}
 // 2
 
 
@@ -42,4 +46,15 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
 
 
     }
+
+    private ArrayList<Employee> addEmployee(){
+
+        return null;
+    }
+
+    private ArrayList<Employee> deleteEmployee(){
+
+        return null;
+    }
+
 }
