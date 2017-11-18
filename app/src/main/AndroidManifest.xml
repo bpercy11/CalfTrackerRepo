@@ -37,6 +37,7 @@
         <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.TasksActivity" />
         <activity android:name="com.calftracker.project.activities.TaskDetailsActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import com.calftracker.project.adapters.VaccineSelectionListViewAdapter;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Task;
+import com.calftracker.project.models.Feeding;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineSelectionItem;
 import com.calftracker.project.models.VaccineTask;
@@ -120,7 +121,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         // make a new calf object from user input from add calf activity
         calf = new Calf(calfID,calfGender,calfCal);
 
-
         // this is kind of dumb but I'm using the same onclick method for
         // when there are no vaccines defined or when there are vaccines
         // defined. Since its the same onclick for both we need to check
@@ -146,6 +146,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             task.getCalvesToObserve().add(calf);
 
         }
+
+        calf.setFeedingHistory(new Feeding[2]);
 
         // gotta add it to the list
         calfList.add(calf);

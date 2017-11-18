@@ -23,6 +23,7 @@ public class TODO {
 		this.overdueVaccinations = overdueVaccinations;
 	}
 
+
 	/**
 	 * @return the dateLastUpdated
 	 */
