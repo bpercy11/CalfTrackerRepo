@@ -1,11 +1,12 @@
 package com.calftracker.project.models;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TODO {
-	private Easy_Date dateLastUpdated;
+	private Calendar dateLastUpdated;
 	private ArrayList<Calf> calvesToObserve;
-	private ArrayList<ArrayList<Vaccine_TODO>> vaccinesToAdminister;
-	private ArrayList<Vaccine_TODO> overdueVaccinations;
+	private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
+	private ArrayList<VaccineTask> overdueVaccinations;
 	
 	/**
 	 * @param dateLastUpdated
@@ -13,8 +14,8 @@ public class TODO {
 	 * @param vaccinesToAdminister
 	 * @param overdueVaccinations
 	 */
-	public TODO(Easy_Date dateLastUpdated, ArrayList<Calf> calvesToObserve,
-			ArrayList<ArrayList<Vaccine_TODO>> vaccinesToAdminister, ArrayList<Vaccine_TODO> overdueVaccinations) {
+	public TODO(Calendar dateLastUpdated, ArrayList<Calf> calvesToObserve,
+				ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations) {
 		super();
 		this.dateLastUpdated = dateLastUpdated;
 		this.calvesToObserve = calvesToObserve;
@@ -25,14 +26,14 @@ public class TODO {
 	/**
 	 * @return the dateLastUpdated
 	 */
-	public Easy_Date getDateLastUpdated() {
+	public Calendar getDateLastUpdated() {
 		return dateLastUpdated;
 	}
 
 	/**
 	 * @param dateLastUpdated the dateLastUpdated to set
 	 */
-	public void setDateLastUpdated(Easy_Date dateLastUpdated) {
+	public void setDateLastUpdated(Calendar dateLastUpdated) {
 		this.dateLastUpdated = dateLastUpdated;
 	}
 
@@ -53,28 +54,28 @@ public class TODO {
 	/**
 	 * @return the vaccinesToAdminister
 	 */
-	public ArrayList<ArrayList<Vaccine_TODO>> getVaccinesToAdminister() {
+	public ArrayList<ArrayList<VaccineTask>> getVaccinesToAdminister() {
 		return vaccinesToAdminister;
 	}
 
 	/**
 	 * @param vaccinesToAdminister the vaccinesToAdminister to set
 	 */
-	public void setVaccinesToAdminister(ArrayList<ArrayList<Vaccine_TODO>> vaccinesToAdminister) {
+	public void setVaccinesToAdminister(ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister) {
 		this.vaccinesToAdminister = vaccinesToAdminister;
 	}
 
 	/**
 	 * @return the overdueVaccinations
 	 */
-	public ArrayList<Vaccine_TODO> getOverdueVaccinations() {
+	public ArrayList<VaccineTask> getOverdueVaccinations() {
 		return overdueVaccinations;
 	}
 
 	/**
 	 * @param overdueVaccinations the overdueVaccinations to set
 	 */
-	public void setOverdueVaccinations(ArrayList<Vaccine_TODO> overdueVaccinations) {
+	public void setOverdueVaccinations(ArrayList<VaccineTask> overdueVaccinations) {
 		this.overdueVaccinations = overdueVaccinations;
 	}
 }

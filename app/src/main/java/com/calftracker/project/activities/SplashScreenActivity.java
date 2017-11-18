@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.content.SharedPreferences;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Task;
+import com.calftracker.project.models.VaccineTask;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by project on 10/31/17.
@@ -34,12 +41,34 @@ public class SplashScreenActivity extends Activity {
                     SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
                     boolean hasBeenUsed = sharedPref.getBoolean("usedApp", false);
 
+                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    Gson gson = new Gson();
+                    String json;
+                    prefsEditor = mPrefs.edit();
+
+                    ArrayList<Calf> emptyCalfList = new ArrayList<>();
+                    ArrayList<ArrayList<VaccineTask>> emptyTaskList = new ArrayList<ArrayList<VaccineTask>>();
+                    ArrayList<VaccineTask> emptyOverdueList = new ArrayList<>();
+
+                    // Create emptyTaskList to hold a full year of entries
+                    for (int i = 0; i < 365; i++) {
+                        emptyTaskList.add(new ArrayList<VaccineTask>());
+                    }
+
+                    Task task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList);
+
                     if(!hasBeenUsed) {
                         Intent intent = new Intent(SplashScreenActivity.this, CreateFarmActivity.class);
 
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putBoolean("usedApp", true);
                         editor.commit();
+
+                        // Save the initial Task Object to system
+                        json = gson.toJson(task);
+                        prefsEditor.putString("Task",json);
+                        prefsEditor.apply();
 
                         startActivity(intent);
                     }else{

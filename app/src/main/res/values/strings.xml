@@ -100,6 +100,8 @@
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="edit_vaccine_enter_units">Enter Units</string>
 
+    <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
+
     <string-array name="vacc_range_spinner">
         <item>Day</item>
         <item>Week</item>

@@ -34,7 +34,9 @@
         <activity android:name="com.calftracker.project.activities.ProtocolsMedicineActivity" />
         <activity android:name="com.calftracker.project.activities.ProtocolsIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.ProtocolsEditIllnessActivity" />
-        <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
+        <activity android:name="com.calftracker.project.activities.TasksActivity" />
+        <activity android:name="com.calftracker.project.activities.TaskDetailsActivity"></activity>
     </application>
 
 </manifest>

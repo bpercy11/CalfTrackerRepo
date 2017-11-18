@@ -50,7 +50,9 @@ public class DashboardActivity extends BaseActivity {
                     case 1: intent = new Intent(DashboardActivity.this,AddCalfActivity.class);
                             startActivity(intent);
                             break;
-                    case 2: break;
+                    case 2: intent = new Intent(DashboardActivity.this,TasksActivity.class);
+                            startActivity(intent);
+                            break;
                     case 3: intent = new Intent(DashboardActivity.this,ProtocolsVaccineActivity.class);
                             startActivity(intent);
                             break;

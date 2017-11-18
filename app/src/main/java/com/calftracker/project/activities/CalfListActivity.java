@@ -61,28 +61,9 @@ public class CalfListActivity extends BaseActivity {
             calfList = new ArrayList<Calf>();
         }
 
-        // Calf Test Set of 10,000 calfs
-//        calfList.clear();
-//        for (int i = 0; i < 10000; i++) {
-//            String testID = "";
-//            if (i < 10)
-//                testID = "000" + i;
-//            if (i < 100 && i >= 10)
-//                testID = "00" + i;
-//            if (i < 1000 && i >= 100)
-//                testID = "0" + i;
-//            if (i < 10000 && i >= 1000) {
-//                testID = Integer.toString(i);
-//            }
-//            Calf testCalf = new Calf(testID, "Male", Calendar.getInstance());
-//            calfList.add(testCalf);
-//        }
-
         listView = (ListView) findViewById(R.id.recyclerViewCalfList);
 
         // Load the calf IDs into an ArrayList
-
-
         if(arrayExists) {
             for (int i = 0; i < calfList.size(); i++) {
                 idArrayList.add(calfList.get(i).getFarmId());
@@ -100,7 +81,7 @@ public class CalfListActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                // Search
+                // Search functionality
                 String currID = editText.getText().toString().toLowerCase(Locale.getDefault());
                 adapter.myFilter(currID);
 

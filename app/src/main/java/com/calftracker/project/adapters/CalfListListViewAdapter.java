@@ -60,6 +60,7 @@ public class CalfListListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
+        // Basic adapter code, set up holder and use it to add items to View
         final ViewHolder holder;
         final int position = i;
         if (convertView == null) {

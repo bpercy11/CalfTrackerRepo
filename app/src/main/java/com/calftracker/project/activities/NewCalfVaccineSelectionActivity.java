@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.calftracker.project.adapters.VaccineSelectionListViewAdapter;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Task;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineSelectionItem;
+import com.calftracker.project.models.VaccineTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,6 +34,9 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private String calfID;
     private Calendar calfCal;
     private String calfGender;
+    private Task task;
+    private Calendar startDate;
+    private Calendar endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = mPreferences.edit();
         Gson gson = new Gson();
         String json;
+
+        // Load the Task object from storage
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
 
         // check if there's an existing calf list and store it for use
         // create a new list if existing not found
@@ -111,6 +120,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         // make a new calf object from user input from add calf activity
         calf = new Calf(calfID,calfGender,calfCal);
 
+
         // this is kind of dumb but I'm using the same onclick method for
         // when there are no vaccines defined or when there are vaccines
         // defined. Since its the same onclick for both we need to check
@@ -121,8 +131,20 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             for (int i = 0; i < adapterArray.size(); i++) {
                 if (adapterArray.get(i).getChecked()) {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
+
+                    startDate = Calendar.getInstance();
+                    startDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
+                    endDate = Calendar.getInstance();
+                    endDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
+                    VaccineTask vaccTaskStart = new VaccineTask(adapterArray.get(i).getVaccine(), calf, true);
+                    VaccineTask vaccTaskEnd = new VaccineTask(adapterArray.get(i).getVaccine(), calf, false);
+
+                    task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]).add(vaccTaskStart);
+                    task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]).add(vaccTaskEnd);
                 }
             }
+            task.getCalvesToObserve().add(calf);
+
         }
 
         // gotta add it to the list
@@ -134,6 +156,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(calfList);
         prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
         prefsEditor.apply();
 
         // this is a lazy way to pass the newly created calf to the calf profile but whatever
