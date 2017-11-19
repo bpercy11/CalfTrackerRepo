@@ -478,6 +478,7 @@ public class CalfProfileActivity extends BaseActivity {
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            tempCalf.setPhoto(encodedImage);
         }
     }
 
@@ -562,6 +563,11 @@ public class CalfProfileActivity extends BaseActivity {
         String json = gson.toJson(calfList);
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
+
+        originalImage = currentImage;
+
+        // Scroll back to top since elements are shifting
+        ((ScrollView) findViewById(R.id.calfProfileScrollLayout)).smoothScrollTo(0,0);
     }
 
     public void clickCancelButton(View view) {
