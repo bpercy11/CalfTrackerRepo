@@ -27,9 +27,11 @@ public class ProtocolsIllnessActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getLayoutInflater().inflate(R.layout.activity_protocol_illness, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_title);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if (mPreferences.contains("IllnessList")) {

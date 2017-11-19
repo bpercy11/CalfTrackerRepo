@@ -21,15 +21,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected FrameLayout frameLayout;
     protected NavigationView mNavigationView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_menu);;
-
-        mTitle = mDrawerTitle = getTitle();
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -44,14 +40,38 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mTitle);
+
+                String title = (String) getTitle();
+                if (mNavigationView.getMenu().findItem(R.id.nav_list).isChecked()) {
+                    title = getString(R.string.calf_list_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_add).isChecked()) {
+                    title = getString(R.string.add_calf_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
+                    title = getString(R.string.protocols_title);
+                }
+                getSupportActionBar().setTitle(title);
+
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(mDrawerTitle);
+
+                String title = (String) getTitle();
+                if (mNavigationView.getMenu().findItem(R.id.nav_list).isChecked()) {
+                    title = getString(R.string.calf_list_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_add).isChecked()) {
+                    title = getString(R.string.add_calf_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
+                    title = getString(R.string.protocols_title);
+                }
+                getSupportActionBar().setTitle(title);
+
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };

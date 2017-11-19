@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,6 +42,12 @@ public class ProtocolsEditVaccineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_protocols_edit_vaccine);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_vaccine_edit);
+
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
         dosage.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -129,5 +136,17 @@ public class ProtocolsEditVaccineActivity extends AppCompatActivity {
     public void clickCancelVaccineButton(View view){
         Intent intent = new Intent(ProtocolsEditVaccineActivity.this,ProtocolsVaccineActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ProtocolsVaccineActivity.class);
+        startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), ProtocolsVaccineActivity.class);
+        startActivity(intent);
+        return true;
     }
 }

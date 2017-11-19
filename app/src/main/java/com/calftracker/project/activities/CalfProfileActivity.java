@@ -1,5 +1,6 @@
 package com.calftracker.project.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.res.Resources;
@@ -21,9 +22,11 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,7 +54,7 @@ import java.util.GregorianCalendar;
 
 import static com.calftracker.project.activities.AddCalfActivity.REQUEST_IMAGE_CAPTURE;
 
-public class CalfProfileActivity extends BaseActivity {
+public class CalfProfileActivity extends AppCompatActivity {
 
     private ImageView mPhoto;
     private ConstraintLayout mConstraintLayout;
@@ -100,7 +103,10 @@ public class CalfProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_calf_profile, frameLayout);
+        setContentView(R.layout.activity_calf_profile);
+
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -112,6 +118,7 @@ public class CalfProfileActivity extends BaseActivity {
 
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
+        getSupportActionBar().setTitle("Calf " + calfID);
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
@@ -270,6 +277,10 @@ public class CalfProfileActivity extends BaseActivity {
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        // Disable back navigation
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Edit Calf " + calfID);
 
         // Edit Photo
         // Case no calf photo set
@@ -570,6 +581,10 @@ public class CalfProfileActivity extends BaseActivity {
 
         // Scroll back to top since elements are shifting
         ((ScrollView) findViewById(R.id.calfProfileScrollLayout)).smoothScrollTo(0,0);
+
+        // Update action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Calf " + tempID);
     }
 
     public void clickCancelButton(View view) {
@@ -616,6 +631,10 @@ public class CalfProfileActivity extends BaseActivity {
 
         // Scroll back to top since elements are shifting
         ((ScrollView) findViewById(R.id.calfProfileScrollLayout)).smoothScrollTo(0,0);
+
+        // Update action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Calf " + calfID);
     }
 
     public void clickNewNoteButton(View view) {
@@ -836,13 +855,14 @@ public class CalfProfileActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            Intent intent = new Intent(this, CalfListActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, CalfListActivity.class);
+        startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), CalfListActivity.class);
+        startActivity(intent);
+        return true;
     }
 
     public void resetVisibility() {

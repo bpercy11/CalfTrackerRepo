@@ -57,6 +57,7 @@
     <string name="options_menu_calf_list_search_hint">Search</string>
 
 
+    <string name="calf_list_title">Calf List</string>
     <string name="calf_list_search_bar_hint">Search</string>
 
 
@@ -108,6 +109,11 @@
     <string name="edit_vaccine_admin_method">Administration</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
     <string name="edit_vaccine_enter_units">Enter Units</string>
+
+    <string name="protocols_title">Protocols</string>
+    <string name="protocols_vaccine_edit">Edit Vaccine</string>
+    <string name="protocols_medicine_edit">Edit Medicine</string>
+    <string name="protocols_illness_edit">Edit Illness</string>
 
     <string-array name="vacc_range_spinner">
         <item>Day</item>

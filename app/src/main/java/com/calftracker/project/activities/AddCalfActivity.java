@@ -64,6 +64,9 @@ public class AddCalfActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_add).setChecked(true);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.add_calf_title);
+
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.addCalfParent));
 

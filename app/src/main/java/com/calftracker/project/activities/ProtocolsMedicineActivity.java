@@ -31,6 +31,9 @@ public class ProtocolsMedicineActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_protocol_medicine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_title);
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();

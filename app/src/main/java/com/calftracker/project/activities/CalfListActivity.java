@@ -45,6 +45,9 @@ public class CalfListActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_calf_list, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_list).setChecked(true);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.calf_list_title);
+
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.calfListParent));
 
