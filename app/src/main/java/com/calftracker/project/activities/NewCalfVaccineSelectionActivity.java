@@ -32,6 +32,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private String calfID;
     private Calendar calfCal;
     private String calfGender;
+    private String calfPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,13 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         json = mPreferences.getString("newCalfGender","");
         calfGender = gson.fromJson(json, String.class);
 
+        // get calf photo, this field comes from the user input in add calf activity
+        // photos are optional so check if null
+        json = mPreferences.getString("newCalfPhoto","");
+        if (json != null) {
+            calfPhoto = gson.fromJson(json, String.class);
+        }
+
         // get vaccine list from shared preferences
         if(mPreferences.contains("VaccineList")) {
             json = mPreferences.getString("VaccineList", "");
@@ -109,7 +117,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
     public void onConfirmVaccines(View view) {
         // make a new calf object from user input from add calf activity
-        calf = new Calf(calfID,calfGender,calfCal);
+        calf = new Calf(calfPhoto,calfID,calfGender,calfCal);
 
         // this is kind of dumb but I'm using the same onclick method for
         // when there are no vaccines defined or when there are vaccines

@@ -2,27 +2,39 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import com.calftracker.project.models.Calf;
@@ -35,7 +47,19 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static com.calftracker.project.activities.AddCalfActivity.REQUEST_IMAGE_CAPTURE;
+
 public class CalfProfileActivity extends BaseActivity {
+
+    private ImageView mPhoto;
+    private ConstraintLayout mConstraintLayout;
+    private Button mButtonAddPhoto;
+    private Button mButtonDeletePhoto;
+    private Button mButtonChangePhoto;
+    private String encodedImage = null;
+    private Bitmap currentImage = null;
+    private Bitmap originalImage = null;
+    private int dp32;
 
     private TextView mIDValue;
     private TextView mGenderValue;
@@ -97,6 +121,11 @@ public class CalfProfileActivity extends BaseActivity {
         }
 
         // print to log calf cbject information
+        mPhoto = (ImageView) findViewById(R.id.calfPhoto);
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.calfProfileLayout);
+        mButtonAddPhoto = (Button) findViewById(R.id.buttonAddPhoto);
+        mButtonDeletePhoto = (Button) findViewById(R.id.buttonDeletePhoto);
+        mButtonChangePhoto = (Button) findViewById(R.id.buttonChangePhoto);
         mIDValue = (TextView) findViewById(R.id.textViewIDValue);
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
@@ -109,6 +138,32 @@ public class CalfProfileActivity extends BaseActivity {
         if (!calf.getPhysicalHistory().isEmpty()) {
             mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
             mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
+        }
+
+        // Calculate 32dp in pixels, to be used when changing margins for photo tools
+        Resources r = getResources();
+        dp32 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, r.getDisplayMetrics());
+
+        // Hide photo buttons until edit
+        mButtonAddPhoto.setVisibility(View.GONE);
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+
+        // Get photo if there is one
+        String encodedImage = calf.getPhoto();
+
+        // Show photo if available
+        if (encodedImage != null) {
+            byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            originalImage = decodedByte;
+            currentImage = decodedByte;
+            mPhoto.setImageBitmap(decodedByte);
+            showPhoto();
+        }
+        // If no photo, hide image view
+        else {
+            mPhoto.setVisibility(View.GONE);
         }
 
         String farmID = calf.getFarmId();
@@ -188,7 +243,6 @@ public class CalfProfileActivity extends BaseActivity {
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNoteDates);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
-
     }
 
     public void clickEditButton(View view) {
@@ -215,6 +269,15 @@ public class CalfProfileActivity extends BaseActivity {
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+        // Edit Photo
+        // Case no calf photo set
+        if (currentImage == null) {
+            showAddPhotoButton();
+        }
+        // Case calf photo set
+        else {
+            showDeleteChangePhotoButton();
+        }
 
         // Edit ID Number
         mIDValue.setOnClickListener(new View.OnClickListener() {
@@ -382,6 +445,100 @@ public class CalfProfileActivity extends BaseActivity {
         alertDam = builderDam.create();
     }
 
+    // Take a photo
+    public void onClickAddPhotoButton(View view) {
+        dispatchTakePictureIntent();
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            mButtonAddPhoto.setVisibility(View.GONE);
+            mPhoto.setVisibility(View.VISIBLE);
+            mButtonDeletePhoto.setVisibility(View.VISIBLE);
+            mButtonChangePhoto.setVisibility(View.VISIBLE);
+            showDeleteChangePhotoButton();
+
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            currentImage = imageBitmap;
+
+            // Set image thumbnail
+            mPhoto.setImageBitmap(imageBitmap);
+
+            // Prepare image for saving
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        }
+    }
+
+    public void onClickDeletePhotoButton(View view) {
+        mPhoto.setVisibility(View.GONE);
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        showAddPhotoButton();
+        currentImage = null;
+    }
+
+    public void showPhoto() {
+        mPhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mPhoto.getId(), ConstraintSet.BOTTOM, dp32);;
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void hidePhoto() {
+        mPhoto.setVisibility(View.GONE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void showAddPhotoButton() {
+        mButtonAddPhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mButtonAddPhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void hideAddPhotoButton() {
+        mButtonAddPhoto.setVisibility(View.GONE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void showDeleteChangePhotoButton() {
+        mButtonDeletePhoto.setVisibility(View.VISIBLE);
+        mButtonChangePhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mButtonDeletePhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void hideDeleteChangePhotoButton() {
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDField, ConstraintSet.TOP, mPhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
     public void clickApplyButton(View view) {
         calf = tempCalf;
 
@@ -415,6 +572,42 @@ public class CalfProfileActivity extends BaseActivity {
         mDamValue.setText(tempDam);
         mGenderValue.setText(tempGender);
         mDOBValue.setText(tempDOBString);
+
+        // Deleted original photo = hide "add" button, show original photo
+        if (currentImage == null && originalImage != null) {
+            mButtonAddPhoto.setVisibility(View.GONE);
+            currentImage = originalImage;
+            mPhoto.setImageBitmap(originalImage);
+            showPhoto();
+        }
+
+        // No original photo and no photo change = hide "add" button
+        else if (currentImage == null && originalImage == null) {
+            hideAddPhotoButton();
+        }
+
+        // Added new photo = hide photo, hide "delete/change" buttons
+        else if (currentImage != null && originalImage == null) {
+            currentImage = null;
+            mButtonDeletePhoto.setVisibility(View.GONE);
+            mButtonChangePhoto.setVisibility(View.GONE);
+            hidePhoto();
+        }
+
+        // Changed original photo = hide "delete/change" buttons, change photo to original
+        else if (currentImage != originalImage) {
+            currentImage = originalImage;
+            hideDeleteChangePhotoButton();
+            mPhoto.setImageBitmap(originalImage);
+        }
+
+        // No changes = hide "delete/change" buttons
+        else if (currentImage == originalImage) {
+            hideDeleteChangePhotoButton();
+        }
+
+        // Scroll back to top since elements are shifting
+        ((ScrollView) findViewById(R.id.calfProfileScrollLayout)).smoothScrollTo(0,0);
     }
 
     public void clickNewNoteButton(View view) {
@@ -640,6 +833,9 @@ public class CalfProfileActivity extends BaseActivity {
     }
 
     public void resetVisibility() {
+        mButtonAddPhoto.setVisibility(View.GONE);
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
         mNoteListView.setVisibility(View.VISIBLE);
         mWeightValue.setVisibility(View.VISIBLE);
         mHeightValue.setVisibility(View.VISIBLE);

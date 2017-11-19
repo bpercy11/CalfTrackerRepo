@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -52,6 +54,7 @@ public class AddCalfActivity extends BaseActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private Button mAddPhoto;
     private ImageView mImageCaptured;
+    private String encodedImage = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +208,13 @@ public class AddCalfActivity extends BaseActivity {
         prefsEditor.putString("newCalfGender",json);
         prefsEditor.apply();
 
+        // save calf image
+        if (encodedImage != null) {
+            json = gson.toJson(encodedImage);
+            prefsEditor.putString("newCalfPhoto",json);     //TODO
+            prefsEditor.apply();
+        }
+
         // save calf calendar
         json = gson.toJson(calfCal);
         prefsEditor.putString("newCalfCal",json);
@@ -241,7 +251,15 @@ public class AddCalfActivity extends BaseActivity {
             mImageCaptured.setVisibility(View.VISIBLE);
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // Set image thumbnail
             mImageCaptured.setImageBitmap(imageBitmap);
+
+            // Prepare image for saving
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
 }
