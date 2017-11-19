@@ -54,7 +54,7 @@ public class AddCalfActivity extends BaseActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private Button mAddPhoto;
     private ImageView mImageCaptured;
-    private String encodedImage = null;
+    private String encodedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,7 +211,12 @@ public class AddCalfActivity extends BaseActivity {
         // save calf image
         if (encodedImage != null) {
             json = gson.toJson(encodedImage);
-            prefsEditor.putString("newCalfPhoto",json);     //TODO
+            prefsEditor.putString("newCalfPhoto",json);
+            prefsEditor.apply();
+        }
+        else {
+            json = gson.toJson(null);
+            prefsEditor.putString("newCalfPhoto",json);
             prefsEditor.apply();
         }
 
