@@ -8,14 +8,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Base64;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +58,13 @@ public class AddCalfActivity extends BaseActivity {
 
     // variables related to taking a photo
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private Button mAddPhoto;
-    private ImageView mImageCaptured;
+    private ImageView mPhoto;
     private String encodedImage;
+    private ConstraintLayout mConstraintLayout;
+    private Button mButtonAddPhoto;
+    private Button mButtonDeletePhoto;
+    private Button mButtonChangePhoto;
+    private int dp32;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +87,20 @@ public class AddCalfActivity extends BaseActivity {
         // get needed UI elements
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
         mGender = (TextView) findViewById(R.id.textViewSelectGender);
-        mAddPhoto = (Button) findViewById(R.id.buttonTakePhoto);
-        mImageCaptured = (ImageView) findViewById(R.id.imageViewCaptured);
+        mPhoto = (ImageView) findViewById(R.id.imageViewCaptured);
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.addCalfLayout);
+        mButtonAddPhoto = (Button) findViewById(R.id.buttonNewAddPhoto);
+        mButtonDeletePhoto = (Button) findViewById(R.id.buttonNewDeletePhoto);
+        mButtonChangePhoto = (Button) findViewById(R.id.buttonNewChangePhoto);
 
-        // hide unneeded UI elements
-        mImageCaptured.setVisibility(View.GONE);
+        // Calculate 32dp in pixels, to be used when changing margins for photo tools
+        Resources r = getResources();
+        dp32 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, r.getDisplayMetrics());
+
+        // Hide photo buttons except for add
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        mPhoto.setVisibility(View.GONE);
 
         // when the date entry field is clicked open a dialog for the user
         // to select a date, using the android datepicker fragment
@@ -243,7 +260,7 @@ public class AddCalfActivity extends BaseActivity {
     }
 
     // Take a photo
-    public void clickPhotoButton(View view) {
+    public void onClickAddPhotoButton(View view) {
         dispatchTakePictureIntent();
     }
 
@@ -257,13 +274,17 @@ public class AddCalfActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            mAddPhoto.setVisibility(View.GONE);
-            mImageCaptured.setVisibility(View.VISIBLE);
+            mButtonAddPhoto.setVisibility(View.GONE);
+            mPhoto.setVisibility(View.VISIBLE);
+            mButtonDeletePhoto.setVisibility(View.VISIBLE);
+            mButtonChangePhoto.setVisibility(View.VISIBLE);
+            showDeleteChangePhotoButton();
+
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             // Set image thumbnail
-            mImageCaptured.setImageBitmap(imageBitmap);
+            mPhoto.setImageBitmap(imageBitmap);
 
             // Prepare image for saving
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -271,6 +292,30 @@ public class AddCalfActivity extends BaseActivity {
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
+    }
+
+    public void onClickDeletePhotoButton(View view) {
+        mPhoto.setVisibility(View.GONE);
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        showAddPhotoButton();
+    }
+
+    public void showAddPhotoButton() {
+        mButtonAddPhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDNumber, ConstraintSet.TOP, mButtonAddPhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void showDeleteChangePhotoButton() {
+        mButtonDeletePhoto.setVisibility(View.VISIBLE);
+        mButtonChangePhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDNumber, ConstraintSet.TOP, mButtonDeletePhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
     }
 
     @Override
