@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -304,7 +305,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         inputID.setInputType(InputType.TYPE_CLASS_NUMBER);
         inputID.setHint("ID Number");
         builderID.setTitle("Enter new ID");
-        builderID.setView(inputID);
+
+
         builderID.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
