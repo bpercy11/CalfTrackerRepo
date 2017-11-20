@@ -50,16 +50,14 @@
                 android:id="@+id/buttonCancel"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:layout_marginBottom="32dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="50dp"
                 android:onClick="clickCancelButton"
                 android:text="Cancel"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/buttonDeleteCalf" />
+                app:layout_constraintTop_toBottomOf="@id/textViewDamField" />
 
             <Button
                 android:id="@+id/buttonApply"
@@ -81,8 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="32dp"
-
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="32dp"
                 android:background="@color/colorPrimaryDark"
                 android:elevation="0dp"
                 android:onClick="clickDeleteCalf"
@@ -96,7 +94,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonCancel"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <android.support.constraint.Guideline
                 android:id="@+id/vertical10percent"
