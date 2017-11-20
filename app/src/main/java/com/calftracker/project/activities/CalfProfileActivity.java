@@ -1,6 +1,5 @@
 package com.calftracker.project.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.res.Resources;
@@ -12,7 +11,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -20,12 +18,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +31,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -283,6 +279,9 @@ public class CalfProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Edit Calf " + calfID);
 
+        // Custom layout for text dialogs
+        LayoutInflater inflater = getLayoutInflater();
+
         // Edit Photo
         // Case no calf photo set
         if (currentImage == null) {
@@ -301,17 +300,17 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderID = new AlertDialog.Builder(this);
-        final EditText inputID = new EditText(this);
-        inputID.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputID.setHint("ID Number");
+        View dialogLayout_ID = inflater.inflate(R.layout.custom_dialog_id, null);
+        final EditText dialogText_ID = (EditText) dialogLayout_ID.findViewById(R.id.dialogTextInput_ID);
+
+        dialogText_ID.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialogText_ID.setHint("ID Number");
         builderID.setTitle("Enter new ID");
-
-
+        builderID.setView(dialogLayout_ID);
         builderID.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                if (inputID.getText().toString().matches("")) {
+                if (dialogText_ID.getText().toString().matches("")) {
                     Context context = getApplicationContext();
                     CharSequence text = "Calf ID cannot be left blank";
                     int duration = Toast.LENGTH_SHORT;
@@ -319,7 +318,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                if (inputID.length() > 9 || inputID.length() < 1) {
+                if (dialogText_ID.length() > 9 || dialogText_ID.length() < 1) {
                     Context context = getApplicationContext();
                     CharSequence text = "ID must be 9 digits or less";
                     int duration = Toast.LENGTH_SHORT;
@@ -327,8 +326,8 @@ public class CalfProfileActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                mIDValue.setText(inputID.getText().toString());
-                tempCalf.setFarmId(inputID.getText().toString());
+                mIDValue.setText(dialogText_ID.getText().toString());
+                tempCalf.setFarmId(dialogText_ID.getText().toString());
             }
         });
         builderID.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -395,15 +394,17 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderSire = new AlertDialog.Builder(this);
-        final EditText inputSire = new EditText(this);
-        inputSire.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputSire.setHint("Sire ID Number");
+        View dialogLayout_Sire = inflater.inflate(R.layout.custom_dialog_sire, null);
+        final EditText dialogText_Sire = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput_Sire);
+
+        dialogText_Sire.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialogText_Sire.setHint("Sire ID Number");
         builderSire.setTitle("Enter Sire ID");
-        builderSire.setView(inputSire);
+        builderSire.setView(dialogLayout_Sire);
         builderSire.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (inputSire.length() > 9 || inputSire.length() < 1) {
+                if (dialogText_Sire.length() > 9 || dialogText_Sire.length() < 1) {
                     Context context = getApplicationContext();
                     CharSequence text = "ID must be 9 digits or less";
                     int duration = Toast.LENGTH_SHORT;
@@ -411,8 +412,8 @@ public class CalfProfileActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                mSireValue.setText(inputSire.getText().toString());
-                tempCalf.setSire(inputSire.getText().toString());
+                mSireValue.setText(dialogText_Sire.getText().toString());
+                tempCalf.setSire(dialogText_Sire.getText().toString());
             }
         });
         builderSire.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -431,15 +432,18 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderDam = new AlertDialog.Builder(this);
-        final EditText inputDam = new EditText(this);
-        inputDam.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputDam.setHint("Dam ID Number");
+        View dialogLayout_Dam = inflater.inflate(R.layout.custom_dialog_dam, null);
+        final EditText dialogText_Dam = (EditText) dialogLayout_Dam.findViewById(R.id.dialogTextInput_Dam);
+
+        dialogText_Dam.setInputType(InputType.TYPE_CLASS_NUMBER);
+        dialogText_Dam.setHint("Dam ID Number");
         builderDam.setTitle("Enter Dam ID");
-        builderDam.setView(inputDam);
+        builderDam.setView(dialogText_Dam);
+        builderDam.setView(dialogLayout_Dam);
         builderDam.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (inputDam.length() > 9 || inputDam.length() < 1) {
+                if (dialogText_Dam.length() > 9 || dialogText_Dam.length() < 1) {
                     Context context = getApplicationContext();
                     CharSequence text = "ID must be 9 digits or less";
                     int duration = Toast.LENGTH_SHORT;
@@ -447,8 +451,8 @@ public class CalfProfileActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                mDamValue.setText(inputDam.getText().toString());
-                tempCalf.setDam(inputDam.getText().toString());
+                mDamValue.setText(dialogText_Dam.getText().toString());
+                tempCalf.setDam(dialogText_Dam.getText().toString());
             }
         });
         builderDam.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
