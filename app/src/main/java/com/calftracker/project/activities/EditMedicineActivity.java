@@ -60,6 +60,7 @@ public class EditMedicineActivity extends AppCompatActivity {
                 || timeActive.getText().toString().matches("")){
             Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
+            return;
         }
         else {
             Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,

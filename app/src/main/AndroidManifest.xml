@@ -36,7 +36,8 @@
         <activity android:name="com.calftracker.project.activities.EditIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.VaccineProfileActivity" />
         <activity android:name="com.calftracker.project.activities.IllnessProfileActivity" />
-        <activity android:name="com.calftracker.project.activities.MedicineProfileActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.MedicineProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.AddIllnessMedicineSelectionActivity" />
     </application>
 
 </manifest>

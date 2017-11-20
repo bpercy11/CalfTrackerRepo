@@ -132,4 +132,8 @@
         <item>Week</item>
         <item>Month</item>
     </string-array>
+    <string name="title_activity_add_illness_medicine_selection">
+        AddIllnessMedicineSelectionActivity
+    </string>
+    <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines</string>
 </resources>

@@ -49,77 +49,53 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="38dp"
         android:layout_marginRight="38dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="120dp"
         android:text="@string/EditIllness_illnessName"
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/editTextIllnessEnterName"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/EditIllness_TreatmentProtocol"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/listViewEditIllness"
-        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <Button
         android:id="@+id/EditIllnessAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
         android:onClick="clickAddIllnessButton"
         android:text="@string/EditIllness_AddButton"
-        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewEditIllness" />
-
-    <ListView
-        android:id="@+id/listViewEditIllness"
-        android:layout_width="wrap_content"
-        android:layout_height="247dp"
-        android:layout_marginTop="130dp"
-        android:choiceMode="multipleChoiceModal"
-        android:clickable="true"
-        android:divider="#d1d1d1"
-        android:dividerHeight="5dp"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/editTextIllnessEnterName"
-        app:layout_constraintStart_toStartOf="@+id/textViewIllnessName"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent" />
 
     <Button
         android:id="@+id/EditIllnessCancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="16dp"
-
+        android:layout_marginLeft="78dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="78dp"
         android:onClick="clickEditIllnessCancelButton"
         android:text="@string/EditIllness_cancelButton"
+        app:layout_constraintBottom_toBottomOf="@+id/EditIllnessAddButton"
         app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintStart_toEndOf="@+id/EditIllnessAddButton"
         app:layout_constraintTop_toTopOf="@+id/EditIllnessAddButton" />
 
     <Button
         android:id="@+id/EditIllnessAddNotesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="130dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="onIllness_Notes_AddButton"
+        android:layout_marginTop="20dp"
+        android:onClick="onAddNotesButton"
         android:text="Add Notes"
-        app:layout_constraintEnd_toStartOf="@+id/EditIllnessCancelButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/EditIllnessAddButton"
-        app:layout_constraintTop_toTopOf="@+id/EditIllnessAddButton" />
+        app:layout_constraintBottom_toTopOf="@+id/EditIllnessCancelButton"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIllnessEnterName" />
 
 </android.support.constraint.ConstraintLayout>

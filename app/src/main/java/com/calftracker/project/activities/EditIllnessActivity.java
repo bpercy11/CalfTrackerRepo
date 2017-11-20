@@ -1,15 +1,18 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +30,7 @@ import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +42,8 @@ public class EditIllnessActivity extends AppCompatActivity {
     private ListView lvTreatmentProtocolMedicines;
     private List<Illness> illnessList;
     private List<Medicine> medicineList;
-    private List<Medicine> tempMedicineList;
     private MedicineAdapter medicineAdapter;
+    private List<Medicine> tempMedicineList;
     private Button addNotesButton;
     final Context context = this;
 
@@ -49,53 +53,49 @@ public class EditIllnessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_illness);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessList")) {
+        if (mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
             String json = mPreferences.getString("IllnessList", "");
             illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
             }.getType());
-        } else { illnessList = new ArrayList<Illness>(); }
+        } else {
+            illnessList = new ArrayList<Illness>();
+        }
 
         SharedPreferences mPreferences1 = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences1.contains("MedicineList")) {
+        if (mPreferences1.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences1.edit();
 
             Gson gson1 = new Gson();
             String json1 = mPreferences1.getString("MedicineList", "");
             medicineList = gson1.fromJson(json1, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
-        } else { medicineList = new ArrayList<Medicine>(); }
+        } else {
+            medicineList = new ArrayList<Medicine>();
+        }
 
-        lvTreatmentProtocolMedicines = (ListView) findViewById(R.id.listViewEditIllness);
-      /*  medicineAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
-        lvTreatmentProtocolMedicines.setAdapter(medicineAdapter); */
 
-        medicineAdapter = new MedicineAdapter(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, medicineList);
-        lvTreatmentProtocolMedicines.setAdapter(medicineAdapter);
-       // lvTreatmentProtocolMedicines.setAdapter(new ArrayAdapter<Medicine>(this, android.R.layout.simple_list_item_multiple_choice, medicineList));
-        lvTreatmentProtocolMedicines.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL); // user HAS to interact with window before continuing
-        //lvTreatmentProtocolMedicines.setItemChecked();
+//        lvTreatmentProtocolMedicines = (ListView) findViewById(R.id.listViewEditIllness);
+//        MedicineAdapter newMedicineAdapter = new MedicineAdapter(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice,medicineList);
+//        lvTreatmentProtocolMedicines.setAdapter(newMedicineAdapter);
+//        lvTreatmentProtocolMedicines.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//
+//        lvTreatmentProtocolMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                Intent intent = new Intent(EditIllnessActivity.this, AddIllnessMedicineSelectionActivity.class);
+//                startActivity(intent);
+//
+//
+//            }
+//        });
+    }
+    public void onAddNotesButton(View view){
 
-        lvTreatmentProtocolMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*if(view.isSelected()) {
-                    view.setSelected(true);
-                    tempMedicineList.add(medicineList.get(position)); */
-                String selected = "";
-                int countChoice = lvTreatmentProtocolMedicines.getCount();
-                SparseBooleanArray sparseBooleanArray = lvTreatmentProtocolMedicines.getCheckedItemPositions();
-                for (int i = 0; i < countChoice; i++){
-                    if (sparseBooleanArray.get(i)){
-                        selected += lvTreatmentProtocolMedicines.getItemAtPosition(i).toString() + "\n";
-                    }
-                }
-                Toast.makeText(EditIllnessActivity.this, selected, Toast.LENGTH_LONG).show();
-            }
-        });
 
         addNotesButton = (Button) findViewById(R.id.EditIllnessAddNotesButton);
         // add button listener
@@ -149,23 +149,23 @@ public class EditIllnessActivity extends AppCompatActivity {
 
         if (illnessName.getText().toString().matches("")){
             Toast.makeText(EditIllnessActivity.this, R.string.EditIllnessActivity_emptyFieldMsg, Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // Make a new illness object
-        String name = illnessName.getText().toString();
-        Illness newIllness = new Illness(name, new Treatment_Protocol(tempMedicineList, illnessNotes));
-
-        illnessList.add(newIllness);
-
-        // SAVE NEW Medicine
+        // save the illness name/notes to local storage
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList", json);
+        String json = gson.toJson(illnessName);
+        prefsEditor.putString("Illness Name", json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(this, IllnessActivity.class);
+        prefsEditor = mPrefs.edit();
+        json = gson.toJson(illnessNotes);
+        prefsEditor.putString("Illness Notes", json);
+        prefsEditor.apply();
+
+        Intent intent = new Intent(EditIllnessActivity.this, AddIllnessMedicineSelectionActivity.class);
         startActivity(intent);
 
     }

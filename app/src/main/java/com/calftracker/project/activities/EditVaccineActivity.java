@@ -72,6 +72,7 @@ public class EditVaccineActivity extends AppCompatActivity {
                 || adminMethod.getText().toString().matches("")){
             Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
+            return;
         }
         else {
             Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
