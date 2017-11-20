@@ -19,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/medicine_profile_medicine_nameData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_medicine_name"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_medicine_name"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_medicine_name" />
+
+    <TextView
         android:id="@+id/medicine_profile_dosage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +40,17 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicine_profile_medicine_name" />
+
+    <TextView
+        android:id="@+id/medicine_profile_dosageData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_dosage"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_dosage"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_dosage" />
 
     <TextView
         android:id="@+id/medicine_profile_dosageUnits"
@@ -43,7 +65,18 @@
         app:layout_constraintTop_toBottomOf="@+id/medicine_profile_dosage" />
 
     <TextView
-        android:id="@+id/medicine_profile_adminMethod"
+        android:id="@+id/medicine_profile_dosageUnitsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_dosageUnits"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_dosageUnits"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_dosageUnits" />
+
+    <TextView
+        android:id="@+id/medicine_profile_timeActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -54,6 +87,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicine_profile_dosageUnits" />
 
-
+    <TextView
+        android:id="@+id/medicine_profile_timeActiveData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_timeActive"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_timeActive"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_timeActive" />
 
 </android.support.constraint.ConstraintLayout>

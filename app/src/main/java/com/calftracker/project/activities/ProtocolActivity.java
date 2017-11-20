@@ -47,6 +47,14 @@ public class ProtocolActivity extends BaseActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(vaccineList.get(position));
+                prefsEditor.putString("VaccineProfile",json);
+                prefsEditor.apply();
+
                 Intent intent = new Intent(ProtocolActivity.this, VaccineProfileActivity.class);
                 startActivity(intent);
             }
