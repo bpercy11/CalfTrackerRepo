@@ -73,6 +73,8 @@
     <string name="edit_medicine_cancel_button">Cancel</string>
     <string name="edit_medicine_enter_dosage">Enter Dosage</string>
     <string name="edit_medicine_enter_units">Enter Units</string>
+    <string name="edit_medicine_add_button">Add</string>
+    <string name="edit_medicine_notes_button">Add Note</string>
 
 
     <string name="enter_range">Range</string>
@@ -123,6 +125,7 @@
     <string name="medicine_profile_dosage">Dosage:</string>
     <string name="medicine_profile_dosageUnits">Dosage Units:</string>
     <string name="medicine_profile_timeActive">Time Active:</string>
+    <string name="medicine_profile_notes">Notes:</string>
     <string name="illness_profile_name">Illness Name:</string>
     <string name="illness_profile_treatment">Treatment:</string>
     <string name="illness_profile_notes">Notes:</string>

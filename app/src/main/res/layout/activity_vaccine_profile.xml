@@ -19,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/vaccine_profile_vaccine_nameData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_vaccine_name"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_vaccine_name"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_vaccine_name" />
+
+    <TextView
         android:id="@+id/vaccine_profile_vacc_range"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,6 +54,17 @@
         app:layout_constraintTop_toBottomOf="@+id/vaccine_profile_vacc_range" />
 
     <TextView
+        android:id="@+id/vaccine_profile_adminStartData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_adminStart"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_adminStart"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_adminStart" />
+
+    <TextView
         android:id="@+id/vaccine_profile_adminEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,6 +75,17 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vaccine_profile_adminStart" />
+
+    <TextView
+        android:id="@+id/vaccine_profile_adminEndData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_adminEnd"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_adminEnd"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_adminEnd" />
 
     <TextView
         android:id="@+id/vaccine_profile_dosage"
@@ -67,6 +100,17 @@
         app:layout_constraintTop_toBottomOf="@+id/vaccine_profile_adminEnd" />
 
     <TextView
+        android:id="@+id/vaccine_profile_dosageData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_dosage"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_dosage"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_dosage" />
+
+    <TextView
         android:id="@+id/vaccine_profile_dosageUnits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,6 +123,17 @@
         app:layout_constraintTop_toBottomOf="@+id/vaccine_profile_dosage" />
 
     <TextView
+        android:id="@+id/vaccine_profile_dosageUnitsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_dosageUnits"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_dosageUnits"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_dosageUnits" />
+
+    <TextView
         android:id="@+id/vaccine_profile_adminMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,5 +144,16 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vaccine_profile_dosageUnits" />
+
+    <TextView
+        android:id="@+id/vaccine_profile_adminMethodData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccine_profile_adminMethod"
+        app:layout_constraintStart_toEndOf="@+id/vaccine_profile_adminMethod"
+        app:layout_constraintTop_toTopOf="@+id/vaccine_profile_adminMethod" />
 
 </android.support.constraint.ConstraintLayout>

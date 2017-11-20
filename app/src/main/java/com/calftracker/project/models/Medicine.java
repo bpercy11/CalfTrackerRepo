@@ -6,6 +6,7 @@ public class Medicine {
 	private double dosage;
 	private String dosage_units;
 	private int timeActive;
+	private String notes;
 
 	
 	/**
@@ -13,13 +14,15 @@ public class Medicine {
 	 * @param dosage
 	 * @param dosage_units
 	 * @param timeActive
+	 * @param notes
 	 */
-	public Medicine(String name, double dosage, String dosage_units, int timeActive) {
+	public Medicine(String name, double dosage, String dosage_units, int timeActive, String notes) {
 		super();
 		this.name = name;
 		this.dosage = dosage;
 		this.dosage_units = dosage_units;
 		this.timeActive = timeActive;
+		this.notes = notes;
 	}
 
 	/**
@@ -78,8 +81,22 @@ public class Medicine {
 		this.timeActive = timeActive;
 	}
 
+	/**
+	 * @return the notes
+	 */
+	public String getNotes() {
+		return notes;
+	}
+
+	/**
+	 * @param notes the notes to set
+	 */
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
 	public Medicine createMedicine(String name, Double dosage, String dosage_units, int timeActive,
 								   String frequency){
-		return new Medicine(name,dosage,dosage_units,timeActive);
+		return new Medicine(name, dosage, dosage_units, timeActive, notes);
 	}
 }

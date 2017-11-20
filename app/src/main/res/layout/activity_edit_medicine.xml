@@ -24,8 +24,8 @@
         android:id="@+id/edit_medicine_textViewMedicineActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/edit_medicine"
@@ -43,17 +43,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/vertical10percent"
         app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewMedicineActivity" />
-<!--
-    <TextView
-        android:id="@+id/edit_medicine_textViewTreatment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/edit_medicine_treatment_name"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewEditMedicine" />
--->
+
     <TextView
         android:id="@+id/edit_medicine_textViewDosage"
         android:layout_width="wrap_content"
@@ -89,40 +79,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:textAlignment="textEnd"
         android:ems="10"
         android:hint="@string/edit_medicine_enter_medicine"
         android:inputType="text"
+        android:textAlignment="textEnd"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewEditMedicine"
         app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
         app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewEditMedicine" />
-<!--
-    <EditText
-        android:id="@+id/edit_medicine_editTextTreatment"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/edit_medicine_enter_treatment"
-        android:layout_gravity="end"
-        android:textAlignment="textEnd"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewTreatment"
-        app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextMedicine"
-        app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewTreatment" />
--->
+
     <EditText
         android:id="@+id/edit_medicine_editTextDosage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/edit_medicine_enter_dosage"
-        android:layout_gravity="end"
-        android:textAlignment="textEnd"
         android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewDosage"
         app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextMedicine"
@@ -162,11 +137,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="65dp"
         android:onClick="clickAddMedicineButton"
-        android:text="ADD"
+        android:text="@string/edit_medicine_add_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/edit_medicine_textViewEditMedicine"
         app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewTimeActive" />
@@ -175,14 +148,26 @@
         android:id="@+id/edit_medicine_buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:onClick="clickCancelButton"
         android:text="@string/edit_medicine_cancel_button"
         app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextMedicine"
-        app:layout_constraintTop_toTopOf="@+id/edit_medicine_buttonAdd" />
+        app:layout_constraintTop_toTopOf="@+id/edit_medicine_buttonAdd"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/edit_medicine_buttonNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="clickNotesButton"
+        android:text="@string/edit_medicine_notes_button"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_buttonAdd"
+        app:layout_constraintEnd_toStartOf="@+id/edit_medicine_buttonCancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/edit_medicine_buttonAdd"
+        app:layout_constraintTop_toTopOf="@+id/edit_medicine_buttonAdd" />
 
 
 </android.support.constraint.ConstraintLayout>

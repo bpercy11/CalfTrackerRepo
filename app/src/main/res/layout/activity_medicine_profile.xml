@@ -98,4 +98,28 @@
         app:layout_constraintStart_toEndOf="@+id/medicine_profile_timeActive"
         app:layout_constraintTop_toTopOf="@+id/medicine_profile_timeActive" />
 
+    <TextView
+        android:id="@+id/medicine_profile_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/medicine_profile_notes"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_timeActive" />
+
+    <TextView
+        android:id="@+id/medicine_profile_notesData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_notes" />
+
+
 </android.support.constraint.ConstraintLayout>

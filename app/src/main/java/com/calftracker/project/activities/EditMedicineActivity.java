@@ -1,6 +1,8 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
@@ -8,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,9 @@ public class EditMedicineActivity extends AppCompatActivity {
     private EditText dosageUnits;
     private EditText timeActive;
     private List<Medicine> medicineList;
+    private Button notesButton;
+    private String medicineNotes;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +51,6 @@ public class EditMedicineActivity extends AppCompatActivity {
             medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
-
-       // dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void clickAddMedicineButton(View view){
@@ -72,8 +77,9 @@ public class EditMedicineActivity extends AppCompatActivity {
         String dosageUnitsStr = dosageUnits.getText().toString();
         int timeActiveInt = Integer.parseInt(timeActive.getText().toString());
 
+
         // MAKE A NEW Medicine OBJECT
-        Medicine medicine = new Medicine(nameStr,dosageDbl,dosageUnitsStr,timeActiveInt);
+        Medicine medicine = new Medicine(nameStr,dosageDbl,dosageUnitsStr,timeActiveInt,medicineNotes);
 
         medicineList.add(medicine);
 
@@ -87,6 +93,46 @@ public class EditMedicineActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
+    }
+    public void clickNotesButton(View view){
+
+        notesButton = (Button) findViewById(R.id.edit_medicine_buttonNote);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set title
+                alertDialogBuilder.setTitle("Please enter a note");
+                final EditText input = new EditText(EditMedicineActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialogBuilder.setView(input);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Done",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                medicineNotes = input.getText().toString();
+                                // if this button is clicked, close
+                                // current activity
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
     }
 
     public void clickCancelButton(View view){
