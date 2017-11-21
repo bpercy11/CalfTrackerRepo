@@ -1,18 +1,15 @@
 package com.calftracker.project.activities;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
@@ -22,19 +19,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EditVaccineActivity extends AppCompatActivity {
+public class EditVaccineProfileActivity extends BaseActivity {
 
-    private AlertDialog alertDialog;
-    private TextView vaccineName;
-    private TextView dosage;
-    private TextView dosageUnits;
-    private TextView adminStart;
-    private TextView adminEnd;
-    private TextView adminMethod;
+    private Vaccine vaccine;
+    private int vaccinePosition;
     private ArrayList<Vaccine> vaccineList;
     private ArrayList<Vacc_Range> vaccRange;
     private int[] range;
+    private int[] preRange;
     private int adminStartInteger;
     private String[] dropDownItems;
     private Spinner dropDown;
@@ -43,12 +37,19 @@ public class EditVaccineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_vaccine);
+        getLayoutInflater().inflate(R.layout.activity_edit_vaccine, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
-        EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
-        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("VaccineProfile")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("VaccineProfile", "");
+            vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {
+            }.getType());
+        } else { }
 
         if(mPreferences.contains("VaccineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -57,22 +58,42 @@ public class EditVaccineActivity extends AppCompatActivity {
             String json = mPreferences.getString("VaccineList", "");
             vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
-        } else { vaccineList = new ArrayList<Vaccine>(); }
+        } else { }
 
+        for (int i = 0; i < vaccineList.size(); i++){
+            if(vaccineList.get(i).getName().equals(vaccine.getName())){
+                vaccinePosition = i;
+            }
+        }
 
         //get the spinner from the xml.
         dropDown = (Spinner)findViewById(R.id.edit_vaccine_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vacc_range_spinner, android.R.layout.simple_spinner_dropdown_item);
-        // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        dropDown.setAdapter(adapter);
-
         dropDown1 = (Spinner)findViewById(R.id.edit_vaccine_spinner1);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vacc_range_spinner, android.R.layout.simple_spinner_dropdown_item);
+        dropDown.setAdapter(adapter);
         dropDown1.setAdapter(adapter);
 
+        EditText vaccineName = (EditText) findViewById(R.id.edit_vaccine_editTextName);
+        EditText adminStart = (EditText) findViewById(R.id.edit_vaccine_editTextAdminStart);
+        EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminEnd);
+        EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
+        EditText dosageUnits = (EditText) findViewById(R.id.edit_vaccine_editTextDosageUnits);
+        EditText adminMethod = (EditText) findViewById(R.id.edit_vaccine_editTextAdminMethod);
+
+
+        vaccineName.setText(vaccine.getName());
+        preRange = vaccine.getToBeAdministered().get(0).getSpan();
+        adminStart.setText(Integer.toString(preRange[0]));
+        adminEnd.setText(Integer.toString(preRange[1]));
+        dosage.setText(Double.toString(vaccine.getDosage()));
+        dosageUnits.setText(vaccine.getDosageUnits());
+        adminMethod.setText(vaccine.getMethodOfAdministration());
     }
 
     public void clickAddVaccineButton(View view){
+
+        vaccineList.remove(vaccinePosition);
+
         EditText vaccine = (EditText) findViewById(R.id.edit_vaccine_editTextName);
         EditText adminStart = (EditText) findViewById(R.id.edit_vaccine_editTextAdminStart);
         EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminEnd);
@@ -114,17 +135,17 @@ public class EditVaccineActivity extends AppCompatActivity {
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
                 || adminMethod.getText().toString().matches("")){
-            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(EditVaccineProfileActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else if(adminEndInt <= adminStartInt){
-            Toast.makeText(EditVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
+            Toast.makeText(EditVaccineProfileActivity.this, R.string.edit_vaccine_vacc_range_error,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else{
-            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+            Toast.makeText(EditVaccineProfileActivity.this, R.string.vaccine_successful,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -152,7 +173,7 @@ public class EditVaccineActivity extends AppCompatActivity {
     }
 
     public void clickCancelVaccineButton(View view){
-        Intent intent = new Intent(EditVaccineActivity.this,ProtocolActivity.class);
+        Intent intent = new Intent(EditVaccineProfileActivity.this,VaccineProfileActivity.class);
         startActivity(intent);
     }
 }
