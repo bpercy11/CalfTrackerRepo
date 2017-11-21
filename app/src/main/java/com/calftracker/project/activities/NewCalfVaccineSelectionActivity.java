@@ -58,7 +58,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         // set up shared preference variables
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
         Gson gson = new Gson();
         String json;
 
@@ -136,8 +135,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             for (int i = 0; i < adapterArray.size(); i++) {
                 if (adapterArray.get(i).getChecked()) {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
-                    //vaccineList.get(i).getVaccineCalves().add(calf);
 
+                    // Set up variables to be used in calculating dates and differences
                     int calfYear = calfCal.get(Calendar.YEAR);
                     int calfMonth = calfCal.get(Calendar.MONTH);
                     int calfDay = calfCal.get(Calendar.DATE);
@@ -145,21 +144,20 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
                     int todayMonth = Calendar.getInstance().get(Calendar.MONTH);
                     int todayDay = Calendar.getInstance().get(Calendar.DATE);
                     Calendar today = Calendar.getInstance();
-                    //Calendar tempDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
                     Calendar startDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
                     Calendar endDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
                     startDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
                     endDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
 
-                    int startYear = startDate.get(Calendar.YEAR);
-                    int startMonth = startDate.get(Calendar.MONTH);
-                    int startDay = startDate.get(Calendar.DATE);
-                    int endYear = endDate.get(Calendar.YEAR);
-                    int endMonth = endDate.get(Calendar.MONTH);
-                    int endDay = endDate.get(Calendar.DATE);
+//                    int startYear = startDate.get(Calendar.YEAR);
+//                    int startMonth = startDate.get(Calendar.MONTH);
+//                    int startDay = startDate.get(Calendar.DATE);
+//                    int endYear = endDate.get(Calendar.YEAR);
+//                    int endMonth = endDate.get(Calendar.MONTH);
+//                    int endDay = endDate.get(Calendar.DATE);
 
-                    int diff = 0; // The number of days between today and when the calf was born
-
+                    // Calculate the number of days between today and the calf's DOB
+                    int diff = 0;
                     if (todayMonth == calfMonth) {
                         diff = Math.abs(todayDay - calfDay);
                     } else if (todayMonth > calfMonth) {
@@ -176,7 +174,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
                     }
 
                     // Testing stuff for dates and adding days
-
 //                    //Log.i("", "today : " + startMonth + "/" + startDay + "/" + startYear);
 //                    Log.i("vaccine", "vaccine : " + vaccineList.get(i).getName());
 //                    Log.i("startint", "start int : " + adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
@@ -196,16 +193,13 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
                 }
             }
-            //task.getCalvesToObserve().add(calf);
-
         }
-
         calf.setFeedingHistory(new Feeding[2]);
 
         // gotta add it to the list
         calfList.add(calf);
 
-        // Save the calfList to local storage
+        // Save the calfList, task, and vaccineList to local storage
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();

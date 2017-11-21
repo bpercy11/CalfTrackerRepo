@@ -29,12 +29,12 @@ public class TaskDetailsActivity extends AppCompatActivity {
     ArrayList<TaskDetailsCalfSelectionItem> adapterArray;
     TaskDetailsAdapter adapter;
 
-    private ArrayList<Vaccine> vaccineList;
     private Vaccine vaccine;
     private ArrayList<Calf> calfList;
     private TextView vaccName;
     private Calf calf;
     private Task task;
+    ArrayList<VaccineTask> todayTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +58,11 @@ public class TaskDetailsActivity extends AppCompatActivity {
         json = mPreferences.getString("Task", "");
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
 
-        // get vaccine list from shared preferences
-        json = mPreferences.getString("VaccineList", "");
-        vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {}.getType());
         adapterArray = new ArrayList<>();
         ArrayList<Calf> vaccineCalfList = new ArrayList<>();
-        ArrayList<VaccineTask> todayTasks = task.getVaccinesToAdminister().get(0);
+        todayTasks = task.getVaccinesToAdminister().get(0);
 
-//        for (int i = 0; i < calfList.size(); i++) {
-//            for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
-//                if (calfList.get(i).getNeededVaccines().get(j).getName().equals(vaccine.getName())) {
-//                    vaccineCalfList.add(calfList.get(i));
-//                    break;
-//                }
-//            }
-//        }
+        // Add the eligible calves for this vaccine to a list
         for (int i = 0; i < todayTasks.size(); i++) {
             if (todayTasks.get(i).getVaccine().getName().equals(vaccine.getName())) {
                 vaccineCalfList.add(todayTasks.get(i).getCalf());
@@ -106,14 +96,17 @@ public class TaskDetailsActivity extends AppCompatActivity {
     }
 
     public void onClickConfirm(View view) {
+        // Check through each item in the array to see if it is checked
         for (int i = 0; i < adapterArray.size(); i++) {
             if (adapterArray.get(i).getChecked()) {
+                // Get the specific calf from the calfList
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(adapterArray.get(i).getId())) {
                         calf = calfList.get(j);
                         break;
                     }
                 }
+                // Update the calf's needed/administered vaccine fields
                 for(int j = 0; j < calf.getNeededVaccines().size(); j++) {
                     if (calf.getNeededVaccines().get(j).getName().equals(vaccine.getName())) {
                         calf.getNeededVaccines().remove(j);
@@ -127,11 +120,21 @@ public class TaskDetailsActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                for (int j = 0; j < todayTasks.size(); j++) {
+                    if (todayTasks.get(j).getCalf().getFarmId().equals(calf.getFarmId())) {
+                        todayTasks.remove(j);
+                    }
+                }
+                // Save the calf to the device
                 SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(calfList);
                 prefsEditor.putString("CalfList",json);
+                prefsEditor.apply();
+
+                json = gson.toJson(task);
+                prefsEditor.putString("Task",json);
                 prefsEditor.apply();
 
                 adapter.notifyDataSetChanged();

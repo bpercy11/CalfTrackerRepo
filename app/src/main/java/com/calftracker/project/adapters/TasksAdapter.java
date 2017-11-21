@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class TasksAdapter extends BaseAdapter{
     private Context context;
-    private ArrayList<VaccineTask> tasks;
+    private ArrayList<VaccineTask> todayTasks;
     private LayoutInflater inflater;
     private boolean isElligble = false;
     private ArrayList<Calf> calfList;
@@ -38,21 +38,21 @@ public class TasksAdapter extends BaseAdapter{
 
     public TasksAdapter(Context context, ArrayList<VaccineTask> tasks, ArrayList<Calf> calfList) {
         this.context = context;
-        this.tasks = tasks;
+        this.todayTasks = tasks;
         this.inflater = LayoutInflater.from(context);
         this.calfList = calfList;
     }
 
     @Override
-    public int getCount() {return tasks.size();}
+    public int getCount() {return todayTasks.size();}
     @Override
-    public VaccineTask getItem(int i) {return tasks.get(i);}
+    public VaccineTask getItem(int i) {return todayTasks.get(i);}
     @Override
     public long getItemId(int i) {return i;}
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        VaccineTask task = this.tasks.get(position);
+        VaccineTask task = this.todayTasks.get(position);
         boolean vaccUsed = false;
         for (int i = 0; i < usedVaccNames.size(); i++) {
             if (usedVaccNames.get(i).equals(task.getVaccine().getName())) {
@@ -83,12 +83,16 @@ public class TasksAdapter extends BaseAdapter{
 //                    }
 //                }
 //            }
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getVaccine().getName().equals(currVacc.getName())) {
-                    elligibleCount++;
+            for (int i = 0; i < todayTasks.size(); i++) {
+                if (todayTasks.get(i).getVaccine().getName().equals(currVacc.getName())) {
+                    for (int j = 0; j < todayTasks.get(i).getCalf().getNeededVaccines().size(); j++) {
+                        if (todayTasks.get(i).getCalf().getNeededVaccines().get(j).getName().equals(currVacc.getName())) {
+                            elligibleCount++;
+                        }
+                    }
                 }
             }
-            holder.vaccine.setText(tasks.get(position).getVaccine().getName());
+            holder.vaccine.setText(todayTasks.get(position).getVaccine().getName());
             holder.elligible.setText(Integer.toString(elligibleCount));
             usedVaccNames.add(currVacc.getName());
             holder.vaccine.setOnClickListener(new View.OnClickListener() {

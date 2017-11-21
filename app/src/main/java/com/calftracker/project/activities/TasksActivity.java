@@ -35,21 +35,18 @@ public class TasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
+        // Load in the Task and CalfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = mPreferences.getString("Task", "");
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
-
         json = mPreferences.getString("CalfList", "");
         calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
 
+        // ArrayList that holds all of the Vaccine Tasks for the current day
         ArrayList<VaccineTask> todayTasks = task.getVaccinesToAdminister().get(0);
 
-        List<Vaccine> allVaccines = new ArrayList<Vaccine>();
-        for (int i = 0; i < todayTasks.size(); i++) {
-            allVaccines.add(todayTasks.get(i).getVaccine());
-        }
-
+        // Create the ListView and create a header message for the activity
         listView = (ListView) findViewById(R.id.listViewTasks);
         Calendar today = Calendar.getInstance();
         int year = today.get(Calendar.YEAR);
