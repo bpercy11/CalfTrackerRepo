@@ -9,12 +9,16 @@
     <string name="add_calf_ID_Number">ID Number</string>
     <string name="add_calf_gender">Gender</string>
     <string name="add_calf_DOB">Date of Birth</string>
-    <string name="add_calf_add_button">Add</string>
-    <string name="add_calf_next_button">Next</string>
+    <string name="add_calf_add_button">Next</string>
     <string name="add_calf_get_ID">Enter ID Number</string>
     <string name="add_calf_select_date">Select a date</string>
     <string name="add_calf_select_gender">Select gender</string>
+    <string name="add_calf_take_photo">Add photo</string>
 
+
+    <string name="calf_profile_add_photo">Add Photo</string>
+    <string name="calf_profile_delete_photo">Delete Photo</string>
+    <string name="calf_profile_change_photo">Change Photo</string>
     <string name="calf_profile_ID_field">ID Number</string>
     <string name="calf_profile_gender_field">Gender</string>
     <string name="calf_profile_DOB_field">Date of Birth</string>
@@ -37,6 +41,7 @@
     <string name="calf_profile_no_weight">No Record</string>
     <string name="calf_profile_no_height">No Record</string>
     <string name="calf_profile_delete_calf">Delete Calf</string>
+
 
     <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
     <string name="calf_profile_medical_history_illness_button">Illnesses</string>
@@ -66,6 +71,7 @@
     <string name="options_menu_calf_list_search">Search</string>
     <string name="options_menu_calf_list_search_hint">Search</string>
 
+    <string name="calf_list_title">Calf List</string>
     <string name="calf_list_search_bar_hint">Search</string>
 
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
@@ -117,6 +123,11 @@
 
     <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
     <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
+
+    <string name="protocols_title">Protocols</string>
+    <string name="protocols_vaccine_edit">Edit Vaccine</string>
+    <string name="protocols_medicine_edit">Edit Medicine</string>
+    <string name="protocols_illness_edit">Edit Illness</string>
 
     <string-array name="vacc_range_spinner">
         <item>Day</item>

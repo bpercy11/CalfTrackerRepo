@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +44,9 @@ public class CalfListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_calf_list, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_list).setChecked(true);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.calf_list_title);
 
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.calfListParent));
@@ -128,7 +133,12 @@ public class CalfListActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,DashboardActivity.class);
-        startActivity(intent);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
     }
 }

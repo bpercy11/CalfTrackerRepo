@@ -8,21 +8,33 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Base64;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -44,11 +56,24 @@ public class AddCalfActivity extends BaseActivity {
     private AlertDialog alert;
     private String calfGender;
 
+    // variables related to taking a photo
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ImageView mPhoto;
+    private String encodedImage;
+    private ConstraintLayout mConstraintLayout;
+    private Button mButtonAddPhoto;
+    private Button mButtonDeletePhoto;
+    private Button mButtonChangePhoto;
+    private int dp32;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_add_calf, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_add).setChecked(true);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.add_calf_title);
 
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.addCalfParent));
@@ -62,6 +87,20 @@ public class AddCalfActivity extends BaseActivity {
         // get needed UI elements
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
         mGender = (TextView) findViewById(R.id.textViewSelectGender);
+        mPhoto = (ImageView) findViewById(R.id.imageViewCaptured);
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.addCalfLayout);
+        mButtonAddPhoto = (Button) findViewById(R.id.buttonNewAddPhoto);
+        mButtonDeletePhoto = (Button) findViewById(R.id.buttonNewDeletePhoto);
+        mButtonChangePhoto = (Button) findViewById(R.id.buttonNewChangePhoto);
+
+        // Calculate 32dp in pixels, to be used when changing margins for photo tools
+        Resources r = getResources();
+        dp32 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, r.getDisplayMetrics());
+
+        // Hide photo buttons except for add
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        mPhoto.setVisibility(View.GONE);
 
         // when the date entry field is clicked open a dialog for the user
         // to select a date, using the android datepicker fragment
@@ -191,6 +230,18 @@ public class AddCalfActivity extends BaseActivity {
         prefsEditor.putString("newCalfGender",json);
         prefsEditor.apply();
 
+        // save calf image
+        if (encodedImage != null) {
+            json = gson.toJson(encodedImage);
+            prefsEditor.putString("newCalfPhoto",json);
+            prefsEditor.apply();
+        }
+        else {
+            json = gson.toJson(null);
+            prefsEditor.putString("newCalfPhoto",json);
+            prefsEditor.apply();
+        }
+
         // save calf calendar
         json = gson.toJson(calfCal);
         prefsEditor.putString("newCalfCal",json);
@@ -206,5 +257,75 @@ public class AddCalfActivity extends BaseActivity {
     public void clickCancelButton(View view) {
         Intent intent = new Intent(this,DashboardActivity.class);
         startActivity(intent);
+    }
+
+    // Take a photo
+    public void onClickAddPhotoButton(View view) {
+        dispatchTakePictureIntent();
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            mButtonAddPhoto.setVisibility(View.GONE);
+            mPhoto.setVisibility(View.VISIBLE);
+            mButtonDeletePhoto.setVisibility(View.VISIBLE);
+            mButtonChangePhoto.setVisibility(View.VISIBLE);
+            showDeleteChangePhotoButton();
+
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // Set image thumbnail
+            mPhoto.setImageBitmap(imageBitmap);
+
+            // Prepare image for saving
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        }
+    }
+
+    public void onClickDeletePhotoButton(View view) {
+        mPhoto.setVisibility(View.GONE);
+        mButtonDeletePhoto.setVisibility(View.GONE);
+        mButtonChangePhoto.setVisibility(View.GONE);
+        showAddPhotoButton();
+    }
+
+    public void showAddPhotoButton() {
+        mButtonAddPhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDNumber, ConstraintSet.TOP, mButtonAddPhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    public void showDeleteChangePhotoButton() {
+        mButtonDeletePhoto.setVisibility(View.VISIBLE);
+        mButtonChangePhoto.setVisibility(View.VISIBLE);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.connect(R.id.textViewIDNumber, ConstraintSet.TOP, mButtonDeletePhoto.getId(), ConstraintSet.BOTTOM, dp32);
+        set.applyTo(mConstraintLayout);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
     }
 }

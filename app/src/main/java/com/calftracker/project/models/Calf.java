@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Calf {
+	private String photo;
 	private String farmId;
 	private int internalId;
 	private String gender;
@@ -26,10 +27,11 @@ public class Calf {
 	 * @param dateOfBirth
 	 * @param neededVaccines
 	 */
-	public Calf(String farmId, int internalId, String gender, Calendar dateOfBirth,
+	public Calf(String photo, String farmId, int internalId, String gender, Calendar dateOfBirth,
 			ArrayList<Vaccine> neededVaccines) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
+		this.photo = photo;
 		this.farmId = farmId;
 		this.internalId = internalId;
 		this.gender = gender;
@@ -49,9 +51,10 @@ public class Calf {
 	}
 
 	//LAZY WITHOUT INTERNAL AND USING CALENDAR
-	public Calf(String farmId, String gender, Calendar dateOfBirth) {
+	public Calf(String photo, String farmId, String gender, Calendar dateOfBirth) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
+        this.photo = photo;
 		this.farmId = farmId;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
@@ -67,6 +70,18 @@ public class Calf {
 		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
+	}
+
+	/**
+	 * @return the photo
+	 */
+	public String getPhoto() { return photo; }
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	/**

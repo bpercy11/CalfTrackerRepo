@@ -29,52 +29,49 @@
         android:layout_marginRight="16dp"
         android:clickable="true"
         android:onClick="clickEditButton"
-        android:tint="@android:color/white"
         android:src="@drawable/ic_edit_black_24dp"
+        android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:rippleColor="@color/common_google_signin_btn_text_light_pressed" />
 
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"
-        android:text="Cancel"
-        android:visibility="invisible"
-        android:onClick="clickCancelButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical33percentparent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonApply"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Apply"
-        android:visibility="invisible"
-        android:onClick="clickApplyButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical66percentparent" />
-
     <ScrollView
+        android:id="@+id/calfProfileScrollLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/calfProfileLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:onClick="clickCancelButton"
+                android:text="Cancel"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDamField" />
+
+            <Button
+                android:id="@+id/buttonApply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:onClick="clickApplyButton"
+                android:text="Apply"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/buttonCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
+                app:layout_constraintTop_toTopOf="@id/buttonCancel" />
 
             <Button
                 android:id="@+id/buttonDeleteCalf"
@@ -82,8 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="32dp"
-
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="32dp"
                 android:background="@color/colorPrimaryDark"
                 android:elevation="0dp"
                 android:onClick="clickDeleteCalf"
@@ -97,7 +94,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDamField" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonCancel"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <android.support.constraint.Guideline
                 android:id="@+id/vertical10percent"
@@ -135,26 +133,16 @@
                 app:layout_constraintGuide_percent=".5" />
 
             <TextView
-                android:id="@+id/textViewIMAGEPLACEHOLDER"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="IMAGE PLACEHOLDER"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/textViewIDField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/calf_profile_ID_field"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIMAGEPLACEHOLDER" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewGenderField"
@@ -247,9 +235,9 @@
                 android:id="@+id/textViewDOBValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="start"
                 android:text="DOB VALUE"
                 android:textAlignment="textStart"
-                android:gravity="start"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDOBField"
                 app:layout_constraintStart_toStartOf="@+id/vertical50percent"
@@ -264,6 +252,20 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textViewSireField"
                 app:layout_constraintStart_toStartOf="@+id/textViewIDValue"
                 app:layout_constraintTop_toTopOf="@+id/textViewSireField" />
+
+            <ListView
+                android:id="@+id/listViewNotes"
+                android:layout_width="0dp"
+                android:layout_height="270dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewNote" />
 
             <TextView
                 android:id="@+id/textViewDamValue"
@@ -299,8 +301,8 @@
                 android:id="@+id/buttonGrowthHistory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="30dp"
                 android:onClick="onClickGrowthHistory"
                 android:text="@string/calf_profile_growth_history_button"
@@ -328,9 +330,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="30dp"
                 android:onClick="onClickMedicalHistory"
                 android:text="@string/calf_profile_medical_history_button"
@@ -345,9 +347,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="40dp"
                 android:text="@string/calf_profile_notes_field"
                 android:textAlignment="textStart"
@@ -373,70 +375,74 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintForNotesListView"
-                android:layout_width="0dp"
-                android:layout_height="270dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/calf_profile_simple_border"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewNote"
-                app:layout_constraintBottom_toBottomOf="parent" >
-
-                <ListView
-                    android:id="@+id/listViewNotes"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="4dip"
-                    android:layout_marginRight="4dip"
-                    android:layout_marginStart="2dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginTop="2dip"
-                    android:layout_marginBottom="2dip"
-                    android:nestedScrollingEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
-
-
             <Button
                 android:id="@+id/buttonAddWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="40dp"
                 android:onClick="onClickAddWeight"
                 android:text="@string/calf_profile_record_weight_button"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@+id/CenterLine"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
 
             <Button
                 android:id="@+id/buttonAddHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
                 android:onClick="onClickAddHeight"
                 android:text="@string/calf_profile_record_height_button"
                 android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/CenterLine"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeightField" />
+
+            <ImageView
+                android:id="@+id/calfPhoto"
+                android:layout_width="165dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonAddPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:onClick="onClickAddPhotoButton"
+                android:text="@string/calf_profile_add_photo"
+                android:textAllCaps="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonDeletePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="onClickDeletePhotoButton"
+                android:text="@string/calf_profile_delete_photo"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toStartOf="@+id/vertical10percent"
+                app:layout_constraintTop_toBottomOf="@+id/calfPhoto" />
+
+            <Button
+                android:id="@+id/buttonChangePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:onClick="onClickAddPhotoButton"
+                android:text="@string/calf_profile_change_photo"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonDeletePhoto"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
+                app:layout_constraintTop_toTopOf="@+id/buttonDeletePhoto" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
