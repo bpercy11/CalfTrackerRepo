@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.calftracker.project.activities.SettingsEditFarmActivity">
+    tools:context="com.calftracker.project.activities.SettingsChangeFarmInfoActivity">
 
     <EditText
-        android:id="@+id/settingsFarmOwnerText"
+        android:id="@+id/farmOwnerChangeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/settingsFarmLocationText"
+        android:id="@+id/farmLocationChangeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/settingsFarmNameText"
+        android:id="@+id/farmNameChangeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -61,15 +61,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/EditFarmEditFieldsBtn"
+        android:id="@+id/EditFarmSaveFieldsBtn"
         android:layout_width="134dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Edit"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -77,47 +79,35 @@
         android:layout_width="145dp"
         android:layout_height="33dp"
         android:layout_marginBottom="58dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="108dp"
-        android:layout_marginStart="8dp"
         android:text="Farm Location"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/settingsFarmLocationText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/farmLocationChangeText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="114dp"
         android:layout_height="29dp"
         android:layout_marginBottom="58dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="8dp"
         android:text="Farm Owner"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/settingsFarmOwnerText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/farmOwnerChangeText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="114dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="58dp"
+        android:layout_marginRight="120dp"
         android:text="Farm Name"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/settingsFarmNameText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/farmNameChangeText"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -3,13 +3,15 @@
     package="com.calftracker.project.calftracker">
 
     <application
+        android:configChanges="locale|orientation"
+        android:name="com.calftracker.project.models.Firebase"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.calftracker.project.activities.SplashScreenActivity">
+        <activity android:name="com.calftracker.project.activities.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,8 +40,9 @@
         <activity android:name="com.calftracker.project.activities.ProtocolsIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.ProtocolsEditIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
-        <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
-        <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.SettingsAddEmployee" />
+        <activity android:name="com.calftracker.project.activities.SettingsChangeFarmInfoActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEmployeeProfileActivity"></activity>
     </application>
 
 </manifest>

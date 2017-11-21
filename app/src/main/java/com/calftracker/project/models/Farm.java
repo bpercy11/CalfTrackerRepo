@@ -34,7 +34,7 @@ public class Farm {
 
         this.currInternalID = 0;
         passcode = -1;
-        employees = new ArrayList<Employee>();
+        //employees = new ArrayList<Employee>();
         calfProfileMap = new HashMap<Integer, Calf>();
         todoList = null;
 
@@ -70,9 +70,9 @@ public class Farm {
 
     /**
      *
-     * @param employee
+     * @param
      */
-    public void addEmployee(Employee employee) { this.employees.add(employee); }
+    public void setEmployeeList(ArrayList<Employee> list) { this.employees = list; }
 
     /**
      *
