@@ -47,35 +47,18 @@ import org.json.JSONObject;
 
 public class Firebase extends Application {
 
-    //private SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);;
     private SharedPreferences.Editor editor;
-    private static Context c;
     private String firebaseTime = "";
     private String prefTime = "";
 
     private DatabaseReference mDatabase;
 
-//    public Firebase(Context c){
-//
-//        SharedPreferences mPreferences = c.getSharedPreferences("ClafTracker", Activity.MODE_PRIVATE);
-//        editor = mPreferences.edit();
-//    }
-
-
     public Firebase(){}
 
     public void compareToFirebase(){
-        //Compare the Time Last Edited saved in shared preferences to that in Firebase
-        //If they are different. Copy the newest one over the Old verstion
-
-        //SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
-        //prefTime = mPreferences.getString("LastEditTime", "0");
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        Log.d("LAST", "SLEEp");
-        SystemClock.sleep(10000);
 
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,22 +70,14 @@ public class Firebase extends Application {
                 SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
                 prefTime = mPreferences.getString("LastEditTime", "0");
 
-                Log.d("IN LAST EDIT TIME", firebaseTime);
-                Log.d("prefTime", prefTime);
-                Log.d("firebaseTime", firebaseTime);
-                Log.d("prefTime.compareTo()", Integer.toString(prefTime.compareTo(firebaseTime)));
 
                 if(prefTime.compareTo(firebaseTime) < 0){
                     //Firebase is older than prefs. Copy prefs to firebase
-                    Log.d("Less THAN 0", "1");
-
                     prefsToFirebase();
 
                 }else if(prefTime.compareTo(firebaseTime) > 0) {
                     //Prefs older than firebase. Copy firebase to prefs
-                    Log.d("Greater THAN 0", "-1");
-
-                    //firebaseToPrefs();
+                    firebaseToPrefs();
                 }
 
             }
@@ -114,13 +89,6 @@ public class Firebase extends Application {
             }
         });
 
-        //mDatabase.child("usedApp").setValue("false");
-        //mDatabase.child("usedApp").setValue("true");
-
-        Log.d("prefTime", prefTime);
-        Log.d("firebaseTime", firebaseTime);
-
-        Log.d("prefTime.compareTo()", Integer.toString(prefTime.compareTo(firebaseTime)));
 
     }
 
@@ -150,11 +118,13 @@ public class Firebase extends Application {
             }
         });
 
+
+
     }
 
     private void prefsToFirebase(){
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
+        final SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Map<String, ?> allEntries = mPreferences.getAll();
@@ -162,24 +132,24 @@ public class Firebase extends Application {
             mDatabase.child(entry.getKey()).setValue(entry.getValue().toString());
         }
 
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-//            try {
-//                Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-//
-//                JSONObject testJSON = new JSONObject(entry.getKey().toString());
-//                //mDatabase.child(entry.getKey()).setValue(testJSON);
-//                Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-//
-//            }catch (JSONException e){
-//                Log.d("map values", "ERROR ERRROR ERROR");
-//
-//            }
-//            //testJSON.(entry.getKey(), entry.getValue().toString());
-//        }
+                Log.d("COMPARISON F2P", Integer.toString(mPreferences.getAll().toString().compareTo(dataSnapshot.getValue().toString())));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
-    public void editSharedPreferences(String id, String json){
+    public void saveData(String id, String json){
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
         SharedPreferences.Editor editor = mPreferences.edit();
 
@@ -195,8 +165,7 @@ public class Firebase extends Application {
         editor.putString("LastEditTime", json2);
         editor.apply();
         prefTime = json2;
-        Log.d("UPDATE PREFS", json2);
-        Log.d("LastEditTime", mPreferences.getString("LastEditTime", "0"));
+
 
         //Get time and set that
         //TODO Push changes to Firebase
