@@ -38,10 +38,12 @@ public class MedicineProfileActivity extends BaseActivity {
         TextView medicineDosage = (TextView) findViewById(R.id.medicine_profile_dosageData);
         TextView medicineDosageUnits = (TextView) findViewById(R.id.medicine_profile_dosageUnitsData);
         TextView medicineTimeActive = (TextView) findViewById(R.id.medicine_profile_timeActiveData);
+        TextView medicineNotes = (TextView) findViewById(R.id.medicine_profile_notesData);
 
         medicineName.setText(medicine.getName());
         medicineDosage.setText(Double.toString(medicine.getDosage()));
         medicineDosageUnits.setText(medicine.getDosage_units());
         medicineTimeActive.setText(Integer.toString(medicine.getTimeActive()));
+        medicineNotes.setText(medicine.getNotes());
     }
 }

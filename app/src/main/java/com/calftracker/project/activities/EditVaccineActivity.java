@@ -60,24 +60,11 @@ public class EditVaccineActivity extends AppCompatActivity {
 
     public void clickAddVaccineButton(View view){
         EditText vaccine = (EditText) findViewById(R.id.edit_vaccine_editTextName);
+        EditText adminStart = (EditText) findViewById(R.id.edit_vaccine_editTextAdminStart);
+        EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminEnd);
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
         EditText dosageUnits = (EditText) findViewById(R.id.edit_vaccine_editTextDosageUnits);
-        EditText adminStart = (EditText) findViewById(R.id.edit_vaccine_editTextAdminDateStart);
-        EditText adminEnd = (EditText) findViewById(R.id.edit_vaccine_editTextAdminDateEnd);
         EditText adminMethod = (EditText) findViewById(R.id.edit_vaccine_editTextAdminMethod);
-
-
-        if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
-                || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
-                || adminMethod.getText().toString().matches("")){
-            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
-            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
-                Toast.LENGTH_SHORT).show();
-        }
 
         String vaccineStr = vaccine.getText().toString();
         int adminStartInt = Integer.parseInt(adminStart.getText().toString());
@@ -118,6 +105,23 @@ public class EditVaccineActivity extends AppCompatActivity {
             case "Month":
                 adminEndInt = adminEndInt*30;
                 break;
+        }
+
+        if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
+                || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
+                || adminMethod.getText().toString().matches("")){
+            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(adminEndInt <= adminStartInt){
+            Toast.makeText(EditVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+                    Toast.LENGTH_SHORT).show();
         }
 
         range = new int[] {adminStartInt,adminEndInt};

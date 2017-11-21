@@ -103,6 +103,7 @@
     <string name="edit_vaccine_dosage_units">Dosage Units</string>
     <string name="edit_vaccine_admin_method">Administration</string>
     <string name="vaccine_successful">Add Vaccine Successful</string>
+    <string name="edit_vaccine_vacc_range_error">Inappropriate Vaccine Range</string>
     <string name="edit_vaccine_enter_units">Enter Units</string>
     <string name="EditIllness_editIllness">Edit Illness</string>
     <string name="EditIllness_enterName">Enter Name</string>
