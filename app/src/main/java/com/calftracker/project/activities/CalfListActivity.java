@@ -50,8 +50,6 @@ public class CalfListActivity extends BaseActivity {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("CalfList")) {
             arrayExists = true;
-            SharedPreferences.Editor editor = mPreferences.edit();
-
             Gson gson = new Gson();
             String json = mPreferences.getString("CalfList", "");
             calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {

@@ -116,6 +116,7 @@
     <string name="edit_vaccine_enter_units">Enter Units</string>
 
     <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
+    <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
 
     <string-array name="vacc_range_spinner">
         <item>Day</item>

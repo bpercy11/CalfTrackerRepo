@@ -6,54 +6,53 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewcalfID"
+        android:id="@+id/textViewCalfID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textViewDose"
-        android:layout_toEndOf="@+id/textViewDose"
-        android:layout_toRightOf="@+id/textViewDose"
-        android:text="@string/new_calf_vaccine_no_vaccines_defined"
+
         android:textSize="20sp"
-        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />
+        <!--android:layout_alignTop="@+id/textViewDose"-->
+        <!--android:layout_toEndOf="@+id/textViewDose"-->
+        <!--android:layout_toRightOf="@+id/textViewDose" -->
 
-    <TextView
-        android:id="@+id/textViewDose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/new_calf_vaccine_no_vaccines_defined"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toRightOf="@+id/textViewcalfID"
-        app:layout_constraintRight_toLeftOf="@+id/textViewMethod"
-        app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />
+    <!--<TextView-->
+        <!--android:id="@+id/textViewDose"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:text="@string/new_calf_vaccine_no_vaccines_defined"-->
+        <!--android:textSize="20sp"-->
+        <!--android:visibility="gone"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/textViewcalfID"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/textViewMethod"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />-->
 
-    <TextView
-        android:id="@+id/textViewMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/new_calf_vaccine_no_vaccines_defined"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toRightOf="@+id/textViewDose"
-        app:layout_constraintRight_toLeftOf="@+id/textViewDueDate"
-        app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />
+    <!--<TextView-->
+        <!--android:id="@+id/textViewMethod"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:text="@string/new_calf_vaccine_no_vaccines_defined"-->
+        <!--android:textSize="20sp"-->
+        <!--android:visibility="gone"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/textViewDose"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/textViewDueDate"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />-->
 
-    <TextView
-        android:id="@+id/textViewDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/new_calf_vaccine_no_vaccines_defined"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toRightOf="@+id/textViewMethod"
-        app:layout_constraintRight_toLeftOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />
+    <!--<TextView-->
+        <!--android:id="@+id/textViewDueDate"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:text="@string/new_calf_vaccine_no_vaccines_defined"-->
+        <!--android:textSize="20sp"-->
+        <!--android:visibility="gone"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/textViewMethod"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/checkBox"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/buttonSelectAll" />-->
 
     <CheckBox
         android:id="@+id/checkBox"

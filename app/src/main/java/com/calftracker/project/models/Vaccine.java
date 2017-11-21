@@ -8,7 +8,8 @@ public class Vaccine
 	private double dosage;
 	private String dosageUnits;
 	private String methodOfAdministration;
-	
+	private ArrayList<Calf> vaccineCalves;
+
 	/**
 	 * @param name
 	 * @param dosage
@@ -25,6 +26,7 @@ public class Vaccine
 		this.dosage = dosage;
 		this.dosageUnits = dosageUnits;
 		this.methodOfAdministration = methodOfAdministration;
+		this.vaccineCalves = new ArrayList<>();
 	}
 
 	/**
@@ -109,5 +111,13 @@ public class Vaccine
 	public Vaccine createVaccine(String name, Double dosage, String dosageUnits,
 								 ArrayList<Vacc_Range> toBeAdministered, String methodOfAdministration){
 		return new Vaccine(name,toBeAdministered,dosage,dosageUnits,methodOfAdministration);
+	}
+
+	public ArrayList<Calf> getVaccineCalves() {
+		return vaccineCalves;
+	}
+
+	public void setVaccineCalves(ArrayList<Calf> vaccineCalves) {
+		this.vaccineCalves = vaccineCalves;
 	}
 }

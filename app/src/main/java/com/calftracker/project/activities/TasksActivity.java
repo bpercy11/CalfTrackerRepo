@@ -1,10 +1,12 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.calftracker.project.adapters.TasksAdapter;
 import com.calftracker.project.calftracker.R;
@@ -17,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TasksActivity extends AppCompatActivity {
@@ -25,6 +28,7 @@ public class TasksActivity extends AppCompatActivity {
     private ArrayList<Calf> calfList;
     private ListView listView;
     private TasksAdapter adapter;
+    private TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +51,21 @@ public class TasksActivity extends AppCompatActivity {
         }
 
         listView = (ListView) findViewById(R.id.listViewTasks);
+        Calendar today = Calendar.getInstance();
+        int year = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH);
+        int day = today.get(Calendar.DATE);
+        String dateStr = month + "/" + day + "/" + year;
+        date = (TextView) findViewById(R.id.textViewTaskDate);
+        date.setText("Tasks for " + dateStr);
 
         adapter = new TasksAdapter(getApplicationContext(), task.getVaccinesToAdminister().get(0), calfList);
         listView.setAdapter(adapter);
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 }

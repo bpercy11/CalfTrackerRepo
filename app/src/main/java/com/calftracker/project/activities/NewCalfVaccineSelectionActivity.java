@@ -38,6 +38,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private Task task;
     private Calendar startDate;
     private Calendar endDate;
+    private ArrayList<Vaccine> vaccineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         TextView mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
         Button mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
 
-        ArrayList<Vaccine> vaccineList;
+
 
         // set up shared preference variables
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -131,6 +132,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             for (int i = 0; i < adapterArray.size(); i++) {
                 if (adapterArray.get(i).getChecked()) {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
+                    //vaccineList.get(i).getVaccineCalves().add(calf);
 
                     startDate = Calendar.getInstance();
                     startDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
@@ -141,9 +143,11 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
                     task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]).add(vaccTaskStart);
                     task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]).add(vaccTaskEnd);
+
+
                 }
             }
-            task.getCalvesToObserve().add(calf);
+            //task.getCalvesToObserve().add(calf);
 
         }
 
@@ -162,6 +166,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(vaccineList);
+        prefsEditor.putString("VaccineList",json);
         prefsEditor.apply();
 
         // this is a lazy way to pass the newly created calf to the calf profile but whatever
