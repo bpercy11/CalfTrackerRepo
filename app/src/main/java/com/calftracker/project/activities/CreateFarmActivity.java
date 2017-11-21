@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.calftracker.project.models.Farm;
 import com.calftracker.project.calftracker.R;
+import com.google.gson.Gson;
 
 
 /**
@@ -40,6 +41,9 @@ public class CreateFarmActivity extends AppCompatActivity {
         farmName = (EditText) findViewById(R.id.Farm_Name_txt);
         farmLocation = (EditText) findViewById(R.id.Farm_Location_txt);
         farmOwner = (EditText) findViewById(R.id.Farm_Owner_txt);
+        String name;
+        String location;
+        String owner;
 
         farmNameRequired = (TextView) findViewById(R.id.FarmName_Required_tv);
         farmLocationRequired = (TextView) findViewById(R.id.FarmLocation_Required_tv);
@@ -79,9 +83,21 @@ public class CreateFarmActivity extends AppCompatActivity {
                     Farm farm = new Farm(farmName.toString(), farmOwner.toString(), farmLocation.toString());
                     SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("farmName", farmName.toString());
-                    editor.putString("farmOwner", farmOwner.toString());
-                    editor.putString("farmLocation", farmLocation.toString());
+                    Gson gson = new Gson();
+                    String json;
+
+                    json = gson.toJson(farm);
+                    editor.putString("FarmProfile", json);
+
+                    json = gson.toJson(farmName.getText().toString());
+                    editor.putString("farmName", json);
+
+                    json = gson.toJson(farmOwner.getText().toString());
+                    editor.putString("farmOwner", json);
+
+                    json = gson.toJson(farmLocation.getText().toString());
+                    editor.putString("farmLocation", json);
+                    editor.apply();
 
                     callDashboard();
                }

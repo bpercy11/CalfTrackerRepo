@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Edit Farm"
+        android:text="Farm"
         android:textSize="28sp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/settingsEmployeeButton"

@@ -12,6 +12,14 @@ import android.widget.TextView;
 import java.util.*;
 import android.util.Log;
 import com.calftracker.project.models.Calf;
+import java.util.Locale;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 
 import com.calftracker.project.calftracker.R;
@@ -22,15 +30,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
-public class SettingsActivity extends BaseActivity {
-
-    private DatabaseReference mDatabase;
+public class SettingsActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
 
         Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
@@ -60,21 +67,20 @@ public class SettingsActivity extends BaseActivity {
             Intent intent;
             public void onClick(View v){
 
-
+                setLocale("en");
             }
         });
 
         spanishButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
-
-
+                setLocale("es");
             }
         });
 
 
 
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
+
         //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         //Map<String, ?> allEntries = mPrefs.getAll();
         //for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
@@ -91,9 +97,7 @@ public class SettingsActivity extends BaseActivity {
 
         //mDatabaseRead = FirebaseDatabase.getInstance().getReference().child("Farm Name");
 
-        //mDatabase.child("Farm Name").setValue(allEntries.toString());
-        //mDatabase.child("Farm Owner").setValue(owner);
-        //mDatabase.child("Farm Location").setValue(location);
+
         //mInfoView = (TextView) findViewById(R.id.info_view);
 
         //mFirebaseButton = (Button) findViewById(R.id.firebase_btn);
@@ -104,5 +108,23 @@ public class SettingsActivity extends BaseActivity {
         //mFarmOwner = (EditText) findViewById(R.id.farmOwnerText);
         //mFarmLocation = (EditText) findViewById(R.id.farmLocationText);
 
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, SettingsActivity.class);
+        startActivity(refresh);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,DashboardActivity.class);
+        startActivity(intent);
     }
 }
