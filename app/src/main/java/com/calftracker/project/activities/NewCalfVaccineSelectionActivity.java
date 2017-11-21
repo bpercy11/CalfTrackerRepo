@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,8 +23,13 @@ import com.calftracker.project.models.VaccineTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
@@ -36,8 +42,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private Calendar calfCal;
     private String calfGender;
     private Task task;
-    private Calendar startDate;
-    private Calendar endDate;
     private ArrayList<Vaccine> vaccineList;
 
     @Override
@@ -134,16 +138,61 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
                     //vaccineList.get(i).getVaccineCalves().add(calf);
 
-                    startDate = Calendar.getInstance();
+                    int calfYear = calfCal.get(Calendar.YEAR);
+                    int calfMonth = calfCal.get(Calendar.MONTH);
+                    int calfDay = calfCal.get(Calendar.DATE);
+                    int todayYear = Calendar.getInstance().get(Calendar.YEAR);
+                    int todayMonth = Calendar.getInstance().get(Calendar.MONTH);
+                    int todayDay = Calendar.getInstance().get(Calendar.DATE);
+                    Calendar today = Calendar.getInstance();
+                    //Calendar tempDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
+                    Calendar startDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
+                    Calendar endDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
                     startDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
-                    endDate = Calendar.getInstance();
                     endDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
-                    VaccineTask vaccTaskStart = new VaccineTask(adapterArray.get(i).getVaccine(), calf, true);
-                    VaccineTask vaccTaskEnd = new VaccineTask(adapterArray.get(i).getVaccine(), calf, false);
 
-                    task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]).add(vaccTaskStart);
-                    task.getVaccinesToAdminister().get(adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]).add(vaccTaskEnd);
+                    int startYear = startDate.get(Calendar.YEAR);
+                    int startMonth = startDate.get(Calendar.MONTH);
+                    int startDay = startDate.get(Calendar.DATE);
+                    int endYear = endDate.get(Calendar.YEAR);
+                    int endMonth = endDate.get(Calendar.MONTH);
+                    int endDay = endDate.get(Calendar.DATE);
 
+                    int diff = 0; // The number of days between today and when the calf was born
+
+                    if (todayMonth == calfMonth) {
+                        diff = Math.abs(todayDay - calfDay);
+                    } else if (todayMonth > calfMonth) {
+                        int monthDiff = todayMonth - calfMonth;
+                        int daysInMonth = calfCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                        diff += daysInMonth - calfDay;
+                        diff += todayDay;
+                        if (monthDiff > 1) {
+                            for (int j = 1; j < monthDiff; j++) {
+                                today.add(Calendar.MONTH, -1);
+                                diff += today.getActualMaximum(Calendar.DAY_OF_MONTH);
+                            }
+                        }
+                    }
+
+                    // Testing stuff for dates and adding days
+
+//                    //Log.i("", "today : " + startMonth + "/" + startDay + "/" + startYear);
+//                    Log.i("vaccine", "vaccine : " + vaccineList.get(i).getName());
+//                    Log.i("startint", "start int : " + adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
+//                    Log.i("start", "startDate : " + startMonth + "/" + startDay + "/" + startYear);
+//                    Log.i("endint", "end int : " + adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
+//                    Log.i("end", "endDate : " + endMonth + "/" + endDay + "/" + endYear);
+
+
+                    VaccineTask vaccTaskStart = new VaccineTask(vaccineList.get(i), calf, true);
+                    VaccineTask vaccTaskEnd = new VaccineTask(vaccineList.get(i), calf, false);
+
+                    int startIndex = vaccineList.get(i).getToBeAdministered().get(0).getSpan()[0] - diff;
+                    int endIndex = vaccineList.get(i).getToBeAdministered().get(0).getSpan()[1] - diff;
+
+                    task.getVaccinesToAdminister().get(startIndex).add(vaccTaskStart);
+                    task.getVaccinesToAdminister().get(endIndex).add(vaccTaskEnd);
 
                 }
             }

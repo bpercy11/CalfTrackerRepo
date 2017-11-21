@@ -76,11 +76,16 @@ public class TasksAdapter extends BaseAdapter{
         final Vaccine currVacc = task.getVaccine();
 
         if (!vaccUsed) {
-            for (int i = 0; i < calfList.size(); i++) {
-                for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
-                    if (calfList.get(i).getNeededVaccines().get(j).getName().equals((currVacc).getName())) {
-                        elligibleCount++;
-                    }
+//            for (int i = 0; i < calfList.size(); i++) {
+//                for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
+//                    if (calfList.get(i).getNeededVaccines().get(j).getName().equals((currVacc).getName())) {
+//                        elligibleCount++;
+//                    }
+//                }
+//            }
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).getVaccine().getName().equals(currVacc.getName())) {
+                    elligibleCount++;
                 }
             }
             holder.vaccine.setText(tasks.get(position).getVaccine().getName());
@@ -103,8 +108,6 @@ public class TasksAdapter extends BaseAdapter{
             holder.vaccine.setVisibility(View.GONE);
             holder.elligible.setVisibility(View.GONE);
         }
-
-        //TODO create the onClickListener that takes user to the TaskDetailsActivity
 
         return convertView;
     }

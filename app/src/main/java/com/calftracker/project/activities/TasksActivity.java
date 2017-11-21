@@ -53,13 +53,13 @@ public class TasksActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listViewTasks);
         Calendar today = Calendar.getInstance();
         int year = today.get(Calendar.YEAR);
-        int month = today.get(Calendar.MONTH);
+        int month = today.get(Calendar.MONTH) + 1;
         int day = today.get(Calendar.DATE);
         String dateStr = month + "/" + day + "/" + year;
         date = (TextView) findViewById(R.id.textViewTaskDate);
         date.setText("Tasks for " + dateStr);
 
-        adapter = new TasksAdapter(getApplicationContext(), task.getVaccinesToAdminister().get(0), calfList);
+        adapter = new TasksAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(adapter);
 
     }

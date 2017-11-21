@@ -13,8 +13,10 @@ import android.widget.TextView;
 import com.calftracker.project.adapters.TaskDetailsAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Task;
 import com.calftracker.project.models.TaskDetailsCalfSelectionItem;
 import com.calftracker.project.models.Vaccine;
+import com.calftracker.project.models.VaccineTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,6 +34,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
     private ArrayList<Calf> calfList;
     private TextView vaccName;
     private Calf calf;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +55,27 @@ public class TaskDetailsActivity extends AppCompatActivity {
         json = mPreferences.getString("vaccToViewInTaskDetails","");
         vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
 
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+
         // get vaccine list from shared preferences
         json = mPreferences.getString("VaccineList", "");
         vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {}.getType());
         adapterArray = new ArrayList<>();
         ArrayList<Calf> vaccineCalfList = new ArrayList<>();
-        for (int i = 0; i < calfList.size(); i++) {
-            for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
-                if (calfList.get(i).getNeededVaccines().get(j).getName().equals(vaccine.getName())) {
-                    vaccineCalfList.add(calfList.get(i));
-                    break;
-                }
+        ArrayList<VaccineTask> todayTasks = task.getVaccinesToAdminister().get(0);
+
+//        for (int i = 0; i < calfList.size(); i++) {
+//            for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
+//                if (calfList.get(i).getNeededVaccines().get(j).getName().equals(vaccine.getName())) {
+//                    vaccineCalfList.add(calfList.get(i));
+//                    break;
+//                }
+//            }
+//        }
+        for (int i = 0; i < todayTasks.size(); i++) {
+            if (todayTasks.get(i).getVaccine().getName().equals(vaccine.getName())) {
+                vaccineCalfList.add(todayTasks.get(i).getCalf());
             }
         }
         for(int i = 0; i < vaccineCalfList.size(); i++) {
