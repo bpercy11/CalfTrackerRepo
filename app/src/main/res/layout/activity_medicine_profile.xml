@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/medicine_profile_medicine_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/medicine_profile_name"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/medicine_profile_medicine_nameData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_medicine_name"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_medicine_name"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_medicine_name" />
+
+    <TextView
+        android:id="@+id/medicine_profile_dosage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/medicine_profile_dosage"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_medicine_name" />
+
+    <TextView
+        android:id="@+id/medicine_profile_dosageData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_dosage"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_dosage"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_dosage" />
+
+    <TextView
+        android:id="@+id/medicine_profile_dosageUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/medicine_profile_dosageUnits"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_dosage" />
+
+    <TextView
+        android:id="@+id/medicine_profile_dosageUnitsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_dosageUnits"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_dosageUnits"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_dosageUnits" />
+
+    <TextView
+        android:id="@+id/medicine_profile_timeActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/medicine_profile_timeActive"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_dosageUnits" />
+
+    <TextView
+        android:id="@+id/medicine_profile_timeActiveData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_timeActive"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_timeActive"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_timeActive" />
+
+    <TextView
+        android:id="@+id/medicine_profile_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/medicine_profile_notes"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_timeActive" />
+
+    <TextView
+        android:id="@+id/medicine_profile_notesData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_notes" />
+
+    <Button
+        android:id="@+id/medicine_profile_editButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="onMProfile_editButton"
+        android:text="Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicine_profile_notesData"
+        app:layout_constraintVertical_bias="0.868" />
+
+    <Button
+        android:id="@+id/medicine_profile_removeButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="90dp"
+        android:onClick="onMProfile_removeButton"
+        android:text="Remove"
+        app:layout_constraintBottom_toBottomOf="@+id/medicine_profile_editButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/medicine_profile_editButton"
+        app:layout_constraintTop_toTopOf="@+id/medicine_profile_editButton" />
+
+
+</android.support.constraint.ConstraintLayout>

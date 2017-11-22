@@ -50,7 +50,16 @@ public class IllnessActivity extends BaseActivity {
         lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do Something
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(illnessList.get(position));
+                prefsEditor.putString("IllnessProfile",json);
+                prefsEditor.apply();
+
+                Intent intent = new Intent(IllnessActivity.this, IllnessProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

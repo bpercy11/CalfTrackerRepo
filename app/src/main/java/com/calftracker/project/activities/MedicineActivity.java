@@ -45,13 +45,22 @@ public class MedicineActivity extends BaseActivity {
         } else { medicineList = new ArrayList<Medicine>(); }
 
         lvMedicine = (ListView)findViewById(R.id.listview_medicine);
-        mAdapter = new MedicineAdapter(getApplicationContext(), medicineList);
+        mAdapter = new MedicineAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,medicineList);
         lvMedicine.setAdapter(mAdapter);
 
         lvMedicine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(medicineList.get(position));
+                prefsEditor.putString("MedicineProfile",json);
+                prefsEditor.apply();
+
+                Intent intent = new Intent(MedicineActivity.this, MedicineProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

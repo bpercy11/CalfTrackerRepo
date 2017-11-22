@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.calftracker.project.activities.AddCalfActivity" />
-        <activity android:name="com.calftracker.project.activities.CalfListActivity" />
+        <activity android:name="com.calftracker.project.activities.CalfListActivity"></activity>
         <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
         <activity android:name="com.calftracker.project.activities.DashboardActivity" />
         <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
@@ -40,6 +40,12 @@
         <activity android:name="com.calftracker.project.activities.TasksActivity" />
         <activity android:name="com.calftracker.project.activities.TaskDetailsActivity"></activity>
         <activity android:name="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.VaccineProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.IllnessProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.MedicineProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.AddIllnessMedicineSelectionActivity" />
+        <activity android:name="com.calftracker.project.activities.EditVaccineProfileActivity" />
+        <activity android:name="com.calftracker.project.activities.EditMedicineProfileActivity"></activity>
     </application>
 
 </manifest>

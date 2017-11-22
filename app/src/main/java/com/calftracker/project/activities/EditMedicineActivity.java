@@ -1,14 +1,18 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,22 +28,19 @@ import java.util.List;
 public class EditMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
-    private TextView medicineName;
-    private TextView dosage;
-    private TextView dosageUnits;
-    private TextView timeActive;
+    private EditText medicineName;
+    private EditText dosage;
+    private EditText dosageUnits;
+    private EditText timeActive;
     private List<Medicine> medicineList;
+    private Button notesButton;
+    private String medicineNotes;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_protocols_edit_medicine);
-
-        // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_medicine_edit);
-
-        // Stylize action bar to use back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_edit_medicine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
@@ -53,32 +54,32 @@ public class EditMedicineActivity extends AppCompatActivity {
     }
 
     public void clickAddMedicineButton(View view){
-        EditText name = (EditText) findViewById(R.id.edit_medicine_editTextMedicine);
-        EditText treatment = (EditText) findViewById(R.id.edit_medicine_editTextTreatment);
-        EditText dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
-        EditText dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
-        EditText timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
+        medicineName = (EditText) findViewById(R.id.edit_medicine_editTextMedicine);
+        dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
+        dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
+        timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
 
-        if (name.getText().toString().matches("") || treatment.getText().toString().matches("")
-                || dosage.getText().toString().matches("") || dosageUnits.getText().toString().matches("")
+        if (medicineName.getText().toString().matches("")
+                || dosage.getText().toString().matches("")
+                || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
             Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
+            return;
         }
         else {
             Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
-        String nameStr = name.getText().toString();
-        String treatmentStr = treatment.getText().toString();
+        String nameStr = medicineName.getText().toString();
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         int timeActiveInt = Integer.parseInt(timeActive.getText().toString());
 
+
         // MAKE A NEW Medicine OBJECT
-        Medicine medicine = new Medicine(treatmentStr,dosageDbl,dosageUnitsStr,timeActiveInt);
-        Treatment_Protocol tp = new Treatment_Protocol(medicine, "");
+        Medicine medicine = new Medicine(nameStr,dosageDbl,dosageUnitsStr,timeActiveInt,medicineNotes);
 
         medicineList.add(medicine);
 
@@ -93,21 +94,51 @@ public class EditMedicineActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }
+    public void clickNotesButton(View view){
+
+        notesButton = (Button) findViewById(R.id.edit_medicine_buttonNote);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set title
+                alertDialogBuilder.setTitle("Please enter a note");
+                final EditText input = new EditText(EditMedicineActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialogBuilder.setView(input);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Done",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                medicineNotes = input.getText().toString();
+                                // if this button is clicked, close
+                                // current activity
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+    }
 
     public void clickCancelButton(View view){
         Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MedicineActivity.class);
-        startActivity(intent);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), MedicineActivity.class);
-        startActivity(intent);
-        return true;
-    }
 }

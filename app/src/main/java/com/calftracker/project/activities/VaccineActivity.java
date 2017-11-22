@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -31,9 +29,6 @@ public class VaccineActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
-        // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_title);
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -52,7 +47,16 @@ public class VaccineActivity extends BaseActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(vaccineList.get(position));
+                prefsEditor.putString("VaccineProfile",json);
+                prefsEditor.apply();
+
+                Intent intent = new Intent(VaccineActivity.this, VaccineProfileActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -72,15 +76,9 @@ public class VaccineActivity extends BaseActivity {
         Intent intent = new Intent(VaccineActivity.this, EditVaccineActivity.class);
         startActivity(intent);
     }
-    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 }
 

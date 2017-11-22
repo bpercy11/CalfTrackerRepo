@@ -1,31 +1,36 @@
 package com.calftracker.project.models;
 
+import com.calftracker.project.models.Medicine;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Treatment_Protocol {
-	private Medicine medicine;
+	private List<Medicine> medicines;
 	private String notes;
 	
 	/**
-	 * @param medicine
+	 * @param medicines
 	 * @param notes
 	 */
-	public Treatment_Protocol(Medicine medicine, String notes) {
+	public Treatment_Protocol(List<Medicine> medicines, String notes) {
 		super();
-		this.medicine = medicine;
+		this.medicines = new ArrayList<Medicine>();
 		this.notes = notes;
 	}
 	
 	/**
-	 * @return the medicine
+	 * @return the medicines
 	 */
-	public Medicine getMedicine() {
-		return medicine;
+	public List<Medicine> getMedicines() {
+		return medicines;
 	}
 
 	/**
-	 * @param medicine the medicine to set
+	 * @param medicines the medicines to set
 	 */
-	public void setMedicine(Medicine medicine) {
-		this.medicine = medicine;
+	public void setMedicine(List<Medicine> medicines) {
+		this.medicines = medicines;
 	}
 
 	/**
@@ -45,12 +50,12 @@ public class Treatment_Protocol {
 	/**
 	 * creates and returns a new treatment protocol for an illness
 	 *
-	 * @param medicine the medicine used to treat the corresponding illness
+	 * @param medicines the medicine used to treat the corresponding illness
 	 * @param notes the notes detailing the treatment protocol for this calf
 	 * @return Treatment_Protocol the new treatment protocol that was created
 	 */
-	public Treatment_Protocol createTreatmentProtocol(Medicine medicine, String notes){
-		return new Treatment_Protocol(medicine,notes);
+	public Treatment_Protocol createTreatmentProtocol(List<Medicine> medicines, String notes){
+		return new Treatment_Protocol(medicines,notes);
 	}
 
 }
