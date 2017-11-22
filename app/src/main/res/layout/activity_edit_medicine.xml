@@ -132,17 +132,40 @@
         app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextDosageUnits"
         app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewTimeActive" />
 
+    <TextView
+        android:id="@+id/edit_medicine_textViewNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/edit_medicine_notes"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewTimeActive" />
+
+    <EditText
+        android:id="@+id/edit_medicine_editTextNotes"
+        android:layout_width="240dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="textLongMessage"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/edit_medicine_editTextTimeActive"
+        app:layout_constraintStart_toEndOf="@+id/edit_medicine_textViewNotes"
+        app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewNotes" />
+
     <Button
         android:id="@+id/edit_medicine_buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="8dp"
         android:onClick="clickAddMedicineButton"
         android:text="@string/edit_medicine_add_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/edit_medicine_textViewEditMedicine"
-        app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewTimeActive" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_medicine_editTextNotes"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/edit_medicine_buttonCancel"

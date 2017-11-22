@@ -133,6 +133,7 @@ public class EditMedicineActivity extends AppCompatActivity {
 
                 // show it
                 alertDialog.show();
+
     }
 
     public void clickCancelButton(View view){

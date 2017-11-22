@@ -100,12 +100,10 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
         android:entries="@array/vacc_range_spinner"
         android:nextFocusDown="@+id/edit_vaccine_editTextAdminEnd"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/edit_vaccine_editTextAdminStart"
         app:layout_constraintEnd_toEndOf="@+id/edit_vaccine_editTextName"
         app:layout_constraintStart_toEndOf="@+id/edit_vaccine_editTextAdminStart"
@@ -147,15 +145,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
         android:entries="@array/vacc_range_spinner"
         android:nextFocusDown="@+id/edit_vaccine_editTextDosage"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/edit_vaccine_editTextAdminEnd"
         app:layout_constraintEnd_toEndOf="@+id/edit_vaccine_editTextName"
         app:layout_constraintStart_toEndOf="@+id/edit_vaccine_editTextAdminEnd"
-        app:layout_constraintTop_toTopOf="@+id/edit_vaccine_editTextAdminEnd" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_vaccine_spinner" />
 
     <TextView
         android:id="@+id/edit_vaccine_textViewDosage"
