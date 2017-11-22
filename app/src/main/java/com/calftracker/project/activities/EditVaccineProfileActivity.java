@@ -173,7 +173,7 @@ public class EditVaccineProfileActivity extends BaseActivity {
     }
 
     public void clickCancelVaccineButton(View view){
-        Intent intent = new Intent(EditVaccineProfileActivity.this,VaccineProfileActivity.class);
+        Intent intent = new Intent(EditVaccineProfileActivity.this,ProtocolActivity.class);
         startActivity(intent);
     }
 }
