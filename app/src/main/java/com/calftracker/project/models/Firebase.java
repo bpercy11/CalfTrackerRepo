@@ -25,8 +25,6 @@ import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Farm;
-import com.calftracker.project.models.TestClass;
-import com.calftracker.project.models.TestClass2;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

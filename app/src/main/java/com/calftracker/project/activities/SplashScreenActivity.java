@@ -48,7 +48,7 @@ public class SplashScreenActivity extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    test.editSharedPreferences("test", "test");
+                    // test.editSharedPreferences("test", "test");
                     SharedPreferences sharedPref = getSharedPreferences("usedApp",Activity.MODE_PRIVATE);
                     //boolean hasBeenUsed = sharedPref.getBoolean("usedApp", false);
                     boolean hasBeenUsed = sharedPref.getBoolean("usedApp", false);
