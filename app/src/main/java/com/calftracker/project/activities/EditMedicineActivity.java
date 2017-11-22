@@ -21,7 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtocolsEditMedicineActivity extends AppCompatActivity {
+public class EditMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private TextView medicineName;
@@ -62,11 +62,11 @@ public class ProtocolsEditMedicineActivity extends AppCompatActivity {
         if (name.getText().toString().matches("") || treatment.getText().toString().matches("")
                 || dosage.getText().toString().matches("") || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
-            Toast.makeText(ProtocolsEditMedicineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(ProtocolsEditMedicineActivity.this, R.string.add_medicine_successful_message,
+            Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -90,23 +90,23 @@ public class ProtocolsEditMedicineActivity extends AppCompatActivity {
         prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(this,ProtocolsMedicineActivity.class);
+        Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }
 
     public void clickCancelButton(View view){
-        Intent intent = new Intent(ProtocolsEditMedicineActivity.this, ProtocolsMedicineActivity.class);
+        Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ProtocolsMedicineActivity.class);
+        Intent intent = new Intent(this, MedicineActivity.class);
         startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), ProtocolsMedicineActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MedicineActivity.class);
         startActivity(intent);
         return true;
     }

@@ -10,66 +10,65 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.VaccineAdapter;
+import com.calftracker.project.adapters.IllnessAdapter;
+import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtocolsVaccineActivity extends BaseActivity {
-
-    private ListView lvVaccine;
-    private VaccineAdapter vAdapter;
-    private List<Vaccine> vaccineList;
+public class IllnessActivity extends BaseActivity {
+    private List<Illness> illnessList;
+    private ListView lvIllness;
+    private IllnessAdapter iAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
+        getLayoutInflater().inflate(R.layout.activity_protocol_illness, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_title);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("VaccineList")) {
+        if (mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
-            String json = mPreferences.getString("VaccineList", "");
-            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
             }.getType());
-        } else { vaccineList = new ArrayList<Vaccine>(); }
+        } else { illnessList = new ArrayList<Illness>(); }
 
-        lvVaccine = (ListView)findViewById(R.id.listview_vaccine);
-        vAdapter = new VaccineAdapter(getApplicationContext(), vaccineList);
-        lvVaccine.setAdapter(vAdapter);
+        lvIllness = (ListView) findViewById(R.id.listview_illness);
+        iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
+        lvIllness.setAdapter(iAdapter);
 
-        lvVaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        lvIllness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Do something
+                //Do Something
             }
         });
     }
-    public void onVaccine_MedicineButtonClick(View view) {
-        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsMedicineActivity.class);
+
+    public void onIllness_MedicineButtonClick(View view) {
+        Intent intent = new Intent(IllnessActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
-    public void onVaccine_VaccineButtonClick(View view){
-        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsVaccineActivity.class);
+    public void onIllness_VaccineButtonClick(View view) {
+        Intent intent = new Intent(IllnessActivity.this, VaccineActivity.class);
         startActivity(intent);
     }
-    public void onVaccine_IllnessButtonClick(View view){
-        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsIllnessActivity.class);
+    public void onIllness_IllnessButtonClick(View view){
+        Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onVaccine_EditVaccineButtonClick(View view){
-        Intent intent = new Intent(ProtocolsVaccineActivity.this, ProtocolsEditVaccineActivity.class);
+    public void onIllness_EditIllnessButtonClick(View view) {
+        Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
         startActivity(intent);
     }
     @Override
@@ -82,5 +81,9 @@ public class ProtocolsVaccineActivity extends BaseActivity {
             startActivity(intent);
         }
     }
+
 }
+
+
+
 

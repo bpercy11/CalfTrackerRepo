@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class ProtocolsEditVaccineActivity extends AppCompatActivity {
+public class EditVaccineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private TextView vaccineName;
@@ -77,11 +77,11 @@ public class ProtocolsEditVaccineActivity extends AppCompatActivity {
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
                 || adminMethod.getText().toString().matches("")){
-            Toast.makeText(ProtocolsEditVaccineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(ProtocolsEditVaccineActivity.this, R.string.vaccine_successful,
+            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
                 Toast.LENGTH_SHORT).show();
         }
 
@@ -129,23 +129,23 @@ public class ProtocolsEditVaccineActivity extends AppCompatActivity {
         prefsEditor.putString("VaccineList",json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(this,ProtocolsVaccineActivity.class);
+        Intent intent = new Intent(this,VaccineActivity.class);
         startActivity(intent);
     }
 
     public void clickCancelVaccineButton(View view){
-        Intent intent = new Intent(ProtocolsEditVaccineActivity.this,ProtocolsVaccineActivity.class);
+        Intent intent = new Intent(EditVaccineActivity.this,VaccineActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ProtocolsVaccineActivity.class);
+        Intent intent = new Intent(this, VaccineActivity.class);
         startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), ProtocolsVaccineActivity.class);
+        Intent intent = new Intent(getApplicationContext(), VaccineActivity.class);
         startActivity(intent);
         return true;
     }

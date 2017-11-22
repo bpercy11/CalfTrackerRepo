@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.calftracker.project.calftracker.R;
 
-public class ProtocolsEditIllnessActivity extends AppCompatActivity {
+public class EditIllnessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,12 @@ public class ProtocolsEditIllnessActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ProtocolsIllnessActivity.class);
+        Intent intent = new Intent(this, IllnessActivity.class);
         startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), ProtocolsIllnessActivity.class);
+        Intent intent = new Intent(getApplicationContext(), IllnessActivity.class);
         startActivity(intent);
         return true;
     }
