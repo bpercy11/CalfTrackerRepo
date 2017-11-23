@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.calftracker.project.calftracker">
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -19,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.calftracker.project.activities.AddCalfActivity" />
-        <activity android:name="com.calftracker.project.activities.CalfListActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.CalfListActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
         <activity android:name="com.calftracker.project.activities.DashboardActivity" />
         <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
@@ -38,14 +40,22 @@
         <activity android:name="com.calftracker.project.activities.EditIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.TasksActivity" />
-        <activity android:name="com.calftracker.project.activities.TaskDetailsActivity"></activity>
-        <activity android:name="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.TaskDetailsActivity" />
+        <activity android:name="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.VaccineProfileActivity" />
         <activity android:name="com.calftracker.project.activities.IllnessProfileActivity" />
         <activity android:name="com.calftracker.project.activities.MedicineProfileActivity" />
         <activity android:name="com.calftracker.project.activities.AddIllnessMedicineSelectionActivity" />
         <activity android:name="com.calftracker.project.activities.EditVaccineProfileActivity" />
-        <activity android:name="com.calftracker.project.activities.EditMedicineProfileActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.EditMedicineProfileActivity" />
+        <activity
+            android:name="com.calftracker.project.activities.EditIllnessProfileActivity"
+            android:label="@string/title_activity_edit_illness_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.calftracker.project.activities.EditIllnessProfileMedicineSelectionActivity"
+            android:label="@string/title_activity_edit_illness_profile_medicine_selection"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
