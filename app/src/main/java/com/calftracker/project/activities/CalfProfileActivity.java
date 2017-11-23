@@ -2,15 +2,15 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -36,16 +36,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
+import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Note;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
-import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -70,6 +69,8 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mDamValue;
     private TextView mWeightValue;
     private TextView mHeightValue;
+
+    LayoutInflater inflater;
 
     private Dialog mGenderListDialog;
     private String[] gender = {"Male","Female"};
@@ -145,6 +146,9 @@ public class CalfProfileActivity extends AppCompatActivity {
             mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
             mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
         }
+
+        // Custom layout for text dialogs
+        inflater = getLayoutInflater();
 
         // Calculate 32dp in pixels, to be used when changing margins for photo tools
         Resources r = getResources();
@@ -278,9 +282,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         // Disable back navigation
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Edit Calf " + calfID);
-
-        // Custom layout for text dialogs
-        LayoutInflater inflater = getLayoutInflater();
 
         // Edit Photo
         // Case no calf photo set
@@ -647,15 +648,17 @@ public class CalfProfileActivity extends AppCompatActivity {
         AlertDialog newNoteAlert;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("Enter Text");
+        View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog_note, null);
+        final EditText dialogText_Note = (EditText) dialogLayout_Note.findViewById(R.id.dialogTextInput_Note);
+
+        dialogText_Note.setInputType(InputType.TYPE_CLASS_TEXT);
+        dialogText_Note.setHint("Enter Text");
         builder.setTitle("Add Note");
-        builder.setView(input);
+        builder.setView(dialogLayout_Note);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String noteMessage = input.getText().toString();
+                String noteMessage = dialogText_Note.getText().toString();
                 Calendar noteDate = Calendar.getInstance();
 
                 Note newNote = new Note(noteMessage,noteDate);

@@ -46,27 +46,23 @@
 
             <Button
                 android:id="@+id/buttonCancel"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:onClick="clickCancelButton"
                 android:text="Cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDOB" />
 
             <Button
                 android:id="@+id/buttonAddCalf"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
                 android:onClick="clickAddCalfButton"
                 android:text="Add"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
                 app:layout_constraintTop_toTopOf="@+id/buttonCancel" />
 
@@ -161,11 +157,13 @@
                 android:id="@+id/buttonNewDeletePhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="16dp"
                 android:onClick="onClickDeletePhotoButton"
                 android:text="@string/calf_profile_delete_photo"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewCaptured" />
 
             <Button
@@ -175,6 +173,7 @@
                 android:onClick="onClickAddPhotoButton"
                 android:text="@string/calf_profile_change_photo"
                 android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonNewDeletePhoto"
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
                 app:layout_constraintTop_toTopOf="@+id/buttonNewDeletePhoto" />
 
