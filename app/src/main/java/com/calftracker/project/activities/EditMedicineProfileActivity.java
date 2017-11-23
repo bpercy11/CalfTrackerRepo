@@ -34,7 +34,7 @@ public class EditMedicineProfileActivity extends BaseActivity {
     private EditText editMedicineNotes;
     private List<Medicine> medicineList;
     private Button notesButton;
-    private String medicineNotes;
+    private EditText medicineNotes;
     final Context context = this;
     private int medicinePosition;
 
@@ -73,14 +73,13 @@ public class EditMedicineProfileActivity extends BaseActivity {
         dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
         dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
         timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
-       // editMedicineNotes = (EditText) findViewById(R.id.edit_medicine_editTextNotes);
+        medicineNotes = (EditText) findViewById(R.id.edit_medicine_editTextNotes);
 
         medicineName.setText(medicine.getName());
         dosage.setText(Double.toString(medicine.getDosage()));
         dosageUnits.setText(medicine.getDosage_units());
         timeActive.setText(Integer.toString(medicine.getTimeActive()));
-        medicineNotes = medicine.getNotes();
-       // editMedicineNotes.setText(medicineNotes);
+        medicineNotes.setText(medicine.getNotes());
 
     }
     public void clickAddMedicineButton(View view){
@@ -91,6 +90,7 @@ public class EditMedicineProfileActivity extends BaseActivity {
         dosage = (EditText) findViewById(R.id.edit_medicine_editTextDosage);
         dosageUnits = (EditText) findViewById(R.id.edit_medicine_editTextDosageUnits);
         timeActive = (EditText) findViewById(R.id.edit_medicine_editTextTimeActive);
+        medicineNotes = (EditText) findViewById(R.id.edit_medicine_editTextNotes);
 
         if (medicineName.getText().toString().matches("")
                 || dosage.getText().toString().matches("")
@@ -109,10 +109,11 @@ public class EditMedicineProfileActivity extends BaseActivity {
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         int timeActiveInt = Integer.parseInt(timeActive.getText().toString());
+        String medicineNotesStr = medicineNotes.getText().toString();
 
 
         // MAKE A NEW Medicine OBJECT
-        Medicine medicine = new Medicine(nameStr,dosageDbl,dosageUnitsStr,timeActiveInt,medicineNotes);
+        Medicine medicine = new Medicine(nameStr,dosageDbl,dosageUnitsStr,timeActiveInt,medicineNotesStr);
 
         medicineList.add(medicine);
 
@@ -127,6 +128,7 @@ public class EditMedicineProfileActivity extends BaseActivity {
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }
+    /*
     public void clickNotesButton(View view){
 
         notesButton = (Button) findViewById(R.id.edit_medicine_buttonNote);
@@ -167,6 +169,7 @@ public class EditMedicineProfileActivity extends BaseActivity {
         // show it
         alertDialog.show();
     }
+    */
 
     public void clickCancelButton(View view){
         Intent intent = new Intent(EditMedicineProfileActivity.this, MedicineActivity.class);

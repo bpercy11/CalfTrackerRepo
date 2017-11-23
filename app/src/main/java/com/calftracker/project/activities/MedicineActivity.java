@@ -77,7 +77,7 @@ public class MedicineActivity extends BaseActivity {
         Intent intent = new Intent(MedicineActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onMedicine_EditMedicineButtonClick(View view){
+    public void onMedicine_AddMedicineButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
         startActivity(intent);
     }
