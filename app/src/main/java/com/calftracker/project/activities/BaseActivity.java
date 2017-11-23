@@ -48,6 +48,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 else if (mNavigationView.getMenu().findItem(R.id.nav_add).isChecked()) {
                     title = getString(R.string.add_calf_title);
                 }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_tasks).isChecked()) {
+                    title = getString(R.string.tasks_title);
+                }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
                 }
@@ -66,6 +69,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_add).isChecked()) {
                     title = getString(R.string.add_calf_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_tasks).isChecked()) {
+                    title = getString(R.string.tasks_title);
                 }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
@@ -133,6 +139,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             case R.id.nav_add: intent = new Intent(BaseActivity.this,AddCalfActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    item.setChecked(true);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.nav_tasks: intent = new Intent(BaseActivity.this,TasksActivity.class);
                 if (!getIntent().filterEquals(intent)) {
                     item.setChecked(true);
                     startActivity(intent);

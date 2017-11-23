@@ -150,6 +150,7 @@
     <string name="illness_profile_treatment">Treatment:</string>
     <string name="illness_profile_notes">Notes:</string>
 
+    <string name="tasks_title">Tasks</string>
     <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
     <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
 
