@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -63,8 +64,8 @@ public class IllnessProfileActivity extends BaseActivity {
 
         for (int i = 0; i < tpMedicines.size(); i++){
             treatmentProtocolStr += tpMedicines.get(i).getName();
-            if (i != tpMedicines.size()){
-                treatmentProtocolStr += "\n";
+            if (i != tpMedicines.size()-1){
+                treatmentProtocolStr += ", ";
             }
         }
 
@@ -76,6 +77,7 @@ public class IllnessProfileActivity extends BaseActivity {
 //        }
         TextView illnessName = (TextView) findViewById(R.id.illness_profile_nameData);
         TextView treatmentProtocol = (TextView) findViewById(R.id.illness_profile_treatmentData);
+        //treatmentProtocol.setMovementMethod(new ScrollingMovementMethod());
         TextView illnessNotes = (TextView) findViewById(R.id.illness_profile_notesData);
 
         illnessName.setText(illness.getName());

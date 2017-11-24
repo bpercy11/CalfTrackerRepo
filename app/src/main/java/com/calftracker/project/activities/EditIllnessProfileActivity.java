@@ -103,6 +103,10 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         prefsEditor.putString("illnessNotes", json);
         prefsEditor.apply();
 
+        json = gson.toJson(illnessList);
+        prefsEditor.putString("IllnessList",json);
+        prefsEditor.apply();
+
         Intent intent = new Intent(EditIllnessProfileActivity.this, EditIllnessProfileMedicineSelectionActivity.class);
         startActivity(intent);
 

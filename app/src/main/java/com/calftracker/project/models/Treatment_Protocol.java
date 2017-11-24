@@ -15,7 +15,7 @@ public class Treatment_Protocol {
 	 */
 	public Treatment_Protocol(List<Medicine> medicines, String notes) {
 		super();
-		this.medicines = new ArrayList<Medicine>();
+		this.medicines = medicines;
 		this.notes = notes;
 	}
 	

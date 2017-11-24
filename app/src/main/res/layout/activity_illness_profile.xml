@@ -43,12 +43,15 @@
 
     <TextView
         android:id="@+id/illness_profile_treatmentData"
-        android:layout_width="wrap_content"
+        android:layout_width="232dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:ellipsize="none"
+        android:inputType="textMultiLine"
+        android:maxLines="20"
+        android:scrollHorizontally="false"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/illness_profile_treatment"
         app:layout_constraintStart_toEndOf="@+id/illness_profile_treatment"
         app:layout_constraintTop_toTopOf="@+id/illness_profile_treatment" />
 
