@@ -2,15 +2,15 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -36,16 +36,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
+import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Note;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
-import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -70,6 +69,8 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mDamValue;
     private TextView mWeightValue;
     private TextView mHeightValue;
+
+    LayoutInflater inflater;
 
     private Dialog mGenderListDialog;
     private String[] gender = {"Male","Female"};
@@ -145,6 +146,9 @@ public class CalfProfileActivity extends AppCompatActivity {
             mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
             mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
         }
+
+        // Custom layout for text dialogs
+        inflater = getLayoutInflater();
 
         // Calculate 32dp in pixels, to be used when changing margins for photo tools
         Resources r = getResources();
@@ -279,9 +283,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Edit Calf " + calfID);
 
-        // Custom layout for text dialogs
-        LayoutInflater inflater = getLayoutInflater();
-
         // Edit Photo
         // Case no calf photo set
         if (currentImage == null) {
@@ -300,8 +301,8 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderID = new AlertDialog.Builder(this);
-        View dialogLayout_ID = inflater.inflate(R.layout.custom_dialog_id, null);
-        final EditText dialogText_ID = (EditText) dialogLayout_ID.findViewById(R.id.dialogTextInput_ID);
+        View dialogLayout_ID = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_ID = (EditText) dialogLayout_ID.findViewById(R.id.dialogTextInput);
 
         dialogText_ID.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialogText_ID.setHint("ID Number");
@@ -394,8 +395,8 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderSire = new AlertDialog.Builder(this);
-        View dialogLayout_Sire = inflater.inflate(R.layout.custom_dialog_sire, null);
-        final EditText dialogText_Sire = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput_Sire);
+        View dialogLayout_Sire = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_Sire = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput);
 
         dialogText_Sire.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialogText_Sire.setHint("Sire ID Number");
@@ -432,8 +433,8 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderDam = new AlertDialog.Builder(this);
-        View dialogLayout_Dam = inflater.inflate(R.layout.custom_dialog_dam, null);
-        final EditText dialogText_Dam = (EditText) dialogLayout_Dam.findViewById(R.id.dialogTextInput_Dam);
+        View dialogLayout_Dam = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_Dam = (EditText) dialogLayout_Dam.findViewById(R.id.dialogTextInput);
 
         dialogText_Dam.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialogText_Dam.setHint("Dam ID Number");
@@ -647,15 +648,17 @@ public class CalfProfileActivity extends AppCompatActivity {
         AlertDialog newNoteAlert;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("Enter Text");
+        View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_Note = (EditText) dialogLayout_Note.findViewById(R.id.dialogTextInput);
+
+        dialogText_Note.setInputType(InputType.TYPE_CLASS_TEXT);
+        dialogText_Note.setHint("Enter Text");
         builder.setTitle("Add Note");
-        builder.setView(input);
+        builder.setView(dialogLayout_Note);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String noteMessage = input.getText().toString();
+                String noteMessage = dialogText_Note.getText().toString();
                 Calendar noteDate = Calendar.getInstance();
 
                 Note newNote = new Note(noteMessage,noteDate);
@@ -731,15 +734,17 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddWeight(View view) {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
+        View dialogLayout_Weight = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_Weight = (EditText) dialogLayout_Weight.findViewById(R.id.dialogTextInput);
+
         builderWeight.setTitle("Record Weight Measurement");
-        final EditText inputWeight = new EditText(this);
-        inputWeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        inputWeight.setHint("Weight (lbs)");
-        builderWeight.setView(inputWeight);
+        dialogText_Weight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        dialogText_Weight.setHint("Weight (lbs)");
+        builderWeight.setView(dialogLayout_Weight);
         builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(inputWeight.getText().toString().matches("")) {
+                if(dialogText_Weight.getText().toString().matches("")) {
                     Context context = getApplicationContext();
                     CharSequence text = "No weight entered";
                     int duration = Toast.LENGTH_SHORT;
@@ -748,7 +753,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     return;
                 }
 
-                double weight = Double.parseDouble(inputWeight.getText().toString());
+                double weight = Double.parseDouble(dialogText_Weight.getText().toString());
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
                 if (!calf.getPhysicalHistory().isEmpty()
@@ -791,15 +796,17 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddHeight(View view) {
         AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
+        View dialogLayout_Height = inflater.inflate(R.layout.custom_dialog, null);
+        final EditText dialogText_Height = (EditText) dialogLayout_Height.findViewById(R.id.dialogTextInput);
+
         builderHeight.setTitle("Record Height Measurement");
-        final EditText inputHeight = new EditText(this);
-        inputHeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        inputHeight.setHint("Height (in)");
-        builderHeight.setView(inputHeight);
+        dialogText_Height.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        dialogText_Height.setHint("Height (in)");
+        builderHeight.setView(dialogLayout_Height);
         builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(inputHeight.getText().toString().matches("")) {
+                if(dialogText_Height.getText().toString().matches("")) {
                     Context context = getApplicationContext();
                     CharSequence text = "No weight entered";
                     int duration = Toast.LENGTH_SHORT;
@@ -808,7 +815,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     return;
                 }
 
-                double height = Double.parseDouble(inputHeight.getText().toString());
+                double height = Double.parseDouble(dialogText_Height.getText().toString());
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
 

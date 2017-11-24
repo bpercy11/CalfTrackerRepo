@@ -3,13 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
@@ -45,6 +44,10 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile_feeding_history);
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Feeding History");
 
         mFirstFeedingButton = (Button) findViewById(R.id.buttonFirstFeeding);
         mSecondFeedingButton = (Button) findViewById(R.id.buttonSecondFeeding);
@@ -200,5 +203,17 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CalfProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), CalfProfileActivity.class);
+        startActivity(intent);
+        return true;
     }
 }

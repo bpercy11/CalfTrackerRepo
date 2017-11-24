@@ -3,7 +3,6 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import com.calftracker.project.adapters.TasksAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
-import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineTask;
 import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;
@@ -22,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class TasksActivity extends AppCompatActivity {
+public class TasksActivity extends BaseActivity {
     private Task task;
     private List<Vaccine_With_Count> vaccCountList;
     private ArrayList<Calf> calfList;
@@ -33,7 +31,11 @@ public class TasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tasks);
+        getLayoutInflater().inflate(R.layout.activity_tasks, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_tasks).setChecked(true);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.tasks_title);
 
         // Load in the Task and CalfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
