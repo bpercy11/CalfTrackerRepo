@@ -9,17 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.calftracker.project.activities.CalfProfileMedicalHistoryActivity;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.interfaces.NeededVaccineAdminstration;
+import com.calftracker.project.interfaces.MedicalHistoryVaccineMethods;
 import com.calftracker.project.models.Vaccine;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.zip.Inflater;
-
-import static com.calftracker.project.interfaces.NeededVaccineAdminstration.*;
 
 /**
  * Created by JT on 11/14/2017.
@@ -31,7 +25,7 @@ public class MedicalHistoryNeededVaccineAdapter extends BaseAdapter {
 
     private final Context context;
 
-    private NeededVaccineAdminstration NVA;
+    private MedicalHistoryVaccineMethods NVA;
 
     // View lookup cache
     private static class ViewHolder {
@@ -40,7 +34,7 @@ public class MedicalHistoryNeededVaccineAdapter extends BaseAdapter {
         Button mAdminister;
     }
 
-    public MedicalHistoryNeededVaccineAdapter(Context context, ArrayList<Vaccine> vaccines, NeededVaccineAdminstration NVA) {
+    public MedicalHistoryNeededVaccineAdapter(Context context, ArrayList<Vaccine> vaccines, MedicalHistoryVaccineMethods NVA) {
         this.context = context;
         this.vaccines = vaccines;
         this.NVA = NVA;

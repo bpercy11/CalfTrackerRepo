@@ -12,9 +12,11 @@ import android.widget.ListView;
 import com.calftracker.project.adapters.MedicalHistoryAdministeredVaccineAdapter;
 import com.calftracker.project.adapters.MedicalHistoryNeededVaccineAdapter;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.interfaces.NeededVaccineAdminstration;
+import com.calftracker.project.interfaces.MedicalHistoryVaccineMethods;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Task;
 import com.calftracker.project.models.Vaccine;
+import com.calftracker.project.models.Vaccine_With_Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class CalfProfileMedicalHistoryActivity extends AppCompatActivity implements NeededVaccineAdminstration {
+public class CalfProfileMedicalHistoryActivity extends AppCompatActivity implements MedicalHistoryVaccineMethods {
 
     String calfID;
     ArrayList<Calf> calfList;
@@ -30,6 +32,8 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
 
     MedicalHistoryNeededVaccineAdapter neededVacAdapter;
     MedicalHistoryAdministeredVaccineAdapter administeredVacAdapter;
+
+    Task task;
 
 
     ListView mlistview;
@@ -54,6 +58,10 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
 
+        // Load in the Task
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
             if (calfList.get(i).getFarmId().equals(calfID)) {
@@ -70,7 +78,7 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
     }
 
     public void clickAdministeredButton(View view) {
-        administeredVacAdapter = new MedicalHistoryAdministeredVaccineAdapter(getApplicationContext(),calf.getAdministeredVaccines());
+        administeredVacAdapter = new MedicalHistoryAdministeredVaccineAdapter(getApplicationContext(),calf.getAdministeredVaccines(), CalfProfileMedicalHistoryActivity.this);
         mlistview.setAdapter(administeredVacAdapter);
     }
 
@@ -103,6 +111,33 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         prefsEditor.apply();
 
         neededVacAdapter.notifyDataSetChanged();
+    }
+
+    public void returnToNeeded(Vaccine_With_Date vaccine) {
+        for(int i = 0; i < calf.getAdministeredVaccines().size(); i++) {
+            if (calf.getAdministeredVaccines().get(i).equals(vaccine)) {
+                calf.getAdministeredVaccines().remove(i);
+
+                task.placeVaccineInTasks(Calendar.getInstance(), vaccine.getVaccine(), calf);
+
+                calf.getNeededVaccines().add(vaccine.getVaccine());
+                break;
+            }
+        }
+
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        administeredVacAdapter.notifyDataSetChanged();
     }
 
     @Override

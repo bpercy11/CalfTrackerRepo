@@ -54,6 +54,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
         TextView mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
         Button mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
+        Button mSelectAll = (Button) findViewById(R.id.buttonSelectAll);
 
 
 
@@ -121,6 +122,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         } else {
             // if there's no vaccines defined the user needs to know that
             // change button to say continue instead of add needed vaccines
+            mSelectAll.setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
             mNoVaccines.setVisibility(View.VISIBLE);
             mNextButton.setText("Continue");
