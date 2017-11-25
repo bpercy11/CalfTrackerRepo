@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CalfTest {
-    Calf calf;
-    String photo;
-    String farmId;
-    int internalId;
-    String gender;
-    Calendar dob;
-    ArrayList<Vaccine> vaccines;
+    private Calf calf;
+    private String photo;
+    private String farmId;
+    private int internalId;
+    private String gender;
+    private Calendar dob;
+    private ArrayList<Vaccine> vaccines;
 
     @Before
     public void setUp() throws Exception {
@@ -54,51 +54,136 @@ public class CalfTest {
     }
 
     @Test
-    public void testChangeCalf() throws Exception {
+    public void testCalfPhoto() throws Exception {
         String new_photo = "photo-data";
+        calf.setPhoto(new_photo);
+        assert(calf.getPhoto().equals(new_photo));
+    }
+
+    @Test
+    public void testCalfFarmId() throws Exception {
         String new_farmId = "321";
+        calf.setFarmId(new_farmId);
+        assert(calf.getFarmId().equals(new_farmId));
+    }
+
+    @Test
+    public void testCalfInternalId() throws Exception {
         int new_internalId = 654;
+        calf.setInternalId(new_internalId);
+        assert(calf.getInternalId() == new_internalId);
+    }
+
+    @Test
+    public void testCalfGender() throws Exception {
         String new_gender = "male";
+        calf.setGender(new_gender);
+        assert(calf.getGender().equals(new_gender));
+    }
+
+    @Test
+    public void testCalfDOB() throws Exception {
         Calendar new_dob = new GregorianCalendar(2017,11,22);
+        calf.setDateOfBirth(new_dob);
+        assert(calf.getDateOfBirth().equals(new_dob));
+    }
+
+    @Test
+    public void testCalfSire() throws Exception {
+        String sire = "789";
+        calf.setSire(sire);
+        assert(calf.getSire().equals(sire));
+    }
+
+    @Test
+    public void testCalfDam() throws Exception {
+        String dam = "987";
+        calf.setDam(dam);
+        assert(calf.getDam().equals(dam));
+    }
+
+    @Test
+    public void testCalfAllergies() throws Exception {
         ArrayList<String> allergies = new ArrayList<String>();
         allergies.add("Dander");
         allergies.add("Peanuts");
-        String sire = "789";
-        String dam = "987";
+        calf.setCalfAllergies(allergies);
+        assert(calf.getCalfAllergies().equals(allergies));
+    }
 
+    @Test
+    public void testCalfActive() throws Exception {
+        calf.setActive(false);
+        assert(!calf.isActive());
+    }
+
+    @Test
+    public void testCalfObserve() throws Exception {
+        calf.setNeedToObserveForIllness(true);
+        assert(calf.isNeedToObserveForIllness());
+    }
+
+    @Test
+    public void testCalfNeededVaccines() throws Exception {
+        ArrayList<Vacc_Range> range = new ArrayList<Vacc_Range>();
+        int[] r = {2, 10};
+        range.add(new Vacc_Range(r));
+        vaccines.add(new Vaccine("exampleVaccine2", range, 0.25, "mL", "IM"));
+        calf.setNeededVaccines(vaccines);
+        assert(calf.getNeededVaccines().equals(vaccines));
+    }
+
+    @Test
+    public void testCalfAdministeredVaccines() throws Exception {
         Calendar date_admin = new GregorianCalendar(2017,11,25);
         Vaccine vacc = vaccines.get(0);
         ArrayList<Vaccine_With_Date> adminVaccines = new ArrayList<Vaccine_With_Date>();
         Vaccine_With_Date adminVacc = new Vaccine_With_Date(vacc, date_admin);
         adminVaccines.add(adminVacc);
         calf.setAdministeredVaccines(adminVaccines);
-
-        calf.setPhoto(new_photo);
-        calf.setFarmId(new_farmId);
-        calf.setInternalId(new_internalId);
-        calf.setGender(new_gender);
-        calf.setDateOfBirth(new_dob);
-        calf.setCalfAllergies(allergies);
-        calf.setSire(sire);
-        calf.setDam(dam);
-        calf.setActive(false);
-
-        assert(calf.getPhoto().equals(new_photo));
-        assert(calf.getFarmId().equals(new_farmId));
-        assert(calf.getInternalId() == new_internalId);
-        assert(calf.getGender().equals(new_gender));
-        assert(calf.getDateOfBirth().equals(new_dob));
-        assert(calf.getCalfAllergies().equals(allergies));
-        assert(calf.getSire().equals(sire));
-        assert(calf.getDam().equals(dam));
-        assert(!calf.isActive());
         assert(calf.getAdministeredVaccines().equals(adminVaccines));
-        // needed vaccines
-        // illness history
-        // physical history
-        // feeding history
-        // notes
-        // observe
+    }
+
+    @Test
+    public void testCalfIllnessHistory() throws Exception {
+        ArrayList<Calf_Illness> illnessList = new ArrayList<Calf_Illness>();
+        ArrayList<Medicine> meds = new ArrayList<Medicine>();
+        meds.add(new Medicine("MasterGuard", 1.0, "mL", 5, "notes"));
+        Treatment_Protocol protocol = new Treatment_Protocol(meds, "notes");
+        illnessList.add(new Calf_Illness(new Illness("Pneumonia", protocol), new Easy_Date(2017, 11, 24), "outcome notes"));
+        calf.setIllnessHistory(illnessList);
+        assert(calf.getIllnessHistory().equals(illnessList));
+    }
+
+    @Test
+    public void testCalfPhysicalHistory() throws Exception {
+        ArrayList<Physical_Metrics_And_Date> physical = new ArrayList<Physical_Metrics_And_Date>();
+        physical.add(new Physical_Metrics_And_Date(50, 64, new GregorianCalendar(2017, 11, 27)));
+        calf.setPhysicalHistory(physical);
+        assert(calf.getPhysicalHistory().equals(physical));
+    }
+
+    @Test
+    public void testCalfFeedingHistory() throws Exception {
+        Feeding feeding = new Feeding(new Employee("Dan"), "bottle", 2);
+        Feeding[] feedings = new Feeding[1];
+        feedings[0] = feeding;
+        calf.setFeedingHistory(feedings);
+        assert(calf.getFeedingHistory().equals(feedings));
+    }
+
+    @Test
+    public void testCalfNotes() throws Exception {
+        ArrayList<Note> notes = new ArrayList<Note>();
+        Note note = new Note("Test note", new GregorianCalendar(2017,11,24));
+        notes.add(note);
+        calf.setNotes(notes);
+        Note note2 = new Note("Test note 2", new GregorianCalendar(2017,11,25));
+        calf.addNote(note2);
+        notes.add(note2);
+        assert(calf.getNotes().equals(notes));
+        assert(calf.getNoteNdx(0).equals(note));
+        assert(calf.getNotesSize() == 1);
     }
 
     @Test
@@ -128,7 +213,5 @@ public class CalfTest {
     }
 
     @After
-    public void tearDown() throws Exception {
-    }
-
+    public void tearDown() throws Exception { }
 }
