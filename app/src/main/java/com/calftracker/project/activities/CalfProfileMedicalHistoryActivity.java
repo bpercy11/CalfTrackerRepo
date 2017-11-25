@@ -118,7 +118,7 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
             if (calf.getAdministeredVaccines().get(i).equals(vaccine)) {
                 calf.getAdministeredVaccines().remove(i);
 
-                task.placeVaccineInTasks(Calendar.getInstance(), vaccine.getVaccine(), calf);
+                task.placeVaccineInTasks(vaccine.getVaccine(), calf);
 
                 calf.getNeededVaccines().add(vaccine.getVaccine());
                 break;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +46,13 @@ public class TasksActivity extends BaseActivity {
         json = mPreferences.getString("CalfList", "");
         calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
 
+        task.updateTasks();
+
+        SharedPreferences.Editor prefsEditor = mPreferences.edit();
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
         // ArrayList that holds all of the Vaccine Tasks for the current day
         ArrayList<VaccineTask> todayTasks = task.getVaccinesToAdminister().get(0);
 
@@ -62,6 +70,11 @@ public class TasksActivity extends BaseActivity {
         listView.setAdapter(adapter);
 
     }
+
+    public void dumbDateChange(View view) {
+        startActivity(new Intent(android.provider.Settings.ACTION_DATE_SETTINGS));
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, DashboardActivity.class);

@@ -56,7 +56,50 @@ public class Task {
         this.overdueVaccinations = overdueVaccinations;
     }
 
-    public void placeVaccineInTasks(Calendar today, Vaccine vaccine, Calf calf) {
+    public void updateTasks() {
+        Calendar today = Calendar.getInstance();
+
+        int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, this.dateLastUpdated));
+
+        // you have to do this however many times a day has passed because there's no way
+        // to just figure out if a vaccine end date has hit zero easily
+        for(int i = 0; i < daysPassedSinceUpdate; i++) {
+            for(int j = 0; j < this.vaccinesToAdminister.size(); j++) {
+
+                // enter this when deciding to move vaccines from the 0th index to overduelist
+                if(j == 0) {
+                    for (int k = 0; k < vaccinesToAdminister.get(j).size(); k++) {
+                        if (!vaccinesToAdminister.get(j).get(k).isStart()) {
+                            this.overdueVaccinations.add(vaccinesToAdminister.get(j).get(k));
+                            vaccinesToAdminister.get(j).get(k).setStart(true);
+                            VaccineTask toRemove = new VaccineTask(vaccinesToAdminister.get(j).get(k));
+
+                            // search in vaccines.get(0) for instances of the vaccine to be moved to
+                            // overdue. there will be two because of the start and end dates.
+                            for (int m = vaccinesToAdminister.get(j).size() - 1; m >= 0; m--) {
+                                if (vaccinesToAdminister.get(j).get(m).equals(toRemove))
+                                    vaccinesToAdminister.get(j).remove(m);
+                            }
+                        }
+                    }
+                } else {
+                    while(!vaccinesToAdminister.get(j).isEmpty()) {
+                        vaccinesToAdminister.get(j - 1).add(vaccinesToAdminister.get(j).remove(0));
+                    }
+                }
+
+
+
+
+            }
+        }
+
+        this.dateLastUpdated = Calendar.getInstance();
+    }
+
+    public void placeVaccineInTasks(Vaccine vaccine, Calf calf) {
+        Calendar today = Calendar.getInstance();
+
         Calendar vaccStart = Calendar.getInstance();
         vaccStart.setTimeZone(calf.getDateOfBirth().getTimeZone());
         vaccStart.setTimeInMillis(calf.getDateOfBirth().getTimeInMillis());
@@ -85,7 +128,7 @@ public class Task {
         }
     }
 
-    private static long calendarDaysBetween(Calendar today, Calendar vaccDate) {
+    private static long calendarDaysBetween(Calendar today, Calendar dateToCompare) {
 
         // Create copies so we don't update the original calendars.
 
@@ -94,8 +137,8 @@ public class Task {
         start.setTimeInMillis(today.getTimeInMillis());
 
         Calendar end = Calendar.getInstance();
-        end.setTimeZone(vaccDate.getTimeZone());
-        end.setTimeInMillis(vaccDate.getTimeInMillis());
+        end.setTimeZone(dateToCompare.getTimeZone());
+        end.setTimeInMillis(dateToCompare.getTimeInMillis());
 
         // Set the copies to be at midnight, but keep the day information.
 
