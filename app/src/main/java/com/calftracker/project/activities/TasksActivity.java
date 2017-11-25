@@ -13,6 +13,7 @@ import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTask;
+import com.calftracker.project.models.VaccineTaskItem;
 import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -54,7 +55,15 @@ public class TasksActivity extends BaseActivity {
         prefsEditor.apply();
 
         // ArrayList that holds all of the Vaccine Tasks for the current day
-        ArrayList<VaccineTask> todayTasks = task.getVaccinesToAdminister().get(0);
+        ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
+
+        // find only the START DATE vaccinetask objects so no doubles from END DATEs
+        for(int i = 0; i < task.getVaccinesToAdminister().get(0).size(); i++)
+            if(task.getVaccinesToAdminister().get(0).get(i).isStart())
+                todayTasks.add(new VaccineTaskItem(false, task.getVaccinesToAdminister().get(0).get(i)));
+
+        for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
+            todayTasks.add(new VaccineTaskItem(true, task.getOverdueVaccinations().get(i)));
 
         // Create the ListView and create a header message for the activity
         listView = (ListView) findViewById(R.id.listViewTasks);
