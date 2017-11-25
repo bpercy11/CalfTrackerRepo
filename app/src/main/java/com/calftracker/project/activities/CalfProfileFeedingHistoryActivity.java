@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.calftracker.project.adapters.FeedingHistoryEmployeeSpinnerAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;
@@ -28,6 +30,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
     private Calf calf;
     private String calfID;
     private ArrayList<Calf> calfList;
+    private ArrayList<Employee> employeeArrayList;
 
     TextView mFirstFeeder;
     TextView mFirstMethod;
@@ -96,6 +99,13 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         }
 
 
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeArrayList = new ArrayList<Employee>(); }
+
+
 
         mFirstFeedingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +116,14 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 final View dialogView = inflater.inflate(R.layout.calf_profile_feeding_history_dialog, null);
 
+                final Spinner mEmployeeSpinner = (Spinner) dialogView.findViewById(R.id.spinnerFeederDialog);
+
+                FeedingHistoryEmployeeSpinnerAdapter adapter = new FeedingHistoryEmployeeSpinnerAdapter(employeeArrayList, getApplicationContext());
+
+                mEmployeeSpinner.setAdapter(adapter);
+
+
+
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(dialogView)
@@ -114,15 +132,16 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
-
+                                Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[0] == null) {
 
-                                    Employee A = new Employee("Derp");
+
                                     String method = "method B";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
-                                    calf.getFeedingHistory()[0] = new Feeding(A, method, liters);
+                                    calf.getFeedingHistory()[0] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[0].setFedBy(fedBy);
                                     calf.getFeedingHistory()[0].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }
 
@@ -146,6 +165,8 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
+
+
                 builder.create().show();
             }
         });
@@ -161,6 +182,12 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 final View dialogView = inflater.inflate(R.layout.calf_profile_feeding_history_dialog, null);
 
+                final Spinner mEmployeeSpinner = (Spinner) dialogView.findViewById(R.id.spinnerFeederDialog);
+
+                FeedingHistoryEmployeeSpinnerAdapter adapter = new FeedingHistoryEmployeeSpinnerAdapter(employeeArrayList, getApplicationContext());
+
+                mEmployeeSpinner.setAdapter(adapter);
+
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(dialogView)
@@ -169,14 +196,15 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
+                                Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[1] == null) {
 
-                                    Employee A = new Employee("Bob");
                                     String method = "method A";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
-                                    calf.getFeedingHistory()[1] = new Feeding(A, method, liters);
+                                    calf.getFeedingHistory()[1] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[1].setFedBy(fedBy);
                                     calf.getFeedingHistory()[1].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }
 
