@@ -57,7 +57,6 @@ public class CalfProfileActivity extends AppCompatActivity {
     private Button mButtonAddPhoto;
     private Button mButtonDeletePhoto;
     private Button mButtonChangePhoto;
-    private String encodedImage = null;
     private Bitmap currentImage = null;
     private Bitmap originalImage = null;
     private int dp32;
@@ -497,7 +496,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
-            encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
             tempCalf.setPhoto(encodedImage);
         }
     }
