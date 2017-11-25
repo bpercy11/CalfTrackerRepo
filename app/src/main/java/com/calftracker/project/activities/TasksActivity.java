@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.TasksAdapter;
+import com.calftracker.project.adapters.tasks.TasksAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
-import com.calftracker.project.models.VaccineTask;
 import com.calftracker.project.models.VaccineTaskItem;
 import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;

@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.MedicalHistoryAdministeredVaccineAdapter;
-import com.calftracker.project.adapters.MedicalHistoryNeededVaccineAdapter;
+import com.calftracker.project.adapters.calfprofile.MedicalHistoryAdministeredVaccineAdapter;
+import com.calftracker.project.adapters.calfprofile.MedicalHistoryNeededVaccineAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.MedicalHistoryVaccineMethods;
 import com.calftracker.project.models.Calf;

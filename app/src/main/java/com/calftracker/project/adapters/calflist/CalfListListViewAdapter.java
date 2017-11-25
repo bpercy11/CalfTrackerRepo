@@ -1,4 +1,4 @@
-package com.calftracker.project.adapters;
+package com.calftracker.project.adapters.calflist;
 
 import android.app.Activity;
 import android.content.Context;

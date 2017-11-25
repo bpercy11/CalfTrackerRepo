@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.TaskDetailsAdapter;
+import com.calftracker.project.adapters.tasks.TaskDetailsAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;

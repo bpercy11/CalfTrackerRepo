@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.FeedingHistoryEmployeeSpinnerAdapter;
+import com.calftracker.project.adapters.calfprofile.FeedingHistoryEmployeeSpinnerAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;

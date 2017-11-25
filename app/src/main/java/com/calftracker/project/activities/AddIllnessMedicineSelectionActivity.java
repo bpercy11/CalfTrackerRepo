@@ -3,12 +3,9 @@ package com.calftracker.project.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
-import com.calftracker.project.adapters.MedicineSelectionListViewAdapter;
+import com.calftracker.project.adapters.protocols.MedicineSelectionListViewAdapter;
 import com.calftracker.project.calftracker.R;
 import android.app.Activity;
 import android.view.View;

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.VaccineAdapter;
+import com.calftracker.project.adapters.protocols.VaccineAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;

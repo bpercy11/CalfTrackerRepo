@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.IllnessAdapter;
+import com.calftracker.project.adapters.protocols.IllnessAdapter;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;

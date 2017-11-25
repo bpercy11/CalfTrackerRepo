@@ -1,38 +1,26 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Illness;
-import com.calftracker.project.models.Treatment_Protocol;
-import com.calftracker.project.adapters.MedicineAdapter;
+import com.calftracker.project.adapters.protocols.MedicineAdapter;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditIllnessActivity extends AppCompatActivity {

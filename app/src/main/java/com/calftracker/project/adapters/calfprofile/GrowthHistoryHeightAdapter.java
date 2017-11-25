@@ -1,4 +1,4 @@
-package com.calftracker.project.adapters;
+package com.calftracker.project.adapters.calfprofile;
 
 import android.content.Context;
 import android.view.LayoutInflater;

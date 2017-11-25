@@ -6,18 +6,15 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.calftracker.project.adapters.CalfListListViewAdapter;
+import com.calftracker.project.adapters.calflist.CalfListListViewAdapter;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;
 import com.calftracker.project.models.Farm;
-import com.calftracker.project.models.Employee;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.*;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;

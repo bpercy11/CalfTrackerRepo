@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.GrowthHistoryHeightAdapter;
-import com.calftracker.project.adapters.GrowthHistoryWeightAdapter;
+import com.calftracker.project.adapters.calfprofile.GrowthHistoryHeightAdapter;
+import com.calftracker.project.adapters.calfprofile.GrowthHistoryWeightAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.google.gson.Gson;

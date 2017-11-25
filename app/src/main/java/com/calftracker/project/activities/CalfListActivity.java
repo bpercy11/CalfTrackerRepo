@@ -16,14 +16,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.CalfListListViewAdapter;
+import com.calftracker.project.adapters.calflist.CalfListListViewAdapter;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Locale;
 
 public class CalfListActivity extends BaseActivity {

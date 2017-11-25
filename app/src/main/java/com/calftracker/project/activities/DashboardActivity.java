@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.calftracker.project.adapters.DashboardGridAdapter;
+import com.calftracker.project.adapters.dashboard.DashboardGridAdapter;
 import com.calftracker.project.calftracker.R;
 
 public class DashboardActivity extends BaseActivity {
