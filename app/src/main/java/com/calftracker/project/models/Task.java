@@ -58,7 +58,8 @@ public class Task {
         this.overdueVaccinations = overdueVaccinations;
     }
 
-    public void updateTasks() {
+    public void updateTasks()
+    {
         Calendar today = Calendar.getInstance();
 
         int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, this.dateLastUpdated));
@@ -102,7 +103,20 @@ public class Task {
 
     }
 
-    public void placeVaccineInTasks(Vaccine vaccine, Calf calf) {
+    public void editVaccine(Vaccine vaccine)
+    {
+        for(int i = 0; i < this.vaccinesToAdminister.size(); i++)
+            for(int j = 0; j < this.vaccinesToAdminister.get(i).size(); j++)
+                if(this.vaccinesToAdminister.get(i).get(j).getVaccine().getName().equals(vaccine.getName()))
+                    this.vaccinesToAdminister.get(i).get(j).setVaccine(vaccine);
+
+        for(int i = 0; i < this.overdueVaccinations.size(); i++)
+            if(this.overdueVaccinations.get(i).getVaccine().getName().equals(vaccine.getName()))
+                this.overdueVaccinations.get(i).setVaccine(vaccine);
+    }
+
+    public void placeVaccineInTasks(Vaccine vaccine, Calf calf)
+    {
         Calendar today = Calendar.getInstance();
 
         Calendar vaccStart = Calendar.getInstance();
@@ -133,7 +147,8 @@ public class Task {
         }
     }
 
-    private static long calendarDaysBetween(Calendar today, Calendar dateToCompare) {
+    private static long calendarDaysBetween(Calendar today, Calendar dateToCompare)
+    {
 
         // Create copies so we don't update the original calendars.
 
