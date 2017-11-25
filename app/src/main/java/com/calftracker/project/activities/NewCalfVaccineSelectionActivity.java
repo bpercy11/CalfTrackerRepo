@@ -44,6 +44,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private Task task;
     private ArrayList<Vaccine> vaccineList;
     private String calfPhoto;
+    private boolean containsVaccineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         // get vaccine list from shared preferences
         if(mPreferences.contains("VaccineList")) {
+            containsVaccineList = true;
+
             json = mPreferences.getString("VaccineList", "");
             vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
@@ -119,9 +122,12 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
                 }
             });
+
+
         } else {
             // if there's no vaccines defined the user needs to know that
             // change button to say continue instead of add needed vaccines
+            containsVaccineList = false;
             mSelectAll.setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
             mNoVaccines.setVisibility(View.VISIBLE);
@@ -223,9 +229,11 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
 
-        json = gson.toJson(vaccineList);
-        prefsEditor.putString("VaccineList",json);
-        prefsEditor.apply();
+        if(containsVaccineList) {
+            json = gson.toJson(vaccineList);
+            prefsEditor.putString("VaccineList", json);
+            prefsEditor.apply();
+        }
 
         // this is a lazy way to pass the newly created calf to the calf profile but whatever.
         // in calf profile we use the string in this shared preference object to iterate through

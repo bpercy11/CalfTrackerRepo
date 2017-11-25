@@ -1,5 +1,7 @@
 package com.calftracker.project.models;
 
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -61,12 +63,12 @@ public class Task {
 
         int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, this.dateLastUpdated));
 
-        // you have to do this however many times a day has passed because there's no way
-        // to just figure out if a vaccine end date has hit zero easily
+        // you have to do this however many times a day has passed because I couldn't think of
+        // a less confusing way to to it.
         for(int i = 0; i < daysPassedSinceUpdate; i++) {
             for(int j = 0; j < this.vaccinesToAdminister.size(); j++) {
 
-                // enter this when deciding to move vaccines from the 0th index to overduelist
+                // enter here when deciding to move vaccines from the 0th index to overduelist
                 if(j == 0) {
                     for (int k = 0; k < vaccinesToAdminister.get(j).size(); k++) {
                         if (!vaccinesToAdminister.get(j).get(k).isStart()) {
@@ -82,7 +84,9 @@ public class Task {
                             }
                         }
                     }
-                } else {
+                }
+                // enter here when moving all other indices
+                else {
                     while(!vaccinesToAdminister.get(j).isEmpty()) {
                         vaccinesToAdminister.get(j - 1).add(vaccinesToAdminister.get(j).remove(0));
                     }
@@ -95,6 +99,7 @@ public class Task {
         }
 
         this.dateLastUpdated = Calendar.getInstance();
+
     }
 
     public void placeVaccineInTasks(Vaccine vaccine, Calf calf) {
