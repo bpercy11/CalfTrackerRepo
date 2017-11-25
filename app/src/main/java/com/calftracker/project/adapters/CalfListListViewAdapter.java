@@ -72,7 +72,7 @@ public class CalfListListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.calfID.setText(calfIDList.get(i));
-        holder.calfID.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!arrayExists) {

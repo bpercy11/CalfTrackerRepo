@@ -99,10 +99,12 @@ public class TasksAdapter extends BaseAdapter{
                     }
                 }
             }
+
+
             holder.vaccine.setText(todayTasks.get(position).getVaccineTask().getVaccine().getName());
             holder.elligible.setText(Integer.toString(elligibleCount));
             usedVaccNames.add(currVacc.getName());
-            holder.vaccine.setOnClickListener(new View.OnClickListener() {
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences mPrefs = context.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
