@@ -56,6 +56,12 @@
             android:name="com.calftracker.project.activities.EditIllnessProfileMedicineSelectionActivity"
             android:label="@string/title_activity_edit_illness_profile_medicine_selection"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.calftracker.project.activities.SettingsActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsAddEmployee" />
+        <activity android:name="com.calftracker.project.activities.SettingsChangeFarmInfoActivity" />
+        <activity android:name="com.calftracker.project.activities.SettingsEmployeeProfileActivity"></activity>
     </application>
 
 </manifest>
