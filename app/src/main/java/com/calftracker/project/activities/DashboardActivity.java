@@ -35,20 +35,15 @@ public class DashboardActivity extends BaseActivity {
             R.drawable.ic_settings_black_24dp
     };
 
+    Farm farm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_dashboard, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
-        // set up shared preference variables
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-
-        // Load the Task object from storage
-        json = mPreferences.getString("Farm", "");
-        Farm farm = gson.fromJson(json, new TypeToken<Farm>() {}.getType());
+        retrieveData();
 
         TextView mFarmName = (TextView) findViewById(R.id.textViewFarmNameDashboard);
         mFarmName.setText(farm.getName());
@@ -83,6 +78,18 @@ public class DashboardActivity extends BaseActivity {
             }
         });
     }
+
+    public void retrieveData() {
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        // Load the Farm object from storage
+        json = mPreferences.getString("Farm", "");
+        farm = gson.fromJson(json, new TypeToken<Farm>() {}.getType());
+    }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
