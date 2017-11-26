@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.calftracker.project.adapters.addcalf.VaccineSelectionListViewAdapter;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Sire;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.Feeding;
 import com.calftracker.project.models.Vaccine;
@@ -206,7 +207,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             }
         }
         calf.setFeedingHistory(new Feeding[2]);
-
+        calf.setSire(new Sire(null,null));
         // gotta add it to the list
         calfList.add(calf);
 

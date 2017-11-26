@@ -164,7 +164,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewSireNameField" />
 
             <TextView
                 android:id="@+id/textViewDOBField"
@@ -176,6 +176,17 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGenderField" />
+
+            <TextView
+                android:id="@+id/textViewSireNameField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sire Name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textViewIDField"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDOBField" />
 
             <TextView
                 android:id="@+id/textViewWeightField"
@@ -242,6 +253,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDOBField"
                 app:layout_constraintStart_toStartOf="@+id/vertical50percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewDOBField" />
+
+            <TextView
+                android:id="@+id/textViewSireNameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/calf_profile_no_sire"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSireNameField"
+                app:layout_constraintStart_toStartOf="@+id/vertical50percent"
+                app:layout_constraintTop_toTopOf="@+id/textViewSireNameField" />
 
             <TextView
                 android:id="@+id/textViewSireValue"

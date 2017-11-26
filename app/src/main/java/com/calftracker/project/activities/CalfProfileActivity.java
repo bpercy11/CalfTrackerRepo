@@ -65,6 +65,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mGenderValue;
     private TextView mDOBValue;
     private TextView mSireValue;
+    private TextView mSireNameValue;
     private TextView mDamValue;
     private TextView mWeightValue;
     private TextView mHeightValue;
@@ -84,6 +85,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private Calf tempCalf;
     private String tempID;
     private String tempSire;
+    private String tempSireName;
     private String tempDam;
     private String tempDOBString;
     private String tempGender;
@@ -136,6 +138,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
         mSireValue = (TextView) findViewById(R.id.textViewSireValue);
+        mSireNameValue = (TextView) findViewById(R.id.textViewSireNameValue);
         mDamValue = (TextView) findViewById(R.id.textViewDamValue);
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
@@ -182,7 +185,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
         int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
-        if (calf.getSire() != null) {mSireValue.setText(calf.getSire());}
+        if (calf.getSire().getId() != null) {mSireValue.setText(calf.getSire().getId());}
+        if (calf.getSire().getName() != null) { mSireNameValue.setText(calf.getSire().getName()); }
         if (calf.getDam() != null) {mDamValue.setText(calf.getDam());}
 
         // Display weight and/or height information only if there has been a recording
@@ -196,6 +200,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         // Set up temporary values, will be updated and applied to the current calf upon user clicking apply
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
+        tempSireName = mSireNameValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
@@ -283,6 +288,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mSireNameValue.setPaintFlags(mSireNameValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // Disable back navigation
@@ -420,7 +426,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     return;
                 }
                 mSireValue.setText(dialogText_Sire.getText().toString());
-                tempCalf.setSire(dialogText_Sire.getText().toString());
+                tempCalf.getSire().setId(dialogText_Sire.getText().toString());
             }
         });
         builderSire.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -430,6 +436,44 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         alertSire = builderSire.create();
+
+        // Edit Sire ID Number
+        mSireNameValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertSire.show();
+            }
+        });
+        AlertDialog.Builder builderSireName = new AlertDialog.Builder(this);
+        View dialogLayout_SireName = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
+        final EditText dialogText_SireName = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput);
+
+        dialogText_Sire.setInputType(InputType.TYPE_CLASS_TEXT);
+        dialogText_Sire.setHint("Sire Name");
+        builderSireName.setTitle("Enter Sire Name");
+        builderSireName.setView(dialogLayout_Sire);
+        builderSireName.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogText_Sire.length() > 9 || dialogText_Sire.length() < 1) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "ID must be 9 digits or less";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+                mSireNameValue.setText(dialogText_Sire.getText().toString());
+                tempCalf.getSire().setName(dialogText_Sire.getText().toString());
+            }
+        });
+        builderSireName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertSire = builderSireName.create();
 
         // Edit Dam ID Number
         mDamValue.setOnClickListener(new View.OnClickListener() {
@@ -579,6 +623,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
+        tempSireName = mSireNameValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
@@ -605,6 +650,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
+        mSireNameValue.setText(tempSireName);
         mDamValue.setText(tempDam);
         mGenderValue.setText(tempGender);
         mDOBValue.setText(tempDOBString);
@@ -915,10 +961,12 @@ public class CalfProfileActivity extends AppCompatActivity {
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireNameValue.setPaintFlags(mSireNameValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
+        mSireNameValue.setOnClickListener(null);
         mDamValue.setOnClickListener(null);
         mGenderValue.setOnClickListener(null);
         mDOBValue.setOnClickListener(null);
