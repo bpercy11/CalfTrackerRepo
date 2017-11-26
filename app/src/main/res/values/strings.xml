@@ -41,6 +41,8 @@
     <string name="calf_profile_no_weight">No Record</string>
     <string name="calf_profile_no_height">No Record</string>
     <string name="calf_profile_delete_calf">Delete Calf</string>
+    <string name="calf_profile_mark_oberservation">Mark need observations</string>
+    <string name="calf_profile_unmark_oberservation">Unmark need observations</string>
 
 
     <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>

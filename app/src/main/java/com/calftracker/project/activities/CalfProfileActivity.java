@@ -234,6 +234,12 @@ public class CalfProfileActivity extends AppCompatActivity {
                 noteContentPopup.show();
             }
         });
+
+        if(calf.isNeedToObserveForIllness()) {
+            Button mMark = (Button) findViewById(R.id.buttonMarkObservation);
+            mMark.setText(R.string.calf_profile_unmark_oberservation);
+        }
+
     }
 
     public void updateNoteListView(Calf calf) {
@@ -914,5 +920,22 @@ public class CalfProfileActivity extends AppCompatActivity {
         mDamValue.setOnClickListener(null);
         mGenderValue.setOnClickListener(null);
         mDOBValue.setOnClickListener(null);
+    }
+
+    public void onClickMarkObservation(View view) {
+        Button mMarkObservation = (Button) findViewById(R.id.buttonMarkObservation);
+        if(calf.isNeedToObserveForIllness())
+            mMarkObservation.setText(R.string.calf_profile_mark_oberservation);
+        else
+            mMarkObservation.setText(R.string.calf_profile_unmark_oberservation);
+
+        calf.setNeedToObserveForIllness(!calf.isNeedToObserveForIllness());
+
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
     }
 }

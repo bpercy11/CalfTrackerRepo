@@ -344,6 +344,19 @@
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddWeight" />
 
+            <Button
+                android:id="@+id/buttonMarkObservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_mark_oberservation"
+                android:textAllCaps="false"
+                android:onClick="onClickMarkObservation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonMedicalHistory" />
+
             <TextView
                 android:id="@+id/textViewNotes"
                 android:layout_width="0dp"
@@ -365,7 +378,6 @@
                 android:id="@+id/buttonCreateNewNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:onClick="clickNewNoteButton"
                 android:text="@string/calf_profile_create_note_button"
