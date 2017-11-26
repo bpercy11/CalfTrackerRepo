@@ -163,6 +163,10 @@ public class Task {
         }
     }
 
+    public void removeVaccineTaskFromTask(Vaccine vaccine, Calf calf) {
+
+    }
+
     public void placeIllnessInTasks(Illness illness, Medicine medicine, Calf calf)
     {
 

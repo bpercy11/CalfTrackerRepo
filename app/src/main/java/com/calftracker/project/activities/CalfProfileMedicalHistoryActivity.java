@@ -47,6 +47,8 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Medical History");
 
+        retrieveData();
+
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
@@ -112,7 +114,16 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
     public void administerVaccine(Vaccine vaccine) {
         for(int i = 0; i < calf.getNeededVaccines().size(); i++) {
             if (calf.getNeededVaccines().get(i).equals(vaccine)) {
-                calf.getNeededVaccines().remove(i);
+                Vaccine vacc = calf.getNeededVaccines().remove(i);
+
+                for (int j = 0; j < task.getVaccinesToAdminister().get(0).size(); j++)
+                    if (task.getVaccinesToAdminister().get(0).get(j).getCalf().getFarmId().equals(calf.getFarmId()))
+                        task.getVaccinesToAdminister().get(0).remove(j);
+
+                for(int j = 0; j < task.getOverdueVaccinations().size(); j++)
+                    if(task.getOverdueVaccinations().get(j).getCalf().getFarmId().equals(calf.getFarmId()))
+                        task.getOverdueVaccinations().remove(j);
+
 
                 Calendar today = Calendar.getInstance();
                 int todayYear = today.get(Calendar.YEAR);
