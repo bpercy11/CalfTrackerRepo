@@ -34,6 +34,8 @@ public class CreateFarmActivity extends AppCompatActivity {
     private TextView farmLocationRequired;
     private TextView farmOwnerRequired;
 
+    Farm farm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +90,8 @@ public class CreateFarmActivity extends AppCompatActivity {
 
 
                 if(!requirementsNotMet) {
-                    Farm farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
-                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                    Gson gson = new Gson();
-                    String json = gson.toJson(farm);
-                    prefsEditor.putString("Farm",json);
-                    prefsEditor.apply();
+                    farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
+                    saveData();
                     callDashboard();
                }
 
@@ -104,6 +101,15 @@ public class CreateFarmActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(farm);
+        prefsEditor.putString("Farm",json);
+        prefsEditor.apply();
     }
 
     public void setupUI(View view) {
