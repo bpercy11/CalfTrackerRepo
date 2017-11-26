@@ -174,4 +174,7 @@
     <string name="title_activity_edit_illness_profile_medicine_selection">
         EditIllnessProfileMedicineSelectionActivity
     </string>
+
+
+    <string name="settings_title">Settings</string>
 </resources>

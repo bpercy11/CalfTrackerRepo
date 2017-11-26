@@ -1,49 +1,32 @@
 package com.calftracker.project.activities;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import java.util.*;
-import android.util.Log;
-import com.calftracker.project.models.Calf;
-import java.util.Locale;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.widget.Toast;
-
+import android.view.View;
+import android.widget.Button;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
-import com.calftracker.project.models.Farm;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
 
-public class SettingsActivity extends AppCompatActivity {
+import java.util.Locale;
 
+public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        getLayoutInflater().inflate(R.layout.activity_settings, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.settings_title);
 
         Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
         Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
         Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
-
 
         editFarmButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
