@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
@@ -26,7 +27,7 @@ public class TasksActivity extends BaseActivity {
     private List<Vaccine_With_Count> vaccCountList;
     private ArrayList<Calf> calfList;
     private ListView listView;
-    private TasksVaccinationAdapter adapter;
+    private TasksVaccinationAdapter vaccineAdapter;
     private TextView date;
 
     TextView mLeft;
@@ -90,8 +91,8 @@ public class TasksActivity extends BaseActivity {
         date = (TextView) findViewById(R.id.textViewTaskDate);
         date.setText("Tasks for " + dateStr);
 
-        adapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
-        listView.setAdapter(adapter);
+        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
+        listView.setAdapter(vaccineAdapter);
 
     }
 
@@ -101,11 +102,34 @@ public class TasksActivity extends BaseActivity {
 
     public void onClickObservations(View view) {
         setObservationColumnNames();
-        return;
+
+        ArrayList<Calf> observeCalves = new ArrayList<Calf>();
+
+        for(int i = 0; i < calfList.size(); i++)
+            if(calfList.get(i).isNeedToObserveForIllness())
+                observeCalves.add(calfList.get(i));
+
+        TasksObservationAdapter adapter = new TasksObservationAdapter(observeCalves, getApplicationContext());
+
+        listView.setAdapter(adapter);
     }
 
     public void onClickVaccineTasks(View view) {
         setVaccineColumnNames();
+
+        // ArrayList that holds all of the Vaccine Tasks for the current day
+        ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
+
+        // find only the START DATE vaccinetask objects so no doubles from END DATEs
+        for(int i = 0; i < task.getVaccinesToAdminister().get(0).size(); i++)
+            if(task.getVaccinesToAdminister().get(0).get(i).isStart())
+                todayTasks.add(new VaccineTaskItem(false, task.getVaccinesToAdminister().get(0).get(i)));
+
+        for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
+            todayTasks.add(new VaccineTaskItem(true, task.getOverdueVaccinations().get(i)));
+
+        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
+        listView.setAdapter(vaccineAdapter);
     }
 
     public void onClickIllnessTasks(View view) {
