@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
@@ -16,12 +17,15 @@ import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Illness;
+import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTaskItem;
 import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +37,10 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     private ListView listView;
     private TasksVaccinationAdapter vaccineAdapter;
     private TextView date;
+
+    private ArrayList<Calf> observeCalves;
+
+    private TasksObservationAdapter observationAdapter;
 
     TextView mLeft;
     TextView mRight;
@@ -107,7 +115,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     public void onClickObservations(View view) {
         setObservationColumnNames();
 
-        ArrayList<Calf> observeCalves = new ArrayList<Calf>();
+        observeCalves = new ArrayList<Calf>();
 
         for(int i = 0; i < calfList.size(); i++)
             if(calfList.get(i).isNeedToObserveForIllness())
@@ -115,9 +123,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
 
 
-        TasksObservationAdapter adapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
+        observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(observationAdapter);
     }
 
     public void onClickVaccineTasks(View view) {
@@ -138,7 +146,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         listView.setAdapter(vaccineAdapter);
     }
 
-    public void showObservationDialog() {
+    public void showObservationDialog(Calf calf) {
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
@@ -146,6 +154,10 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
 
+        final Spinner mIllnessSpinner = (Spinner) dialogView.findViewById(R.id.spinnerIllnessDialog);
+        final Spinner mMedicationSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMedicationDialog);
+
+        final Calf calfcopy = calf;
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView)
@@ -153,7 +165,11 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
                 .setPositiveButton("Confirm Illness", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        Illness illness = (Illness) mIllnessSpinner.getSelectedItem();
+                        Medicine medicine = (Medicine) mMedicationSpinner.getSelectedItem();
+
+                        removeCalfFromObservations(calfcopy.getFarmId());
+
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -164,6 +180,39 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
 
         builder.create().show();
+    }
+
+    public void removeCalfFromObservations(String calfID) {
+        for(int i = 0; i < observeCalves.size(); i++) {
+            if(observeCalves.get(i).getFarmId().equals(calfID)) {
+                observeCalves.remove(i);
+                break;
+            }
+
+        }
+
+        // Search through the calfList to find the correct calf by ID
+        for (int i = 0; i < calfList.size(); i++) {
+            if (calfList.get(i).getFarmId().equals(calfID)) {
+                calfList.get(i).setNeedToObserveForIllness(!calfList.get(i).isNeedToObserveForIllness());
+                break;
+            }
+        }
+
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        SharedPreferences.Editor prefsEditor = mPreferences.edit();
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        observationAdapter.notifyDataSetChanged();
     }
 
     public void clickObservationItem(Calf calf) {

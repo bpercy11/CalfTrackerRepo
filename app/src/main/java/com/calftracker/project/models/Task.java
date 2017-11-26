@@ -17,6 +17,8 @@ public class Task {
     private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
     private ArrayList<VaccineTask> overdueVaccinations;
 
+    private ArrayList<ArrayList<IllnessTask>> illnessTracker;
+
     public Task(Calendar dateLastUpdated, ArrayList<Calf> calvesToObserve,
                 ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations) {
         super();
@@ -24,6 +26,14 @@ public class Task {
         this.calvesToObserve = calvesToObserve;
         this.vaccinesToAdminister = vaccinesToAdminister;
         this.overdueVaccinations = overdueVaccinations;
+    }
+
+    public ArrayList<ArrayList<IllnessTask>> getIllnessTracker() {
+        return illnessTracker;
+    }
+
+    public void setIllnessTracker(ArrayList<ArrayList<IllnessTask>> illnessTracker) {
+        this.illnessTracker = illnessTracker;
     }
 
     public Calendar getDateLastUpdated() {
@@ -146,6 +156,13 @@ public class Task {
             this.vaccinesToAdminister.get((int) daysBetweenStart).add(new VaccineTask(vaccine, calf, true));
         }
     }
+
+    public void placeIllnessInTasks(Illness illness, Medicine medicine, Calf calf)
+    {
+
+    }
+
+
 
     private static long calendarDaysBetween(Calendar today, Calendar dateToCompare)
     {

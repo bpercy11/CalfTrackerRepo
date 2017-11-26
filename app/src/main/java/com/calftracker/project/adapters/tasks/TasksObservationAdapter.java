@@ -84,12 +84,12 @@ public class TasksObservationAdapter extends BaseAdapter {
             result=convertView;
         }
 
-        final ViewGroup parentcopy = parent;
+        final int positioncopy = position;
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TM.showObservationDialog();
+                TM.showObservationDialog(getItem(positioncopy));
             }
         });
 //
