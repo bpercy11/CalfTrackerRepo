@@ -3,9 +3,8 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,20 +12,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.VaccineSelectionListViewAdapter;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Task;
+import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Feeding;
+import com.calftracker.project.models.Task;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineSelectionItem;
 import com.calftracker.project.models.VaccineTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -100,24 +95,26 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
 
-            adapterArray = new ArrayList<VaccineSelectionItem>();
-            for(int i = 0; i < vaccineList.size(); i++) {
-                adapterArray.add(new VaccineSelectionItem(vaccineList.get(i),false));
-            }
-            adapter = new VaccineSelectionListViewAdapter(adapterArray, getApplicationContext());
-
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView parent, View view, int position, long id) {
-
-                    VaccineSelectionItem dataModel= adapterArray.get(position);
-                    dataModel.setChecked(!dataModel.getChecked());
-                    adapter.notifyDataSetChanged();
-
-
+            if (vaccineList != null) {
+                adapterArray = new ArrayList<VaccineSelectionItem>();
+                for (int i = 0; i < vaccineList.size(); i++) {
+                    adapterArray.add(new VaccineSelectionItem(vaccineList.get(i), false));
                 }
-            });
+                adapter = new VaccineSelectionListViewAdapter(adapterArray, getApplicationContext());
+
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+                        VaccineSelectionItem dataModel = adapterArray.get(position);
+                        dataModel.setChecked(!dataModel.getChecked());
+                        adapter.notifyDataSetChanged();
+
+
+                    }
+                });
+            }
         } else {
             // if there's no vaccines defined the user needs to know that
             // change button to say continue instead of add needed vaccines

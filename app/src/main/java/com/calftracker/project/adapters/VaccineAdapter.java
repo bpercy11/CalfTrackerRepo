@@ -33,6 +33,7 @@ public class VaccineAdapter extends BaseAdapter {
 
     @Override
     public int getCount(){
+        if (vaccineList == null)  return 0;
         return vaccineList.size();
     }
     @Override
