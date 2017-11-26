@@ -2,11 +2,13 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calftracker.project.adapters.calfprofile.FeedingHistoryEmployeeSpinnerAdapter;
 import com.calftracker.project.calftracker.R;
@@ -141,6 +144,16 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
+                                String ed_text = mLiters.getText().toString().trim();
+
+                                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Must set amount fed";
+                                    int duration = Toast.LENGTH_SHORT;
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                    return;
+                                }
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
                                 String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[0] == null) {
@@ -215,6 +228,16 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
+                                String ed_text = mLiters.getText().toString().trim();
+
+                                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Must set amount fed";
+                                    int duration = Toast.LENGTH_SHORT;
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                    return;
+                                }
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
                                 String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[1] == null) {
