@@ -69,7 +69,7 @@ public class MedicineProfileActivity extends BaseActivity {
         medicineName.setText(medicine.getName());
         medicineDosage.setText(Double.toString(medicine.getDosage()));
         medicineDosageUnits.setText(medicine.getDosage_units());
-        medicineTimeActive.setText(Integer.toString(medicine.getTimeActive()));
+        medicineTimeActive.setText(Integer.toString(medicine.getTimeActive()) + " days");
         medicineNotes.setText(medicine.getNotes());
     }
 
