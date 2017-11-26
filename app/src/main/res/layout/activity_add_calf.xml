@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="clickAddCalfButton"
-                android:text="Add"
+                android:text="Next"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
                 app:layout_constraintStart_toStartOf="@+id/vertical66percent"
                 app:layout_constraintTop_toTopOf="@+id/buttonCancel" />
@@ -157,7 +157,7 @@
                 android:id="@+id/buttonNewDeletePhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="16dp"
                 android:onClick="onClickDeletePhotoButton"
                 android:text="@string/calf_profile_delete_photo"

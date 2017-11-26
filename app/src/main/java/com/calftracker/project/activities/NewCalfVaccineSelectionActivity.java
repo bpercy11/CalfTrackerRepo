@@ -243,6 +243,14 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     }
 
     public void onClickBack(View view) {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(new Calf(null, calfID, calfGender, calfCal));
+        prefsEditor.putString("BackToAddScreen",json);
+        prefsEditor.apply();
+
+
         // go back to add new calf screen
         Intent intent = new Intent(this,AddCalfActivity.class);
         startActivity(intent);
