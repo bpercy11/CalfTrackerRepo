@@ -55,4 +55,10 @@ public class Illness {
 		return new Illness(name,treatmentProtocol);
 	}
 
+	@Override
+	public String toString()
+	{
+		return(this.name);
+	}
+
 }

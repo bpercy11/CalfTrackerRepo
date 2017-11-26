@@ -8,10 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.calftracker.project.adapters.tasks.IllnessObservationDialogSpinnerAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
@@ -39,6 +41,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     private TextView date;
 
     private ArrayList<Calf> observeCalves;
+    private ArrayList<Illness> illnessList;
 
     private TasksObservationAdapter observationAdapter;
 
@@ -74,6 +77,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
         json = mPreferences.getString("CalfList", "");
         calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+
+        json = mPreferences.getString("IllnessList", "");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
 
         task.updateTasks();
 
@@ -156,6 +162,10 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         final Spinner mIllnessSpinner = (Spinner) dialogView.findViewById(R.id.spinnerIllnessDialog);
         final Spinner mMedicationSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMedicationDialog);
+
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, illnessList);
+
+        mIllnessSpinner.setAdapter(spinnerAdapter);
 
         final Calf calfcopy = calf;
         // Inflate and set the layout for the dialog

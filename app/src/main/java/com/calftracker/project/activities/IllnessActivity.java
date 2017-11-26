@@ -90,7 +90,6 @@ public class IllnessActivity extends BaseActivity {
             startActivity(intent);
         }
     }
-
 }
 
 

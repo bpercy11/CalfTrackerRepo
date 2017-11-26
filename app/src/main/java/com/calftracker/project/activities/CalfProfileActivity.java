@@ -273,6 +273,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonAddWeight).setVisibility(View.GONE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
+        findViewById(R.id.buttonMarkObservation).setVisibility(View.GONE);
         findViewById(R.id.textViewNotes).setVisibility(View.GONE);
         findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
@@ -908,6 +909,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonMarkObservation).setVisibility(View.VISIBLE);
 
         mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
