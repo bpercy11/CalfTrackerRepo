@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.calftracker.project.activities.TaskDetailsActivity;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Vaccine;
-import com.calftracker.project.models.VaccineTask;
 import com.calftracker.project.models.VaccineTaskItem;
 import com.google.gson.Gson;
 

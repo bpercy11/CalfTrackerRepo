@@ -8,12 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.tasks.IllnessObservationDialogSpinnerAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
@@ -27,7 +27,6 @@ import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -165,7 +164,23 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         ArrayAdapter spinnerAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, illnessList);
 
+        mIllnessSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Illness selected = (Illness) mIllnessSpinner.getSelectedItem();
+                ArrayAdapter medicationSpinAdapter = new ArrayAdapter(adapterView.getContext(), android.R.layout.simple_spinner_item, selected.getTreatmentProtocol().getMedicines());
+                mMedicationSpinner.setAdapter(medicationSpinAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         mIllnessSpinner.setAdapter(spinnerAdapter);
+
+
 
         final Calf calfcopy = calf;
         // Inflate and set the layout for the dialog
