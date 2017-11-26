@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.MedicineAdapter;
+import com.calftracker.project.adapters.protocols.MedicineAdapter;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
@@ -77,7 +77,7 @@ public class MedicineActivity extends BaseActivity {
         Intent intent = new Intent(MedicineActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onMedicine_EditMedicineButtonClick(View view){
+    public void onMedicine_AddMedicineButtonClick(View view){
         Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
         startActivity(intent);
     }

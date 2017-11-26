@@ -1,5 +1,12 @@
-package com.calftracker.project.adapters;
+package com.calftracker.project.adapters.protocols;
 
+import android.content.Context;
+
+import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.MedicineSelectionItem;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -9,38 +16,35 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.VaccineSelectionItem;
+/**
+ * Created by Lisa on 11/17/2017.
+ */
 
-import java.util.ArrayList;
+public class MedicineSelectionListViewAdapter extends ArrayAdapter{
 
-public class VaccineSelectionListViewAdapter extends ArrayAdapter {
-
-    private ArrayList<VaccineSelectionItem> dataSet;
+    private ArrayList<MedicineSelectionItem> dataSet;
     Context mContext;
 
-    // View lookup cache
     private static class ViewHolder {
         TextView txtName;
         CheckBox checkBox;
     }
 
-    public VaccineSelectionListViewAdapter(ArrayList data, Context context) {
-        super(context, R.layout.new_calf_vaccine_selection_vaccine_row_item, data);
+    public MedicineSelectionListViewAdapter(ArrayList data, Context context){
+        super(context, R.layout.add_illness_medicine_selection_row_item, data);
         this.dataSet = data;
         this.mContext = context;
-
     }
+
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
     @Override
-    public VaccineSelectionItem getItem(int position) {
+    public MedicineSelectionItem getItem(int position) {
         return dataSet.get(position);
     }
-
 
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -50,7 +54,7 @@ public class VaccineSelectionListViewAdapter extends ArrayAdapter {
 
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_calf_vaccine_selection_vaccine_row_item, parent, false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_illness_medicine_selection_row_item, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.txtName);
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
 
@@ -62,13 +66,14 @@ public class VaccineSelectionListViewAdapter extends ArrayAdapter {
             result=convertView;
         }
 
-        VaccineSelectionItem item = getItem(position);
+        MedicineSelectionItem item = getItem(position);
 
 
-        viewHolder.txtName.setText(item.getVaccine().getName());
+        viewHolder.txtName.setText(item.getMedicine().getName());
         viewHolder.checkBox.setChecked(item.getChecked());
 
 
         return result;
     }
+
 }

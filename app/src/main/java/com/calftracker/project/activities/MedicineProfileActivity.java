@@ -30,6 +30,8 @@ public class MedicineProfileActivity extends BaseActivity {
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+
+        //Load clicked medicine
         if(mPreferences.contains("MedicineProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
@@ -39,6 +41,7 @@ public class MedicineProfileActivity extends BaseActivity {
             }.getType());
         } else { }
 
+        //Load MedicineList
         if(mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
@@ -48,18 +51,21 @@ public class MedicineProfileActivity extends BaseActivity {
             }.getType());
         } else { }
 
+        //Find medicine position in medicineList
         for (int i = 0; i < medicineList.size(); i++){
             if(medicineList.get(i).getName().equals(medicine.getName())){
                 medicinePosition = i;
             }
         }
 
+        //Finding where Data needs to be displayed
         TextView medicineName = (TextView) findViewById(R.id.medicine_profile_medicine_nameData);
         TextView medicineDosage = (TextView) findViewById(R.id.medicine_profile_dosageData);
         TextView medicineDosageUnits = (TextView) findViewById(R.id.medicine_profile_dosageUnitsData);
         TextView medicineTimeActive = (TextView) findViewById(R.id.medicine_profile_timeActiveData);
         TextView medicineNotes = (TextView) findViewById(R.id.medicine_profile_notesData);
 
+        //Setting Data with correct medicine information
         medicineName.setText(medicine.getName());
         medicineDosage.setText(Double.toString(medicine.getDosage()));
         medicineDosageUnits.setText(medicine.getDosage_units());
@@ -71,6 +77,7 @@ public class MedicineProfileActivity extends BaseActivity {
 
         medicineList.remove(medicinePosition);
 
+        //Save updated medicineList
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();

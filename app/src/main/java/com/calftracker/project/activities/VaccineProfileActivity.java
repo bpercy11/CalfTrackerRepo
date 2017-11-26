@@ -28,6 +28,8 @@ public class VaccineProfileActivity extends BaseActivity {
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+
+        //Load clicked Vaccine
         if(mPreferences.contains("VaccineProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
@@ -37,6 +39,7 @@ public class VaccineProfileActivity extends BaseActivity {
             }.getType());
         } else { }
 
+        //Load VaccineList
         if(mPreferences.contains("VaccineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
@@ -46,12 +49,14 @@ public class VaccineProfileActivity extends BaseActivity {
             }.getType());
         } else { }
 
+        //Find Vaccine position in VaccineList
         for (int i = 0; i < vaccineList.size(); i++){
             if(vaccineList.get(i).getName().equals(vaccine.getName())){
                 vaccinePosition = i;
             }
         }
 
+        //Finding where Data needs to be displayed
         TextView vaccineName = (TextView) findViewById(R.id.vaccine_profile_vaccine_nameData);
         TextView vaccineAdminStart = (TextView) findViewById(R.id.vaccine_profile_adminStartData);
         TextView vaccineAdminEnd = (TextView) findViewById(R.id.vaccine_profile_adminEndData);
@@ -64,6 +69,7 @@ public class VaccineProfileActivity extends BaseActivity {
 
         vaccineName.setText(vaccine.getName());
 
+        //Setting the Vacc_Range Data
         if (range[0] % 7 == 0 && range[1] % 7 == 0) {
             range[0] = range[0]/7;
             range[1] = range[1]/7;
@@ -81,6 +87,7 @@ public class VaccineProfileActivity extends BaseActivity {
             vaccineAdminEnd.setText(Integer.toString(range[1]) + " Days");
         }
 
+        //Setting Data with correct vaccine information
         vaccineDosage.setText(Double.toString(vaccine.getDosage()));
         vaccineDosageUnits.setText(vaccine.getDosageUnits());
         vaccineAdminMethod.setText(vaccine.getMethodOfAdministration());
@@ -95,6 +102,7 @@ public class VaccineProfileActivity extends BaseActivity {
 
         vaccineList.remove(vaccinePosition);
 
+        //Save Updated VaccineList
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();

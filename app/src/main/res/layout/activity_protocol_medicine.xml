@@ -30,6 +30,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorIcon"
+        android:onClick="onMedicine_MedicineButtonClick"
         android:text="Medicine"
         app:layout_constraintBottom_toTopOf="@+id/listview_medicine"
         app:layout_constraintEnd_toStartOf="@+id/medicine_illnessButton"
@@ -54,13 +55,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/medicine_editMedicine"
+        android:id="@+id/medicine_addMedicine"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="8dp"
-        android:onClick="onMedicine_EditMedicineButtonClick"
-        android:text="Edit Medicine"
+        android:onClick="onMedicine_AddMedicineButtonClick"
+        android:text="Add Medicine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -78,7 +79,7 @@
         android:divider="#d1d1d1"
         android:dividerHeight="5dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/medicine_editMedicine"
+        app:layout_constraintBottom_toTopOf="@+id/medicine_addMedicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

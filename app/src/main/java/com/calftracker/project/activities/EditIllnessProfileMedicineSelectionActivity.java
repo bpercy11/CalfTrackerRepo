@@ -1,18 +1,17 @@
 package com.calftracker.project.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.calftracker.project.adapters.protocols.MedicineSelectionListViewAdapter;
-import com.calftracker.project.calftracker.R;
-import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.calftracker.project.adapters.protocols.MedicineSelectionListViewAdapter;
+import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.MedicineSelectionItem;
@@ -22,24 +21,23 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+public class EditIllnessProfileMedicineSelectionActivity extends AppCompatActivity {
 
-public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
-
-    ArrayList<MedicineSelectionItem> adapterArray;
-    MedicineSelectionListViewAdapter adapter;
     private ArrayList<Illness> illnessList;
     private ArrayList<Medicine> medicineList;
-    String illnessName;
-    String illnessNotes;
-
+    ArrayList<MedicineSelectionItem> adapterArray;
+    MedicineSelectionListViewAdapter adapter;
+    private String illnessNotesStr;
+    private String illnessNameStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_illness_medicine_selection);
+        setContentView(R.layout.activity_edit_illness_profile_medicine_selection);
 
-        ListView lv = (ListView) findViewById(R.id.listViewMedicineSelection);
-        Button confirmButton = (Button) findViewById(R.id.buttonConfirmMedicines);
+
+        ListView lv = (ListView) findViewById(R.id.medicineSelectionEditIllness_listView);
+        Button confirmButton = (Button) findViewById(R.id.medicineSelectionEditIllness_confirmButton);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessList")) {
@@ -83,10 +81,10 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
             lv.setVisibility(View.GONE);
             confirmButton.setText("Continue");
         }
-
     }
 
-    public void onConfirmMedicines(View view) {
+    public void medicineSelectionConfirmButtonClick(View view) {
+
 
         ArrayList<Medicine> tempMedicineList = new ArrayList<Medicine>();
 
@@ -104,14 +102,14 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json;
 
-        json = mPreferences.getString("thisIllnessName","");
-        illnessName = gson.fromJson(json, String.class);
+        json = mPreferences.getString("illnessName","");
+        illnessNameStr = gson.fromJson(json, String.class);
 
         json = mPreferences.getString("illnessNotes","");
-        illnessNotes = gson.fromJson(json, String.class);
+        illnessNotesStr = gson.fromJson(json, String.class);
 
         // create a new illness object
-        Illness illness = new Illness(illnessName, new Treatment_Protocol(tempMedicineList,illnessNotes));
+        Illness illness = new Illness(illnessNameStr, new Treatment_Protocol(tempMedicineList,illnessNotesStr));
 
         // add the illness to the list of local illnesses, save to local storage
         illnessList.add(illness);
@@ -125,13 +123,13 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickBackMedicines(View view) {
+    public void onClickBackEditIllnessProfileMedicines(View view) {
         // go back to Add Illness screen
-        Intent intent = new Intent(this,EditIllnessActivity.class);
+        Intent intent = new Intent(this,EditIllnessProfileActivity.class);
         startActivity(intent);
     }
 
-    public void onClickSelectAllMedicines(View view) {
+    public void onClickEditIllnessProfileSelectAllMedicines(View view) {
         for(int i = 0; i < adapterArray.size(); i++) {
             adapterArray.get(i).setChecked(true);
         }
@@ -139,4 +137,3 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
     }
 
 }
-

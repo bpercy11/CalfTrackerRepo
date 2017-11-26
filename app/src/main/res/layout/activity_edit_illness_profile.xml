@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.calftracker.project.activities.EditIllnessProfileActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical10percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="39dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical90percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="346dp" />
+
+    <TextView
+        android:id="@+id/editIllnessProfile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Edit Illness"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/editIllnessProfile_illnessName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Illness Name:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+        app:layout_constraintTop_toBottomOf="@+id/editIllnessProfile_title" />
+
+    <EditText
+        android:id="@+id/editIllnessProfile_enterName"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:gravity="end"
+        android:hint="Enter Name"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editIllnessProfile_illnessName"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintStart_toEndOf="@+id/editIllnessProfile_illnessName"
+        app:layout_constraintTop_toTopOf="@+id/editIllnessProfile_illnessName" />
+
+    <TextView
+        android:id="@+id/editIllnessProfile_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="32dp"
+        android:text="Notes:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/editIllnessProfile_illnessName"
+        app:layout_constraintStart_toStartOf="@+id/editIllnessProfile_illnessName"
+        app:layout_constraintTop_toBottomOf="@+id/editIllnessProfile_illnessName" />
+
+    <EditText
+        android:id="@+id/editIllnessProfile_enterNotes"
+        android:layout_width="244dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="170dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="Enter Notes"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editIllnessProfile_notes"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toEndOf="@+id/editIllnessProfile_notes"
+        app:layout_constraintTop_toTopOf="@+id/editIllnessProfile_notes"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <Button
+        android:id="@+id/editIllness_buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="280dp"
+        android:onClick="addEditedIllnessButton"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical10percent"
+        app:layout_constraintTop_toBottomOf="@+id/editIllnessProfile_notes" />
+
+    <Button
+        android:id="@+id/editIllness_buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="cancelEditedIllnessButton"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/editIllness_buttonAdd"
+        app:layout_constraintEnd_toStartOf="@+id/vertical90percent"
+        app:layout_constraintTop_toTopOf="@+id/editIllness_buttonAdd" />
+
+
+</android.support.constraint.ConstraintLayout>

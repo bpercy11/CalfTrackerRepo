@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.calftracker.project.activities.EditIllnessProfileMedicineSelectionActivity">
+
+
+    <TextView
+        android:id="@+id/medicineSelectionEditIllness_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Select Required Medicines"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/medicineSelectionEditIllness_listView"
+        android:layout_width="360dp"
+        android:layout_height="345dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/medicineSelectionEditIllness_title" />
+
+    <Button
+        android:id="@+id/medicinSelectionEditIllness_selectAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickEditIllnessProfileSelectAllMedicines"
+        android:text="Select all"
+        app:layout_constraintBottom_toTopOf="@+id/medicineSelectionEditIllness_listView"
+        app:layout_constraintEnd_toEndOf="@+id/medicineSelectionEditIllness_title"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/medicineSelectionEditIllness_title"
+        app:layout_constraintTop_toBottomOf="@+id/medicineSelectionEditIllness_title"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/medicineSelectionEditIllness_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickBackEditIllnessProfileMedicines"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/medicineSelectionEditIllness_confirmButton"
+        app:layout_constraintStart_toStartOf="@+id/medicineSelectionEditIllness_listView"
+        app:layout_constraintTop_toBottomOf="@+id/medicineSelectionEditIllness_listView" />
+
+    <Button
+        android:id="@+id/medicineSelectionEditIllness_confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="medicineSelectionConfirmButtonClick"
+        android:text="Confirm Required Medicines"
+        app:layout_constraintBottom_toBottomOf="@+id/medicineSelectionEditIllness_backButton"
+        app:layout_constraintEnd_toEndOf="@+id/medicineSelectionEditIllness_listView"
+        app:layout_constraintTop_toTopOf="@+id/medicineSelectionEditIllness_backButton" />
+
+
+</android.support.constraint.ConstraintLayout>

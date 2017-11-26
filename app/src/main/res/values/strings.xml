@@ -168,4 +168,10 @@
         AddIllnessMedicineSelectionActivity
     </string>
     <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines</string>
+    <string name="IllnessProfile_EditButtonName">Edit</string>
+    <string name="IllnessProfile_RemoveButtonName">Remove</string>
+    <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity</string>
+    <string name="title_activity_edit_illness_profile_medicine_selection">
+        EditIllnessProfileMedicineSelectionActivity
+    </string>
 </resources>

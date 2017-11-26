@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.TaskDetailsAdapter;
+import com.calftracker.project.adapters.tasks.TaskDetailsAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
@@ -63,14 +63,20 @@ public class TaskDetailsActivity extends AppCompatActivity {
         todayTasks = task.getVaccinesToAdminister().get(0);
 
         // Add the eligible calves for this vaccine to a list
-        for (int i = 0; i < todayTasks.size(); i++) {
-            if (todayTasks.get(i).getVaccine().getName().equals(vaccine.getName())) {
-                vaccineCalfList.add(todayTasks.get(i).getCalf());
-            }
-        }
-        for(int i = 0; i < vaccineCalfList.size(); i++) {
+        for (int i = 0; i < todayTasks.size(); i++)
+            if (todayTasks.get(i).getVaccine().getName().equals(vaccine.getName()))
+                if(todayTasks.get(i).isStart())
+                    vaccineCalfList.add(todayTasks.get(i).getCalf());
+
+        for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
+            if(task.getOverdueVaccinations().get(i).getVaccine().getName().equals(vaccine.getName()))
+                vaccineCalfList.add(task.getOverdueVaccinations().get(i).getCalf());
+
+
+        for(int i = 0; i < vaccineCalfList.size(); i++)
             adapterArray.add(new TaskDetailsCalfSelectionItem(vaccineCalfList.get(i).getFarmId(),false));
-        }
+
+
         adapter = new TaskDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
 
         vaccName = (TextView) findViewById(R.id.textViewTaskItemVaccineName);
@@ -120,11 +126,22 @@ public class TaskDetailsActivity extends AppCompatActivity {
                         break;
                     }
                 }
+
+                // I'm like 90% sure that this loop will take out extra calves in the tasks.
+                // a situtation where like calf #100 is elligble for both Vaccine A and Vaccine B
+                // if you were on the taskdetails for Vaccine A it would probably take out
+                // Vaccine B as well. haven't tested yet so it might not be a problem -JT
                 for (int j = 0; j < todayTasks.size(); j++) {
                     if (todayTasks.get(j).getCalf().getFarmId().equals(calf.getFarmId())) {
                         todayTasks.remove(j);
                     }
                 }
+
+                for(int j = 0; j < task.getOverdueVaccinations().size(); j++)
+                    if(task.getOverdueVaccinations().get(j).getCalf().getFarmId().equals(calf.getFarmId()))
+                        task.getOverdueVaccinations().remove(j);
+
+
                 // Save the calf to the device
                 SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.IllnessAdapter;
+import com.calftracker.project.adapters.protocols.IllnessAdapter;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
@@ -76,7 +76,7 @@ public class IllnessActivity extends BaseActivity {
         Intent intent = new Intent(IllnessActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onIllness_EditIllnessButtonClick(View view) {
+    public void onIllness_AddIllnessButtonClick(View view) {
         Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
         startActivity(intent);
     }

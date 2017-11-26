@@ -17,6 +17,13 @@ public class VaccineTask {
         this.start = start;
     }
 
+    // NEED TO BE ABLE TO COPY FOR SEARCHING IN UPDATETASKS
+    public VaccineTask(VaccineTask vT) {
+        this.vaccine = vT.getVaccine();
+        this.calf = vT.getCalf();
+        this.start = vT.isStart();
+    }
+
     public Vaccine getVaccine() {
         return vaccine;
     }
@@ -39,5 +46,27 @@ public class VaccineTask {
 
     public void setStart(boolean start) {
         this.start = start;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof VaccineTask)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        VaccineTask task = (VaccineTask) o;
+
+        if(task.getCalf().getFarmId().equals(this.getCalf().getFarmId()) && task.getVaccine().getName().equals(this.getVaccine().getName()))
+            return true;
+        else
+            return false;
     }
 }

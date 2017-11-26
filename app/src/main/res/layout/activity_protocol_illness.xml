@@ -45,6 +45,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorIcon"
+        android:onClick="onIllness_IllnessButtonClick"
         android:text="Illness"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -52,13 +53,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/illness_EditIllness"
+        android:id="@+id/illness_AddIllness"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="8dp"
-        android:onClick="onIllness_EditIllnessButtonClick"
-        android:text="Edit Illness"
+        android:onClick="onIllness_AddIllnessButtonClick"
+        android:text="Add Illness"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,7 +77,7 @@
         android:divider="#d1d1d1"
         android:dividerHeight="5dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/illness_EditIllness"
+        app:layout_constraintBottom_toTopOf="@+id/illness_AddIllness"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

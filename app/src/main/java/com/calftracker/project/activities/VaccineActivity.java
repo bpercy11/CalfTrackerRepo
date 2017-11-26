@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.calftracker.project.adapters.VaccineAdapter;
+import com.calftracker.project.adapters.protocols.VaccineAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;
@@ -28,6 +28,9 @@ public class VaccineActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_protocol_vaccine, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_title);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineList")) {
@@ -72,7 +75,7 @@ public class VaccineActivity extends BaseActivity {
         Intent intent = new Intent(VaccineActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-    public void onVaccine_EditVaccineButtonClick(View view){
+    public void onVaccine_AddVaccineButtonClick(View view){
         Intent intent = new Intent(VaccineActivity.this, EditVaccineActivity.class);
         startActivity(intent);
     }

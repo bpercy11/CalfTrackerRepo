@@ -1,13 +1,15 @@
-package com.calftracker.project.adapters;
+package com.calftracker.project.adapters.tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.calftracker.project.activities.TaskDetailsActivity;
@@ -15,6 +17,7 @@ import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineTask;
+import com.calftracker.project.models.VaccineTaskItem;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 
 public class TasksAdapter extends BaseAdapter{
     private Context context;
-    private ArrayList<VaccineTask> todayTasks;
+    private ArrayList<VaccineTaskItem> todayTasks;
     private LayoutInflater inflater;
     private boolean isElligble = false;
     private ArrayList<Calf> calfList;
@@ -34,9 +37,10 @@ public class TasksAdapter extends BaseAdapter{
     public class ViewHolder {
         TextView vaccine;
         TextView elligible;
+        ImageView overdueNotification;
     }
 
-    public TasksAdapter(Context context, ArrayList<VaccineTask> tasks, ArrayList<Calf> calfList) {
+    public TasksAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
         this.context = context;
         this.todayTasks = tasks;
         this.inflater = LayoutInflater.from(context);
@@ -46,16 +50,16 @@ public class TasksAdapter extends BaseAdapter{
     @Override
     public int getCount() {return todayTasks.size();}
     @Override
-    public VaccineTask getItem(int i) {return todayTasks.get(i);}
+    public VaccineTaskItem getItem(int i) {return todayTasks.get(i);}
     @Override
     public long getItemId(int i) {return i;}
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        VaccineTask task = this.todayTasks.get(position);
+        VaccineTaskItem task = this.todayTasks.get(position);
         boolean vaccUsed = false;
         for (int i = 0; i < usedVaccNames.size(); i++) {
-            if (usedVaccNames.get(i).equals(task.getVaccine().getName())) {
+            if (usedVaccNames.get(i).equals(task.getVaccineTask().getVaccine().getName())) {
                 vaccUsed = true;
                 break;
             }
@@ -65,6 +69,7 @@ public class TasksAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.tasks_vaccine_item, null);
             holder.vaccine = (TextView) convertView.findViewById(R.id.textViewTaskItemVaccineName);
             holder.elligible = (TextView) convertView.findViewById(R.id.textViewElligible);
+            holder.overdueNotification = (ImageView) convertView.findViewById(R.id.imageViewOverdue);
 
             convertView.setTag(holder);
 
@@ -73,7 +78,7 @@ public class TasksAdapter extends BaseAdapter{
         }
 
         int elligibleCount = 0;
-        final Vaccine currVacc = task.getVaccine();
+        final Vaccine currVacc = task.getVaccineTask().getVaccine();
 
         if (!vaccUsed) {
 //            for (int i = 0; i < calfList.size(); i++) {
@@ -84,18 +89,22 @@ public class TasksAdapter extends BaseAdapter{
 //                }
 //            }
             for (int i = 0; i < todayTasks.size(); i++) {
-                if (todayTasks.get(i).getVaccine().getName().equals(currVacc.getName())) {
-                    for (int j = 0; j < todayTasks.get(i).getCalf().getNeededVaccines().size(); j++) {
-                        if (todayTasks.get(i).getCalf().getNeededVaccines().get(j).getName().equals(currVacc.getName())) {
+                if (todayTasks.get(i).getVaccineTask().getVaccine().getName().equals(currVacc.getName())) {
+                    for (int j = 0; j < todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().size(); j++) {
+                        if (todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().get(j).getName().equals(currVacc.getName())) {
                             elligibleCount++;
+                            if(todayTasks.get(i).isOverdue())
+                                holder.overdueNotification.setVisibility(View.VISIBLE);
                         }
                     }
                 }
             }
-            holder.vaccine.setText(todayTasks.get(position).getVaccine().getName());
+
+
+            holder.vaccine.setText(todayTasks.get(position).getVaccineTask().getVaccine().getName());
             holder.elligible.setText(Integer.toString(elligibleCount));
             usedVaccNames.add(currVacc.getName());
-            holder.vaccine.setOnClickListener(new View.OnClickListener() {
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SharedPreferences mPrefs = context.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);

@@ -1,4 +1,4 @@
-package com.calftracker.project.adapters;
+package com.calftracker.project.adapters.protocols;
 
 import android.view.LayoutInflater;
 import android.widget.TextView;
