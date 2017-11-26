@@ -50,17 +50,11 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
-
         Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        String json;
 
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
-
-        // Load in the Task
-        json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
@@ -75,6 +69,33 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         neededVacAdapter = new MedicalHistoryNeededVaccineAdapter(getApplicationContext(),calf.getNeededVaccines(),CalfProfileMedicalHistoryActivity.this);
 
         mlistview.setAdapter(neededVacAdapter);
+    }
+
+    public void retrieveData() {
+        // try and get calf object made by main activity
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+
+        // Load in the Task
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+    }
+
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
     }
 
     public void clickAdministeredButton(View view) {
@@ -103,12 +124,7 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
             }
         }
 
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
+        saveData();
 
         neededVacAdapter.notifyDataSetChanged();
     }
@@ -125,17 +141,7 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
             }
         }
 
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
-
-
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
+        saveData();
 
         administeredVacAdapter.notifyDataSetChanged();
     }
