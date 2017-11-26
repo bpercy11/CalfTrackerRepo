@@ -50,18 +50,7 @@ public class CalfListActivity extends BaseActivity {
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.calfListParent));
 
-        // Load in the calf list
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("CalfList")) {
-            arrayExists = true;
-            Gson gson = new Gson();
-            String json = mPreferences.getString("CalfList", "");
-            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
-            }.getType());
-        } else {
-            arrayExists = false;
-            calfList = new ArrayList<Calf>();
-        }
+        retrieveData();
 
         listView = (ListView) findViewById(R.id.recyclerViewCalfList);
 
@@ -94,6 +83,21 @@ public class CalfListActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void retrieveData() {
+        // Load in the calf list
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("CalfList")) {
+            arrayExists = true;
+            Gson gson = new Gson();
+            String json = mPreferences.getString("CalfList", "");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
+            }.getType());
+        } else {
+            arrayExists = false;
+            calfList = new ArrayList<Calf>();
+        }
     }
 
     public void setupUI(View view) {
