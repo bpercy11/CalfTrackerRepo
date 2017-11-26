@@ -212,7 +212,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
 
-        observationAdapter.notifyDataSetChanged();
+        observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
+
+        listView.setAdapter(observationAdapter);
     }
 
     public void clickObservationItem(Calf calf) {
