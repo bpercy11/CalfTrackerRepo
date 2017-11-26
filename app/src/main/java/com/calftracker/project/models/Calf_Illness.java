@@ -1,9 +1,11 @@
 package com.calftracker.project.models;
 
+import java.util.Calendar;
+
 public class Calf_Illness
 {
 	private Illness illness;
-	private Easy_Date dateDiagnosed;
+	private Calendar dateDiagnosed;
 	private String outcomeNotes;
 	
 	/**
@@ -11,7 +13,7 @@ public class Calf_Illness
 	 * @param dateDiagnosed
 	 * @param outcomeNotes
 	 */
-	public Calf_Illness(Illness illness, Easy_Date dateDiagnosed, String outcomeNotes) {
+	public Calf_Illness(Illness illness, Calendar dateDiagnosed, String outcomeNotes) {
 		this.illness = illness;
 		this.dateDiagnosed = dateDiagnosed;
 		this.outcomeNotes = outcomeNotes;
@@ -34,14 +36,14 @@ public class Calf_Illness
 	/**
 	 * @return the dateDiagnosed
 	 */
-	public Easy_Date getDateDiagnosed() {
+	public Calendar getDateDiagnosed() {
 		return dateDiagnosed;
 	}
 
 	/**
 	 * @param dateDiagnosed the dateDiagnosed to set
 	 */
-	public void setDateDiagnosed(Easy_Date dateDiagnosed) {
+	public void setDateDiagnosed(Calendar dateDiagnosed) {
 		this.dateDiagnosed = dateDiagnosed;
 	}
 

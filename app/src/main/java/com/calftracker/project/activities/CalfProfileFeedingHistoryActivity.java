@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -122,7 +123,15 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 mEmployeeSpinner.setAdapter(adapter);
 
+                final Spinner mMethodSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMethodDialog);
 
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                        R.array.methods_of_administration, android.R.layout.simple_spinner_item);
+                // Specify the layout to use when the list of choices appears
+                methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                mMethodSpinner.setAdapter(methodAdapter);
 
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
@@ -133,14 +142,14 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
+                                String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[0] == null) {
 
-
-                                    String method = "method B";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
                                     calf.getFeedingHistory()[0] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[0].setMethodOfFeeding(method);
                                     calf.getFeedingHistory()[0].setFedBy(fedBy);
                                     calf.getFeedingHistory()[0].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }
@@ -188,6 +197,16 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 mEmployeeSpinner.setAdapter(adapter);
 
+                final Spinner mMethodSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMethodDialog);
+
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                        R.array.methods_of_administration, android.R.layout.simple_spinner_item);
+                // Specify the layout to use when the list of choices appears
+                methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                mMethodSpinner.setAdapter(methodAdapter);
+
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(dialogView)
@@ -197,13 +216,14 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
+                                String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[1] == null) {
 
-                                    String method = "method A";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
                                     calf.getFeedingHistory()[1] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[1].setMethodOfFeeding(method);
                                     calf.getFeedingHistory()[1].setFedBy(fedBy);
                                     calf.getFeedingHistory()[1].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }

@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CalfTest {
@@ -14,7 +13,7 @@ public class CalfTest {
     private String farmId;
     private int internalId;
     private String gender;
-    private Calendar dob;
+    private java.util.Calendar dob;
     private ArrayList<Vaccine> vaccines;
 
     @Before
@@ -83,7 +82,7 @@ public class CalfTest {
 
     @Test
     public void testCalfDOB() throws Exception {
-        Calendar new_dob = new GregorianCalendar(2017,11,22);
+        java.util.Calendar new_dob = new GregorianCalendar(2017,11,22);
         calf.setDateOfBirth(new_dob);
         assert(calf.getDateOfBirth().equals(new_dob));
     }
@@ -135,7 +134,7 @@ public class CalfTest {
 
     @Test
     public void testCalfAdministeredVaccines() throws Exception {
-        Calendar date_admin = new GregorianCalendar(2017,11,25);
+        java.util.Calendar date_admin = new GregorianCalendar(2017,11,25);
         Vaccine vacc = vaccines.get(0);
         ArrayList<Vaccine_With_Date> adminVaccines = new ArrayList<Vaccine_With_Date>();
         Vaccine_With_Date adminVacc = new Vaccine_With_Date(vacc, date_admin);
@@ -150,7 +149,7 @@ public class CalfTest {
         ArrayList<Medicine> meds = new ArrayList<Medicine>();
         meds.add(new Medicine("MasterGuard", 1.0, "mL", 5, "notes"));
         Treatment_Protocol protocol = new Treatment_Protocol(meds, "notes");
-        illnessList.add(new Calf_Illness(new Illness("Pneumonia", protocol), new Easy_Date(2017, 11, 24), "outcome notes"));
+        illnessList.add(new Calf_Illness(new Illness("Pneumonia", protocol), java.util.Calendar.getInstance(), "outcome notes"));
         calf.setIllnessHistory(illnessList);
         assert(calf.getIllnessHistory().equals(illnessList));
     }
@@ -188,7 +187,7 @@ public class CalfTest {
 
     @Test
     public void testAddAdministeredVaccine() throws Exception {
-        Calendar date_admin = new GregorianCalendar(2017,11,25);
+        java.util.Calendar date_admin = new GregorianCalendar(2017,11,25);
         Vaccine vacc = vaccines.get(0);
         calf.addAdministeredVaccine(vacc, date_admin);
 

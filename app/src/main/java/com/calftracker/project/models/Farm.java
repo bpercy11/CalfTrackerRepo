@@ -18,7 +18,6 @@ public class Farm {
     private Integer currInternalID;
     //TODO Medical_Procedures
     private ArrayList<Employee> employees;
-    private TODO todoList;
 
 
     /***
@@ -36,7 +35,6 @@ public class Farm {
         passcode = -1;
         //employees = new ArrayList<Employee>();
         calfProfileMap = new HashMap<Integer, Calf>();
-        todoList = null;
 
         //TODO set up anything else we need
     }
@@ -85,12 +83,6 @@ public class Farm {
      * @return
      */
     public ArrayList getEmployees() { return this.employees; }
-
-    /**
-     *
-     * @return
-     */
-    public TODO getTodoList() { return this.todoList; }
 
 
 }

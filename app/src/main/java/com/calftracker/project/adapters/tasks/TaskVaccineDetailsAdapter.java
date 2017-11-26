@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by Jared on 11/20/2017.
  */
 
-public class TaskDetailsAdapter extends ArrayAdapter {
+public class TaskVaccineDetailsAdapter extends ArrayAdapter {
     private ArrayList<TaskDetailsCalfSelectionItem> itemList;
     Context context;
     private Vaccine vaccine;
@@ -37,7 +37,7 @@ public class TaskDetailsAdapter extends ArrayAdapter {
         CheckBox checkBox;
     }
 
-    public TaskDetailsAdapter(ArrayList data, Context context, Vaccine vacc) {
+    public TaskVaccineDetailsAdapter(ArrayList data, Context context, Vaccine vacc) {
         super(context, R.layout.task_details_item, data);
         this.itemList = data;
         this.context = context;
