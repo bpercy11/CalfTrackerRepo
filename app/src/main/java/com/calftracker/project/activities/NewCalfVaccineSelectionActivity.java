@@ -39,6 +39,10 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
     private ArrayList<Vaccine> vaccineList;
     private String calfPhoto;
     private boolean containsVaccineList;
+    private ListView listView;
+    private TextView mNoVaccines;
+    private Button mNextButton;
+    private Button mSelectAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,29 +50,19 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_calf_vaccine_selection);
 
         // get needed UI elements
-        ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
-        TextView mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
-        Button mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
-        Button mSelectAll = (Button) findViewById(R.id.buttonSelectAll);
+        listView = (ListView) findViewById(R.id.listViewVaccineSelection);
+        mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
+        mNextButton = (Button) findViewById(R.id.buttonConfirmVaccines);
+        mSelectAll = (Button) findViewById(R.id.buttonSelectAll);
+
+        retrieveData();
 
 
 
-        // set up shared preference variables
+        // get stuff from shared preferences that isn't supposed to go in firebase
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
-
-        // Load the Task object from storage
-        json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
-
-        // check if there's an existing calf list and store it for use
-        // create a new list if existing not found
-        if(mPreferences.contains("CalfList")) {
-            json = mPreferences.getString("CalfList", "");
-            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
-            }.getType());
-        } else { calfList = new ArrayList<Calf>(); }
 
         // get calf ID, this field comes from the user input in add calf activity
         json = mPreferences.getString("newCalfID","");
@@ -90,13 +84,8 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             calfPhoto = gson.fromJson(json, String.class);
         }
 
-        // get vaccine list from shared preferences
-        if(mPreferences.contains("VaccineList")) {
-            containsVaccineList = true;
-
-            json = mPreferences.getString("VaccineList", "");
-            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
-            }.getType());
+        // setup listview of available vaccines
+        if(containsVaccineList) {
 
             adapterArray = new ArrayList<VaccineSelectionItem>();
             for(int i = 0; i < vaccineList.size(); i++) {
@@ -121,12 +110,13 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         } else {
             // if there's no vaccines defined the user needs to know that
             // change button to say continue instead of add needed vaccines
-            containsVaccineList = false;
             mSelectAll.setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
             mNoVaccines.setVisibility(View.VISIBLE);
             mNextButton.setText("Continue");
         }
+
+
 
 
     }
@@ -211,7 +201,63 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         // gotta add it to the list
         calfList.add(calf);
 
-        // Save the calfList, task, and vaccineList to local storage
+        // Save the calfList, task, and vaccineList to local storage, change to firebase
+        saveData();
+
+
+//
+
+
+        // this is a lazy way to pass the newly created calf to the calf profile but whatever.
+        // in calf profile we use the string in this shared preference object to iterate through
+        // the master calf list until this string matches a calf object to display.
+        // this could cause problems if there are mutliple calves with the same ID
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json;
+        prefsEditor = mPrefs.edit();
+        json = gson.toJson(calf.getFarmId());
+        prefsEditor.putString("calfToViewInProfile",json);
+        prefsEditor.apply();
+
+        // go to calf profile for new calf
+        Intent intent = new Intent(this,CalfProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void retrieveData() {
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        // Load the Task object from storage
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+
+        // check if there's an existing calf list and store it for use
+        // create a new list if existing not found
+        if(mPreferences.contains("CalfList")) {
+            json = mPreferences.getString("CalfList", "");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
+            }.getType());
+        } else { calfList = new ArrayList<Calf>(); }
+
+        // get vaccine list from shared preferences
+        if(mPreferences.contains("VaccineList")) {
+            containsVaccineList = true;
+
+            json = mPreferences.getString("VaccineList", "");
+            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
+            }.getType());
+
+        } else {
+            containsVaccineList = false;
+        }
+    }
+
+    public void saveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -228,19 +274,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             prefsEditor.putString("VaccineList", json);
             prefsEditor.apply();
         }
-
-        // this is a lazy way to pass the newly created calf to the calf profile but whatever.
-        // in calf profile we use the string in this shared preference object to iterate through
-        // the master calf list until this string matches a calf object to display.
-        // this could cause problems if there are mutliple calves with the same ID
-        prefsEditor = mPrefs.edit();
-        json = gson.toJson(calf.getFarmId());
-        prefsEditor.putString("calfToViewInProfile",json);
-        prefsEditor.apply();
-
-        // go to calf profile for new calf
-        Intent intent = new Intent(this,CalfProfileActivity.class);
-        startActivity(intent);
     }
 
     public void onClickBack(View view) {
