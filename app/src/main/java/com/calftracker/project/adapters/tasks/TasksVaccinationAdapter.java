@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * Created by Jared on 11/16/2017.
  */
 
-public class TasksAdapter extends BaseAdapter{
+public class TasksVaccinationAdapter extends BaseAdapter{
     private Context context;
     private ArrayList<VaccineTaskItem> todayTasks;
     private LayoutInflater inflater;
@@ -40,7 +40,7 @@ public class TasksAdapter extends BaseAdapter{
         ImageView overdueNotification;
     }
 
-    public TasksAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
+    public TasksVaccinationAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
         this.context = context;
         this.todayTasks = tasks;
         this.inflater = LayoutInflater.from(context);

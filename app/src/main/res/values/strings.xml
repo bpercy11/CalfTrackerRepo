@@ -153,6 +153,16 @@
     <string name="illness_profile_notes">Notes:</string>
 
     <string name="tasks_title">Tasks</string>
+    <string name="tasks_vaccines_button">Vaccines</string>
+    <string name="tasks_observations_button">Observations</string>
+    <string name="tasks_vaccine_name">Vaccine Name</string>
+    <string name="tasks_vaccine_elligible">Elligible</string>
+    <string name="tasks_observations_calf_id">Calf ID</string>
+    <string name="tasks_observations_days_observed">Days under observation</string>
+    <string name="tasks_illness_calf_id">Calf ID</string>
+    <string name="tasks_illness_name">Illness</string>
+    <string name="tasks_illness_current_med">Current medication</string>
+    <string name="tasks_illnesses_button">Illnesses</string>
     <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
     <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
 

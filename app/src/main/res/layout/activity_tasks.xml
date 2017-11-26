@@ -27,10 +27,22 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="Vaccine Name"
+        android:text="@string/tasks_vaccine_name"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTaskDate" />
+
+    <TextView
+        android:id="@+id/textViewIllnessNameTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/tasks_illness_name"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/textViewElligibleTitle"
+        app:layout_constraintStart_toEndOf="@+id/textViewVaccineNameTitle"
         app:layout_constraintTop_toBottomOf="@+id/textViewTaskDate" />
 
     <TextView
@@ -40,7 +52,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
-        android:text="Elligible"
+        android:text="@string/tasks_vaccine_elligible"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listViewTasks"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +67,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonObservationTasks" />
 
     <Button
         android:id="@+id/buttondatechange"
@@ -67,6 +79,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/buttonVaccineTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickVaccineTasks"
+        android:text="@string/tasks_vaccines_button"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/buttonObservationTasks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonObservationTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickObservations"
+        android:text="@string/tasks_observations_button"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonIllnessTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickIllnessTasks"
+        android:text="@string/tasks_illnesses_button"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonObservationTasks"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

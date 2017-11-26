@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.tasks.TasksAdapter;
+import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
@@ -26,8 +26,19 @@ public class TasksActivity extends BaseActivity {
     private List<Vaccine_With_Count> vaccCountList;
     private ArrayList<Calf> calfList;
     private ListView listView;
-    private TasksAdapter adapter;
+    private TasksVaccinationAdapter adapter;
     private TextView date;
+
+    TextView mLeft;
+    TextView mRight;
+
+    TextView mCalfIDObserved;
+    TextView mDaysOberserved;
+
+    TextView mCalfIDIllness;
+    TextView mCenter;
+    TextView mCurrentMed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,11 @@ public class TasksActivity extends BaseActivity {
 
         // Custom title
         getSupportActionBar().setTitle(R.string.tasks_title);
+
+        mLeft = (TextView) findViewById(R.id.textViewVaccineNameTitle);
+        mRight = (TextView) findViewById(R.id.textViewElligibleTitle);
+        mCenter = (TextView) findViewById(R.id.textViewIllnessNameTasks);
+
 
         // Load in the Task and CalfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -74,13 +90,46 @@ public class TasksActivity extends BaseActivity {
         date = (TextView) findViewById(R.id.textViewTaskDate);
         date.setText("Tasks for " + dateStr);
 
-        adapter = new TasksAdapter(getApplicationContext(), todayTasks, calfList);
+        adapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(adapter);
 
     }
 
     public void dumbDateChange(View view) {
         startActivity(new Intent(android.provider.Settings.ACTION_DATE_SETTINGS));
+    }
+
+    public void onClickObservations(View view) {
+        setObservationColumnNames();
+        return;
+    }
+
+    public void onClickVaccineTasks(View view) {
+        setVaccineColumnNames();
+    }
+
+    public void onClickIllnessTasks(View view) {
+        setIllnessColumnNames();
+    }
+
+    public void setObservationColumnNames() {
+        mLeft.setText(R.string.tasks_observations_calf_id);
+        mRight.setText(R.string.tasks_observations_days_observed);
+        if(mCenter.getVisibility() == View.VISIBLE)
+            mCenter.setVisibility(View.GONE);
+    }
+
+    public void setVaccineColumnNames() {
+        mLeft.setText(R.string.tasks_vaccine_name);
+        mRight.setText(R.string.tasks_vaccine_elligible);
+        if(mCenter.getVisibility() == View.VISIBLE)
+            mCenter.setVisibility(View.GONE);
+    }
+
+    public void setIllnessColumnNames() {
+        mLeft.setText(R.string.tasks_illness_calf_id);
+        mRight.setText(R.string.tasks_illness_current_med);
+        mCenter.setVisibility(View.VISIBLE);
     }
 
     @Override
