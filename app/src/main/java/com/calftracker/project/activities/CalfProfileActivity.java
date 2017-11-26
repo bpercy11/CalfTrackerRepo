@@ -306,7 +306,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderID = new AlertDialog.Builder(this);
-        View dialogLayout_ID = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_ID = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_ID = (EditText) dialogLayout_ID.findViewById(R.id.dialogTextInput);
 
         dialogText_ID.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -400,7 +400,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderSire = new AlertDialog.Builder(this);
-        View dialogLayout_Sire = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_Sire = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Sire = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput);
 
         dialogText_Sire.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -438,7 +438,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderDam = new AlertDialog.Builder(this);
-        View dialogLayout_Dam = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_Dam = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Dam = (EditText) dialogLayout_Dam.findViewById(R.id.dialogTextInput);
 
         dialogText_Dam.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -653,7 +653,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         AlertDialog newNoteAlert;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_Note = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Note = (EditText) dialogLayout_Note.findViewById(R.id.dialogTextInput);
 
         dialogText_Note.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -739,7 +739,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddWeight(View view) {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
-        View dialogLayout_Weight = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_Weight = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Weight = (EditText) dialogLayout_Weight.findViewById(R.id.dialogTextInput);
 
         builderWeight.setTitle("Record Weight Measurement");
@@ -801,7 +801,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddHeight(View view) {
         AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
-        View dialogLayout_Height = inflater.inflate(R.layout.custom_dialog, null);
+        View dialogLayout_Height = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Height = (EditText) dialogLayout_Height.findViewById(R.id.dialogTextInput);
 
         builderHeight.setTitle("Record Height Measurement");

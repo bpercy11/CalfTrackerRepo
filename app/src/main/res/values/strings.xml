@@ -166,6 +166,9 @@
     <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
     <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
 
+    <string name="task_illness_dialog_illness">Illness</string>
+    <string name="task_illness_dialog_medication">Medication</string>
+
     <string name="protocols_title">Protocols</string>
     <string name="protocols_vaccine_edit">Edit Vaccine</string>
     <string name="protocols_medicine_edit">Edit Medicine</string>

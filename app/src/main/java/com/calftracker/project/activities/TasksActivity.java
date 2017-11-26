@@ -1,9 +1,12 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTaskItem;
@@ -22,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class TasksActivity extends BaseActivity {
+public class TasksActivity extends BaseActivity implements TasksMethods {
     private Task task;
     private List<Vaccine_With_Count> vaccCountList;
     private ArrayList<Calf> calfList;
@@ -109,7 +113,9 @@ public class TasksActivity extends BaseActivity {
             if(calfList.get(i).isNeedToObserveForIllness())
                 observeCalves.add(calfList.get(i));
 
-        TasksObservationAdapter adapter = new TasksObservationAdapter(observeCalves, getApplicationContext());
+
+
+        TasksObservationAdapter adapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
         listView.setAdapter(adapter);
     }
@@ -130,6 +136,38 @@ public class TasksActivity extends BaseActivity {
 
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
+    }
+
+    public void showObservationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
+
+        LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
+
+
+        View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(dialogView)
+                // Add action buttons
+                .setPositiveButton("Confirm Illness", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+
+        builder.create().show();
+    }
+
+    public void clickObservationItem(Calf calf) {
+
     }
 
     public void onClickIllnessTasks(View view) {
