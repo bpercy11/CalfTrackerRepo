@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTask;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -49,13 +51,18 @@ public class SplashScreenActivity extends Activity {
                     ArrayList<Calf> emptyCalfList = new ArrayList<>();
                     ArrayList<ArrayList<VaccineTask>> emptyTaskList = new ArrayList<ArrayList<VaccineTask>>();
                     ArrayList<VaccineTask> emptyOverdueList = new ArrayList<>();
+                    ArrayList<ArrayList<IllnessTask>> emptyIllnessTaskList = new ArrayList<ArrayList<IllnessTask>>();
 
                     // Create emptyTaskList to hold a full year of entries
                     for (int i = 0; i < 365; i++) {
                         emptyTaskList.add(new ArrayList<VaccineTask>());
                     }
 
-                    Task task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList);
+                    for (int i = 0; i < 40; i++) {
+                        emptyIllnessTaskList.add(new ArrayList<IllnessTask>());
+                    }
+
+                    Task task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList, emptyIllnessTaskList);
 
                     if(!hasBeenUsed) {
                         Intent intent = new Intent(SplashScreenActivity.this, CreateFarmActivity.class);

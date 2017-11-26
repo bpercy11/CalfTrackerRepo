@@ -7,6 +7,5 @@ import com.calftracker.project.models.Calf;
  */
 
 public interface TasksMethods {
-    void clickObservationItem(Calf calf);
     void showObservationDialog(Calf calf);
 }

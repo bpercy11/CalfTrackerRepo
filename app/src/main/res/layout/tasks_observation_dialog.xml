@@ -84,6 +84,17 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <Button
+        android:id="@+id/buttonUnmarkObservationDialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/calf_profile_unmark_oberservation"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/constraintForMedicationSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMedicationDialog" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -6,12 +6,12 @@ package com.calftracker.project.models;
 
 public class IllnessTask {
     private Illness illness;
-    private Medicine medicine;
+    private Medicine prescribedMedicine;
     private Calf calf;
 
     public IllnessTask(Illness illness, Medicine medicine, Calf calf) {
         this.illness = illness;
-        this.medicine = medicine;
+        this.prescribedMedicine = medicine;
         this.calf = calf;
     }
 
@@ -24,11 +24,11 @@ public class IllnessTask {
     }
 
     public Medicine getMedicine() {
-        return medicine;
+        return prescribedMedicine;
     }
 
     public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
+        this.prescribedMedicine = medicine;
     }
 
     public Calf getCalf() {

@@ -10,16 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
+import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Calf_Illness;
 import com.calftracker.project.models.Illness;
+import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTaskItem;
@@ -44,15 +49,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     private TasksObservationAdapter observationAdapter;
 
-    TextView mLeft;
-    TextView mRight;
-
-    TextView mCalfIDObserved;
-    TextView mDaysOberserved;
-
-    TextView mCalfIDIllness;
-    TextView mCenter;
-    TextView mCurrentMed;
+    TextView mLeftLabel;
+    TextView mRightLabel;
+    TextView mCenterLabel;
 
 
     @Override
@@ -64,9 +63,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         // Custom title
         getSupportActionBar().setTitle(R.string.tasks_title);
 
-        mLeft = (TextView) findViewById(R.id.textViewVaccineNameTitle);
-        mRight = (TextView) findViewById(R.id.textViewElligibleTitle);
-        mCenter = (TextView) findViewById(R.id.textViewIllnessNameTasks);
+        mLeftLabel = (TextView) findViewById(R.id.textViewVaccineNameTitle);
+        mRightLabel = (TextView) findViewById(R.id.textViewElligibleTitle);
+        mCenterLabel = (TextView) findViewById(R.id.textViewIllnessNameTasks);
 
 
         // Load in the Task and CalfList
@@ -133,31 +132,13 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         listView.setAdapter(observationAdapter);
     }
 
-    public void onClickVaccineTasks(View view) {
-        setVaccineColumnNames();
-
-        // ArrayList that holds all of the Vaccine Tasks for the current day
-        ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
-
-        // find only the START DATE vaccinetask objects so no doubles from END DATEs
-        for(int i = 0; i < task.getVaccinesToAdminister().get(0).size(); i++)
-            if(task.getVaccinesToAdminister().get(0).get(i).isStart())
-                todayTasks.add(new VaccineTaskItem(false, task.getVaccinesToAdminister().get(0).get(i)));
-
-        for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
-            todayTasks.add(new VaccineTaskItem(true, task.getOverdueVaccinations().get(i)));
-
-        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
-        listView.setAdapter(vaccineAdapter);
-    }
-
     public void showObservationDialog(Calf calf) {
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
 
 
-        View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
 
         final Spinner mIllnessSpinner = (Spinner) dialogView.findViewById(R.id.spinnerIllnessDialog);
         final Spinner mMedicationSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMedicationDialog);
@@ -183,6 +164,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
 
         final Calf calfcopy = calf;
+
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView)
@@ -193,7 +175,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
                         Illness illness = (Illness) mIllnessSpinner.getSelectedItem();
                         Medicine medicine = (Medicine) mMedicationSpinner.getSelectedItem();
 
-                        removeCalfFromObservations(calfcopy.getFarmId());
+                        removeCalfFromObservations(illness, medicine, calfcopy.getFarmId());
 
                     }
                 })
@@ -204,31 +186,50 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
                 });
 
 
-        builder.create().show();
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        Button mUnmark = (Button) dialogView.findViewById(R.id.buttonUnmarkObservationDialog);
+
+        mUnmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeCalfFromObservations(null, null, calfcopy.getFarmId());
+                alertDialog.dismiss();
+            }
+        });
     }
 
-    public void removeCalfFromObservations(String calfID) {
+    public void removeCalfFromObservations(Illness illness, Medicine medication, String calfID) {
+        Calf calfToRemove = null;
+
         for(int i = 0; i < observeCalves.size(); i++) {
             if(observeCalves.get(i).getFarmId().equals(calfID)) {
                 observeCalves.remove(i);
                 break;
             }
-
         }
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
             if (calfList.get(i).getFarmId().equals(calfID)) {
-                calfList.get(i).setNeedToObserveForIllness(!calfList.get(i).isNeedToObserveForIllness());
+                calfToRemove = calfList.get(i);
+                calfToRemove.setNeedToObserveForIllness(!calfList.get(i).isNeedToObserveForIllness());
                 break;
             }
+        }
+
+        if(illness != null) {
+            calfToRemove.getIllnessHistory().add(new Calf_Illness(illness, Calendar.getInstance(), "test note"));
+            task.getIllnessTracker().get(0).add(new IllnessTask(illness, medication, calfToRemove));
+            task.getIllnessTracker().get(3).add(new IllnessTask(illness, medication, calfToRemove));
         }
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
-
         SharedPreferences.Editor prefsEditor = mPreferences.edit();
+
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
@@ -242,32 +243,50 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         listView.setAdapter(observationAdapter);
     }
 
-    public void clickObservationItem(Calf calf) {
+    public void onClickVaccineTasks(View view) {
+        setVaccineColumnNames();
 
+        // ArrayList that holds all of the Vaccine Tasks for the current day
+        ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
+
+        // find only the START DATE vaccinetask objects so no doubles from END DATEs
+        for(int i = 0; i < task.getVaccinesToAdminister().get(0).size(); i++)
+            if(task.getVaccinesToAdminister().get(0).get(i).isStart())
+                todayTasks.add(new VaccineTaskItem(false, task.getVaccinesToAdminister().get(0).get(i)));
+
+        for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
+            todayTasks.add(new VaccineTaskItem(true, task.getOverdueVaccinations().get(i)));
+
+        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
+        listView.setAdapter(vaccineAdapter);
     }
 
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
+
+        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
+
+        listView.setAdapter(illnessAdapter);
     }
 
     public void setObservationColumnNames() {
-        mLeft.setText(R.string.tasks_observations_calf_id);
-        mRight.setText(R.string.tasks_observations_days_observed);
-        if(mCenter.getVisibility() == View.VISIBLE)
-            mCenter.setVisibility(View.GONE);
+        mLeftLabel.setText(R.string.tasks_observations_calf_id);
+        mRightLabel.setText(R.string.tasks_observations_days_observed);
+        if(mCenterLabel.getVisibility() == View.VISIBLE)
+            mCenterLabel.setVisibility(View.GONE);
     }
 
     public void setVaccineColumnNames() {
-        mLeft.setText(R.string.tasks_vaccine_name);
-        mRight.setText(R.string.tasks_vaccine_elligible);
-        if(mCenter.getVisibility() == View.VISIBLE)
-            mCenter.setVisibility(View.GONE);
+        mLeftLabel.setText(R.string.tasks_vaccine_name);
+        mRightLabel.setText(R.string.tasks_vaccine_elligible);
+        if(mCenterLabel.getVisibility() == View.VISIBLE)
+            mCenterLabel.setVisibility(View.GONE);
     }
 
     public void setIllnessColumnNames() {
-        mLeft.setText(R.string.tasks_illness_calf_id);
-        mRight.setText(R.string.tasks_illness_current_med);
-        mCenter.setVisibility(View.VISIBLE);
+        mLeftLabel.setText(R.string.tasks_illness_calf_id);
+        mRightLabel.setText(R.string.tasks_illness_current_med);
+        mCenterLabel.setVisibility(View.VISIBLE);
     }
 
     @Override

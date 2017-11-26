@@ -1,6 +1,7 @@
 package com.calftracker.project.models;
 
 import android.content.SharedPreferences;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,12 +21,14 @@ public class Task {
     private ArrayList<ArrayList<IllnessTask>> illnessTracker;
 
     public Task(Calendar dateLastUpdated, ArrayList<Calf> calvesToObserve,
-                ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations) {
+                ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations,
+                ArrayList<ArrayList<IllnessTask>> illnessTracker) {
         super();
         this.dateLastUpdated = dateLastUpdated;
         this.calvesToObserve = calvesToObserve;
         this.vaccinesToAdminister = vaccinesToAdminister;
         this.overdueVaccinations = overdueVaccinations;
+        this.illnessTracker = illnessTracker;
     }
 
     public ArrayList<ArrayList<IllnessTask>> getIllnessTracker() {
@@ -102,12 +105,15 @@ public class Task {
                         vaccinesToAdminister.get(j - 1).add(vaccinesToAdminister.get(j).remove(0));
                     }
                 }
-
-
-
-
             }
         }
+
+        for(int i = 0; i < daysPassedSinceUpdate; i++)
+            // dont touch index zero, all illnesstasks
+            // at zero don't have active medicine
+            for(int j = 1; j < illnessTracker.size(); j++)
+                    while(!illnessTracker.get(j).isEmpty())
+                        illnessTracker.get(j - 1).add(illnessTracker.get(j).remove(0));
 
         this.dateLastUpdated = Calendar.getInstance();
 
