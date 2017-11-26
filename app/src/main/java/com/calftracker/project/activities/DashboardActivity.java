@@ -1,13 +1,20 @@
 package com.calftracker.project.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.calftracker.project.adapters.dashboard.DashboardGridAdapter;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Farm;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class DashboardActivity extends BaseActivity {
     GridView grid;
@@ -33,6 +40,18 @@ public class DashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_dashboard, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        // Load the Task object from storage
+        json = mPreferences.getString("Farm", "");
+        Farm farm = gson.fromJson(json, new TypeToken<Farm>() {}.getType());
+
+        TextView mFarmName = (TextView) findViewById(R.id.textViewFarmNameDashboard);
+        mFarmName.setText(farm.getName());
 
         DashboardGridAdapter adapter = new DashboardGridAdapter(DashboardActivity.this, dashboard_items, imageId);
         grid=(GridView)findViewById(R.id.grid);

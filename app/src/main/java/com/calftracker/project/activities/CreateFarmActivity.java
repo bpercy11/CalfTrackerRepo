@@ -2,6 +2,7 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,8 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Farm;
 import com.calftracker.project.calftracker.R;
+import com.google.gson.Gson;
 
 
 /**
@@ -80,8 +83,18 @@ public class CreateFarmActivity extends AppCompatActivity {
 
                 //dialogBox();
 
+
+
+
+
                 if(!requirementsNotMet) {
-                    Farm farm = new Farm(farmName.toString(), farmOwner.toString(), farmLocation.toString());
+                    Farm farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
+                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(farm);
+                    prefsEditor.putString("Farm",json);
+                    prefsEditor.apply();
                     callDashboard();
                }
 

@@ -39,6 +39,10 @@ public class Farm {
         //TODO set up anything else we need
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /***
      *
      * @param passcode
