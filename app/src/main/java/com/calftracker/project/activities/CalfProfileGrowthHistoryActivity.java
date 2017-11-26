@@ -40,14 +40,13 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Growth History");
 
+        retrieveData();
+
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
-
         Gson gson = new Gson();
         String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
-
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
 
@@ -72,6 +71,13 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
 
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
     }
 
     public void onClickWeightButton(View view) {
