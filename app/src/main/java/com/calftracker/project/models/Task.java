@@ -1,8 +1,5 @@
 package com.calftracker.project.models;
 
-import android.content.SharedPreferences;
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

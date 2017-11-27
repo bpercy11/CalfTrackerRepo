@@ -54,6 +54,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
                 }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_settings).isChecked()) {
+                    title = getString(R.string.settings_title);
+                }
                 getSupportActionBar().setTitle(title);
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -75,6 +78,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_settings).isChecked()) {
+                    title = getString(R.string.settings_title);
                 }
                 getSupportActionBar().setTitle(title);
 

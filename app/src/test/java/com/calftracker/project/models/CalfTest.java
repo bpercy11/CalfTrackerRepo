@@ -89,7 +89,7 @@ public class CalfTest {
 
     @Test
     public void testCalfSire() throws Exception {
-        String sire = "789";
+        Sire sire = new Sire("Rockstar", "789");
         calf.setSire(sire);
         assert(calf.getSire().equals(sire));
     }

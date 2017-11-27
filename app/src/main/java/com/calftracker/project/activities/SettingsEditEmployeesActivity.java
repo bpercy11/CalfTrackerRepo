@@ -3,8 +3,15 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.calftracker.project.adapters.calflist.CalfListListViewAdapter;
 import com.calftracker.project.calftracker.R;
@@ -13,19 +20,9 @@ import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.*;
-
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView;
-
-import android.widget.ListView;
+import java.util.ArrayList;
 
 public class SettingsEditEmployeesActivity extends AppCompatActivity {
-
-
 
     private ListView mListView;
     private ListView listView;
@@ -38,6 +35,10 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_edit_employees);
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Edit Employees");
 
         Button addEmployeeButton = (Button) findViewById(R.id.addEmployeeBtn);
         mListView = (ListView) findViewById(R.id.employeesList);
@@ -99,5 +100,9 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
+        return true;
+    }
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.KeyListener;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +26,10 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_edit_farm);
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Edit Farm");
 
         Button editFieldsButton = (Button) findViewById(R.id.EditFarmEditFieldsBtn);
 
@@ -87,5 +92,11 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this,SettingsActivity.class);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
+        return true;
     }
 }

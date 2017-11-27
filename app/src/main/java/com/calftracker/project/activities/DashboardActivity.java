@@ -11,30 +11,11 @@ import android.widget.TextView;
 
 import com.calftracker.project.adapters.dashboard.DashboardGridAdapter;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class DashboardActivity extends BaseActivity {
-    GridView grid;
-    String[] dashboard_items = {
-            "Calf List",
-            "Add Calf",
-            "Tasks",
-            "Protocols",
-            "Insights",
-            "Settings"
-    } ;
-    int[] imageId = {
-            R.drawable.ic_view_list_black_24dp,
-            R.drawable.ic_add_circle_black_24dp,
-            R.drawable.ic_check_box_black_24dp,
-            R.drawable.ic_local_hospital_black_24dp,
-            R.drawable.ic_insert_chart_black_24dp,
-            R.drawable.ic_settings_black_24dp
-    };
-
     Farm farm;
 
     @Override
@@ -42,6 +23,24 @@ public class DashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_dashboard, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
+        GridView grid;
+        String[] dashboard_items = {
+                getString(R.string.calf_list_title),
+                getString(R.string.add_calf_title),
+                getString(R.string.tasks_title),
+                getString(R.string.protocols_title),
+                getString(R.string.insights_title),
+                getString(R.string.settings_title)
+        } ;
+        int[] imageId = {
+                R.drawable.ic_view_list_black_24dp,
+                R.drawable.ic_add_circle_black_24dp,
+                R.drawable.ic_check_box_black_24dp,
+                R.drawable.ic_local_hospital_black_24dp,
+                R.drawable.ic_insert_chart_black_24dp,
+                R.drawable.ic_settings_black_24dp
+        };
 
         retrieveData();
 
