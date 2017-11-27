@@ -30,6 +30,7 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
     private EditText illnessName;
     private EditText illnessNotes;
     private String illnessNotesStr;
+    private String illnessNameStr;
     final Context context = this;
     private int illnessPosition;
 
@@ -38,25 +39,7 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness_profile);
 
-
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessProfile")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessProfile", "");
-            illness = gson.fromJson(json, new TypeToken<Illness>() {
-            }.getType());
-        } else { }
-
-        if(mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
-            }.getType());
-        } else { }
+        retrieveData();
 
         // get the position of the illness to be edited
         for (int i = 0; i < illnessList.size(); i++){
@@ -70,14 +53,10 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
 
         illnessName.setText(illness.getName());
         illnessNotes.setText((CharSequence) illness.getTreatmentProtocol().getNotes());
-
-
-
     }
 
 
     public void addEditedIllnessButton(View view){
-
         illnessList.remove(illnessPosition);
 
         illnessName = (EditText) findViewById(R.id.editIllnessProfile_enterName);
@@ -89,9 +68,37 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
             return;
         }
 
-        String illnessNameStr = illnessName.getText().toString();
+        illnessNameStr = illnessName.getText().toString();
         illnessNotesStr = illnessNotes.getText().toString();
 
+        saveData();
+
+        Intent intent = new Intent(EditIllnessProfileActivity.this, EditIllnessProfileMedicineSelectionActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void cancelEditedIllnessButton(View view){
+        Intent intent = new Intent(EditIllnessProfileActivity.this, IllnessActivity.class);
+        startActivity(intent);
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("IllnessProfile")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessProfile", "");
+            illness = gson.fromJson(json, new TypeToken<Illness>() {}.getType());
+        }
+
+        if(mPreferences.contains("IllnessList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        }
+    }
+
+    public void saveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -106,15 +113,5 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         json = gson.toJson(illnessList);
         prefsEditor.putString("IllnessList",json);
         prefsEditor.apply();
-
-        Intent intent = new Intent(EditIllnessProfileActivity.this, EditIllnessProfileMedicineSelectionActivity.class);
-        startActivity(intent);
-
     }
-
-    public void cancelEditedIllnessButton(View view){
-        Intent intent = new Intent(EditIllnessProfileActivity.this, IllnessActivity.class);
-        startActivity(intent);
-    }
-
 }

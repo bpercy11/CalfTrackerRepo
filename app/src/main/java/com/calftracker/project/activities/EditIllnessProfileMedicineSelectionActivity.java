@@ -41,22 +41,16 @@ public class EditIllnessProfileMedicineSelectionActivity extends AppCompatActivi
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
             Gson gson = new Gson();
             String json;
             json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
-            }.getType());
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
         } else { illnessList = new ArrayList<Illness>(); }
 
         // get medicine list from shared preferences
-        SharedPreferences mPreferences1 = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences1.contains("MedicineList")) {
-            SharedPreferences.Editor editor = mPreferences1.edit();
-
+        if(mPreferences.contains("MedicineList")) {
             Gson gson1 = new Gson();
-            String json1 = mPreferences1.getString("MedicineList", "");
+            String json1 = mPreferences.getString("MedicineList", "");
             medicineList = gson1.fromJson(json1, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
 
@@ -135,5 +129,4 @@ public class EditIllnessProfileMedicineSelectionActivity extends AppCompatActivi
         }
         adapter.notifyDataSetChanged();
     }
-
 }
