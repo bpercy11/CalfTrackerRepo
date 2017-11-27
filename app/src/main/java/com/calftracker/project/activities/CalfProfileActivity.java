@@ -209,7 +209,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 if(calf.getNotesSize() == 0)
                     return;
 
@@ -218,7 +218,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
                 final TextView output = new TextView(CalfProfileActivity.this);
                 // Space at the start to make notes easier to read
-                output.setText(" " + calf.getNoteNdx(position).getMessage());
+                output.setText(calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
                 Calendar noteDate = calf.getNoteNdx(position).getDateEntered();
@@ -230,6 +230,14 @@ public class CalfProfileActivity extends AppCompatActivity {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        calf.getNotes().remove(position);
+                        saveData();
+                        updateNoteListView(calf);
                     }
                 });
 
@@ -266,19 +274,15 @@ public class CalfProfileActivity extends AppCompatActivity {
     }
 
     public void updateNoteListView(Calf calf) {
-        ArrayList<String> allNoteDates = new ArrayList<>();
+        ArrayList<String> noteContents = new ArrayList<>();
         for(int i = 0; i < calf.getNotesSize(); i++) {
-            Calendar noteDate = calf.getNoteNdx(i).getDateEntered();
-            int year = noteDate.get(Calendar.YEAR);
-            int month = noteDate.get(Calendar.MONTH) + 1;
-            int day = noteDate.get(Calendar.DAY_OF_MONTH);
-            allNoteDates.add(month + "/" + day + "/" + year);
+            noteContents.add(calf.getNotes().get(i).getMessage());
         }
 
         if(calf.getNotesSize() == 0)
-            allNoteDates.add("No Notes!");
+            noteContents.add("No Notes!");
 
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allNoteDates);
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteContents);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);
     }
