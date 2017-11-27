@@ -222,7 +222,6 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         if(illness != null) {
             calfToRemove.getIllnessHistory().add(new Calf_Illness(illness, Calendar.getInstance(), "test note"));
             task.getIllnessTracker().get(0).add(new IllnessTask(illness, medication, calfToRemove));
-            task.getIllnessTracker().get(3).add(new IllnessTask(illness, medication, calfToRemove));
         }
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
