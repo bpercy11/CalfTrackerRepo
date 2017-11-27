@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.calftracker.project.activities.TaskDetailsActivity;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Vaccine;
-import com.calftracker.project.models.VaccineTask;
 import com.calftracker.project.models.VaccineTaskItem;
 import com.google.gson.Gson;
 
@@ -26,7 +24,7 @@ import java.util.ArrayList;
  * Created by Jared on 11/16/2017.
  */
 
-public class TasksAdapter extends BaseAdapter{
+public class TasksVaccinationAdapter extends BaseAdapter{
     private Context context;
     private ArrayList<VaccineTaskItem> todayTasks;
     private LayoutInflater inflater;
@@ -40,7 +38,7 @@ public class TasksAdapter extends BaseAdapter{
         ImageView overdueNotification;
     }
 
-    public TasksAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
+    public TasksVaccinationAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
         this.context = context;
         this.todayTasks = tasks;
         this.inflater = LayoutInflater.from(context);

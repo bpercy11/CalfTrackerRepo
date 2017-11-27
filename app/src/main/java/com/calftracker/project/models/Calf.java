@@ -9,7 +9,7 @@ public class Calf {
 	private String gender;
 	private Calendar dateOfBirth;
 	private ArrayList<String> calfAllergies;
-	private String sire;
+	private Sire sire;
 	private String dam;
 	private boolean active;
 	private ArrayList<Vaccine_With_Date> administeredVaccines;
@@ -157,14 +157,14 @@ public class Calf {
 	/**
 	 * @return the sire
 	 */
-	public String getSire() {
+	public Sire getSire() {
 		return sire;
 	}
 
 	/**
 	 * @param sire the sire to set
 	 */
-	public void setSire(String sire) {
+	public void setSire(Sire sire) {
 		this.sire = sire;
 	}
 

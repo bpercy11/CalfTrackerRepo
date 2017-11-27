@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.calftracker.project.adapters.tasks.TaskDetailsAdapter;
+import com.calftracker.project.adapters.tasks.TaskVaccineDetailsAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Task;
@@ -27,7 +27,7 @@ import java.util.GregorianCalendar;
 public class TaskDetailsActivity extends AppCompatActivity {
 
     ArrayList<TaskDetailsCalfSelectionItem> adapterArray;
-    TaskDetailsAdapter adapter;
+    TaskVaccineDetailsAdapter adapter;
 
     private Vaccine vaccine;
     private ArrayList<Calf> calfList;
@@ -77,7 +77,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
             adapterArray.add(new TaskDetailsCalfSelectionItem(vaccineCalfList.get(i).getFarmId(),false));
 
 
-        adapter = new TaskDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
+        adapter = new TaskVaccineDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
 
         vaccName = (TextView) findViewById(R.id.textViewTaskItemVaccineName);
         vaccName.setText(vaccine.getName());

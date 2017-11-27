@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="methods_of_administration">
+        <item>Bottle</item>
+        <item>Tube</item>
+    </string-array>
+</resources>

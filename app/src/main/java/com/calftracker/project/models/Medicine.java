@@ -99,4 +99,9 @@ public class Medicine {
 								   String frequency){
 		return new Medicine(name, dosage, dosage_units, timeActive, notes);
 	}
+
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }

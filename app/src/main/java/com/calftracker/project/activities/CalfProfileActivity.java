@@ -65,6 +65,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private TextView mGenderValue;
     private TextView mDOBValue;
     private TextView mSireValue;
+    private TextView mSireNameValue;
     private TextView mDamValue;
     private TextView mWeightValue;
     private TextView mHeightValue;
@@ -84,6 +85,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private Calf tempCalf;
     private String tempID;
     private String tempSire;
+    private String tempSireName;
     private String tempDam;
     private String tempDOBString;
     private String tempGender;
@@ -92,6 +94,7 @@ public class CalfProfileActivity extends AppCompatActivity {
     private AlertDialog alertID;
     private AlertDialog alertGender;
     private AlertDialog alertSire;
+    private AlertDialog alertSireName;
     private AlertDialog alertDam;
 
     private double mostRecentWeight;
@@ -105,14 +108,12 @@ public class CalfProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        retrieveData();
+
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-
         Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
-
+        String json;
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
         getSupportActionBar().setTitle("Calf " + calfID);
@@ -136,6 +137,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         mGenderValue = (TextView) findViewById(R.id.textViewGenderValue);
         mDOBValue = (TextView) findViewById(R.id.textViewDOBValue);
         mSireValue = (TextView) findViewById(R.id.textViewSireValue);
+        mSireNameValue = (TextView) findViewById(R.id.textViewSireNameValue);
         mDamValue = (TextView) findViewById(R.id.textViewDamValue);
         mWeightValue = (TextView) findViewById(R.id.textViewWeightValue);
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
@@ -182,7 +184,8 @@ public class CalfProfileActivity extends AppCompatActivity {
         int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
         int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
-        if (calf.getSire() != null) {mSireValue.setText(calf.getSire());}
+        if (calf.getSire().getId() != null) {mSireValue.setText(calf.getSire().getId());}
+        if (calf.getSire().getName() != null) { mSireNameValue.setText(calf.getSire().getName()); }
         if (calf.getDam() != null) {mDamValue.setText(calf.getDam());}
 
         // Display weight and/or height information only if there has been a recording
@@ -196,6 +199,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         // Set up temporary values, will be updated and applied to the current calf upon user clicking apply
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
+        tempSireName = mSireNameValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
@@ -235,6 +239,31 @@ public class CalfProfileActivity extends AppCompatActivity {
                 noteContentPopup.show();
             }
         });
+
+        if(calf.isNeedToObserveForIllness()) {
+            Button mMark = (Button) findViewById(R.id.buttonMarkObservation);
+            mMark.setText(R.string.calf_profile_unmark_oberservation);
+        }
+
+    }
+
+    public void retrieveData() {
+        // try and get calf object made by main activity
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+    }
+
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
     }
 
     public void updateNoteListView(Calf calf) {
@@ -268,6 +297,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonAddWeight).setVisibility(View.GONE);
         findViewById(R.id.buttonAddHeight).setVisibility(View.GONE);
         findViewById(R.id.buttonCreateNewNote).setVisibility(View.GONE);
+        findViewById(R.id.buttonMarkObservation).setVisibility(View.GONE);
         findViewById(R.id.textViewNotes).setVisibility(View.GONE);
         findViewById(R.id.buttonCancel).setVisibility(View.VISIBLE);
         findViewById(R.id.buttonApply).setVisibility(View.VISIBLE);
@@ -277,6 +307,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mSireNameValue.setPaintFlags(mSireNameValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // Disable back navigation
@@ -301,7 +332,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderID = new AlertDialog.Builder(this);
-        View dialogLayout_ID = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_ID = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_ID = (EditText) dialogLayout_ID.findViewById(R.id.dialogTextInput);
 
         dialogText_ID.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -395,7 +426,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderSire = new AlertDialog.Builder(this);
-        View dialogLayout_Sire = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_Sire = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Sire = (EditText) dialogLayout_Sire.findViewById(R.id.dialogTextInput);
 
         dialogText_Sire.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -414,7 +445,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     return;
                 }
                 mSireValue.setText(dialogText_Sire.getText().toString());
-                tempCalf.setSire(dialogText_Sire.getText().toString());
+                tempCalf.getSire().setId(dialogText_Sire.getText().toString());
             }
         });
         builderSire.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -425,6 +456,46 @@ public class CalfProfileActivity extends AppCompatActivity {
         });
         alertSire = builderSire.create();
 
+        // Edit Sire Name
+        mSireNameValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertSireName.show();
+            }
+        });
+        AlertDialog.Builder builderSireName = new AlertDialog.Builder(this);
+        View dialogLayout_SireName = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
+        final EditText dialogText_SireName = (EditText) dialogLayout_SireName.findViewById(R.id.dialogTextInput);
+
+        dialogText_SireName.setInputType(InputType.TYPE_CLASS_TEXT);
+        dialogText_SireName.setHint("Sire Name");
+        builderSireName.setTitle("Enter Sire Name");
+        builderSireName.setView(dialogLayout_SireName);
+        builderSireName.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String ed_text = dialogText_SireName.getText().toString().trim();
+
+                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please enter calf sire name";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+                mSireNameValue.setText(dialogText_SireName.getText().toString());
+                tempCalf.getSire().setName(dialogText_SireName.getText().toString());
+            }
+        });
+        builderSireName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertSireName = builderSireName.create();
+
         // Edit Dam ID Number
         mDamValue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -433,7 +504,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builderDam = new AlertDialog.Builder(this);
-        View dialogLayout_Dam = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_Dam = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Dam = (EditText) dialogLayout_Dam.findViewById(R.id.dialogTextInput);
 
         dialogText_Dam.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -573,16 +644,12 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         tempID = mIDValue.getText().toString();
         tempSire = mSireValue.getText().toString();
+        tempSireName = mSireNameValue.getText().toString();
         tempDam = mDamValue.getText().toString();
         tempGender = mGenderValue.getText().toString();
         tempDOBString = mDOBValue.getText().toString();
 
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
+        saveData();
 
         originalImage = currentImage;
 
@@ -599,6 +666,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
         mIDValue.setText(tempID);
         mSireValue.setText(tempSire);
+        mSireNameValue.setText(tempSireName);
         mDamValue.setText(tempDam);
         mGenderValue.setText(tempGender);
         mDOBValue.setText(tempDOBString);
@@ -648,7 +716,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         AlertDialog newNoteAlert;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_Note = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Note = (EditText) dialogLayout_Note.findViewById(R.id.dialogTextInput);
 
         dialogText_Note.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -671,12 +739,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     }
                 }
 
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
+                saveData();
 
                 updateNoteListView(calf);
             }
@@ -702,12 +765,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Remove the calf from the list and save the new list to local storage
                 calfList.remove(calf);
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
+                saveData();
 
                 // Show a toast saying that the calf was removed
                 Context context = getApplicationContext();
@@ -734,7 +792,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddWeight(View view) {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
-        View dialogLayout_Weight = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_Weight = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Weight = (EditText) dialogLayout_Weight.findViewById(R.id.dialogTextInput);
 
         builderWeight.setTitle("Record Weight Measurement");
@@ -774,12 +832,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     }
                 }
 
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
+                saveData();
             }
         });
         builderWeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -796,7 +849,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddHeight(View view) {
         AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
-        View dialogLayout_Height = inflater.inflate(R.layout.custom_dialog_input, null);
+        View dialogLayout_Height = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
         final EditText dialogText_Height = (EditText) dialogLayout_Height.findViewById(R.id.dialogTextInput);
 
         builderHeight.setTitle("Record Height Measurement");
@@ -837,12 +890,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                     }
                 }
 
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
+                saveData();
             }
         });
         builderHeight.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -903,17 +951,32 @@ public class CalfProfileActivity extends AppCompatActivity {
         findViewById(R.id.textViewNotes).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewWeightField).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewHeightField).setVisibility(View.VISIBLE);
+        findViewById(R.id.buttonMarkObservation).setVisibility(View.VISIBLE);
 
         mIDValue.setPaintFlags(mIDValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mGenderValue.setPaintFlags(mGenderValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mDOBValue.setPaintFlags(mDOBValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mSireValue.setPaintFlags(mSireValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
+        mSireNameValue.setPaintFlags(mSireNameValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
         mDamValue.setPaintFlags(mDamValue.getPaintFlags() & (~Paint.UNDERLINE_TEXT_FLAG));
 
         mIDValue.setOnClickListener(null);
         mSireValue.setOnClickListener(null);
+        mSireNameValue.setOnClickListener(null);
         mDamValue.setOnClickListener(null);
         mGenderValue.setOnClickListener(null);
         mDOBValue.setOnClickListener(null);
+    }
+
+    public void onClickMarkObservation(View view) {
+        Button mMarkObservation = (Button) findViewById(R.id.buttonMarkObservation);
+        if(calf.isNeedToObserveForIllness())
+            mMarkObservation.setText(R.string.calf_profile_mark_oberservation);
+        else
+            mMarkObservation.setText(R.string.calf_profile_unmark_oberservation);
+
+        calf.setNeedToObserveForIllness(!calf.isNeedToObserveForIllness());
+
+        saveData();
     }
 }

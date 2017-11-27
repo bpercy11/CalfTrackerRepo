@@ -2,18 +2,22 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calftracker.project.adapters.calfprofile.FeedingHistoryEmployeeSpinnerAdapter;
 import com.calftracker.project.calftracker.R;
@@ -63,16 +67,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         mSecondMethod = (TextView) findViewById(R.id.textViewSecondMethodValue);
         mSecondLiters = (TextView) findViewById(R.id.textViewSecondLitersValue);
 
-        // try and get calf object made by main activity
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-
-        Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
-
-        json = mPreferences.getString("calfToViewInProfile","");
-        calfID = gson.fromJson(json, String.class);
+        retrieveData();
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
@@ -99,13 +94,6 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         }
 
 
-        if(mPreferences.contains("EmployeeList")) {
-            json = mPreferences.getString("EmployeeList", "");
-            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
-            }.getType());
-        } else { employeeArrayList = new ArrayList<Employee>(); }
-
-
 
         mFirstFeedingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +110,15 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 mEmployeeSpinner.setAdapter(adapter);
 
+                final Spinner mMethodSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMethodDialog);
 
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                        R.array.methods_of_administration, android.R.layout.simple_spinner_item);
+                // Specify the layout to use when the list of choices appears
+                methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                mMethodSpinner.setAdapter(methodAdapter);
 
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
@@ -132,15 +128,25 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
+                                String ed_text = mLiters.getText().toString().trim();
+
+                                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Must set amount fed";
+                                    int duration = Toast.LENGTH_SHORT;
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                    return;
+                                }
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
+                                String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[0] == null) {
 
-
-                                    String method = "method B";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
                                     calf.getFeedingHistory()[0] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[0].setMethodOfFeeding(method);
                                     calf.getFeedingHistory()[0].setFedBy(fedBy);
                                     calf.getFeedingHistory()[0].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }
@@ -151,13 +157,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                                 mFirstMethod.setText(calf.getFeedingHistory()[0].getMethodOfFeeding());
                                 mFirstLiters.setText(calf.getFeedingHistory()[0].getLitersFed() + " L");
 
-                                // Save the calfList to local storage
-                                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                                Gson gson = new Gson();
-                                String json = gson.toJson(calfList);
-                                prefsEditor.putString("CalfList",json);
-                                prefsEditor.apply();
+                                saveData();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -188,6 +188,16 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
 
                 mEmployeeSpinner.setAdapter(adapter);
 
+                final Spinner mMethodSpinner = (Spinner) dialogView.findViewById(R.id.spinnerMethodDialog);
+
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                        R.array.methods_of_administration, android.R.layout.simple_spinner_item);
+                // Specify the layout to use when the list of choices appears
+                methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                mMethodSpinner.setAdapter(methodAdapter);
+
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(dialogView)
@@ -196,14 +206,25 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
+                                String ed_text = mLiters.getText().toString().trim();
+
+                                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Must set amount fed";
+                                    int duration = Toast.LENGTH_SHORT;
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                    return;
+                                }
                                 Employee fedBy = (Employee) mEmployeeSpinner.getSelectedItem();
+                                String method = (String) mMethodSpinner.getSelectedItem();
                                 if(calf.getFeedingHistory()[1] == null) {
 
-                                    String method = "method A";
                                     Double liters = Double.parseDouble(mLiters.getText().toString());
 
                                     calf.getFeedingHistory()[1] = new Feeding(fedBy, method, liters);
                                 } else {
+                                    calf.getFeedingHistory()[1].setMethodOfFeeding(method);
                                     calf.getFeedingHistory()[1].setFedBy(fedBy);
                                     calf.getFeedingHistory()[1].setLitersFed(Double.parseDouble(mLiters.getText().toString()));
                                 }
@@ -214,13 +235,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                                 mSecondMethod.setText(calf.getFeedingHistory()[1].getMethodOfFeeding());
                                 mSecondLiters.setText(calf.getFeedingHistory()[1].getLitersFed() + " L");
 
-                                // Save the calfList to local storage
-                                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                                Gson gson = new Gson();
-                                String json = gson.toJson(calfList);
-                                prefsEditor.putString("CalfList",json);
-                                prefsEditor.apply();
+                                saveData();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -231,6 +246,35 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
+    }
+
+    public void retrieveData() {
+        // try and get calf object made by main activity
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+
+        json = mPreferences.getString("calfToViewInProfile","");
+        calfID = gson.fromJson(json, String.class);
+
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeArrayList = new ArrayList<Employee>(); }
+    }
+
+    public void saveData() {
+        // Save the calfList to local storage
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
     }
 
     @Override

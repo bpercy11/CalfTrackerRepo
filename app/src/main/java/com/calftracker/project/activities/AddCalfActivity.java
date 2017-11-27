@@ -32,7 +32,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Task;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
@@ -56,6 +59,8 @@ public class AddCalfActivity extends BaseActivity {
     private AlertDialog alert;
     private String calfGender;
 
+    private EditText ID;
+
     // variables related to taking a photo
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView mPhoto;
@@ -78,6 +83,8 @@ public class AddCalfActivity extends BaseActivity {
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.addCalfParent));
 
+
+
         // Sets the default date to be today in case this field is left blank
         Calendar today = Calendar.getInstance();
         calfYear = today.get(Calendar.YEAR);
@@ -85,6 +92,7 @@ public class AddCalfActivity extends BaseActivity {
         calfDay = today.get(Calendar.DATE);
 
         // get needed UI elements
+        ID = (EditText) findViewById(R.id.editTextGetID);
         mDisplayDate = (TextView) findViewById(R.id.textViewDisplayDate);
         mGender = (TextView) findViewById(R.id.textViewSelectGender);
         mPhoto = (ImageView) findViewById(R.id.imageViewCaptured);
@@ -92,6 +100,35 @@ public class AddCalfActivity extends BaseActivity {
         mButtonAddPhoto = (Button) findViewById(R.id.buttonNewAddPhoto);
         mButtonDeletePhoto = (Button) findViewById(R.id.buttonNewDeletePhoto);
         mButtonChangePhoto = (Button) findViewById(R.id.buttonNewChangePhoto);
+
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        // Load the Task object from storage
+        json = mPreferences.getString("BackToAddScreen", "");
+        Calf calfFromBack= gson.fromJson(json, new TypeToken<Calf>() {}.getType());
+
+        if(calfFromBack != null) {
+            ID.setText(calfFromBack.getFarmId());
+            mGender.setText(calfFromBack.getGender());
+
+            int year = calfFromBack.getDateOfBirth().get(Calendar.YEAR);
+            int month = calfFromBack.getDateOfBirth().get(Calendar.MONTH) + 1;
+            int day = calfFromBack.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+
+            String date = month + "/" + day + "/" + year;
+            mDisplayDate.setText(date);
+
+            calfFromBack = null;
+
+            SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+            json = gson.toJson(calfFromBack);
+            prefsEditor.putString("BackToAddScreen",json);
+            prefsEditor.apply();
+        }
 
         // Calculate 32dp in pixels, to be used when changing margins for photo tools
         Resources r = getResources();
@@ -187,7 +224,6 @@ public class AddCalfActivity extends BaseActivity {
 
     public void clickAddCalfButton(View view) {
         // GET USER INPUT FOR ID NUMBER FROM EDITTEXT
-        EditText ID = (EditText) findViewById(R.id.editTextGetID);
         String calfID = ID.getText().toString();
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

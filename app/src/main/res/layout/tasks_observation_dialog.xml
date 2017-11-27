@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tasksObservationDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical30percentobservationdialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <TextView
+        android:id="@+id/textViewIllnessDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/task_illness_dialog_illness"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewMedicationDialog"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintForIllnessSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/calf_profile_simple_border"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewIllnessDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/constraintForMedicationSpinner"
+        app:layout_constraintTop_toTopOf="@+id/textViewIllnessDialog" >
+
+        <Spinner
+            android:id="@+id/spinnerIllnessDialog"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <TextView
+        android:id="@+id/textViewMedicationDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/task_illness_dialog_medication"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIllnessDialog"
+        app:layout_constraintEnd_toStartOf="@+id/vertical30percentobservationdialog"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintForMedicationSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/calf_profile_simple_border"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMedicationDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewMedicationDialog"
+        app:layout_constraintTop_toTopOf="@+id/textViewMedicationDialog" >
+
+        <Spinner
+            android:id="@+id/spinnerMedicationDialog"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonUnmarkObservationDialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/calf_profile_unmark_oberservation"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/constraintForMedicationSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMedicationDialog" />
+
+
+</android.support.constraint.ConstraintLayout>
