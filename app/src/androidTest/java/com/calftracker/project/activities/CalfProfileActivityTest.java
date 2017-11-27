@@ -25,10 +25,12 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
@@ -38,6 +40,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.not;
 
 // This may be obvious, but you need to create at least one calf before running these tests
@@ -316,15 +319,26 @@ public class CalfProfileActivityTest {
         String newNote = "Test note";
         Calendar currentDate = Calendar.getInstance();
         int day = currentDate.get(Calendar.DAY_OF_MONTH);
-        int month = currentDate.get(Calendar.MONTH);
+        int month = currentDate.get(Calendar.MONTH) + 1;    // Calendars are indexed starting at 0
         int year = currentDate.get(Calendar.YEAR);
         String date = month + "/" + day + "/" + year;
+
+        int prevCount = GetListCountMatcher.getCountFromList(R.id.listViewNotes);
 
         onView(withId(R.id.buttonCreateNewNote))
                 .perform(scrollTo())
                 .perform(click());
         onView(withId(R.id.dialogTextInput)).perform(ViewActions.typeText(newNote), closeSoftKeyboard());
         onView(withText("Ok")).perform(click());
-        // TODO
+
+        int newCount = GetListCountMatcher.getCountFromList(R.id.listViewNotes);
+        assert(newCount == prevCount + 1);
+
+        onView(withId(R.id.calfProfileScrollLayout)).perform(swipeUp());    // Scroll to bottom to see notes
+        onData(anything()).inAdapterView(withId(R.id.listViewNotes)).atPosition(newCount - 1).check(matches(withText(date)));
+        onData(anything()).inAdapterView(withId(R.id.listViewNotes)).atPosition(newCount - 1).perform(click());
+
+        onView(withText("Note entered " + date)).check(matches(isDisplayed()));
+        onView(withText(" " + newNote)).check(matches(isDisplayed()));
     }
 }

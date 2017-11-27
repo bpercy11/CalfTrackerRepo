@@ -16,6 +16,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
+import static android.support.test.espresso.contrib.DrawerMatchers.isOpen;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -25,6 +26,17 @@ import static org.hamcrest.Matchers.allOf;
 public class DashboardActivityTest {
     @Rule
     public IntentsTestRule<DashboardActivity> mIntentsTestRuleDashboard = new IntentsTestRule<DashboardActivity>(DashboardActivity.class);
+
+    @Test
+    public void testOpenCloseMenu() throws Exception {
+        onView(withId(R.id.drawer_layout))
+                .check(matches(isClosed(Gravity.LEFT)))
+                .perform(DrawerActions.open());
+        onView(withId(R.id.drawer_layout))
+                .check(matches(isOpen(Gravity.LEFT)))
+                .perform(DrawerActions.close());
+        onView(withId(R.id.drawer_layout)).check(matches(isClosed(Gravity.LEFT)));
+    }
 
     @Test
     public void testOpenCalfListMenu() throws Exception {
