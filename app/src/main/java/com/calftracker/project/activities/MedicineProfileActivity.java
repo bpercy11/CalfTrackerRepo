@@ -3,12 +3,14 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +23,7 @@ public class MedicineProfileActivity extends BaseActivity {
     private Medicine medicine;
     private List<Medicine> medicineList;
     private int medicinePosition;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MedicineProfileActivity extends BaseActivity {
 
         getLayoutInflater().inflate(R.layout.activity_medicine_profile, frameLayout);
         mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -84,6 +89,21 @@ public class MedicineProfileActivity extends BaseActivity {
         String json = gson.toJson(medicineList);
         prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
+
+        // if this medicine is removed, make sure that no treatment protocol calls for this
+        Illness tempIllness;
+        ArrayList<Illness> illnessList;
+
+        json = mPrefs.getString("IllnessList", "");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+        }.getType());
+
+        for (int i = 0; i < illnessList.size(); i++){
+            tempIllness = illnessList.get(i);
+            if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
+                tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
+            }
+        }
 
         Intent intent = new Intent(MedicineProfileActivity.this,MedicineActivity.class);
         startActivity(intent);
