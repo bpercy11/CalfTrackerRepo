@@ -795,7 +795,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         final EditText dialogText_Weight = (EditText) dialogLayout_Weight.findViewById(R.id.dialogTextInput);
 
         builderWeight.setTitle("Record Weight Measurement");
-        dialogText_Weight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
         dialogText_Weight.setHint("Weight (lbs)");
         builderWeight.setView(dialogLayout_Weight);
         builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -814,12 +814,17 @@ public class CalfProfileActivity extends AppCompatActivity {
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
                 if (!calf.getPhysicalHistory().isEmpty()
-                        && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() == -1
                         && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
                         && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
                         && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                    if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() != -1) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Previous weight recording from this day overwritten";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                     calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setWeight(weight);
-
                 } else {
                     calf.getPhysicalHistory().add(size);
                 }
@@ -852,7 +857,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         final EditText dialogText_Height = (EditText) dialogLayout_Height.findViewById(R.id.dialogTextInput);
 
         builderHeight.setTitle("Record Height Measurement");
-        dialogText_Height.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         dialogText_Height.setHint("Height (in)");
         builderHeight.setView(dialogLayout_Height);
         builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -872,10 +876,16 @@ public class CalfProfileActivity extends AppCompatActivity {
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
 
                 if (!calf.getPhysicalHistory().isEmpty()
-                        && calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() == -1
                         && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
                         && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
                         && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                    if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Previous height recording from this day overwritten";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                     calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setHeight(height);
 
                 } else {
