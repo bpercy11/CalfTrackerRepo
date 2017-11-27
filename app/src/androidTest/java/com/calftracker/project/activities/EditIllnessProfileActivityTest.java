@@ -4,6 +4,7 @@ import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,6 +63,12 @@ public class EditIllnessProfileActivityTest {
     public void testAddEditedIllnessButton() throws Exception{
         onView(withId(R.id.editIllness_buttonAdd)).perform(click());
         intended(hasComponent(EditIllnessProfileMedicineSelectionActivity.class.getName()));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        mActivity = null;
+        Intents.release();
     }
 
 }
