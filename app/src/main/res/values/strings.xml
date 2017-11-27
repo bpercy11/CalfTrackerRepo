@@ -5,7 +5,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="add_calf_title">Add a Calf</string>
+    <string name="add_calf_title">Add Calf</string>
     <string name="add_calf_ID_Number">ID Number</string>
     <string name="add_calf_gender">Gender</string>
     <string name="add_calf_DOB">Date of Birth</string>
@@ -190,6 +190,7 @@
         EditIllnessProfileMedicineSelectionActivity
     </string>
 
+    <string name="insights_title">Insights</string>
 
     <string name="settings_title">Settings</string>
 </resources>
