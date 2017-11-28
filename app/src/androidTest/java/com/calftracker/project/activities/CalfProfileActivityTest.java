@@ -335,10 +335,10 @@ public class CalfProfileActivityTest {
         assert(newCount == prevCount + 1);
 
         onView(withId(R.id.calfProfileScrollLayout)).perform(swipeUp());    // Scroll to bottom to see notes
-        onData(anything()).inAdapterView(withId(R.id.listViewNotes)).atPosition(newCount - 1).check(matches(withText(date)));
+        onData(anything()).inAdapterView(withId(R.id.listViewNotes)).atPosition(newCount - 1).check(matches(withText(newNote)));
         onData(anything()).inAdapterView(withId(R.id.listViewNotes)).atPosition(newCount - 1).perform(click());
 
         onView(withText("Note entered " + date)).check(matches(isDisplayed()));
-        onView(withText(" " + newNote)).check(matches(isDisplayed()));
+        onView(withText(newNote)).check(matches(isDisplayed()));
     }
 }
