@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/illness_profile_notes" />
 
     <Button
-        android:id="@+id/illnessProfileEditButton"
+        android:id="@+id/illness_profile_editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -103,8 +103,8 @@
         android:layout_marginRight="50dp"
         android:onClick="onIllnessProfile_RemoveButton"
         android:text="@string/IllnessProfile_RemoveButtonName"
-        app:layout_constraintBottom_toBottomOf="@+id/illnessProfileEditButton"
+        app:layout_constraintBottom_toBottomOf="@+id/illness_profile_editButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/illnessProfileEditButton" />
+        app:layout_constraintTop_toTopOf="@+id/illness_profile_editButton" />
 
 </android.support.constraint.ConstraintLayout>
