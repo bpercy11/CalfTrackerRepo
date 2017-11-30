@@ -40,6 +40,8 @@ public class EditIllnessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_illness_edit);
 
         addNotesButton = (Button) findViewById(R.id.EditIllnessAddNotesButton);
         // add button listener
