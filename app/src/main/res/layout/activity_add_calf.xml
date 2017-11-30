@@ -7,20 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.calftracker.project.activities.AddCalfActivity">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical33percentparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.45833334" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical66percentparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.55" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,18 +17,18 @@
             android:id="@+id/addCalfLayout">
 
             <android.support.constraint.Guideline
-                android:id="@+id/vertical66percent"
+                android:id="@+id/vertical55percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.55" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/vertical33percent"
+                android:id="@+id/vertical45percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45833334" />
+                app:layout_constraintGuide_percent="0.45" />
 
             <Button
                 android:id="@+id/buttonCancel"
@@ -53,7 +39,7 @@
                 android:onClick="clickCancelButton"
                 android:text="Cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDOB" />
 
             <Button
@@ -63,7 +49,7 @@
                 android:onClick="clickAddCalfButton"
                 android:text="Next"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/buttonCancel" />
 
             <TextView
@@ -74,7 +60,7 @@
                 android:text="@string/add_calf_ID_Number"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonNewAddPhoto" />
 
             <TextView
@@ -87,7 +73,7 @@
                 android:textAlignment="textEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
             <TextView
@@ -98,26 +84,29 @@
                 android:text="@string/add_calf_gender"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIDNumber" />
 
             <TextView
                 android:id="@+id/textViewDisplayDate"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:gravity="start"
                 android:hint="@string/add_calf_select_date"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDOB"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewDOB" />
 
             <EditText
                 android:id="@+id/editTextGetID"
                 style="@android:style/Widget.AutoCompleteTextView"
-                android:layout_width="152dp"
-                android:layout_height="25dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:gravity="start"
@@ -126,19 +115,22 @@
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewIDNumber"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewIDNumber" />
 
             <TextView
                 android:id="@+id/textViewSelectGender"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:gravity="start"
                 android:hint="@string/add_calf_select_gender"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewGender"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/textViewGender" />
 
             <Button
@@ -162,7 +154,7 @@
                 android:onClick="onClickDeletePhotoButton"
                 android:text="@string/calf_profile_delete_photo"
                 android:textAllCaps="false"
-                app:layout_constraintEnd_toStartOf="@+id/vertical33percent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewCaptured" />
 
@@ -174,7 +166,7 @@
                 android:text="@string/calf_profile_change_photo"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonNewDeletePhoto"
-                app:layout_constraintStart_toStartOf="@+id/vertical66percent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/buttonNewDeletePhoto" />
 
             <ImageView

@@ -96,7 +96,7 @@
     <string name="edit_medicine_enter_units">Enter Units</string>
     <string name="edit_medicine_add_button">Add</string>
     <string name="edit_medicine_notes_button">Add Note</string>
-    <string name="edit_medicine_notes">Notes:</string>
+    <string name="edit_medicine_notes">Notes</string>
 
     <string name="enter_range">Range</string>
 
