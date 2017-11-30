@@ -109,8 +109,8 @@
     <string name="edit_vaccine_cancel_button">Cancel</string>
     <string name="edit_medicine">Edit Medicine</string>
     <string name="edit_vaccine_edit_vaccine">Edit Vaccine</string>
-    <string name="edit_vaccine_vaccine_name">Vaccine</string>
-    <string name="edit_vaccine_enter_vaccine">Enter Vaccine</string>
+    <string name="edit_vaccine_vaccine_name">Vaccine Name</string>
+    <string name="edit_vaccine_enter_vaccine">Enter Name</string>
 
     <string name="medicine_list_medicine">Medicine</string>
     <string name="medicine_list_time_active">Time Active</string>

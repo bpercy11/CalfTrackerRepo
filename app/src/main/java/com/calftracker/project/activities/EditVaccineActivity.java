@@ -1,15 +1,13 @@
 package com.calftracker.project.activities;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -48,9 +46,6 @@ public class EditVaccineActivity extends AppCompatActivity {
 
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_vaccine_edit);
-
-        // Stylize action bar to use back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
         dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -167,11 +162,5 @@ public class EditVaccineActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, VaccineActivity.class);
         startActivity(intent);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), VaccineActivity.class);
-        startActivity(intent);
-        return true;
     }
 }
