@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 
 public class SettingsEditFarmActivity extends AppCompatActivity {
@@ -55,6 +56,10 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
             String name = mPreferences.getString("farmName","Farm Name not set");
             int end = name.length();
             name = name.substring(1, end-1);
+
+            Firebase fb = (Firebase) getApplicationContext();
+            fb.saveData("farmName", name);
+
             farmName.setHint(name);
         }
         if(mPreferences.contains("farmOwner")){
