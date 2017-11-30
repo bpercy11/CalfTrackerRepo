@@ -105,6 +105,10 @@ public class MedicineProfileActivity extends BaseActivity {
             }
         }
 
+        json = gson.toJson(illnessList);
+        prefsEditor.putString("IllnessList",json);
+        prefsEditor.apply();
+
         Intent intent = new Intent(MedicineProfileActivity.this,MedicineActivity.class);
         startActivity(intent);
     }

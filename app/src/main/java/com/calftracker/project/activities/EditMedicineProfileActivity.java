@@ -128,48 +128,7 @@ public class EditMedicineProfileActivity extends BaseActivity {
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);
     }
-    /*
-    public void clickNotesButton(View view){
 
-        notesButton = (Button) findViewById(R.id.edit_medicine_buttonNote);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-
-        // set title
-        alertDialogBuilder.setTitle("Please enter a note");
-        final EditText input = new EditText(EditMedicineProfileActivity.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        alertDialogBuilder.setView(input);
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("Done",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        medicineNotes = input.getText().toString();
-                        // if this button is clicked, close
-                        // current activity
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-    }
-    */
 
     public void clickCancelButton(View view){
         Intent intent = new Intent(EditMedicineProfileActivity.this, MedicineActivity.class);
