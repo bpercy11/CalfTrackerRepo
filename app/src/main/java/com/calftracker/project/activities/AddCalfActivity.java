@@ -33,7 +33,6 @@ import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
-import com.calftracker.project.models.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -114,9 +113,9 @@ public class AddCalfActivity extends BaseActivity {
             ID.setText(calfFromBack.getFarmId());
             mGender.setText(calfFromBack.getGender());
 
-            int year = calfFromBack.getDateOfBirth().get(Calendar.YEAR);
-            int month = calfFromBack.getDateOfBirth().get(Calendar.MONTH) + 1;
-            int day = calfFromBack.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+            int year = calfFromBack.makeCalendarDOB().get(Calendar.YEAR);
+            int month = calfFromBack.makeCalendarDOB().get(Calendar.MONTH) + 1;
+            int day = calfFromBack.makeCalendarDOB().get(Calendar.DAY_OF_MONTH);
 
             String date = month + "/" + day + "/" + year;
             mDisplayDate.setText(date);

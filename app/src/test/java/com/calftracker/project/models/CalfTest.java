@@ -38,7 +38,7 @@ public class CalfTest {
         assert(calf.getFarmId().equals(farmId));
         assert(calf.getInternalId() == internalId);
         assert(calf.getGender().equals(gender));
-        assert(calf.getDateOfBirth().equals(dob));
+        assert(calf.makeCalendarDOB().equals(dob));
         assert(calf.getNeededVaccines().equals(vaccines));
         assert(calf.getCalfAllergies() == null);
         assert(calf.getSire()== null);
@@ -83,8 +83,8 @@ public class CalfTest {
     @Test
     public void testCalfDOB() throws Exception {
         java.util.Calendar new_dob = new GregorianCalendar(2017,11,22);
-        calf.setDateOfBirth(new_dob);
-        assert(calf.getDateOfBirth().equals(new_dob));
+        calf.placeCalendarDOB(new_dob);
+        assert(calf.makeCalendarDOB().equals(new_dob));
     }
 
     @Test
