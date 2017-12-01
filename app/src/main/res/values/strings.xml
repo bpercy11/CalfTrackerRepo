@@ -135,13 +135,13 @@
     <string name="EditIllnessActivity_emptyFieldMsg">Please enter illness name</string>
     <string name="EditIllness_notes">Please enter notes for your Treatment Protocol.</string>
 
-    <string name="vaccine_profile_name">Vaccine:</string>
-    <string name="vaccine_profile_vacc_range">Vaccine Range:</string>
-    <string name="vaccine_profile_adminStart">Starting Calf Age:</string>
-    <string name="vaccine_profile_adminEnd">Ending Calf Age:</string>
-    <string name="vaccine_profile_dosage">Dosage:</string>
-    <string name="vaccine_profile_dosageUnits">Dosage Units:</string>
-    <string name="vaccine_profile_adminMethod">Administration Method:</string>
+    <string name="vaccine_profile_name">Vaccine</string>
+    <string name="vaccine_profile_vacc_range">Vaccine Range</string>
+    <string name="vaccine_profile_adminStart">Starting Calf Age</string>
+    <string name="vaccine_profile_adminEnd">Ending Calf Age</string>
+    <string name="vaccine_profile_dosage">Dosage</string>
+    <string name="vaccine_profile_dosageUnits">Dosage Units</string>
+    <string name="vaccine_profile_adminMethod">Administration Method</string>
 
     <string name="medicine_profile_name">Medicine Name</string>
     <string name="medicine_profile_dosage">Dosage</string>
@@ -171,9 +171,9 @@
     <string name="task_illness_dialog_medication">Medication</string>
 
     <string name="protocols_title">Protocols</string>
-    <string name="protocols_vaccine_edit">Edit Vaccine</string>
-    <string name="protocols_medicine_edit">Edit Medicine</string>
-    <string name="protocols_illness_edit">Edit Illness</string>
+    <string name="protocols_vaccine_add">Add Vaccine</string>
+    <string name="protocols_medicine_add">Add Medicine</string>
+    <string name="protocols_illness_add">Add Illness</string>
 
     <string-array name="vacc_range_spinner">
         <item>Day</item>

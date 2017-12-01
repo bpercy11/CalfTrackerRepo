@@ -32,6 +32,9 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness_profile);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.EditIllness_editIllness);
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -41,9 +44,6 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
             illness = gson.fromJson(json, new TypeToken<Illness>() {
             }.getType());
         }
-
-        // Custom title
-        getSupportActionBar().setTitle(illness.getName());
 
         if(mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();

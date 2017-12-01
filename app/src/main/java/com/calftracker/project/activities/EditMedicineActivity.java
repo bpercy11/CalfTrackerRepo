@@ -38,7 +38,7 @@ public class EditMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_medicine);
 
         // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_medicine_edit);
+        getSupportActionBar().setTitle(R.string.protocols_medicine_add);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
@@ -49,6 +49,8 @@ public class EditMedicineActivity extends AppCompatActivity {
             medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
+
+        ((Button) findViewById(R.id.edit_medicine_buttonAdd)).setText("Add");
     }
 
     public void clickAddMedicineButton(View view){

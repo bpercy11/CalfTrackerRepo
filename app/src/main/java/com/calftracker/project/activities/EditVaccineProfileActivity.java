@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class EditVaccineProfileActivity extends BaseActivity {
+public class EditVaccineProfileActivity extends AppCompatActivity {
 
     private Vaccine vaccine;
     private int vaccinePosition;
@@ -34,9 +36,10 @@ public class EditVaccineProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_edit_vaccine, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        setContentView(R.layout.activity_edit_vaccine);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.edit_vaccine_edit_vaccine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineProfile")) {
@@ -85,6 +88,8 @@ public class EditVaccineProfileActivity extends BaseActivity {
         dosage.setText(Double.toString(vaccine.getDosage()));
         dosageUnits.setText(vaccine.getDosageUnits());
         adminMethod.setText(vaccine.getMethodOfAdministration());
+
+        ((Button) findViewById(R.id.edit_vaccine_buttonAddVaccine)).setText("Apply");
     }
 
     public void clickAddVaccineButton(View view){

@@ -41,7 +41,7 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_medicine);
 
         // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_medicine_edit);
+        getSupportActionBar().setTitle(R.string.edit_medicine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineProfile")) {
@@ -79,6 +79,8 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
         dosageUnits.setText(medicine.getDosage_units());
         timeActive.setText(Integer.toString(medicine.getTimeActive()));
         medicineNotes.setText(medicine.getNotes());
+
+        ((Button) findViewById(R.id.edit_medicine_buttonAdd)).setText("Apply");
 
     }
     public void clickAddMedicineButton(View view){

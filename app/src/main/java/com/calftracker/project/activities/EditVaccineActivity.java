@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,10 +45,9 @@ public class EditVaccineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_vaccine);
 
         // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_vaccine_edit);
+        getSupportActionBar().setTitle(R.string.protocols_vaccine_add);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
-        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -72,6 +71,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         dropDown1 = (Spinner)findViewById(R.id.edit_vaccine_spinner1);
         dropDown1.setAdapter(adapter);
 
+        ((Button) findViewById(R.id.edit_vaccine_buttonAddVaccine)).setText("Add");
     }
 
     public void clickAddVaccineButton(View view){
