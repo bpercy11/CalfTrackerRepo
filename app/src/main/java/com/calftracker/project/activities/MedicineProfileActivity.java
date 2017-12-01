@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicineProfileActivity extends BaseActivity {
+public class MedicineProfileActivity extends AppCompatActivity {
 
     private Medicine medicine;
     private List<Medicine> medicineList;
@@ -28,23 +29,27 @@ public class MedicineProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_medicine_profile);
 
-        getLayoutInflater().inflate(R.layout.activity_medicine_profile, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked medicine
-        if(mPreferences.contains("MedicineProfile")) {
+        if (mPreferences.contains("MedicineProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
             String json = mPreferences.getString("MedicineProfile", "");
             medicine = gson.fromJson(json, new TypeToken<Medicine>() {
             }.getType());
-        } else { }
+        }
+
+        // Custom title
+        getSupportActionBar().setTitle(medicine.getName());
 
         //Load MedicineList
         if(mPreferences.contains("MedicineList")) {
@@ -54,7 +59,7 @@ public class MedicineProfileActivity extends BaseActivity {
             String json = mPreferences.getString("MedicineList", "");
             medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
-        } else { }
+        }
 
         //Find medicine position in medicineList
         for (int i = 0; i < medicineList.size(); i++){
@@ -114,4 +119,15 @@ public class MedicineProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MedicineActivity.class);
+        startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), MedicineActivity.class);
+        startActivity(intent);
+        return true;
+    }
 }

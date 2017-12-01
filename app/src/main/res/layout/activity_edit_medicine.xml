@@ -30,48 +30,58 @@
 
             <TextView
                 android:id="@+id/edit_medicine_textViewEditMedicine"
-                android:layout_width="85dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:text="@string/edit_medicine_medicine_name"
+                android:textAlignment="textEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/edit_medicine_textViewDosage"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/edit_medicine_dosage"
+                android:textAlignment="textEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewEditMedicine" />
 
             <TextView
                 android:id="@+id/edit_medicine_textViewDosageUnits"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/edit_medicine_dosage_units"
                 android:textAlignment="textEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewDosage" />
 
             <TextView
                 android:id="@+id/edit_medicine_textViewTimeActive"
-                android:layout_width="158dp"
+                android:layout_width="0dp"
                 android:layout_height="28dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/edit_medicine_time_active"
                 android:textAlignment="textEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewDosageUnits" />
 
             <EditText

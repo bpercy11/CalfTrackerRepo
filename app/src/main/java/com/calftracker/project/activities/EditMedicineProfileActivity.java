@@ -2,28 +2,25 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Medicine;
-import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMedicineProfileActivity extends BaseActivity {
+public class EditMedicineProfileActivity extends AppCompatActivity {
 
     private Medicine medicine;
     private AlertDialog alertDialog;
@@ -41,8 +38,10 @@ public class EditMedicineProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_edit_medicine, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        setContentView(R.layout.activity_edit_medicine);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_medicine_edit);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineProfile")) {

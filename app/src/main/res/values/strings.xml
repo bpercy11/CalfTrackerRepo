@@ -84,7 +84,7 @@
 
     <string name="action_settings">Action Settings</string>
 
-    <string name="edit_medicine_medicine_name">Medicine</string>
+    <string name="edit_medicine_medicine_name">Name</string>
     <string name="edit_medicine_treatment_name">Treatment</string>
     <string name="edit_medicine_dosage">Dosage</string>
     <string name="edit_medicine_dosage_units">Dosage Units</string>
@@ -143,14 +143,15 @@
     <string name="vaccine_profile_dosageUnits">Dosage Units:</string>
     <string name="vaccine_profile_adminMethod">Administration Method:</string>
 
-    <string name="medicine_profile_name">Medicine:</string>
-    <string name="medicine_profile_dosage">Dosage:</string>
-    <string name="medicine_profile_dosageUnits">Dosage Units:</string>
-    <string name="medicine_profile_timeActive">Time Active:</string>
-    <string name="medicine_profile_notes">Notes:</string>
-    <string name="illness_profile_name">Illness Name:</string>
-    <string name="illness_profile_treatment">Treatment:</string>
-    <string name="illness_profile_notes">Notes:</string>
+    <string name="medicine_profile_name">Name</string>
+    <string name="medicine_profile_dosage">Dosage</string>
+    <string name="medicine_profile_dosageUnits">Dosage Units</string>
+    <string name="medicine_profile_timeActive">Time Active</string>
+    <string name="medicine_profile_notes">Notes</string>
+    <string name="medicine_profile_delete">Delete Medicine</string>
+    <string name="illness_profile_name">Illness Name</string>
+    <string name="illness_profile_treatment">Treatment</string>
+    <string name="illness_profile_notes">Notes</string>
 
     <string name="tasks_title">Tasks</string>
     <string name="tasks_vaccines_button">Vaccines</string>
