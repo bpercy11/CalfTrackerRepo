@@ -84,7 +84,7 @@
 
     <string name="action_settings">Action Settings</string>
 
-    <string name="edit_medicine_medicine_name">Name</string>
+    <string name="edit_medicine_medicine_name">Medicine Name</string>
     <string name="edit_medicine_treatment_name">Treatment</string>
     <string name="edit_medicine_dosage">Dosage</string>
     <string name="edit_medicine_dosage_units">Dosage Units</string>
@@ -128,7 +128,7 @@
     <string name="edit_vaccine_enter_units">Enter Units</string>
     <string name="EditIllness_editIllness">Edit Illness</string>
     <string name="EditIllness_enterName">Enter Name</string>
-    <string name="EditIllness_illnessName">Illness</string>
+    <string name="EditIllness_illnessName">Illness Name</string>
     <string name="EditIllness_TreatmentProtocol">Treatment Protocol</string>
     <string name="EditIllness_cancelButton">Cancel</string>
     <string name="EditIllness_AddButton">Add</string>
@@ -143,7 +143,7 @@
     <string name="vaccine_profile_dosageUnits">Dosage Units:</string>
     <string name="vaccine_profile_adminMethod">Administration Method:</string>
 
-    <string name="medicine_profile_name">Name</string>
+    <string name="medicine_profile_name">Medicine Name</string>
     <string name="medicine_profile_dosage">Dosage</string>
     <string name="medicine_profile_dosageUnits">Dosage Units</string>
     <string name="medicine_profile_timeActive">Time Active</string>

@@ -2,22 +2,16 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Illness;
-import com.calftracker.project.models.Treatment_Protocol;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,7 +32,6 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness_profile);
 
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -47,7 +40,10 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
             String json = mPreferences.getString("IllnessProfile", "");
             illness = gson.fromJson(json, new TypeToken<Illness>() {
             }.getType());
-        } else { }
+        }
+
+        // Custom title
+        getSupportActionBar().setTitle(illness.getName());
 
         if(mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -56,7 +52,7 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
             String json = mPreferences.getString("IllnessList", "");
             illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
             }.getType());
-        } else { }
+        }
 
         // get the position of the illness to be edited
         for (int i = 0; i < illnessList.size(); i++){
@@ -70,9 +66,6 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
 
         illnessName.setText(illness.getName());
         illnessNotes.setText((CharSequence) illness.getTreatmentProtocol().getNotes());
-
-
-
     }
 
 

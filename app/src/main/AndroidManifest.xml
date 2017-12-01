@@ -25,13 +25,8 @@
         <activity android:name="com.calftracker.project.activities.CalfProfileActivity" />
         <activity android:name="com.calftracker.project.activities.DashboardActivity" />
         <activity android:name="com.calftracker.project.activities.CreateFarmActivity" />
-        <!-- <activity -->
-        <!-- android:name=".menu" -->
-        <!-- android:label="@string/title_activity_menu" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <activity android:name="com.calftracker.project.activities.NewCalfVaccineSelectionActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileMedicalHistoryActivity" />
-        android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.calftracker.project.activities.VaccineActivity" />
         <activity android:name="com.calftracker.project.activities.EditMedicineActivity" />
         <activity android:name="com.calftracker.project.activities.EditVaccineActivity" />
@@ -50,12 +45,10 @@
         <activity android:name="com.calftracker.project.activities.EditMedicineProfileActivity" />
         <activity
             android:name="com.calftracker.project.activities.EditIllnessProfileActivity"
-            android:label="@string/title_activity_edit_illness_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_edit_illness_profile" />
         <activity
             android:name="com.calftracker.project.activities.EditIllnessProfileMedicineSelectionActivity"
-            android:label="@string/title_activity_edit_illness_profile_medicine_selection"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_edit_illness_profile_medicine_selection"></activity>
         <activity android:name="com.calftracker.project.activities.SettingsActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity" />
