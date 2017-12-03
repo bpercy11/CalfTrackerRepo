@@ -194,6 +194,15 @@
     <string name="insights_title">Insights</string>
 
     <string name="settings_title">Settings</string>
-    <string name="settings_switch_english">Switch to Engligh</string>
-    <string name="settings_switch_spanish">Cambiar a Español</string>
+    <string name="settings_switch_english">Switch language to English</string>
+    <string name="settings_switch_spanish">Cambiar el idioma al Español</string>
+    <string name="settings_employee_name">Name</string>
+    <string name="settings_employee_id">ID</string>
+    <string name="settings_employee_position">Position</string>
+    <string name="settings_employee_enter_name">Enter Name</string>
+    <string name="settings_employee_enter_id">Enter ID</string>
+    <string name="settings_employee_enter_position">Enter Position</string>
+    <string name="settings_employee_no_name">No Name Entered</string>
+    <string name="settings_employee_no_id">No ID Entered</string>
+    <string name="settings_employee_no_position">No Position Entered</string>
 </resources>

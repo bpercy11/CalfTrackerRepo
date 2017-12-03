@@ -20,6 +20,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
 
     private EditText name;
     private EditText id;
+    private EditText position;
     private Button addEmployeeButton;
     private ArrayList<Employee> employeeList;
 
@@ -33,6 +34,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.addEmployeeNameText);
         id = findViewById(R.id.addEmployeeIDText);
+        position = findViewById(R.id.addEmployeePositionText);
         addEmployeeButton = (Button) findViewById(R.id.settingsAddEmployeeAcceptBtn);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -55,7 +57,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
                 if(name.getText().toString().equals("")){
                     requirementsNotMet = true;
                 } else {
-                    Employee emp = new Employee(name.getText().toString());
+                    Employee emp = new Employee(name.getText().toString(), id.getText().toString(), position.getText().toString());
                     employeeList.add(emp);
                 }
 

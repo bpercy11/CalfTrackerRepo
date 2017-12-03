@@ -102,12 +102,10 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
 
         Intent intent = new Intent(EditIllnessProfileActivity.this, EditIllnessProfileMedicineSelectionActivity.class);
         startActivity(intent);
-
     }
 
     public void cancelEditedIllnessButton(View view){
         Intent intent = new Intent(EditIllnessProfileActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
-
 }
