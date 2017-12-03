@@ -45,7 +45,7 @@ public class DashboardActivity extends BaseActivity {
         retrieveData();
 
         TextView mFarmName = (TextView) findViewById(R.id.textViewFarmNameDashboard);
-        mFarmName.setText(farm.getName());
+        mFarmName.setText("TestFarm");
 
         DashboardGridAdapter adapter = new DashboardGridAdapter(DashboardActivity.this, dashboard_items, imageId);
         grid=(GridView)findViewById(R.id.grid);
