@@ -180,9 +180,9 @@ public class CalfProfileActivity extends AppCompatActivity {
         String farmID = calf.getFarmId();
         mIDValue.setText(farmID);
         mGenderValue.setText(calf.getGender());
-        int year = calf.getDateOfBirth().get(Calendar.YEAR);
-        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+        int year = calf.makeCalendarDOB().get(Calendar.YEAR);
+        int month = calf.makeCalendarDOB().get(Calendar.MONTH) + 1;
+        int day = calf.makeCalendarDOB().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
         if (calf.getSire().getId() != null) {mSireValue.setText(calf.getSire().getId());}
         if (calf.getSire().getName() != null) { mSireNameValue.setText(calf.getSire().getName()); }
@@ -417,7 +417,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = month + "/" + day + "/" + year;
                 mDOBValue.setText(date);
-                tempCalf.setDateOfBirth(tempDOB);
+                tempCalf.placeCalendarDOB(tempDOB);
             }
         };
 

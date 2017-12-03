@@ -133,13 +133,13 @@ public class Task {
         Calendar today = Calendar.getInstance();
 
         Calendar vaccStart = Calendar.getInstance();
-        vaccStart.setTimeZone(calf.getDateOfBirth().getTimeZone());
-        vaccStart.setTimeInMillis(calf.getDateOfBirth().getTimeInMillis());
+        vaccStart.setTimeZone(calf.makeCalendarDOB().getTimeZone());
+        vaccStart.setTimeInMillis(calf.makeCalendarDOB().getTimeInMillis());
         vaccStart.add(Calendar.DATE, vaccine.getToBeAdministered().get(0).getSpan()[0]);
 
         Calendar vaccEnd = Calendar.getInstance();
-        vaccEnd.setTimeZone(calf.getDateOfBirth().getTimeZone());
-        vaccEnd.setTimeInMillis(calf.getDateOfBirth().getTimeInMillis());
+        vaccEnd.setTimeZone(calf.makeCalendarDOB().getTimeZone());
+        vaccEnd.setTimeInMillis(calf.makeCalendarDOB().getTimeInMillis());
         vaccEnd.add(Calendar.DATE, vaccine.getToBeAdministered().get(0).getSpan()[1]);
 
         long daysBetweenEnd = calendarDaysBetween(today, vaccEnd);

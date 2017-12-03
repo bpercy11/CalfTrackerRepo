@@ -99,20 +99,7 @@ public class EditIllnessActivity extends AppCompatActivity {
         }
 
         // save the illness name/notes to local storage
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.serializeNulls();
-        Gson gson = gsonBuilder.create();
-        String json;
-
-        json = gson.toJson(illnessName.getText().toString());
-        prefsEditor.putString("thisIllnessName", json);
-        prefsEditor.apply();
-
-        json = gson.toJson(illnessNotes);
-        prefsEditor.putString("illnessNotes", json);
-        prefsEditor.apply();
+        saveData();
 
         Intent intent = new Intent(this, AddIllnessMedicineSelectionActivity.class);
         startActivity(intent);
@@ -122,6 +109,23 @@ public class EditIllnessActivity extends AppCompatActivity {
     public void clickEditIllnessCancelButton(View view){
         Intent intent = new Intent(EditIllnessActivity.this, IllnessActivity.class);
         startActivity(intent);
+    }
+
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.serializeNulls();
+        Gson gson = gsonBuilder.create();
+        String json;
+
+        json = gson.toJson(illnessNameStr);
+        prefsEditor.putString("thisIllnessName", json);
+        prefsEditor.apply();
+
+        json = gson.toJson(illnessNotes);
+        prefsEditor.putString("illnessNotes", json);
+        prefsEditor.apply();
     }
 }
 
