@@ -80,18 +80,18 @@ public class VaccineProfileActivity extends AppCompatActivity {
         if (range[0] % 7 == 0 && range[1] % 7 == 0) {
             range[0] = range[0]/7;
             range[1] = range[1]/7;
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Weeks");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Weeks");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " weeks");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " weeks");
         }
         else if(range[0] % 30 == 0 && range[1] % 30 == 0){
             range[0] = range[0]/30;
             range[1] = range[1]/30;
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Months");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Months");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " months");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " months");
         }
         else{
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Days");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Days");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " days");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " days");
         }
 
         //Setting Data with correct vaccine information

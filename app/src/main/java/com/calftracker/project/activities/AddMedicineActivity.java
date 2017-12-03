@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMedicineActivity extends AppCompatActivity {
+public class AddMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private EditText medicineName;
@@ -35,7 +35,7 @@ public class EditMedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_medicine);
+        setContentView(R.layout.activity_add_medicine);
 
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_medicine_add);
@@ -64,12 +64,12 @@ public class EditMedicineActivity extends AppCompatActivity {
                 || dosage.getText().toString().matches("")
                 || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
-            Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(AddMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else {
-            Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
+            Toast.makeText(AddMedicineActivity.this, R.string.add_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -98,7 +98,7 @@ public class EditMedicineActivity extends AppCompatActivity {
     }
 
     public void clickCancelButton(View view){
-        Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(AddMedicineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
 

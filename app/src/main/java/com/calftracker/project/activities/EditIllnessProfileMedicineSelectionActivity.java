@@ -35,6 +35,8 @@ public class EditIllnessProfileMedicineSelectionActivity extends AppCompatActivi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_illness_profile_medicine_selection);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.title_activity_edit_illness_profile_medicine_selection);
 
         ListView lv = (ListView) findViewById(R.id.medicineSelectionEditIllness_listView);
         Button confirmButton = (Button) findViewById(R.id.medicineSelectionEditIllness_confirmButton);

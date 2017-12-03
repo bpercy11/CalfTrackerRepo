@@ -82,7 +82,7 @@ public class VaccineActivity extends BaseActivity {
     }
 
     public void onVaccine_AddVaccineButtonClick(View view){
-        Intent intent = new Intent(VaccineActivity.this, EditVaccineActivity.class);
+        Intent intent = new Intent(VaccineActivity.this, AddVaccineActivity.class);
         startActivity(intent);
     }
 

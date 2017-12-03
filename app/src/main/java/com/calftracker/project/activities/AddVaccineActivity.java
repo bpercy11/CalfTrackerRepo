@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class EditVaccineActivity extends AppCompatActivity {
+public class AddVaccineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private TextView vaccineName;
@@ -42,7 +42,7 @@ public class EditVaccineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_vaccine);
+        setContentView(R.layout.activity_add_vaccine);
 
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_vaccine_add);
@@ -116,17 +116,17 @@ public class EditVaccineActivity extends AppCompatActivity {
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
                 || adminMethod.getText().toString().matches("")){
-            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(AddVaccineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else if(adminEndInt <= adminStartInt){
-            Toast.makeText(EditVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
+            Toast.makeText(AddVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else{
-            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+            Toast.makeText(AddVaccineActivity.this, R.string.vaccine_successful,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -154,7 +154,7 @@ public class EditVaccineActivity extends AppCompatActivity {
     }
 
     public void clickCancelVaccineButton(View view){
-        Intent intent = new Intent(EditVaccineActivity.this,VaccineActivity.class);
+        Intent intent = new Intent(AddVaccineActivity.this,VaccineActivity.class);
         startActivity(intent);
     }
 

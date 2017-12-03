@@ -36,7 +36,7 @@ public class EditVaccineProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_vaccine);
+        setContentView(R.layout.activity_add_vaccine);
 
         // Custom title
         getSupportActionBar().setTitle(R.string.edit_vaccine_edit_vaccine);

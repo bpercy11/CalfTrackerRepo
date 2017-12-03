@@ -28,11 +28,11 @@
         <activity android:name="com.calftracker.project.activities.NewCalfVaccineSelectionActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileMedicalHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.VaccineActivity" />
-        <activity android:name="com.calftracker.project.activities.EditMedicineActivity" />
-        <activity android:name="com.calftracker.project.activities.EditVaccineActivity" />
+        <activity android:name="com.calftracker.project.activities.AddMedicineActivity" />
+        <activity android:name="com.calftracker.project.activities.AddVaccineActivity" />
         <activity android:name="com.calftracker.project.activities.MedicineActivity" />
         <activity android:name="com.calftracker.project.activities.IllnessActivity" />
-        <activity android:name="com.calftracker.project.activities.EditIllnessActivity" />
+        <activity android:name="com.calftracker.project.activities.AddIllnessActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.TasksActivity" />
         <activity android:name="com.calftracker.project.activities.TaskDetailsActivity" />

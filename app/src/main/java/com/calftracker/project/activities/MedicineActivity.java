@@ -78,7 +78,7 @@ public class MedicineActivity extends BaseActivity {
         startActivity(intent);
     }
     public void onMedicine_AddMedicineButtonClick(View view){
-        Intent intent = new Intent(MedicineActivity.this, EditMedicineActivity.class);
+        Intent intent = new Intent(MedicineActivity.this, AddMedicineActivity.class);
         startActivity(intent);
     }
     @Override

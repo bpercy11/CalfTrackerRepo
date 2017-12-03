@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="addEditedIllnessButton"
-                android:text="Apply"
+                android:text="Next"
                 app:layout_constraintBottom_toBottomOf="@+id/editIllness_buttonCancel"
                 app:layout_constraintStart_toStartOf="@+id/vertical55percent"
                 app:layout_constraintTop_toTopOf="@+id/editIllness_buttonCancel" />

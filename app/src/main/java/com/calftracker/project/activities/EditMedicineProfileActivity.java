@@ -38,7 +38,7 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_medicine);
+        setContentView(R.layout.activity_add_medicine);
 
         // Custom title
         getSupportActionBar().setTitle(R.string.edit_medicine);

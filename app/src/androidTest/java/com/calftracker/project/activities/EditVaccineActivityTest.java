@@ -33,8 +33,8 @@ public class EditVaccineActivityTest {
 
 
     @Rule
-    public ActivityTestRule<EditVaccineActivity> mActivityTestRule = new ActivityTestRule(EditVaccineActivity.class);
-    private EditVaccineActivity mActivity = null;
+    public ActivityTestRule<AddVaccineActivity> mActivityTestRule = new ActivityTestRule(AddVaccineActivity.class);
+    private AddVaccineActivity mActivity = null;
 
     @Before
     public void setUp() throws Exception {

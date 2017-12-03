@@ -33,7 +33,7 @@
     <string name="calf_profile_create_note_button">Add Note</string>
     <string name="calf_profile_cancel_button">Cancel</string>
     <string name="calf_profile_apply_button">Apply</string>
-    <string name="calf_profile_delete_button">Remove Calf</string>
+    <string name="calf_profile_delete_button">Delete Calf</string>
     <string name="calf_profile_record_weight_button">Record Weight</string>
     <string name="calf_profile_record_height_button">Record Height</string>
     <string name="calf_profile_no_sire">No Record</string>
@@ -131,6 +131,7 @@
     <string name="EditIllness_illnessName">Illness Name</string>
     <string name="EditIllness_TreatmentProtocol">Treatment Protocol</string>
     <string name="EditIllness_cancelButton">Cancel</string>
+    <string name="EditIllness_nextButton">Next</string>
     <string name="EditIllness_AddButton">Add</string>
     <string name="EditIllnessActivity_emptyFieldMsg">Please enter illness name</string>
     <string name="EditIllness_notes">Please enter notes for your Treatment Protocol.</string>
@@ -180,16 +181,12 @@
         <item>Week</item>
         <item>Month</item>
     </string-array>
-    <string name="title_activity_add_illness_medicine_selection">
-        AddIllnessMedicineSelectionActivity
-    </string>
+    <string name="title_activity_add_illness_medicine_selection">Add Medicines</string>
     <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines</string>
     <string name="IllnessProfile_EditButtonName">Edit</string>
-    <string name="IllnessProfile_RemoveButtonName">Remove</string>
+    <string name="IllnessProfile_RemoveButtonName">Delete Illness</string>
     <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity</string>
-    <string name="title_activity_edit_illness_profile_medicine_selection">
-        EditIllnessProfileMedicineSelectionActivity
-    </string>
+    <string name="title_activity_edit_illness_profile_medicine_selection">Edit Medicines</string>
 
     <string name="insights_title">Insights</string>
 
