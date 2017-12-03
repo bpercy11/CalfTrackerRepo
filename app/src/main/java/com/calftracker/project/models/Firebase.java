@@ -184,6 +184,25 @@ public class Firebase extends Application {
     }
 
 
+    public void calfListStuff(ArrayList<Calf> calfList){
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("CalfListTest").setValue(calfList);
+
+        Map<String, String> calfMap = new HashMap<>();
+        //Map<String, Calf> calfMap = new HashMap<>();
+
+        for(int i = 0; i < calfList.size(); i++){
+            if(calfList.get(i).isActive()){
+                calfMap.put(Integer.toString(i), calfList.get(i).getFarmId());
+            }
+
+        }
+
+        mDatabase.child("CalfIdList").setValue(calfMap);
+
+    }
+
 
 
 
