@@ -25,15 +25,27 @@ public class SettingsActivity extends BaseActivity {
 
         Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
-        Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
-        Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
+        //Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
+        //Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
+        final Button languageButton = (Button) findViewById(R.id.languageButton);
+
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+            public void onClick(View v){
+                if (languageButton.getText().equals(getString(R.string.settings_switch_english))) {
+                    languageButton.setText(R.string.settings_switch_spanish);
+                }
+                else if (languageButton.getText().equals(getString(R.string.settings_switch_spanish))) {
+                    languageButton.setText(R.string.settings_switch_english);
+                }
+            }
+        });
 
         editFarmButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
                 intent = new Intent(SettingsActivity.this, SettingsEditFarmActivity.class);
                 startActivity(intent);
-
             }
         });
 
@@ -46,7 +58,7 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
-        englishButton.setOnClickListener(new View.OnClickListener(){
+        /*englishButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
 
@@ -59,10 +71,7 @@ public class SettingsActivity extends BaseActivity {
             public void onClick(View v){
                 setLocale("es");
             }
-        });
-
-
-
+        });*/
 
         //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         //Map<String, ?> allEntries = mPrefs.getAll();

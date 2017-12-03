@@ -3,12 +3,12 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.KeyListener;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
@@ -29,9 +29,9 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
 
         // Stylize action bar to use back button and custom title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Edit Farm");
+        getSupportActionBar().setTitle("Farm Information");
 
-        Button editFieldsButton = (Button) findViewById(R.id.EditFarmEditFieldsBtn);
+        FloatingActionButton editFieldsButton = (FloatingActionButton) findViewById(R.id.EditFarmEditFieldsBtn);
 
         //populateFields();
         farmName = (TextView) findViewById(R.id.settingsFarmNameText);

@@ -3,18 +3,14 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;
-import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,6 +27,9 @@ public class SettingsAddEmployee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_add_employee);
+
+        // Custom title
+        getSupportActionBar().setTitle("Add Employee");
 
         name = (EditText) findViewById(R.id.addEmployeeNameText);
         id = findViewById(R.id.addEmployeeIDText);
@@ -60,8 +59,6 @@ public class SettingsAddEmployee extends AppCompatActivity {
                     employeeList.add(emp);
                 }
 
-                //dialogBox();
-
                 if(!requirementsNotMet) {
                     SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -72,19 +69,18 @@ public class SettingsAddEmployee extends AppCompatActivity {
 
                     back();
                 }
-
-
             }
         });
+    }
 
-
+    public void clickCancelEmployeeButton(View view){
+        Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
+        startActivity(intent);
     }
 
     private void back() {
-
         Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
         finish();
         startActivity(intent);
-
     }
 }

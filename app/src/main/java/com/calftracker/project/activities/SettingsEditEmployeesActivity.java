@@ -38,7 +38,7 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
 
         // Stylize action bar to use back button and custom title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Edit Employees");
+        getSupportActionBar().setTitle("Employees List");
 
         Button addEmployeeButton = (Button) findViewById(R.id.addEmployeeBtn);
         mListView = (ListView) findViewById(R.id.employeesList);

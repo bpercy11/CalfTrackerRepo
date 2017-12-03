@@ -194,4 +194,6 @@
     <string name="insights_title">Insights</string>
 
     <string name="settings_title">Settings</string>
+    <string name="settings_switch_english">Switch to Engligh</string>
+    <string name="settings_switch_spanish">Cambiar a Español</string>
 </resources>

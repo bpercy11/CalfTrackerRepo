@@ -3,14 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 
 public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
@@ -25,11 +24,12 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_change_farm_info);
         Button saveFieldsButton = (Button) findViewById(R.id.EditFarmSaveFieldsBtn);
 
+        getSupportActionBar().setTitle("Edit Farm Information");
+
         //farmNameChangeText
         farmName = (TextView) findViewById(R.id.farmNameChangeText);
         farmOwner = (TextView) findViewById(R.id.farmOwnerChangeText);
         farmLocation = (TextView) findViewById(R.id.farmLocationChangeText);
-
 
         saveFieldsButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
@@ -46,7 +46,6 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
                 if(farmLocation.getText().toString().equals("")) {
                     requirementsNotMet = true;
                 }
-
 
                 if(!requirementsNotMet) {
                     SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -66,27 +65,23 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
                     back();
                 }
-
-
-
-
             }
         });
-
-
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,SettingsEditFarmActivity.class);
+        Intent intent = new Intent(this, SettingsEditFarmActivity.class);
         startActivity(intent);
     }
 
     public void back(){
-        Intent intent;
-        intent = new Intent(SettingsChangeFarmInfoActivity.this, SettingsEditFarmActivity.class);
+        Intent intent = new Intent(this, SettingsEditFarmActivity.class);
         startActivity(intent);
     }
 
-
+    public void clickCancelFarmButton(View view){
+        Intent intent = new Intent(this, SettingsEditFarmActivity.class);
+        startActivity(intent);
+    }
 }
