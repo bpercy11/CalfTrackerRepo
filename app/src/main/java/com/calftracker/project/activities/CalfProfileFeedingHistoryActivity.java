@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -124,7 +123,7 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(dialogView)
                         // Add action buttons
-                        .setPositiveButton("Set Feeding", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 EditText mLiters = (EditText) dialogView.findViewById(R.id.editTextLitersDialog);
