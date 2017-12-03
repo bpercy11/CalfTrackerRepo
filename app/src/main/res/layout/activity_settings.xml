@@ -40,32 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsFarmButton" />
 
-    <!--<Button
-        android:id="@+id/settingsEnglishButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="Switch to English"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/settingsSpanishButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsEmployeeButton" />
-
-    <Button
-        android:id="@+id/settingsSpanishButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:text="Switch to Espanol"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/settingsEnglishButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settingsEnglishButton"
-        app:layout_constraintTop_toTopOf="@+id/settingsEnglishButton" />-->
-
     <Button
         android:id="@+id/languageButton"
         android:layout_width="wrap_content"

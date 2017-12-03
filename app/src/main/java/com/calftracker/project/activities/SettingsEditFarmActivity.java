@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class SettingsEditFarmActivity extends AppCompatActivity {
 
@@ -20,7 +22,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
     private TextView farmName;
     private TextView farmOwner;
     private TextView farmLocation;
-
+    private Farm farm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,6 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
 
         FloatingActionButton editFieldsButton = (FloatingActionButton) findViewById(R.id.EditFarmEditFieldsBtn);
 
-        //populateFields();
         farmName = (TextView) findViewById(R.id.settingsFarmNameText);
         farmOwner = (TextView) findViewById(R.id.settingsFarmOwnerText);
         farmLocation = (TextView) findViewById(R.id.settingsFarmLocationText);
@@ -44,31 +45,21 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
         mKeyListener = farmLocation.getKeyListener();
         farmLocation.setKeyListener(null);
 
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        //String json;
-        //json = mPreferences.getString("farmName","");
 
-        //Populates the fields entered when creating farm on first use
-        if(mPreferences.contains("farmName")){
-            String name = mPreferences.getString("farmName","Farm Name not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
-            farmName.setHint(name);
+        //Load clicked Employee
+        if(mPreferences.contains("Farm")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("Farm", "");
+            farm = gson.fromJson(json, new TypeToken<Farm>() {
+            }.getType());
         }
-        if(mPreferences.contains("farmOwner")){
-            String name = mPreferences.getString("farmOwner","Farm Owner not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
-            farmOwner.setHint(name);
-        }
-        if(mPreferences.contains("farmLocation")){
-            String name = mPreferences.getString("farmLocation","Farm Location not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
-            farmLocation.setHint(name);
-        }
+
+        farmName.setText(farm.getName());
+        farmOwner.setText(farm.getOwner());
+        farmLocation.setText(farm.getLocation());
 
         editFieldsButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
@@ -77,15 +68,6 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-    }
-
-    /**
-     * function to populate fields entered when farm is created
-     */
-    private void populateFields(){
-
     }
 
     @Override
