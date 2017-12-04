@@ -201,7 +201,34 @@ public class Firebase extends Application {
 
         mDatabase.child("CalfIdList").setValue(calfMap);
 
+
+
     }
+
+    public void readFirebase(String val){
+
+        final String strVal = val;
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map =  (Map<String,Object>) dataSnapshot.getValue();
+
+               returnObj(map.get(strVal));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public Object returnObj(Object obj){ return obj; }
 
 
 
