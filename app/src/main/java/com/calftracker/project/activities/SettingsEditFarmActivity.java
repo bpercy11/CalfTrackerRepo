@@ -45,6 +45,26 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
         farmLocation.setKeyListener(null);
 
 
+        retrieveData();
+
+        editFieldsButton.setOnClickListener(new View.OnClickListener(){
+            Intent intent;
+            public void onClick(View v){
+                intent = new Intent(SettingsEditFarmActivity.this, SettingsChangeFarmInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         //String json;
@@ -69,16 +89,6 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
             name = name.substring(1, end-1);
             farmLocation.setHint(name);
         }
-
-        editFieldsButton.setOnClickListener(new View.OnClickListener(){
-            Intent intent;
-            public void onClick(View v){
-                intent = new Intent(SettingsEditFarmActivity.this, SettingsChangeFarmInfoActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     /**

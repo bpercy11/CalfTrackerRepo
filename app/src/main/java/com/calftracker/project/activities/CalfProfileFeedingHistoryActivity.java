@@ -248,6 +248,17 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         });
     }
 
+    // TODO
+    public void saveData() {
+        // Save the calfList to local storage
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
     public void retrieveData() {
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -265,16 +276,6 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
             employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
             }.getType());
         } else { employeeArrayList = new ArrayList<Employee>(); }
-    }
-
-    public void saveData() {
-        // Save the calfList to local storage
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
     }
 
     @Override

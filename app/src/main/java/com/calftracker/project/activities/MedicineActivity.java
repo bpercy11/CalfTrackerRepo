@@ -34,15 +34,7 @@ public class MedicineActivity extends BaseActivity {
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_title);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("MedicineList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("MedicineList", "");
-            medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
-            }.getType());
-        } else { medicineList = new ArrayList<Medicine>(); }
+        retrieveData();
 
         lvMedicine = (ListView)findViewById(R.id.listview_medicine);
         mAdapter = new MedicineAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,medicineList);
@@ -64,6 +56,25 @@ public class MedicineActivity extends BaseActivity {
             }
         });
     }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("MedicineList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("MedicineList", "");
+            medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
+            }.getType());
+        } else { medicineList = new ArrayList<Medicine>(); }
+    }
+
     public void onMedicine_VaccineButtonClick(View view) {
         Intent intent = new Intent(MedicineActivity.this,VaccineActivity.class);
         startActivity(intent);

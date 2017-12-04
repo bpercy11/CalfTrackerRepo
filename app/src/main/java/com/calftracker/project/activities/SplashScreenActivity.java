@@ -20,6 +20,8 @@ import java.util.Calendar;
  * Created by project on 10/31/17.
  */
 public class SplashScreenActivity extends Activity {
+    boolean hasBeenUsed;
+    Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,7 @@ public class SplashScreenActivity extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-
-                    SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
-                    boolean hasBeenUsed = sharedPref.getBoolean("usedApp", false);
-
-                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                    Gson gson = new Gson();
-                    String json;
-                    prefsEditor = mPrefs.edit();
+                    retrieveData();
 
                     ArrayList<Calf> emptyCalfList = new ArrayList<>();
                     ArrayList<ArrayList<VaccineTask>> emptyTaskList = new ArrayList<ArrayList<VaccineTask>>();
@@ -62,19 +56,12 @@ public class SplashScreenActivity extends Activity {
                         emptyIllnessTaskList.add(new ArrayList<IllnessTask>());
                     }
 
-                    Task task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList, emptyIllnessTaskList);
+                    task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList, emptyIllnessTaskList);
 
                     if(!hasBeenUsed) {
                         Intent intent = new Intent(SplashScreenActivity.this, CreateFarmActivity.class);
 
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putBoolean("usedApp", true);
-                        editor.commit();
-
-                        // Save the initial Task Object to system
-                        json = gson.toJson(task);
-                        prefsEditor.putString("Task",json);
-                        prefsEditor.apply();
+                        saveData();
 
                         startActivity(intent);
                     }else{
@@ -88,7 +75,27 @@ public class SplashScreenActivity extends Activity {
         timerThread.start();
     }
 
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json;
+        prefsEditor = mPrefs.edit();
 
+        prefsEditor.putBoolean("usedApp", true);
+        prefsEditor.commit();
+
+        // Save the initial Task Object to system
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        hasBeenUsed = mPrefs.getBoolean("usedApp", false);
+    }
 
     @Override
     protected void onPause() {

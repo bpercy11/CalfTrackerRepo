@@ -36,16 +36,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
         id = findViewById(R.id.addEmployeeIDText);
         addEmployeeButton = (Button) findViewById(R.id.settingsAddEmployeeAcceptBtn);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-        Gson gson = new Gson();
-        String json;
-
-        if(mPreferences.contains("EmployeeList")) {
-            json = mPreferences.getString("EmployeeList", "");
-            employeeList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
-            }.getType());
-        } else { employeeList = new ArrayList<Employee>(); }
+        retrieveData();
 
 
         addEmployeeButton.setOnClickListener(new View.OnClickListener(){
@@ -63,12 +54,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
                 //dialogBox();
 
                 if(!requirementsNotMet) {
-                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                    Gson gson = new Gson();
-                    String json = gson.toJson(employeeList);
-                    prefsEditor.putString("EmployeeList",json);
-                    prefsEditor.apply();
+                    saveData();
 
                     back();
                 }
@@ -78,6 +64,29 @@ public class SettingsAddEmployee extends AppCompatActivity {
         });
 
 
+    }
+
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(employeeList);
+        prefsEditor.putString("EmployeeList",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        Gson gson = new Gson();
+        String json;
+
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeList = new ArrayList<Employee>(); }
     }
 
     private void back() {

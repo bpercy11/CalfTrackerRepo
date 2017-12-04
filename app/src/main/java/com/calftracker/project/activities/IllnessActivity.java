@@ -33,15 +33,7 @@ public class IllnessActivity extends BaseActivity {
         // Custom title
         getSupportActionBar().setTitle(R.string.protocols_title);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if (mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
-            }.getType());
-        } else { illnessList = new ArrayList<Illness>(); }
+        retrieveData();
 
         lvIllness = (ListView) findViewById(R.id.listview_illness);
         iAdapter = new IllnessAdapter(getApplicationContext(), illnessList);
@@ -62,6 +54,24 @@ public class IllnessActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if (mPreferences.contains("IllnessList")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+            }.getType());
+        } else { illnessList = new ArrayList<Illness>(); }
     }
 
     public void onIllness_MedicineButtonClick(View view) {

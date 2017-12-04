@@ -73,6 +73,12 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
 
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
     public void retrieveData() {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();

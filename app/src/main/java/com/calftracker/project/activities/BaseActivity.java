@@ -93,6 +93,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

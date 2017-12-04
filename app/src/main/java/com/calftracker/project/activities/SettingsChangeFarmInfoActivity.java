@@ -49,20 +49,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
 
                 if(!requirementsNotMet) {
-                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    Gson gson = new Gson();
-                    String json;
-
-                    json = gson.toJson(farmName.getText().toString());
-                    editor.putString("farmName", json);
-
-                    json = gson.toJson(farmOwner.getText().toString());
-                    editor.putString("farmOwner", json);
-
-                    json = gson.toJson(farmLocation.getText().toString());
-                    editor.putString("farmLocation", json);
-                    editor.apply();
+                    saveData();
 
                     back();
                 }
@@ -74,6 +61,30 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    // TODO
+    public void saveData() {
+        SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json;
+
+        json = gson.toJson(farmName.getText().toString());
+        editor.putString("farmName", json);
+
+        json = gson.toJson(farmOwner.getText().toString());
+        editor.putString("farmOwner", json);
+
+        json = gson.toJson(farmLocation.getText().toString());
+        editor.putString("farmLocation", json);
+        editor.apply();
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS METHOD (AS OF RIGHT NOW)
+        // TODO: farm data needs to be retrieved to show user what the current farm information is
     }
 
     @Override

@@ -254,6 +254,16 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     }
 
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
     public void retrieveData() {
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -262,15 +272,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = mPreferences.getString("CalfList","");
         calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
-    }
-
-    public void saveData() {
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
     }
 
     public void updateNoteListView(Calf calf) {
