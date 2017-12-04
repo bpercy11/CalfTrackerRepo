@@ -93,22 +93,6 @@ public class IllnessProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onIllnessProfile_RemoveButton(View view){
-
-        illnessList.remove(illnessPosition);
-
-        //Save updated IllnessList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
-        prefsEditor.apply();
-
-        Intent intent = new Intent(IllnessProfileActivity.this,IllnessActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, IllnessActivity.class);

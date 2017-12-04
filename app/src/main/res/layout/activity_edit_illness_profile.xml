@@ -110,13 +110,29 @@
                 android:id="@+id/editIllness_buttonCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
                 android:layout_marginTop="50dp"
                 android:onClick="cancelEditedIllnessButton"
                 android:text="Cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
                 app:layout_constraintTop_toBottomOf="@+id/editIllnessProfile_enterNotes" />
+
+            <Button
+                android:id="@+id/illness_profile_removeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/colorPrimaryDark"
+                android:onClick="onIllnessProfile_RemoveButton"
+                android:text="@string/IllnessProfile_RemoveButtonName"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editIllness_buttonCancel" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

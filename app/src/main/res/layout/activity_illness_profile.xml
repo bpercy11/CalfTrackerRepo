@@ -125,23 +125,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/illness_profile_notes" />
 
-            <Button
-                android:id="@+id/illness_profile_removeButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="50dp"
-                android:background="@color/colorPrimaryDark"
-                android:onClick="onIllnessProfile_RemoveButton"
-                android:text="@string/IllnessProfile_RemoveButtonName"
-                android:textColor="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/illness_profile_notesData" />
-
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

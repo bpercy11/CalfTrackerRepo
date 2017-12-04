@@ -105,22 +105,6 @@ public class VaccineProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onVProfile_removeButton(View view){
-
-        vaccineList.remove(vaccinePosition);
-
-        //Save Updated VaccineList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(vaccineList);
-        prefsEditor.putString("VaccineList",json);
-        prefsEditor.apply();
-
-        Intent intent = new Intent(VaccineProfileActivity.this,VaccineActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, VaccineActivity.class);

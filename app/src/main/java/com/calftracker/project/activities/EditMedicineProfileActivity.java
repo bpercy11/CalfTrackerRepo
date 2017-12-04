@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class EditMedicineProfileActivity extends AppCompatActivity {
 
+    private ConstraintLayout mConstraintLayout;
     private Medicine medicine;
     private AlertDialog alertDialog;
     private EditText medicineName;
@@ -82,7 +86,17 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.edit_medicine_buttonAdd)).setText("Apply");
 
+        // Show "Delete" button
+        ((Button) findViewById(R.id.medicine_profile_removeButton)).setVisibility(View.VISIBLE);
+
+        // Rearrange buttons
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.add_medicine_layout);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.clear(R.id.edit_medicine_buttonCancel, ConstraintSet.BOTTOM);
+        set.applyTo(mConstraintLayout);
     }
+
     public void clickAddMedicineButton(View view){
 
         medicineList.remove(medicinePosition);
@@ -174,6 +188,37 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
 
     public void clickCancelButton(View view){
         Intent intent = new Intent(EditMedicineProfileActivity.this, MedicineActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void onMProfile_removeButton(View view){
+        medicineList.remove(medicinePosition);
+
+        //Save updated medicineList
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(medicineList);
+        prefsEditor.putString("MedicineList",json);
+        prefsEditor.apply();
+
+        // if this medicine is removed, make sure that no treatment protocol calls for this
+        Illness tempIllness;
+        ArrayList<Illness> illnessList;
+
+        json = mPrefs.getString("IllnessList", "");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+        }.getType());
+
+        for (int i = 0; i < illnessList.size(); i++){
+            tempIllness = illnessList.get(i);
+            if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
+                tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
+            }
+        }
+
+        Intent intent = new Intent(EditMedicineProfileActivity.this,MedicineActivity.class);
         startActivity(intent);
     }
 }
