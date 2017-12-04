@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.Semaphore;
+
 import android.util.Log;
 import com.calftracker.project.models.Calf;
 
@@ -25,10 +27,12 @@ import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Farm;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -39,15 +43,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 /**
  * Created by BrendonLapp on 11/19/17.
  */
 
-public class Firebase extends Application {
+
+
+public class Firebase extends Application{
 
     private SharedPreferences.Editor editor;
     private String firebaseTime = "";
     private String prefTime = "";
+    private ArrayList<Employee> rObj = null;
 
     private DatabaseReference mDatabase;
 
@@ -120,10 +128,12 @@ public class Firebase extends Application {
 
     }
 
-    private void prefsToFirebase(){
+    public void prefsToFirebase(){
 
         final SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        Log.d("In", "change");
 
         Map<String, ?> allEntries = mPreferences.getAll();
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
@@ -143,6 +153,10 @@ public class Firebase extends Application {
 
             }
         });
+
+    }
+
+    public void saveToFirebase(String str, Object obj){
 
     }
 
@@ -205,34 +219,72 @@ public class Firebase extends Application {
 
     }
 
-    public void readFirebase(String val){
 
-        final String strVal = val;
+    public void readFirebase(String var){
+
+        final String v = var;
+
+        Log.d("before on data change", "before on data change");
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        mDatabase = mDatabase.child("EmployeeList");
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> map =  (Map<String,Object>) dataSnapshot.getValue();
+                //Map<String, Object> map =  (Map<String,Object>) dataSnapshot.getValue();
 
-               returnObj(map.get(strVal));
+                GenericTypeIndicator<ArrayList<Employee>> t = new GenericTypeIndicator<ArrayList<Employee>>() {};
 
+                ArrayList<Employee> e = dataSnapshot.getValue(t);
+
+                Log.d("In on data change", "in on data change");
+
+                Log.d("data1" , e.toString());
+                //Log.d("data1" , e.getName());
+
+                //ArrayList<Employee> = (ArrayList<Employee>) map.get("EmployeeList");
+
+
+               returnObj(e);
+
+                Log.d("data1" , "after return");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
+        /*
+        while(rObj == null){
+            //Log.d("abcd", "in fb");
+        }
+
+        Log.d("abcd", rObj.toString());
+
+        Object temp = rObj;
+        rObj = null;
+        return temp;
+        */
+        //return null;
 
     }
 
-    public Object returnObj(Object obj){ return obj; }
+    public void returnObj(ArrayList<Employee> obj){
 
+        Log.d("test", "intest");
 
+        rObj = obj;
 
+    }
 
+    public void getObj(){
+        Log.d("data1", rObj.get(0).getName());
+    }
 
 
 }
