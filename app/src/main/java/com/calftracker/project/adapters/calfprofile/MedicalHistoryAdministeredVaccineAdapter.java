@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.MedicalHistoryVaccineMethods;
-import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.Vaccine_With_Date;
 
 import java.util.ArrayList;
@@ -79,9 +78,9 @@ public class MedicalHistoryAdministeredVaccineAdapter extends BaseAdapter {
         }
         Vaccine_With_Date holder = this.vaccines.get(position);
 
-        int year = holder.getDate().get(Calendar.YEAR);
-        int month = holder.getDate().get(Calendar.MONTH) + 1;
-        int day = holder.getDate().get(Calendar.DAY_OF_MONTH);
+        int year = holder.makeDate().get(Calendar.YEAR);
+        int month = holder.makeDate().get(Calendar.MONTH) + 1;
+        int day = holder.makeDate().get(Calendar.DAY_OF_MONTH);
 
         viewHolder.mName.setText(holder.getVaccine().getName());
 

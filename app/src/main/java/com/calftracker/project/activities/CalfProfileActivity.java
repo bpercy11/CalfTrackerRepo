@@ -221,7 +221,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 output.setText(calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
-                Calendar noteDate = calf.getNoteNdx(position).getDateEntered();
+                Calendar noteDate = calf.getNoteNdx(position).makeDateEntered();
                 int year = noteDate.get(Calendar.YEAR);
                 int month = noteDate.get(Calendar.MONTH) + 1;
                 int day = noteDate.get(Calendar.DAY_OF_MONTH);
@@ -818,9 +818,9 @@ public class CalfProfileActivity extends AppCompatActivity {
                 Calendar today = Calendar.getInstance();
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
                 if (!calf.getPhysicalHistory().isEmpty()
-                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
-                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
-                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.DATE)) {
                     if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() != -1) {
                         Context context = getApplicationContext();
                         CharSequence text = "Previous weight recording from this day overwritten";
@@ -880,9 +880,9 @@ public class CalfProfileActivity extends AppCompatActivity {
                 Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
 
                 if (!calf.getPhysicalHistory().isEmpty()
-                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
-                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
-                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
+                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.YEAR)
+                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.MONTH)
+                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).makeDateRecorded().get(Calendar.DATE)) {
                     if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1) {
                         Context context = getApplicationContext();
                         CharSequence text = "Previous height recording from this day overwritten";
