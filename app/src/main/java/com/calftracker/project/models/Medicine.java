@@ -25,6 +25,8 @@ public class Medicine {
 		this.notes = notes;
 	}
 
+	public Medicine(){}
+
 	/**
 	 * @return the name
 	 */

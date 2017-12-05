@@ -24,6 +24,8 @@ public class Physical_Metrics_And_Date {
 		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
 	}
 
+	public Physical_Metrics_And_Date(){}
+
 	public Physical_Metrics_And_Date(Calendar dateRecorded, double height) {
 		super();
 		this.height = height;

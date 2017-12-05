@@ -272,7 +272,7 @@ public class Firebase extends Application{
                 //ArrayList<Employee> = (ArrayList<Employee>) map.get("EmployeeList");
 
 
-                returnObj(e);
+                //returnObj(e);
 
                 Log.d("data1" , "after return");
             }
@@ -283,8 +283,6 @@ public class Firebase extends Application{
             }
 
         });
-
-
     }
 
     public void saveData(String str, Object o){
@@ -292,18 +290,39 @@ public class Firebase extends Application{
         mDatabase.child(str).setValue(o);
     }
 
-    public ArrayList<Employee> returnObj(ArrayList<Employee> obj){
+    public void setDataChangeListeners(){
 
-        Log.d("test", "intest");
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        rObj = obj;
-        return rObj;
+        mDatabase = mDatabase.child("CalfList");
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<ArrayList<Calf>> t = new GenericTypeIndicator<ArrayList<Calf>>() {};
+                ArrayList<Calf> calfList = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(calfList);
+                prefsEditor.putString("CalfList",json);
+                prefsEditor.apply();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
-    public void getObj(){
-        Log.d("data1", rObj.get(0).getName());
-    }
 
 
 }

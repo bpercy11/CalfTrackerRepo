@@ -25,6 +25,8 @@ public class Calf_Illness
 		this.day = dateDiagnosed.get(Calendar.DAY_OF_MONTH);
 	}
 
+	public Calf_Illness(){}
+
 	public int getYear() {
 		return year;
 	}

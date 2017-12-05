@@ -1,4 +1,6 @@
 package com.calftracker.project.models;
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -23,7 +25,9 @@ public class Calf {
 	private int calfyear;
 	private int calfmonth;
 	private int calfday;
-	
+
+	public Calf(){}
+
 	/**
 	 * @param farmId
 	 * @param internalId
@@ -289,6 +293,7 @@ public class Calf {
 	/**
 	 * @return the feedingHistory
 	 */
+	@Exclude
 	public Feeding[] getFeedingHistory() {
 		return feedingHistory;
 	}

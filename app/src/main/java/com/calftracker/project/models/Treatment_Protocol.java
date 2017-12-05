@@ -18,6 +18,8 @@ public class Treatment_Protocol {
 		this.medicines = medicines;
 		this.notes = notes;
 	}
+
+	public Treatment_Protocol(){}
 	
 	/**
 	 * @return the medicines
