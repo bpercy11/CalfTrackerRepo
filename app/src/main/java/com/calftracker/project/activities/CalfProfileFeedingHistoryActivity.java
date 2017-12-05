@@ -24,6 +24,7 @@ import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;
 import com.calftracker.project.models.Feeding;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -257,6 +258,9 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         String json = gson.toJson(calfList);
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("CalfList", calfList);
     }
 
     public void retrieveData() {

@@ -18,8 +18,9 @@ public class Vacc_Range
 	public Vacc_Range(int[] span) {
 		super();
 		this.span = span;
+		spanArrayList = new ArrayList<Integer>();
 		for(int i = 0; i < span.length; i++){
-			spanArrayList.set(i, span[i]);
+			spanArrayList.add(span[i]);
 		}
 	}
 

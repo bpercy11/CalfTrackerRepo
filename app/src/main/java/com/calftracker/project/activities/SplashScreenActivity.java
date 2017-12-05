@@ -41,6 +41,15 @@ public class SplashScreenActivity extends Activity {
         //editor.putBoolean("usedApp", false);
         //editor.commit();
 
+        ArrayList<Integer> i = new ArrayList<Integer>();
+        i.add(12);
+        i.add(1234);
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("testSaveData", i);
+
+        fb.saveData("testString", "testString");
+
         Thread timerThread = new Thread(){
             public void run(){
                 try{
