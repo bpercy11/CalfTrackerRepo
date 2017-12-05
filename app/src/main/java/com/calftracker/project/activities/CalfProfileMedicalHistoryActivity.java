@@ -86,8 +86,8 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         // Background tint only works on 15 & up.
         // This should probably be changed to Background Color but that overrides styles and I'm lazy
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            administeredButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
-            administeredButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            neededButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            neededButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         }
     }
 
