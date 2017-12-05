@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -330,7 +332,12 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
     }
 }
