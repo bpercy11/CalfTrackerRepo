@@ -287,6 +287,11 @@ public class Firebase extends Application{
 
     }
 
+    public void saveData(String str, Object o){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(str).setValue(o);
+    }
+
     public ArrayList<Employee> returnObj(ArrayList<Employee> obj){
 
         Log.d("test", "intest");
