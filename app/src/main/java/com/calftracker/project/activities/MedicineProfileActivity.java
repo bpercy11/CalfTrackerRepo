@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
@@ -89,6 +90,9 @@ public class MedicineProfileActivity extends BaseActivity {
         String json = gson.toJson(medicineList);
         prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("MedicineList", medicineList);
 
         // if this medicine is removed, make sure that no treatment protocol calls for this
         Illness tempIllness;

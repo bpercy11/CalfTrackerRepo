@@ -23,6 +23,7 @@ import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Calf_Illness;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Medicine;
@@ -85,6 +86,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Task", task);
 
         // ArrayList that holds all of the Vaccine Tasks for the current day
         ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
@@ -233,9 +237,14 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Task", task);
+
         json = gson.toJson(calfList);
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
+
+        fb.saveData("CalfList", calfList);
 
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 

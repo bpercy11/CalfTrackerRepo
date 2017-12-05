@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.calftracker.project.adapters.tasks.TaskVaccineDetailsAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.TaskDetailsCalfSelectionItem;
 import com.calftracker.project.models.Vaccine;
@@ -150,9 +151,14 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 prefsEditor.putString("CalfList",json);
                 prefsEditor.apply();
 
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("CalfList", calfList);
+
                 json = gson.toJson(task);
                 prefsEditor.putString("Task",json);
                 prefsEditor.apply();
+
+                fb.saveData("Task", task);
 
                 adapter.notifyDataSetChanged();
             }

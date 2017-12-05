@@ -105,16 +105,17 @@ public class CreateFarmActivity extends AppCompatActivity {
 
     // TODO
     public void saveData() {
-        //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        //SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        //Gson gson = new Gson();
-        //String json = gson.toJson(farm);
-        //prefsEditor.putString("Farm",json);
-        //prefsEditor.apply();
-        Log.d("FARM INFO", farm.getName() + ", " + farm.getOwner() + ", " + farm.getLocation());
-        fb.saveData("farmName", farm.getName());
-        fb.saveData("farmOwner", farm.getOwner());
-        fb.saveData("farmLocation", farm.getLocation());
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(farm);
+        prefsEditor.putString("Farm",json);
+        prefsEditor.apply();
+        //Log.d("FARM INFO", farm.getName() + ", " + farm.getOwner() + ", " + farm.getLocation());
+        //fb.saveData("farmName", farm.getName());
+        //fb.saveData("farmOwner", farm.getOwner());
+        //fb.saveData("farmLocation", farm.getLocation());
+        fb.saveData("Farm", farm);
     }
 
     public void retrieveData() {

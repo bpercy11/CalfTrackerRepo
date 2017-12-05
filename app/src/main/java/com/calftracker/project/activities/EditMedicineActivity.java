@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -90,6 +91,10 @@ public class EditMedicineActivity extends AppCompatActivity {
         String json = gson.toJson(medicineList);
         prefsEditor.putString("MedicineList",json);
         prefsEditor.apply();
+
+        //TODO
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("MedicineList", medicineList);
 
         Intent intent = new Intent(this,MedicineActivity.class);
         startActivity(intent);

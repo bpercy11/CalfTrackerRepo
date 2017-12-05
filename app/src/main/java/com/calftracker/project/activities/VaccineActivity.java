@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.calftracker.project.adapters.protocols.VaccineAdapter;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,6 +50,9 @@ public class VaccineActivity extends BaseActivity {
                 String json = gson.toJson(vaccineList.get(position));
                 prefsEditor.putString("VaccineProfile",json);
                 prefsEditor.apply();
+
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("VaccineProfile", vaccineList);
 
                 Intent intent = new Intent(VaccineActivity.this, VaccineProfileActivity.class);
                 startActivity(intent);
