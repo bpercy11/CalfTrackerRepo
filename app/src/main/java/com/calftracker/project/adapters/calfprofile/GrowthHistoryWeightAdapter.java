@@ -57,9 +57,9 @@ public class GrowthHistoryWeightAdapter extends BaseAdapter {
         }
         Physical_Metrics_And_Date size = this.sizes.get(position);
 
-        int year = size.getDateRecorded().get(Calendar.YEAR);
-        int month = size.getDateRecorded().get(Calendar.MONTH) + 1;
-        int day = size.getDateRecorded().get(Calendar.DAY_OF_MONTH);
+        int year = size.makeDateRecorded().get(Calendar.YEAR);
+        int month = size.makeDateRecorded().get(Calendar.MONTH) + 1;
+        int day = size.makeDateRecorded().get(Calendar.DAY_OF_MONTH);
 
         holder.weight.setText(Double.toString(sizes.get(position).getWeight()) + " lbs");
         holder.date.setText(month + "/" + day + "/" + year);

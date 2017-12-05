@@ -111,6 +111,7 @@ public class EditIllnessActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // TODO
     public void saveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -126,6 +127,11 @@ public class EditIllnessActivity extends AppCompatActivity {
         json = gson.toJson(illnessNotes);
         prefsEditor.putString("illnessNotes", json);
         prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 }
 

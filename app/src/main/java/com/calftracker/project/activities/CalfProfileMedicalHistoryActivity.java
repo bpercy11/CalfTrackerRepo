@@ -73,6 +73,20 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         mlistview.setAdapter(neededVacAdapter);
     }
 
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+    }
+
     public void retrieveData() {
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -85,19 +99,6 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         // Load in the Task
         json = mPreferences.getString("Task", "");
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
-    }
-
-    public void saveData() {
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
-
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
     }
 
     public void clickAdministeredButton(View view) {

@@ -85,6 +85,12 @@ public class CalfListActivity extends BaseActivity {
         });
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
     public void retrieveData() {
         // Load in the calf list
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);

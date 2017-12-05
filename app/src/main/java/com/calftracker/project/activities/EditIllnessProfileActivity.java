@@ -83,21 +83,7 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void retrieveData() {
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        if(mPreferences.contains("IllnessProfile")) {
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessProfile", "");
-            illness = gson.fromJson(json, new TypeToken<Illness>() {}.getType());
-        }
-
-        if(mPreferences.contains("IllnessList")) {
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
-        }
-    }
-
+    // TODO
     public void saveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -113,5 +99,20 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         json = gson.toJson(illnessList);
         prefsEditor.putString("IllnessList",json);
         prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("IllnessProfile")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessProfile", "");
+            illness = gson.fromJson(json, new TypeToken<Illness>() {}.getType());
+        }
+
+        if(mPreferences.contains("IllnessList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        }
     }
 }

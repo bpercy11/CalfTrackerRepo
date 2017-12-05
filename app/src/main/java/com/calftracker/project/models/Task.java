@@ -2,6 +2,7 @@ package com.calftracker.project.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -10,7 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Task {
 
-    private Calendar dateLastUpdated;
+
+    private int year;
+    private int month;
+    private int day;
+
     private ArrayList<Calf> calvesToObserve;
     private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
     private ArrayList<VaccineTask> overdueVaccinations;
@@ -21,11 +26,37 @@ public class Task {
                 ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations,
                 ArrayList<ArrayList<IllnessTask>> illnessTracker) {
         super();
-        this.dateLastUpdated = dateLastUpdated;
+        this.year = dateLastUpdated.get(Calendar.YEAR);
+        this.month = dateLastUpdated.get(Calendar.MONTH);
+        this.day = dateLastUpdated.get(Calendar.DAY_OF_MONTH);
         this.calvesToObserve = calvesToObserve;
         this.vaccinesToAdminister = vaccinesToAdminister;
         this.overdueVaccinations = overdueVaccinations;
         this.illnessTracker = illnessTracker;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public ArrayList<ArrayList<IllnessTask>> getIllnessTracker() {
@@ -36,12 +67,14 @@ public class Task {
         this.illnessTracker = illnessTracker;
     }
 
-    public Calendar getDateLastUpdated() {
-        return dateLastUpdated;
+    public Calendar makeDateLastUpdated() {
+        return new GregorianCalendar(year, month, day);
     }
 
-    public void setDateLastUpdated(Calendar dateLastUpdated) {
-        this.dateLastUpdated = dateLastUpdated;
+    public void putDateLastUpdated(Calendar dateLastUpdated) {
+        this.year = dateLastUpdated.get(Calendar.YEAR);
+        this.month = dateLastUpdated.get(Calendar.MONTH);
+        this.day = dateLastUpdated.get(Calendar.DAY_OF_MONTH);
     }
 
     public ArrayList<Calf> getCalvesToObserve() {
@@ -71,8 +104,9 @@ public class Task {
     public void updateTasks()
     {
         Calendar today = Calendar.getInstance();
+        Calendar dateLastUpdated = new GregorianCalendar(year, month, day);
 
-        int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, this.dateLastUpdated));
+        int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, dateLastUpdated));
 
         // you have to do this however many times a day has passed because I couldn't think of
         // a less confusing way to to it.
@@ -112,7 +146,7 @@ public class Task {
                     while(!illnessTracker.get(j).isEmpty())
                         illnessTracker.get(j - 1).add(illnessTracker.get(j).remove(0));
 
-        this.dateLastUpdated = Calendar.getInstance();
+        this.putDateLastUpdated(Calendar.getInstance());
 
     }
 

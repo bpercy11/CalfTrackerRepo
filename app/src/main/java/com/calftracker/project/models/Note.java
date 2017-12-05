@@ -1,10 +1,14 @@
 package com.calftracker.project.models;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Note {
 	private String message;
-	private Calendar dateEntered;
+
+	private int year;
+	private int month;
+	private int day;
 	
 	/**
 	 * @param message
@@ -13,7 +17,33 @@ public class Note {
 	public Note(String message, Calendar dateEntered) {
 		super();
 		this.message = message;
-		this.dateEntered = dateEntered;
+		this.year = dateEntered.get(Calendar.YEAR);
+		this.month = dateEntered.get(Calendar.MONTH);
+		this.day = dateEntered.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	/**
@@ -33,14 +63,16 @@ public class Note {
 	/**
 	 * @return the dateEntered
 	 */
-	public Calendar getDateEntered() {
-		return dateEntered;
+	public Calendar makeDateEntered() {
+		return new GregorianCalendar(year, month, day);
 	}
 
 	/**
 	 * @param dateEntered the dateEntered to set
 	 */
-	public void setDateEntered(Calendar dateEntered) {
-		this.dateEntered = dateEntered;
+	public void putDateEntered(Calendar dateEntered) {
+		this.year = dateEntered.get(Calendar.YEAR);
+		this.month = dateEntered.get(Calendar.MONTH);
+		this.day = dateEntered.get(Calendar.DAY_OF_MONTH);
 	}
 }

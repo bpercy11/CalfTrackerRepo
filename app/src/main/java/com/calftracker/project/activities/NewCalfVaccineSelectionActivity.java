@@ -225,6 +225,27 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        if(containsVaccineList) {
+            json = gson.toJson(vaccineList);
+            prefsEditor.putString("VaccineList", json);
+            prefsEditor.apply();
+        }
+    }
+
     public void retrieveData() {
         // set up shared preference variables
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -253,25 +274,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         } else {
             containsVaccineList = false;
-        }
-    }
-
-    public void saveData() {
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
-
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
-
-        if(containsVaccineList) {
-            json = gson.toJson(vaccineList);
-            prefsEditor.putString("VaccineList", json);
-            prefsEditor.apply();
         }
     }
 
