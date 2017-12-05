@@ -128,7 +128,8 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Administer Medication"
+        android:onClick="onClickChangeMedication"
+        android:text="Change Medication"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@id/buttonTaskIllnessDetailsAdministerMedication"
         app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
@@ -143,6 +144,7 @@
         android:layout_marginStart="8dp"
         android:text="Medication History"
         android:textAllCaps="false"
+        android:onClick="onClickMedicationHistory"
         app:layout_constraintBottom_toTopOf="@id/buttonTaskIllnessDetailsSymptoms"
         app:layout_constraintStart_toEndOf="@+id/vertical55percent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -156,6 +158,7 @@
         android:layout_marginStart="8dp"
         android:text="Administer Medication"
         android:textAllCaps="false"
+        android:onClick="onClickAdministerMedication"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -167,8 +170,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Symptoms Alleviated"
+        android:text="Discontinue Treatment"
         android:textAllCaps="false"
+        android:onClick="onClickDiscontinueTreatment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/vertical55percent" />

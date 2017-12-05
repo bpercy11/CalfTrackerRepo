@@ -108,6 +108,7 @@ public class Task {
 
         int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, dateLastUpdated));
 
+        // do the stuff for vaccinetasks
         // you have to do this however many times a day has passed because I couldn't think of
         // a less confusing way to to it.
         for(int i = 0; i < daysPassedSinceUpdate; i++) {
@@ -139,6 +140,7 @@ public class Task {
             }
         }
 
+        // do the stuff for illnessTasks
         for(int i = 0; i < daysPassedSinceUpdate; i++)
             // dont touch index zero, all illnesstasks
             // at zero don't have active medicine
@@ -160,6 +162,36 @@ public class Task {
         for(int i = 0; i < this.overdueVaccinations.size(); i++)
             if(this.overdueVaccinations.get(i).getVaccine().getName().equals(vaccine.getName()))
                 this.overdueVaccinations.get(i).setVaccine(vaccine);
+    }
+
+    public void administerMedication(IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    illnessTask = this.getIllnessTracker().get(i).remove(j);
+                    break OUTER;
+                }
+
+        this.getIllnessTracker().get(illnessTask.getMedicine().getTimeActive()).add(illnessTask);
+
+    }
+
+    public void editMedication(Medicine medicine, IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    illnessTask.setMedicine(medicine);
+                    break OUTER;
+                }
+    }
+
+    public void removeIllnessTask(IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    this.getIllnessTracker().get(i).remove(j);
+                    break OUTER;
+                }
     }
 
     public void placeVaccineInTasks(Vaccine vaccine, Calf calf)
