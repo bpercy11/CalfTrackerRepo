@@ -18,6 +18,8 @@ public class Feeding
 		this.litersFed = litersFed;
 	}
 
+	public Feeding(){}
+
 	/**
 	 * @return the fedBy
 	 */

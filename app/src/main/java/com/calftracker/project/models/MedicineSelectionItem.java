@@ -14,6 +14,8 @@ public class MedicineSelectionItem {
         this.checked = checked;
     }
 
+    public MedicineSelectionItem(){}
+
     public Medicine getMedicine(){
         return medicine;
     }

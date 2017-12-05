@@ -10,6 +10,8 @@ public class Vaccine
 	private String methodOfAdministration;
 	private ArrayList<Calf> vaccineCalves;
 
+	public Vaccine(){}
+
 	/**
 	 * @param name
 	 * @param dosage
@@ -17,7 +19,6 @@ public class Vaccine
 	 * @param methodOfAdministration
 	 * @param toBeAdministered
 	 */
-
 	public Vaccine(String name, ArrayList<Vacc_Range> toBeAdministered, double dosage,
 				   String dosageUnits, String methodOfAdministration) {
 		super();

@@ -39,6 +39,8 @@ public class Farm {
         //TODO set up anything else we need
     }
 
+    public Farm(){}
+
     public String getName() {
         return this.name;
     }

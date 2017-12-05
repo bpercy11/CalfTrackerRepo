@@ -19,8 +19,9 @@ public class Task {
     private ArrayList<Calf> calvesToObserve;
     private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
     private ArrayList<VaccineTask> overdueVaccinations;
-
     private ArrayList<ArrayList<IllnessTask>> illnessTracker;
+
+    public Task(){}
 
     public Task(Calendar dateLastUpdated, ArrayList<Calf> calvesToObserve,
                 ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations,

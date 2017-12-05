@@ -22,6 +22,8 @@ public class Note {
 		this.day = dateEntered.get(Calendar.DAY_OF_MONTH);
 	}
 
+	public Note(){}
+
 	public int getYear() {
 		return year;
 	}

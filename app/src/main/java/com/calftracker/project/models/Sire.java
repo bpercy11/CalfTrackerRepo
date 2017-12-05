@@ -13,6 +13,8 @@ public class Sire {
         this.id = id;
     }
 
+    public Sire(){}
+
     public String getName() {
         return name;
     }

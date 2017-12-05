@@ -15,6 +15,8 @@ public class IllnessTask {
         this.calf = calf;
     }
 
+    public IllnessTask(){}
+
     public Illness getIllness() {
         return illness;
     }

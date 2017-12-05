@@ -11,6 +11,7 @@ public class Medical_Procedures {
     private ArrayList<Vaccine> vaccines;
     private ArrayList<Illness> illnesses;
 
+
     public Medical_Procedures(){
        this.vaccines = new ArrayList<>();
        this.illnesses = new ArrayList<>();

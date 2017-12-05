@@ -11,6 +11,8 @@ public class VaccineTask {
     private Calf calf;
     private boolean start;
 
+    public VaccineTask(){}
+
     public VaccineTask(Vaccine vaccine, Calf calf, boolean start) {
         this.vaccine = vaccine;
         this.calf = calf;

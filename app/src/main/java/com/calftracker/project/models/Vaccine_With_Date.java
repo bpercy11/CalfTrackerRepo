@@ -8,7 +8,9 @@ public class Vaccine_With_Date {
 	private int year;
 	private int month;
 	private int day;
-	
+
+	public Vaccine_With_Date(){}
+
 	/**
 	 * @param vaccine
 	 * @param date

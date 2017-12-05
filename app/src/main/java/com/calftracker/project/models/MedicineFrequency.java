@@ -22,6 +22,8 @@ public class MedicineFrequency {
         }
     }
 
+    public MedicineFrequency(){}
+
     /**
      * @return the span
      */

@@ -8,6 +8,8 @@ public class TaskDetailsCalfSelectionItem {
     private String id;
     private boolean checked;
 
+    public TaskDetailsCalfSelectionItem(){}
+
     public TaskDetailsCalfSelectionItem(String id, boolean checked){
         this.id = id;
         this.checked = checked;

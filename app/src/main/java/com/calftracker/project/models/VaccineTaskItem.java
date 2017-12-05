@@ -10,6 +10,8 @@ public class VaccineTaskItem {
     boolean overdue;
     VaccineTask vaccineTask;
 
+    public VaccineTaskItem(){}
+
     public VaccineTaskItem(boolean overdue, VaccineTask vaccineTask) {
         this.overdue = overdue;
         this.vaccineTask = vaccineTask;

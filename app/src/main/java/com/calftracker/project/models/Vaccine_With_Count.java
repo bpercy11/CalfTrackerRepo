@@ -8,6 +8,8 @@ public class Vaccine_With_Count {
     private Vaccine vaccine;
     private int count;
 
+    public Vaccine_With_Count(){}
+
     public Vaccine_With_Count(Vaccine vaccine, int count) {
         this.vaccine = vaccine;
         this.count = count;

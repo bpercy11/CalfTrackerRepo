@@ -12,6 +12,8 @@ public class Vacc_Range
 	private ArrayList<Integer> spanArrayList;
 	private List<Integer> spanList;
 
+	public Vacc_Range(){}
+
 	/**
 	 * @param span
 	 */
