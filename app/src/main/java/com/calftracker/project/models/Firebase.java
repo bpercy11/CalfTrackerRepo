@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.Semaphore;
+import java.util.function.ToDoubleBiFunction;
 
 import android.util.Log;
 
@@ -290,16 +291,24 @@ public class Firebase extends Application{
         mDatabase.child(str).setValue(o);
     }
 
+    /**
+     * Method called at start of splashscreen
+     * Used to turn on event listeners for different litsts stored in firebase
+     * Upon a change to xList in Firebase, xValueEventListener will trigger and updated the xList
+     *  in shared preferences
+     */
+    //TODO
+    // update LastEditTime in shared pref each time an event listener fires
+    // update LastEditTime in firebase each time we write to it
+    // add LastEditTimes to each diff list stored in fb so we aren't pulling things we don't need to
     public void setDataChangeListeners(){
-
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        /////// CALF LIST DATABASE LISTENER ////////////////////////
         mDatabase = mDatabase.child("CalfList");
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 GenericTypeIndicator<ArrayList<Calf>> t = new GenericTypeIndicator<ArrayList<Calf>>() {};
                 ArrayList<Calf> calfList = dataSnapshot.getValue(t);
 
@@ -309,17 +318,97 @@ public class Firebase extends Application{
                 String json = gson.toJson(calfList);
                 prefsEditor.putString("CalfList",json);
                 prefsEditor.apply();
-
-
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
 
+        /////// EMPLOYEE LIST DATABASE LISTENER ////////////////////////
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.child("EmployeeList");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<ArrayList<Employee>> t = new GenericTypeIndicator<ArrayList<Employee>>() {};
+                ArrayList<Employee> employeeList = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(employeeList);
+                prefsEditor.putString("EmployeeList",json);
+                prefsEditor.apply();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
+        /////// VACCINE LIST (in protocols) DATABASE LISTENER ////////////////////////
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.child("VaccineList");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Vaccine>> t = new GenericTypeIndicator<List<Vaccine>>() {};
+                List<Vaccine> vaccineList = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(vaccineList);
+                prefsEditor.putString("VaccineList",json);
+                prefsEditor.apply();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
+        /////// MEDICINE LIST (in protocols) DATABASE LISTENER ////////////////////////
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.child("MedicineList");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Medicine>> t = new GenericTypeIndicator<List<Medicine>>() {};
+                List<Medicine> medicineList = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(medicineList);
+                prefsEditor.putString("MedicineList",json);
+                prefsEditor.apply();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
+        //TODO
+        //Not syncing after adding an illness to database manually, need to try w/ two emulators
+        /////// ILLNESS LIST (in protocols) DATABASE LISTENER ////////////////////////
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.child("IllnessList");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<ArrayList<Illness>> t = new GenericTypeIndicator<ArrayList<Illness>>() {};
+                ArrayList<Illness> illnessList = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(illnessList);
+                prefsEditor.putString("IllnessList",json);
+                prefsEditor.apply();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
     }
 

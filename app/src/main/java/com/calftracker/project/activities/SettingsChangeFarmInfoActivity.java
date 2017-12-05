@@ -53,31 +53,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
 
                 if(!requirementsNotMet) {
-                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    Gson gson = new Gson();
-                    String json;
-
-                    farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
-                    json = gson.toJson(farm);
-                    editor.putString("Farm",json);
-
-                    json = gson.toJson(farmName.getText().toString());
-                    editor.putString("farmName", json);
-
-                    json = gson.toJson(farmOwner.getText().toString());
-                    editor.putString("farmOwner", json);
-
-                    json = gson.toJson(farmLocation.getText().toString());
-                    editor.putString("farmLocation", json);
-                    editor.apply();
-
-                    /*
-                    Firebase fb = (Firebase) getApplicationContext();
-                    fb.saveData("farmName", farmName.getText().toString());
-                    fb.saveData("farmOwner", farmOwner.getText().toString());
-                    fb.saveData("farmLocation", farmLocation.getText().toString());
-                    */
+                    saveData();
                     back();
                 }
 
@@ -87,6 +63,38 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void saveData(){
+        SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json;
+
+        farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
+        json = gson.toJson(farm);
+        editor.putString("Farm",json);
+        editor.apply();
+
+        json = gson.toJson(farmName.getText().toString());
+        editor.putString("farmName", json);
+        editor.apply();
+
+        json = gson.toJson(farmOwner.getText().toString());
+        editor.putString("farmOwner", json);
+        editor.apply();
+
+        json = gson.toJson(farmLocation.getText().toString());
+        editor.putString("farmLocation", json);
+        editor.apply();
+
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Farm", farm);
+        fb.saveData("farmName", farmName.getText().toString());
+        fb.saveData("farmOwner", farmOwner.getText().toString());
+        fb.saveData("farmLocation", farmLocation.getText().toString());
 
     }
 

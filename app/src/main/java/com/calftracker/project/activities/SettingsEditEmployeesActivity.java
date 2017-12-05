@@ -39,9 +39,10 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
     private ListView listView;
     private CalfListListViewAdapter adapter;
     private ArrayList<String> idArrayList = new ArrayList<String>();
-    private ArrayList<Employee> employeeArrayList;
+    private ArrayList<Employee> employeeArrayList = new ArrayList<Employee>();
     private Farm farm;
     private ArrayList<Map> mapList;
+    private boolean employeeListExists;
 
 
     @Override
@@ -60,7 +61,6 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = mPreferences.edit();
         Gson gson = new Gson();
         String json;
-
 
 
         // FIREBASE READ DATA TEMPLATE //
@@ -106,43 +106,57 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         });
         */
 
+        /*
+        Log.d("ELIST", "HELLO11");
+        SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor e1 = sharedPref.edit();
+        Gson gson1 = new Gson();
+        String json1;
 
-        if(mPreferences.contains("EmployeeList")) {
+        Employee e = new Employee("bobbbby");
+        employeeArrayList.add(e);
+        json1 = gson1.toJson(employeeArrayList);
+        editor.putString("EmployeeList",json1);
+        editor.apply();
+        */
+
+        employeeListExists = false;
+        if (mPreferences.contains("EmployeeList")) {
+            employeeListExists = true;
             json = mPreferences.getString("EmployeeList", "");
             employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
             }.getType());
-        } else { employeeArrayList = new ArrayList<Employee>(); }
+        }
 
 
-        if(mPreferences.contains("FarmProfile")){
+        if (mPreferences.contains("FarmProfile")) {
             //Log.d("TAG", "THE FARM PROFILE EXISTS");
             json = mPreferences.getString("FarmProfile", "");
             farm = gson.fromJson(json, Farm.class);
             farm.setEmployeeList(employeeArrayList);
-            Employee n = (Employee) farm.getEmployees().get(0);
-            //Log.d("Employee 1", n.getName());
+
         }
 
+        if (employeeListExists){
 
-        String[] listItems = new String[employeeArrayList.size()];
+            String[] listItems = new String[employeeArrayList.size()];
 
-        for(int i = 0; i < employeeArrayList.size(); i++)
-            listItems[i] = employeeArrayList.get(i).getName();
+            for (int i = 0; i < employeeArrayList.size(); i++)
+                listItems[i] = employeeArrayList.get(i).getName();
 
-        ArrayAdapter adapter = new ArrayAdapter(SettingsEditEmployeesActivity.this, android.R.layout.simple_list_item_1, listItems);
-        mListView.setAdapter(adapter);
+            ArrayAdapter adapter = new ArrayAdapter(SettingsEditEmployeesActivity.this, android.R.layout.simple_list_item_1, listItems);
+            mListView.setAdapter(adapter);
 
 
-
-        mListView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
+            mListView.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(SettingsEditEmployeesActivity.this, SettingsEmployeeProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
+                    Intent intent = new Intent(SettingsEditEmployeesActivity.this, SettingsEmployeeProfileActivity.class);
+                    startActivity(intent);
+                }
+             });
+        }
 
         addEmployeeButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;

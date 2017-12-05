@@ -47,7 +47,7 @@ public class CreateFarmActivity extends AppCompatActivity {
         setContentView(R.layout.create_farm);
 
         // set UI to hide keyboard when user clicks anywhere off the keyboard
-        setupUI(findViewById(R.id.createFarmParent));
+        //setupUI(findViewById(R.id.createFarmParent));
 
         fb = (Firebase) getApplicationContext();
 
@@ -118,7 +118,8 @@ public class CreateFarmActivity extends AppCompatActivity {
         prefsEditor.putString("farmLocation",json);
 
         prefsEditor.apply();
-        Log.d("FARM INFO", farm.getName() + ", " + farm.getOwner() + ", " + farm.getLocation());
+        //Log.d("FARM INFO", farm.getName() + ", " + farm.getOwner() + ", " + farm.getLocation());
+        fb.saveData("Farm", farm);
         fb.saveData("farmName", farm.getName());
         fb.saveData("farmOwner", farm.getOwner());
         fb.saveData("farmLocation", farm.getLocation());

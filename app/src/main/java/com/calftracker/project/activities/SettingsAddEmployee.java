@@ -47,7 +47,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
         getSupportActionBar().setTitle("Add Employee");
 
         retrieveData();
-        //test
+
 
 
 
