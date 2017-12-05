@@ -43,21 +43,16 @@ public class SettingsAddEmployee extends AppCompatActivity {
         id = findViewById(R.id.addEmployeeIDText);
         addEmployeeButton = (Button) findViewById(R.id.settingsAddEmployeeAcceptBtn);
 
-        /*
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-        Gson gson = new Gson();
-        String json;
-        */
-        /*
-        if(mPreferences.contains("EmployeeList")) {
-            json = mPreferences.getString("EmployeeList", "");
-            employeeList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
-            }.getType());
-        } else { employeeList = new ArrayList<Employee>(); }
-        */
-        Firebase fb = (Firebase) getApplicationContext();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Add Employee");
 
+        retrieveData();
+
+
+
+        // TEMPLATE FOR READING IN FROM FIREBASE //
+        /*
+        Firebase fb = (Firebase) getApplicationContext();
 
         //Data read method
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
@@ -77,8 +72,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
                 //when starting
                 Log.d("ONSTART", "Started");
                 // Stylize action bar to use back button and custom title
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle("Add Employee");
+
 
 
             }
@@ -87,6 +81,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
                 Log.d("ONFAILURE", "Failed");
             }
         });
+        */
 
 
         addEmployeeButton.setOnClickListener(new View.OnClickListener(){
@@ -101,20 +96,17 @@ public class SettingsAddEmployee extends AppCompatActivity {
                     employeeArrayList.add(emp);
                 }
 
-                //dialogBox();
-
                 if(!requirementsNotMet) {
 
-                    /*SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = mPrefs.edit();
                     Gson gson = new Gson();
-                    String json = gson.toJson(employeeList);
+                    String json = gson.toJson(employeeArrayList);
                     prefsEditor.putString("EmployeeList",json);
-                    prefsEditor.apply();*/
+                    prefsEditor.apply();
 
                     DatabaseReference root = FirebaseDatabase.getInstance().getReference();
                     root.child("EmployeeList").setValue(employeeArrayList);
-
 
                     back();
                 }
@@ -125,6 +117,21 @@ public class SettingsAddEmployee extends AppCompatActivity {
 
 
     }
+
+    private void retrieveData(){
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        Gson gson = new Gson();
+        String json;
+
+
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeArrayList = new ArrayList<Employee>(); }
+    }
+
 
     private void back() {
 

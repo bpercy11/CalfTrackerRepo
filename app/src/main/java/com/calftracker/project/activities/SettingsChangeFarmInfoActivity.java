@@ -20,6 +20,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
     private TextView farmName;
     private TextView farmOwner;
     private TextView farmLocation;
+    private Farm farm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,14 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
 
                 if(!requirementsNotMet) {
-                    /*SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     Gson gson = new Gson();
                     String json;
+
+                    farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
+                    json = gson.toJson(farm);
+                    editor.putString("Farm",json);
 
                     json = gson.toJson(farmName.getText().toString());
                     editor.putString("farmName", json);
@@ -65,13 +70,14 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
                     json = gson.toJson(farmLocation.getText().toString());
                     editor.putString("farmLocation", json);
-                    editor.apply();*/
+                    editor.apply();
 
+                    /*
                     Firebase fb = (Firebase) getApplicationContext();
                     fb.saveData("farmName", farmName.getText().toString());
                     fb.saveData("farmOwner", farmOwner.getText().toString());
                     fb.saveData("farmLocation", farmLocation.getText().toString());
-
+                    */
                     back();
                 }
 

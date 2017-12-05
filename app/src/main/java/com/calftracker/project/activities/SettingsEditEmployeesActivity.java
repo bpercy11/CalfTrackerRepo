@@ -52,14 +52,20 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         Button addEmployeeButton = (Button) findViewById(R.id.addEmployeeBtn);
         mListView = (ListView) findViewById(R.id.employeesList);
 
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Edit Employees");
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         Gson gson = new Gson();
         String json;
 
+
+
+        // FIREBASE READ DATA TEMPLATE //
+        /*
         Firebase fb = (Firebase) getApplicationContext();
-
-
         //Data read method
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
         fb.readData(root.child("EmployeeList"), new Firebase.OnGetDataListener() {
@@ -89,9 +95,6 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
             public void onStart() {
                 //when starting
                 Log.d("ONSTART", "Started");
-                // Stylize action bar to use back button and custom title
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle("Edit Employees");
 
 
             }
@@ -101,25 +104,33 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
                 Log.d("ONFAILURE", "Failed");
             }
         });
+        */
 
 
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeArrayList = new ArrayList<Employee>(); }
 
-        //if(mPreferences.contains("EmployeeList")) {
-        //    json = mPreferences.getString("EmployeeList", "");
-        //    employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
-        //    }.getType());
-        //} else { employeeArrayList = new ArrayList<Employee>(); }
 
-
-        //if(mPreferences.contains("FarmProfile")){
+        if(mPreferences.contains("FarmProfile")){
             //Log.d("TAG", "THE FARM PROFILE EXISTS");
-        //    json = mPreferences.getString("FarmProfile", "");
-         //   farm = gson.fromJson(json, Farm.class);
-          //  farm.setEmployeeList(employeeArrayList);
-            //Employee n = (Employee) farm.getEmployees().get(0);
+            json = mPreferences.getString("FarmProfile", "");
+            farm = gson.fromJson(json, Farm.class);
+            farm.setEmployeeList(employeeArrayList);
+            Employee n = (Employee) farm.getEmployees().get(0);
             //Log.d("Employee 1", n.getName());
-        //}
+        }
 
+
+        String[] listItems = new String[employeeArrayList.size()];
+
+        for(int i = 0; i < employeeArrayList.size(); i++)
+            listItems[i] = employeeArrayList.get(i).getName();
+
+        ArrayAdapter adapter = new ArrayAdapter(SettingsEditEmployeesActivity.this, android.R.layout.simple_list_item_1, listItems);
+        mListView.setAdapter(adapter);
 
 
 

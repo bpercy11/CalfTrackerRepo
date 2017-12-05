@@ -55,9 +55,10 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
-        //String json;
-        //json = mPreferences.getString("farmName","");
+        String json;
+        json = mPreferences.getString("farmName","");
 
+        /*
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -88,11 +89,11 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
 
             }
         });
+        */
 
-        /*
         //Populates the fields entered when creating farm on first use
         if(mPreferences.contains("farmName")){
-            //String name = mPreferences.getString("farmName","Farm Name not set");
+            String name = mPreferences.getString("farmName","Farm Name not set");
             int end = name.length();
             name = name.substring(1, end-1);
 
@@ -118,7 +119,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
             Firebase fb = (Firebase) getApplicationContext();
             fb.saveData("farmLocation", name);
             farmLocation.setHint(name);
-        }*/
+        }
 
         editFieldsButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
