@@ -10,4 +10,6 @@
     <color name="colorLightGrey">#D7D7D7</color>
     <color name="colorMaleBlue">#3DACC4</color>
     <color name="colorFemalePink">#EB6CA1</color>
+    <color name="colorObserveOrange">#FF8800</color>
+    <color name="colorHealthyGreen">#0EEDA3</color>
 </resources>

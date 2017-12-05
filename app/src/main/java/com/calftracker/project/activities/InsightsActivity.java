@@ -34,10 +34,6 @@ public class InsightsActivity extends BaseActivity {
         // Custom title
         getSupportActionBar().setTitle(R.string.insights_title);
 
-        getGenderData();
-    }
-
-    public void getGenderData() {
         // Load in the calf list
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("CalfList")) {
@@ -47,6 +43,11 @@ public class InsightsActivity extends BaseActivity {
             }.getType());
         }
 
+        getGenderData();
+        getHealthData();
+    }
+
+    public void getGenderData() {
         float femaleCount = 0;
         float maleCount = 0;
 
@@ -88,6 +89,59 @@ public class InsightsActivity extends BaseActivity {
         genderChart.setData(data);
 
         Legend legend = genderChart.getLegend();
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setTextSize(16f);
+        legend.setXEntrySpace(24f);
+    }
+
+    public void getHealthData() {
+        // Load in the calf list
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if(mPreferences.contains("CalfList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("CalfList", "");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {
+            }.getType());
+        }
+
+        float observeCount = 0;
+
+        if (calfList != null) {
+            for (int i = 0; i < calfList.size(); i++) {
+                if (calfList.get(i).isNeedToObserveForIllness()) {
+                    observeCount++;
+                }
+            }
+        }
+
+        float healthyCount = calfList.size() - observeCount;
+        float observePercent = (observeCount/(observeCount + healthyCount)) * 100;
+        float healthyPercent = (healthyCount/(observeCount + healthyCount)) * 100;
+
+        PieChart healthyChart = (PieChart) findViewById(R.id.healthChart);
+        healthyChart.setDrawHoleEnabled(false);
+        healthyChart.getDescription().setEnabled(false);
+        healthyChart.setTouchEnabled(false);
+        healthyChart.setDrawEntryLabels(false);
+        healthyChart.setExtraOffsets(0,0,0,-10);
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(observePercent, "Need to Observe"));
+        entries.add(new PieEntry(healthyPercent, "Healthy"));
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(getResources().getColor(R.color.colorObserveOrange));
+        colors.add(getResources().getColor(R.color.colorHealthyGreen));
+        dataSet.setColors(colors);
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTextSize(14f);
+        dataSet.setValueFormatter(new PercentFormatter());
+
+        PieData data = new PieData(dataSet);
+        healthyChart.setData(data);
+
+        Legend legend = healthyChart.getLegend();
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setTextSize(16f);
         legend.setXEntrySpace(24f);
