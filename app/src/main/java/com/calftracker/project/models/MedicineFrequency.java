@@ -16,8 +16,9 @@ public class MedicineFrequency {
     public MedicineFrequency(int[] span) {
         super();
         this.span = span;
+        spanArrayList = new ArrayList<Integer>();
         for(int i = 0; i < span.length; i++){
-            spanArrayList.set(i, span[i]);
+            spanArrayList.add(span[i]);
         }
     }
 
