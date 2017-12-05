@@ -68,9 +68,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         getSupportActionBar().setTitle(R.string.tasks_title);
 
         mLeftLabel = (TextView) findViewById(R.id.textViewVaccineNameTitle);
-        mRightLabel = (TextView) findViewById(R.id.textViewElligibleTitle);
+        mRightLabel = (TextView) findViewById(R.id.textVieweligibleTitle);
         mCenterLabel = (TextView) findViewById(R.id.textViewIllnessNameTasks);
-
 
         // Load in the Task and CalfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -318,7 +317,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     public void setVaccineColumnNames() {
         mLeftLabel.setText(R.string.tasks_vaccine_name);
-        mRightLabel.setText(R.string.tasks_vaccine_elligible);
+        mRightLabel.setText(R.string.tasks_vaccine_eligible);
         if(mCenterLabel.getVisibility() == View.VISIBLE)
             mCenterLabel.setVisibility(View.GONE);
     }

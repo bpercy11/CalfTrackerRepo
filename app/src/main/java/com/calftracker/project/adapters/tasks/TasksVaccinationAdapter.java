@@ -34,7 +34,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
 
     public class ViewHolder {
         TextView vaccine;
-        TextView elligible;
+        TextView eligible;
         ImageView overdueNotification;
     }
 
@@ -66,7 +66,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.tasks_vaccine_item, null);
             holder.vaccine = (TextView) convertView.findViewById(R.id.textViewTaskItemVaccineName);
-            holder.elligible = (TextView) convertView.findViewById(R.id.textViewElligible);
+            holder.eligible = (TextView) convertView.findViewById(R.id.textVieweligible);
             holder.overdueNotification = (ImageView) convertView.findViewById(R.id.imageViewOverdue);
 
             convertView.setTag(holder);
@@ -75,14 +75,14 @@ public class TasksVaccinationAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        int elligibleCount = 0;
+        int eligibleCount = 0;
         final Vaccine currVacc = task.getVaccineTask().getVaccine();
 
         if (!vaccUsed) {
 //            for (int i = 0; i < calfList.size(); i++) {
 //                for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
 //                    if (calfList.get(i).getNeededVaccines().get(j).getName().equals((currVacc).getName())) {
-//                        elligibleCount++;
+//                        eligibleCount++;
 //                    }
 //                }
 //            }
@@ -90,7 +90,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
                 if (todayTasks.get(i).getVaccineTask().getVaccine().getName().equals(currVacc.getName())) {
                     for (int j = 0; j < todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().size(); j++) {
                         if (todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().get(j).getName().equals(currVacc.getName())) {
-                            elligibleCount++;
+                            eligibleCount++;
                             if(todayTasks.get(i).isOverdue())
                                 holder.overdueNotification.setVisibility(View.VISIBLE);
                         }
@@ -100,7 +100,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
 
 
             holder.vaccine.setText(todayTasks.get(position).getVaccineTask().getVaccine().getName());
-            holder.elligible.setText(Integer.toString(elligibleCount));
+            holder.eligible.setText(Integer.toString(eligibleCount));
             usedVaccNames.add(currVacc.getName());
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,7 +117,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
             });
         } else {
             holder.vaccine.setVisibility(View.GONE);
-            holder.elligible.setVisibility(View.GONE);
+            holder.eligible.setVisibility(View.GONE);
         }
 
         return convertView;
