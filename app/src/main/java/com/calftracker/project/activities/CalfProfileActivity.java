@@ -762,8 +762,8 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void clickDeleteCalf(View view) {
         AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
-        builderDelete.setMessage("Are you sure you want to remove this calf? This action cannot be undone.")
-                .setTitle("Remove Calf");
+        builderDelete.setMessage("Are you sure you want to delete this calf? This action cannot be undone.")
+                .setTitle("Delete Calf");
         builderDelete.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

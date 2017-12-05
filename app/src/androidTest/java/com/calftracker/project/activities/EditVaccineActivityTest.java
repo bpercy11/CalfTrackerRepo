@@ -1,23 +1,15 @@
 package com.calftracker.project.activities;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Vacc_Range;
-import com.calftracker.project.models.Vaccine;
-import com.google.gson.Gson;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -33,7 +25,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 /**
  * Created by AlexanderGlowacki on 11/25/17.
@@ -42,8 +33,8 @@ public class EditVaccineActivityTest {
 
 
     @Rule
-    public ActivityTestRule<EditVaccineActivity> mActivityTestRule = new ActivityTestRule(EditVaccineActivity.class);
-    private EditVaccineActivity mActivity = null;
+    public ActivityTestRule<AddVaccineActivity> mActivityTestRule = new ActivityTestRule(AddVaccineActivity.class);
+    private AddVaccineActivity mActivity = null;
 
     @Before
     public void setUp() throws Exception {
@@ -96,7 +87,7 @@ public class EditVaccineActivityTest {
     public void testEditVaccineDosage() throws Exception {
         Double newDosage = 15.2;
         onView(withId(R.id.edit_vaccine_editTextDosage)).perform(click());
-        onView(withId(R.id.edit_vaccine_editTextDosage)).perform(ViewActions.typeText(Double.toString(newDosage)),closeSoftKeyboard());
+        onView(withId(R.id.edit_vaccine_editTextDosage)).perform(ViewActions.replaceText(Double.toString(newDosage)),closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextDosage)).check(matches(withText(Double.toString(newDosage))));
 
     }
@@ -105,7 +96,7 @@ public class EditVaccineActivityTest {
     public void testEditVaccineDosageUnits() throws Exception {
         String newDosageUnits = "Dosage Units";
         onView(withId(R.id.edit_vaccine_editTextDosageUnits)).perform(click());
-        onView(withId(R.id.edit_vaccine_editTextDosageUnits)).perform(ViewActions.typeText(newDosageUnits),closeSoftKeyboard());
+        onView(withId(R.id.edit_vaccine_editTextDosageUnits)).perform(ViewActions.replaceText(newDosageUnits),closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextDosageUnits)).check(matches(withText(newDosageUnits)));
     }
 
@@ -113,7 +104,7 @@ public class EditVaccineActivityTest {
     public void testEditVaccineAdminMethod() throws Exception {
         String newAdminMethod = "Admin Method";
         onView(withId(R.id.edit_vaccine_editTextAdminMethod)).perform(click());
-        onView(withId(R.id.edit_vaccine_editTextAdminMethod)).perform(ViewActions.typeText(newAdminMethod),closeSoftKeyboard());
+        onView(withId(R.id.edit_vaccine_editTextAdminMethod)).perform(ViewActions.replaceText(newAdminMethod),closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextAdminMethod)).check(matches(withText(newAdminMethod)));
     }
 

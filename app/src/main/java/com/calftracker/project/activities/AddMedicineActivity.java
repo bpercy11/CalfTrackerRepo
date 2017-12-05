@@ -2,31 +2,25 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.InputType;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.calftracker.project.models.Medicine;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Treatment_Protocol;
+import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMedicineActivity extends AppCompatActivity {
+public class AddMedicineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private EditText medicineName;
@@ -41,7 +35,10 @@ public class EditMedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_medicine);
+        setContentView(R.layout.activity_add_medicine);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_medicine_add);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("MedicineList")) {
@@ -52,6 +49,8 @@ public class EditMedicineActivity extends AppCompatActivity {
             medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
         } else { medicineList = new ArrayList<Medicine>(); }
+
+        ((Button) findViewById(R.id.edit_medicine_buttonAdd)).setText("Add");
     }
 
     public void clickAddMedicineButton(View view){
@@ -65,12 +64,12 @@ public class EditMedicineActivity extends AppCompatActivity {
                 || dosage.getText().toString().matches("")
                 || dosageUnits.getText().toString().matches("")
                 || timeActive.getText().toString().matches("")){
-            Toast.makeText(EditMedicineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(AddMedicineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else {
-            Toast.makeText(EditMedicineActivity.this, R.string.add_medicine_successful_message,
+            Toast.makeText(AddMedicineActivity.this, R.string.add_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -99,7 +98,7 @@ public class EditMedicineActivity extends AppCompatActivity {
     }
 
     public void clickCancelButton(View view){
-        Intent intent = new Intent(EditMedicineActivity.this, MedicineActivity.class);
+        Intent intent = new Intent(AddMedicineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
 

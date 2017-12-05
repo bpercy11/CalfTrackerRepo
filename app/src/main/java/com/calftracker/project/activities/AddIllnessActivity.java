@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +19,14 @@ import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.adapters.protocols.MedicineAdapter;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Illness;
+import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-public class EditIllnessActivity extends AppCompatActivity {
+public class AddIllnessActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private String illnessNameStr;
@@ -34,11 +37,18 @@ public class EditIllnessActivity extends AppCompatActivity {
     private MedicineAdapter medicineAdapter;
     private List<Medicine> tempMedicineList;
     private Button addNotesButton;
+    private LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_illness);
+        setContentView(R.layout.activity_add_illness);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.protocols_illness_add);
+
+        // Custom layout for text dialogs
+        inflater = getLayoutInflater();
 
 
         addNotesButton = (Button) findViewById(R.id.EditIllnessAddNotesButton);
@@ -47,32 +57,26 @@ public class EditIllnessActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditIllnessActivity.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AddIllnessActivity.this);
+                View dialogLayout_Notes = inflater.inflate(R.layout.custom_dialog_input, null);
+                final EditText input =  (EditText) dialogLayout_Notes.findViewById(R.id.dialogTextInput);
 
                 // set title
-                alertDialogBuilder.setTitle("Please enter a note");
-                final EditText input = new EditText(EditIllnessActivity.this);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(lp);
-                alertDialogBuilder.setView(input);
+                alertDialogBuilder.setTitle("Enter Note");
+                alertDialogBuilder.setView(dialogLayout_Notes);
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("Done",new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 illnessNotes = input.getText().toString();
-                                // if this button is clicked, close
-                                // current activity
+                                // if this button is clicked, close current activity
                                 dialog.dismiss();
                             }
                         })
                         .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, just close
-                                // the dialog box and do nothing
+                                // if this button is clicked, just close the dialog box and do nothing
                                 dialog.cancel();
                             }
                         });
@@ -92,7 +96,7 @@ public class EditIllnessActivity extends AppCompatActivity {
         illnessNameStr = illnessName.getText().toString();
 
         if (illnessNameStr.matches("")) {
-            Toast.makeText(EditIllnessActivity.this, R.string.EditIllnessActivity_emptyFieldMsg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddIllnessActivity.this, R.string.EditIllnessActivity_emptyFieldMsg, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -105,7 +109,7 @@ public class EditIllnessActivity extends AppCompatActivity {
     }
 
     public void clickEditIllnessCancelButton(View view){
-        Intent intent = new Intent(EditIllnessActivity.this, IllnessActivity.class);
+        Intent intent = new Intent(AddIllnessActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
 

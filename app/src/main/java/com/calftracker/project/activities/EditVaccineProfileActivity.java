@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,8 +22,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class EditVaccineProfileActivity extends BaseActivity {
+public class EditVaccineProfileActivity extends AppCompatActivity {
 
+    private ConstraintLayout mConstraintLayout;
     private Vaccine vaccine;
     private int vaccinePosition;
     private ArrayList<Vaccine> vaccineList;
@@ -34,9 +39,10 @@ public class EditVaccineProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_edit_vaccine, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        setContentView(R.layout.activity_add_vaccine);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.edit_vaccine_edit_vaccine);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("VaccineProfile")) {
@@ -85,6 +91,18 @@ public class EditVaccineProfileActivity extends BaseActivity {
         dosage.setText(Double.toString(vaccine.getDosage()));
         dosageUnits.setText(vaccine.getDosageUnits());
         adminMethod.setText(vaccine.getMethodOfAdministration());
+
+        ((Button) findViewById(R.id.edit_vaccine_buttonAddVaccine)).setText("Apply");
+
+        // Show "Delete" button
+        ((Button) findViewById(R.id.vaccine_profile_removeButton)).setVisibility(View.VISIBLE);
+
+        // Rearrange buttons
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.add_vaccine_layout);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(mConstraintLayout);
+        set.clear(R.id.edit_vaccine_buttonCancel, ConstraintSet.BOTTOM);
+        set.applyTo(mConstraintLayout);
     }
 
     public void clickAddVaccineButton(View view){
@@ -166,6 +184,22 @@ public class EditVaccineProfileActivity extends BaseActivity {
         prefsEditor.apply();
 
         Intent intent = new Intent(this,VaccineActivity.class);
+        startActivity(intent);
+    }
+
+    public void onVProfile_removeButton(View view){
+
+        vaccineList.remove(vaccinePosition);
+
+        //Save Updated VaccineList
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(vaccineList);
+        prefsEditor.putString("VaccineList",json);
+        prefsEditor.apply();
+
+        Intent intent = new Intent(EditVaccineProfileActivity.this,VaccineActivity.class);
         startActivity(intent);
     }
 

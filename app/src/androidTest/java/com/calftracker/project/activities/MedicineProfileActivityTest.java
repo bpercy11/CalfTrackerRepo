@@ -1,5 +1,6 @@
 package com.calftracker.project.activities;
 
+import android.support.test.espresso.PerformException;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
@@ -15,7 +16,6 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.junit.Assert.*;
 
 /**
  * Created by AlexanderGlowacki on 11/26/17.
@@ -40,8 +40,11 @@ public class MedicineProfileActivityTest {
 
     @Test
     public void testMProfileRemoveButton() throws Exception {
-        onView(withId(R.id.medicine_profile_removeButton)).perform(click());
-        intended(hasComponent(MedicineActivity.class.getName()));
+        try {
+            onView(withId(R.id.medicine_profile_removeButton)).perform(click());
+            intended(hasComponent(MedicineActivity.class.getName()));
+        }
+        catch (PerformException e) { }  // Case no medicines to delete
     }
     @After
     public void tearDown() throws Exception {

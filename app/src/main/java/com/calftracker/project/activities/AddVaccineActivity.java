@@ -1,16 +1,14 @@
 package com.calftracker.project.activities;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class EditVaccineActivity extends AppCompatActivity {
+public class AddVaccineActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private TextView vaccineName;
@@ -44,16 +42,12 @@ public class EditVaccineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_vaccine);
+        setContentView(R.layout.activity_add_vaccine);
 
         // Custom title
-        getSupportActionBar().setTitle(R.string.protocols_vaccine_edit);
-
-        // Stylize action bar to use back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.protocols_vaccine_add);
 
         EditText dosage = (EditText) findViewById(R.id.edit_vaccine_editTextDosage);
-        dosage.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -77,6 +71,7 @@ public class EditVaccineActivity extends AppCompatActivity {
         dropDown1 = (Spinner)findViewById(R.id.edit_vaccine_spinner1);
         dropDown1.setAdapter(adapter);
 
+        ((Button) findViewById(R.id.edit_vaccine_buttonAddVaccine)).setText("Add");
     }
 
     public void clickAddVaccineButton(View view){
@@ -121,17 +116,17 @@ public class EditVaccineActivity extends AppCompatActivity {
         if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
                 || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
                 || adminMethod.getText().toString().matches("")){
-            Toast.makeText(EditVaccineActivity.this, R.string.empty_fields_message,
+            Toast.makeText(AddVaccineActivity.this, R.string.empty_fields_message,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else if(adminEndInt <= adminStartInt){
-            Toast.makeText(EditVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
+            Toast.makeText(AddVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
                     Toast.LENGTH_SHORT).show();
             return;
         }
         else{
-            Toast.makeText(EditVaccineActivity.this, R.string.vaccine_successful,
+            Toast.makeText(AddVaccineActivity.this, R.string.vaccine_successful,
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -159,7 +154,7 @@ public class EditVaccineActivity extends AppCompatActivity {
     }
 
     public void clickCancelVaccineButton(View view){
-        Intent intent = new Intent(EditVaccineActivity.this,VaccineActivity.class);
+        Intent intent = new Intent(AddVaccineActivity.this,VaccineActivity.class);
         startActivity(intent);
     }
 
@@ -167,11 +162,5 @@ public class EditVaccineActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, VaccineActivity.class);
         startActivity(intent);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), VaccineActivity.class);
-        startActivity(intent);
-        return true;
     }
 }

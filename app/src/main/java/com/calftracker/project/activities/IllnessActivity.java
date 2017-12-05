@@ -87,7 +87,7 @@ public class IllnessActivity extends BaseActivity {
         startActivity(intent);
     }
     public void onIllness_AddIllnessButtonClick(View view) {
-        Intent intent = new Intent(IllnessActivity.this, EditIllnessActivity.class);
+        Intent intent = new Intent(IllnessActivity.this, AddIllnessActivity.class);
         startActivity(intent);
     }
     @Override

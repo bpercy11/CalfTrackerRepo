@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -78,21 +80,31 @@ public class VaccineActivity extends BaseActivity {
         Intent intent = new Intent(VaccineActivity.this, MedicineActivity.class);
         startActivity(intent);
     }
+
     public void onVaccine_VaccineButtonClick(View view){
         Intent intent = new Intent(VaccineActivity.this, VaccineActivity.class);
         startActivity(intent);
     }
+
     public void onVaccine_IllnessButtonClick(View view){
         Intent intent = new Intent(VaccineActivity.this, IllnessActivity.class);
         startActivity(intent);
     }
+
     public void onVaccine_AddVaccineButtonClick(View view){
-        Intent intent = new Intent(VaccineActivity.this, EditVaccineActivity.class);
+        Intent intent = new Intent(VaccineActivity.this, AddVaccineActivity.class);
         startActivity(intent);
     }
+
+    @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
     }
 }
 

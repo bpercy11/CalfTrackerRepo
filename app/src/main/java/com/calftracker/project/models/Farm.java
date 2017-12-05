@@ -43,6 +43,16 @@ public class Farm {
         return this.name;
     }
 
+    public void setName(String name) { this.name = name; }
+
+    public String getOwner() { return this.owner; }
+
+    public void setOwner(String owner) { this.owner = owner; }
+
+    public String getLocation() { return this.location; }
+
+    public void setLocation(String location) { this.location = location; }
+
     /***
      *
      * @param passcode

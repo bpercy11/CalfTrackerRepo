@@ -3,18 +3,14 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Employee;
-import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,6 +20,7 @@ public class SettingsAddEmployee extends AppCompatActivity {
 
     private EditText name;
     private EditText id;
+    private EditText position;
     private Button addEmployeeButton;
     private ArrayList<Employee> employeeList;
 
@@ -32,8 +29,12 @@ public class SettingsAddEmployee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_add_employee);
 
+        // Custom title
+        getSupportActionBar().setTitle("Add Employee");
+
         name = (EditText) findViewById(R.id.addEmployeeNameText);
         id = findViewById(R.id.addEmployeeIDText);
+        position = findViewById(R.id.addEmployeePositionText);
         addEmployeeButton = (Button) findViewById(R.id.settingsAddEmployeeAcceptBtn);
 
         retrieveData();
@@ -47,23 +48,22 @@ public class SettingsAddEmployee extends AppCompatActivity {
                 if(name.getText().toString().equals("")){
                     requirementsNotMet = true;
                 } else {
-                    Employee emp = new Employee(name.getText().toString());
+                    Employee emp = new Employee(name.getText().toString(), id.getText().toString(), position.getText().toString());
                     employeeList.add(emp);
                 }
-
-                //dialogBox();
 
                 if(!requirementsNotMet) {
                     saveData();
 
                     back();
                 }
-
-
             }
         });
+    }
 
-
+    public void clickCancelEmployeeButton(View view){
+        Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
+        startActivity(intent);
     }
 
     // TODO
@@ -90,10 +90,8 @@ public class SettingsAddEmployee extends AppCompatActivity {
     }
 
     private void back() {
-
         Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
         finish();
         startActivity(intent);
-
     }
 }

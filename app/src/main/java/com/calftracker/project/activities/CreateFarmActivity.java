@@ -3,8 +3,8 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +12,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.calftracker.project.models.Calf;
-import com.calftracker.project.models.Farm;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Farm;
 import com.google.gson.Gson;
 
 
@@ -55,52 +55,40 @@ public class CreateFarmActivity extends AppCompatActivity {
         farmLocationRequired = (TextView) findViewById(R.id.FarmLocation_Required_tv);
         farmOwnerRequired = (TextView) findViewById(R.id.FarmOwner_Required_tv);
 
-
         doneButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
 
                 boolean requirementsNotMet = false;
 
-                if(farmName.getText().toString().equals("")){
+                if (farmName.getText().toString().equals("")){
                     requirementsNotMet = true;
                     farmNameRequired.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     farmNameRequired.setVisibility(View.INVISIBLE);
                 }
-                if(farmOwner.getText().toString().equals("")){
+                if (farmOwner.getText().toString().equals("")){
                     requirementsNotMet = true;
                     farmOwnerRequired.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     farmOwnerRequired.setVisibility(View.INVISIBLE);
                 }
-                if(farmLocation.getText().toString().equals("")){
+                if (farmLocation.getText().toString().equals("")){
                     requirementsNotMet = true;
                     farmLocationRequired.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     farmLocationRequired.setVisibility(View.INVISIBLE);
                 }
 
-
-
-                //dialogBox();
-
-
-
-
-
-                if(!requirementsNotMet) {
+                if (!requirementsNotMet) {
                     farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
                     saveData();
                     callDashboard();
-               }
-
-
-
+                } else {
+                    Toast.makeText(CreateFarmActivity.this, "Please fill any empty fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
     }
 
     // TODO

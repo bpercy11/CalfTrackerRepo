@@ -38,7 +38,7 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
 
         // Stylize action bar to use back button and custom title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Edit Employees");
+        getSupportActionBar().setTitle("Employees List");
 
         Button addEmployeeButton = (Button) findViewById(R.id.addEmployeeBtn);
         mListView = (ListView) findViewById(R.id.employeesList);
@@ -59,6 +59,13 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(employeeArrayList.get(position));
+                prefsEditor.putString("EmployeeProfile",json);
+                prefsEditor.apply();
+
                 Intent intent = new Intent(SettingsEditEmployeesActivity.this, SettingsEmployeeProfileActivity.class);
                 startActivity(intent);
             }
@@ -70,7 +77,6 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
             public void onClick(View v){
                 intent = new Intent(SettingsEditEmployeesActivity.this, SettingsAddEmployee.class);
                 startActivity(intent);
-
             }
         });
 

@@ -7,213 +7,277 @@
     android:layout_height="match_parent"
     tools:context="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical30percentfeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.30" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical50percentfeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical55percentfeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.55" />
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical55percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal10percentfeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical45percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal60percentfeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical30percentfeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.30" />
 
-    <TextView
-        android:id="@+id/textViewFirstFeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calf_profile_feeding_history_first_feeding"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal10percentfeeding" />
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical50percentfeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
 
-    <TextView
-        android:id="@+id/textViewFirstFeeder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_feeder"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstFeeding"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical55percentfeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
 
-    <TextView
-        android:id="@+id/textViewFirstFeederValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstFeeder"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstFeeder"/>
+            <android.support.constraint.Guideline
+                android:id="@+id/horizontal60percentfeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.60" />
 
-    <TextView
-        android:id="@+id/textViewFirstMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_method"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstFeeder"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+            <TextView
+                android:id="@+id/textViewFirstFeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/calf_profile_feeding_history_first_feeding"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewFirstMethodValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstMethod"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstMethod"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstMethod"/>
+            <TextView
+                android:id="@+id/textViewFirstFeeder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_feeder"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFirstFeeding" />
 
-    <TextView
-        android:id="@+id/textViewFirstLiters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_liters"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstMethod"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
+            <TextView
+                android:id="@+id/textViewFirstFeederValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewFirstFeeder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewFirstFeeder" />
 
-    <TextView
-        android:id="@+id/textViewFirstLitersValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstLiters"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLiters"/>
+            <TextView
+                android:id="@+id/textViewFirstMethod"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_method"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFirstFeeder" />
 
-    <TextView
-        android:id="@+id/textViewSecondFeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/calf_profile_feeding_history_second_feeding"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstLiters" />
+            <TextView
+                android:id="@+id/textViewFirstMethodValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewFirstMethod"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewFirstMethod" />
 
-    <TextView
-        android:id="@+id/textViewSecondFeeder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_feeder"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSecondFeeding"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
+            <TextView
+                android:id="@+id/textViewFirstLiters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_liters"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFirstMethod" />
 
-    <TextView
-        android:id="@+id/textViewSecondFeederValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
-        app:layout_constraintTop_toTopOf="@+id/textViewSecondFeeder"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSecondFeeder"/>
+            <TextView
+                android:id="@+id/textViewFirstLitersValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLiters"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewFirstLiters" />
 
-    <TextView
-        android:id="@+id/textViewSecondMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_method"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSecondFeeder"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentfeeding"/>
+            <TextView
+                android:id="@+id/textViewSecondFeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/calf_profile_feeding_history_second_feeding"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonFirstFeeding" />
 
-    <TextView
-        android:id="@+id/textViewSecondMethodValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewSecondMethod"
-        app:layout_constraintTop_toTopOf="@+id/textViewSecondMethod"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSecondMethod"/>
+            <TextView
+                android:id="@+id/textViewSecondFeeder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_feeder"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSecondFeeding" />
 
-    <TextView
-        android:id="@+id/textViewSecondLiters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/calf_profile_feeding_history_liters"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSecondMethod"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"/>
+            <TextView
+                android:id="@+id/textViewSecondFeederValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSecondFeeder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewSecondFeeder" />
 
-    <TextView
-        android:id="@+id/textViewSecondLitersValue"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="@string/calf_profile_feeding_history_no_data"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewFirstMethodValue"
-        app:layout_constraintTop_toTopOf="@+id/textViewSecondLiters"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSecondLiters"/>
+            <TextView
+                android:id="@+id/textViewSecondMethod"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_method"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSecondFeeder" />
 
-    <Button
-        android:id="@+id/buttonFirstFeeding"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/calf_profile_feeding_history_first_button_no_data"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical50percentfeeding"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:id="@+id/textViewSecondMethodValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSecondMethod"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewSecondMethod" />
 
-    <Button
-        android:id="@+id/buttonSecondFeeding"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/calf_profile_feeding_history_second_button_no_data"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/vertical50percentfeeding"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:id="@+id/textViewSecondLiters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_liters"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintLeft_toLeftOf="@+id/textViewFirstMethod"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSecondMethod" />
 
+            <TextView
+                android:id="@+id/textViewSecondLitersValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calf_profile_feeding_history_no_data"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSecondLiters"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percentfeeding"
+                app:layout_constraintTop_toTopOf="@+id/textViewSecondLiters" />
 
+            <Button
+                android:id="@+id/buttonFirstFeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_first_button_no_data"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFirstLiters" />
+
+            <Button
+                android:id="@+id/buttonSecondFeeding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calf_profile_feeding_history_second_button_no_data"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSecondLitersValue" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

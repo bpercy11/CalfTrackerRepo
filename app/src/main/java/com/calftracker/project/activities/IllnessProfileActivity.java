@@ -3,10 +3,9 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.sip.SipSession;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,11 +15,10 @@ import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IllnessProfileActivity extends BaseActivity {
+public class IllnessProfileActivity extends AppCompatActivity {
 
     private ArrayList<Illness> illnessList;
     private Illness illness;
@@ -30,9 +28,10 @@ public class IllnessProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_illness_profile);
 
-        getLayoutInflater().inflate(R.layout.activity_illness_profile, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -44,7 +43,10 @@ public class IllnessProfileActivity extends BaseActivity {
             String json = mPreferences.getString("IllnessProfile", "");
             illness = gson.fromJson(json, new TypeToken<Illness>() {
             }.getType());
-        } else { }
+        }
+
+        // Custom title
+        getSupportActionBar().setTitle(illness.getName());
 
         //Load IllnessList
         if(mPreferences.contains("IllnessList")) {
@@ -54,7 +56,7 @@ public class IllnessProfileActivity extends BaseActivity {
             String json = mPreferences.getString("IllnessList", "");
             illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
             }.getType());
-        } else { }
+        }
 
         //Finding position of illness object
         for (int i = 0; i < illnessList.size(); i++){
@@ -91,20 +93,15 @@ public class IllnessProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public void onIllnessProfile_RemoveButton(View view){
-
-        illnessList.remove(illnessPosition);
-
-        //Save updated IllnessList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
-        prefsEditor.apply();
-
-        Intent intent = new Intent(IllnessProfileActivity.this,IllnessActivity.class);
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, IllnessActivity.class);
         startActivity(intent);
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), IllnessActivity.class);
+        startActivity(intent);
+        return true;
     }
 }

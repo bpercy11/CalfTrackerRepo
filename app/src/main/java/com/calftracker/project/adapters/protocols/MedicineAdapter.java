@@ -57,7 +57,7 @@ public class MedicineAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.medicineName.setText(medicineList.get(position).getName());
-        holder.medicineTimeActive.setText(Integer.toString(medicineList.get(position).getTimeActive()));
+        holder.medicineTimeActive.setText(Integer.toString(medicineList.get(position).getTimeActive())  + " days");
         return convertView;
     }
 }

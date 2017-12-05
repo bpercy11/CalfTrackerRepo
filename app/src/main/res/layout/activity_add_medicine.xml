@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.calftracker.project.activities.AddMedicineActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_medicine_layout" >
+
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical55percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical45percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <TextView
+                android:id="@+id/edit_medicine_textViewEditMedicine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/edit_medicine_medicine_name"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/edit_medicine_textViewDosage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/edit_medicine_dosage"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewEditMedicine" />
+
+            <TextView
+                android:id="@+id/edit_medicine_textViewDosageUnits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/edit_medicine_dosage_units"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewDosage" />
+
+            <TextView
+                android:id="@+id/edit_medicine_textViewTimeActive"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/edit_medicine_time_active"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewDosageUnits" />
+
+            <EditText
+                android:id="@+id/edit_medicine_editTextMedicine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/edit_medicine_enter_medicine"
+                android:inputType="text"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewEditMedicine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+                app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewEditMedicine" />
+
+            <EditText
+                android:id="@+id/edit_medicine_editTextDosage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/edit_medicine_enter_dosage"
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewDosage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+                app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewDosage" />
+
+            <EditText
+                android:id="@+id/edit_medicine_editTextDosageUnits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/edit_medicine_enter_units"
+                android:inputType="textPersonName"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewDosageUnits"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+                app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewDosageUnits" />
+
+            <EditText
+                android:id="@+id/edit_medicine_editTextTimeActive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/edit_medicine_enter_days"
+                android:inputType="number"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_textViewTimeActive"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+                app:layout_constraintTop_toTopOf="@+id/edit_medicine_textViewTimeActive" />
+
+            <TextView
+                android:id="@+id/edit_medicine_textViewNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/edit_medicine_notes"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewTimeActive" />
+
+            <EditText
+                android:id="@+id/edit_medicine_editTextNotes"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="Enter Notes"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollbars="vertical"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_textViewNotes" />
+
+            <Button
+                android:id="@+id/edit_medicine_buttonAdd"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:onClick="clickAddMedicineButton"
+                android:text="@string/edit_medicine_add_button"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_medicine_buttonCancel"
+                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+                app:layout_constraintTop_toTopOf="@+id/edit_medicine_buttonCancel" />
+
+            <Button
+                android:id="@+id/edit_medicine_buttonCancel"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="50dp"
+                android:onClick="clickCancelButton"
+                android:text="@string/edit_medicine_cancel_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_editTextNotes" />
+
+            <Button
+                android:id="@+id/medicine_profile_removeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/colorPrimaryDark"
+                android:onClick="onMProfile_removeButton"
+                android:text="Delete Medicine"
+                android:textColor="@android:color/white"
+                android:visibility="gone"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_medicine_buttonCancel" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

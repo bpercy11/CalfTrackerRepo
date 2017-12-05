@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VaccineProfileActivity extends BaseActivity {
+public class VaccineProfileActivity extends AppCompatActivity {
 
     private Vaccine vaccine;
     private List<Vaccine> vaccineList;
@@ -24,8 +26,10 @@ public class VaccineProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_vaccine_profile, frameLayout);
-        mNavigationView.getMenu().findItem(R.id.nav_protocols).setChecked(true);
+        setContentView(R.layout.activity_vaccine_profile);
+
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -37,7 +41,10 @@ public class VaccineProfileActivity extends BaseActivity {
             String json = mPreferences.getString("VaccineProfile", "");
             vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {
             }.getType());
-        } else { }
+        }
+
+        // Custom title
+        getSupportActionBar().setTitle(vaccine.getName());
 
         //Load VaccineList
         if(mPreferences.contains("VaccineList")) {
@@ -47,7 +54,7 @@ public class VaccineProfileActivity extends BaseActivity {
             String json = mPreferences.getString("VaccineList", "");
             vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
             }.getType());
-        } else { }
+        }
 
         //Find Vaccine position in VaccineList
         for (int i = 0; i < vaccineList.size(); i++){
@@ -73,18 +80,18 @@ public class VaccineProfileActivity extends BaseActivity {
         if (range[0] % 7 == 0 && range[1] % 7 == 0) {
             range[0] = range[0]/7;
             range[1] = range[1]/7;
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Weeks");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Weeks");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " weeks");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " weeks");
         }
         else if(range[0] % 30 == 0 && range[1] % 30 == 0){
             range[0] = range[0]/30;
             range[1] = range[1]/30;
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Months");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Months");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " months");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " months");
         }
         else{
-            vaccineAdminStart.setText(Integer.toString(range[0]) + " Days");
-            vaccineAdminEnd.setText(Integer.toString(range[1]) + " Days");
+            vaccineAdminStart.setText(Integer.toString(range[0]) + " days");
+            vaccineAdminEnd.setText(Integer.toString(range[1]) + " days");
         }
 
         //Setting Data with correct vaccine information
@@ -98,19 +105,15 @@ public class VaccineProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public void onVProfile_removeButton(View view){
-
-        vaccineList.remove(vaccinePosition);
-
-        //Save Updated VaccineList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(vaccineList);
-        prefsEditor.putString("VaccineList",json);
-        prefsEditor.apply();
-
-        Intent intent = new Intent(VaccineProfileActivity.this,VaccineActivity.class);
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, VaccineActivity.class);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), VaccineActivity.class);
+        startActivity(intent);
+        return true;
     }
 }

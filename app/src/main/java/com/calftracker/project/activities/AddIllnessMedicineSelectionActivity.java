@@ -1,18 +1,17 @@
 package com.calftracker.project.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.calftracker.project.adapters.protocols.MedicineSelectionListViewAdapter;
-import com.calftracker.project.calftracker.R;
-import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.calftracker.project.adapters.protocols.MedicineSelectionListViewAdapter;
+import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.MedicineSelectionItem;
@@ -32,11 +31,13 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
     String illnessName;
     String illnessNotes;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_illness_medicine_selection);
+
+        // Custom title
+        getSupportActionBar().setTitle(R.string.title_activity_add_illness_medicine_selection);
 
         ListView lv = (ListView) findViewById(R.id.listViewMedicineSelection);
         Button confirmButton = (Button) findViewById(R.id.buttonConfirmMedicines);
@@ -127,7 +128,7 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
 
     public void onClickBackMedicines(View view) {
         // go back to Add Illness screen
-        Intent intent = new Intent(this,EditIllnessActivity.class);
+        Intent intent = new Intent(this,AddIllnessActivity.class);
         startActivity(intent);
     }
 
