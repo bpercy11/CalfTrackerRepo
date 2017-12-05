@@ -410,6 +410,26 @@ public class Firebase extends Application{
             public void onCancelled(DatabaseError databaseError) { }
         });
 
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.child("Farm");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<Farm> t = new GenericTypeIndicator<Farm>() {};
+                Farm farm = dataSnapshot.getValue(t);
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(farm);
+                prefsEditor.putString("Farm",json);
+                prefsEditor.apply();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
     }
 
 

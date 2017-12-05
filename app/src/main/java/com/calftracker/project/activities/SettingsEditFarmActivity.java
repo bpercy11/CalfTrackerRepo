@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Farm;
 import com.calftracker.project.models.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class SettingsEditFarmActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
     private TextView farmOwner;
     private TextView farmLocation;
     private String temp;
+    private Farm farm;
 
 
     @Override
@@ -52,11 +55,6 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
         mKeyListener = farmLocation.getKeyListener();
         farmLocation.setKeyListener(null);
 
-
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-        json = mPreferences.getString("farmName","");
 
         /*
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -91,34 +89,29 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
         });
         */
 
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        String json;
+
         //Populates the fields entered when creating farm on first use
-        if(mPreferences.contains("farmName")){
-            String name = mPreferences.getString("farmName","Farm Name not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
+        if(mPreferences.contains("Farm")){
+            json = mPreferences.getString("Farm","");
+            Gson gson = new Gson();
+            farm = gson.fromJson(json, new TypeToken<Farm>() {}.getType());
+
+
+            String name = farm.getName();
+            String owner = farm.getOwner();
+            String location = farm.getLocation();
+
+            //int end = name.length();
+            //name = name.substring(1, end-1);
 
             Firebase fb = (Firebase) getApplicationContext();
-            fb.saveData("farmName", name);
+            fb.saveData("Farm", farm);
 
             farmName.setHint(name);
-        }
-        if(mPreferences.contains("farmOwner")){
-            String name = mPreferences.getString("farmOwner","Farm Owner not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
-
-            Firebase fb = (Firebase) getApplicationContext();
-            fb.saveData("farmOwner", name);
-            farmOwner.setHint(name);
-        }
-        if(mPreferences.contains("farmLocation")){
-            String name = mPreferences.getString("farmLocation","Farm Location not set");
-            int end = name.length();
-            name = name.substring(1, end-1);
-
-            Firebase fb = (Firebase) getApplicationContext();
-            fb.saveData("farmLocation", name);
-            farmLocation.setHint(name);
+            farmOwner.setHint(owner);
+            farmLocation.setHint(location);
         }
 
         editFieldsButton.setOnClickListener(new View.OnClickListener(){
@@ -128,8 +121,6 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     /**

@@ -321,6 +321,7 @@ public class Calf {
 
 	public Note getNoteNdx(int i) { return this.notes.get(i); }
 
+	@Exclude
 	public int getNotesSize() { return this.notes.size(); }
 
 	/**
