@@ -51,10 +51,6 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile_feeding_history);
 
-        // Stylize action bar to use back button and custom title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Feeding History");
-
         mFirstFeedingButton = (Button) findViewById(R.id.buttonFirstFeeding);
         mSecondFeedingButton = (Button) findViewById(R.id.buttonSecondFeeding);
 
@@ -67,6 +63,10 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         mSecondLiters = (TextView) findViewById(R.id.textViewSecondLitersValue);
 
         retrieveData();
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Calf " + calfID + " Feeding History");
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
