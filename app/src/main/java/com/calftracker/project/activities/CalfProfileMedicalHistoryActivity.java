@@ -43,10 +43,6 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile_medical_history);
 
-        // Stylize action bar to use back button and custom title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Medical History");
-
         retrieveData();
 
         // try and get calf object made by main activity
@@ -57,6 +53,10 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
 
         json = mPreferences.getString("calfToViewInProfile","");
         calfID = gson.fromJson(json, String.class);
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Calf " + calfID + " Medical History");
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {

@@ -39,11 +39,12 @@
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/listViewGrowthHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAverageGrowth" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphViewHeightHistory"
@@ -52,11 +53,12 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/listViewGrowthHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAverageGrowth" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guidelineVertical50Percent"
@@ -96,6 +98,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+
+    <TextView
+        android:id="@+id/textViewAverageGrowth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Average Growth"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+
+    <TextView
+        android:id="@+id/textViewNoGraphShown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="*Graph will be shown when there are 3 or more recordings."
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/listViewGrowthHistory"
