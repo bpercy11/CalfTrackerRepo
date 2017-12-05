@@ -4,6 +4,8 @@ package com.calftracker.project.models;
  * Created by JT on 11/24/2017.
  */
 
+
+
 public class VaccineTaskItem {
     boolean overdue;
     VaccineTask vaccineTask;

@@ -7,9 +7,12 @@ import android.content.SharedPreferences;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTask;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
@@ -25,6 +28,11 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        // enable offline usability
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        DatabaseReference employeeList = FirebaseDatabase.getInstance().getReference("EmployeeList");
+        employeeList.keepSynced(true);
 
         //final SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
         //final SharedPreferences.Editor editor = sharedPref.edit();

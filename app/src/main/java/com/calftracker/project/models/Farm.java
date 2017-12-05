@@ -43,6 +43,14 @@ public class Farm {
         return this.name;
     }
 
+    public String getOwner() {
+        return this.owner;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
     /***
      *
      * @param passcode

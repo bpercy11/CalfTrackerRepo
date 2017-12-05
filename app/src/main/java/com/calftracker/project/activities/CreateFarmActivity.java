@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Farm;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 
 
@@ -34,6 +36,8 @@ public class CreateFarmActivity extends AppCompatActivity {
     private TextView farmLocationRequired;
     private TextView farmOwnerRequired;
 
+    Firebase fb;
+
     Farm farm;
 
 
@@ -44,6 +48,8 @@ public class CreateFarmActivity extends AppCompatActivity {
 
         // set UI to hide keyboard when user clicks anywhere off the keyboard
         setupUI(findViewById(R.id.createFarmParent));
+
+        fb = (Firebase) getApplicationContext();
 
         Button doneButton = (Button) findViewById(R.id.Create_Farm_Btn);
 
@@ -81,13 +87,7 @@ public class CreateFarmActivity extends AppCompatActivity {
                     farmLocationRequired.setVisibility(View.INVISIBLE);
                 }
 
-
-
                 //dialogBox();
-
-
-
-
 
                 if(!requirementsNotMet) {
                     farm = new Farm(farmName.getText().toString(), farmOwner.getText().toString(), farmLocation.getText().toString());
@@ -104,12 +104,16 @@ public class CreateFarmActivity extends AppCompatActivity {
     }
 
     public void saveData() {
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(farm);
-        prefsEditor.putString("Farm",json);
-        prefsEditor.apply();
+        //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        //SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        //Gson gson = new Gson();
+        //String json = gson.toJson(farm);
+        //prefsEditor.putString("Farm",json);
+        //prefsEditor.apply();
+        Log.d("FARM INFO", farm.getName() + ", " + farm.getOwner() + ", " + farm.getLocation());
+        fb.saveData("farmName", farm.getName());
+        fb.saveData("farmOwner", farm.getOwner());
+        fb.saveData("farmLocation", farm.getLocation());
     }
 
     public void setupUI(View view) {

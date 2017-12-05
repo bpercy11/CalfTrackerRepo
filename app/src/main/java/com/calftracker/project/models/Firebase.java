@@ -21,6 +21,8 @@ import java.util.*;
 import java.util.concurrent.Semaphore;
 
 import android.util.Log;
+
+import com.calftracker.project.activities.SettingsEditEmployeesActivity;
 import com.calftracker.project.models.Calf;
 
 
@@ -162,13 +164,14 @@ public class Firebase extends Application{
 
     public void saveData(String id, String json){
 
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
         SharedPreferences.Editor editor = mPreferences.edit();
 
         //SharedPreferences.Editor = editor = mPreferences.edit();
 
-        editor.putString(id, json);
-        editor.apply();
+        //editor.putString(id, json);
+        //editor.apply();
 
         Long time = Calendar.getInstance().getTimeInMillis();
         Gson gson = new Gson();
@@ -214,8 +217,29 @@ public class Firebase extends Application{
         }
 
         mDatabase.child("CalfIdList").setValue(calfMap);
+    }
 
 
+    public interface OnGetDataListener {
+        //this is for callbacks
+        void onSuccess(DataSnapshot dataSnapshot);
+        void onStart();
+        void onFailure();
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailure();
+            }
+        });
 
     }
 
@@ -248,7 +272,7 @@ public class Firebase extends Application{
                 //ArrayList<Employee> = (ArrayList<Employee>) map.get("EmployeeList");
 
 
-               returnObj(e);
+                returnObj(e);
 
                 Log.d("data1" , "after return");
             }
@@ -259,26 +283,16 @@ public class Firebase extends Application{
             }
 
         });
-        /*
-        while(rObj == null){
-            //Log.d("abcd", "in fb");
-        }
 
-        Log.d("abcd", rObj.toString());
-
-        Object temp = rObj;
-        rObj = null;
-        return temp;
-        */
-        //return null;
 
     }
 
-    public void returnObj(ArrayList<Employee> obj){
+    public ArrayList<Employee> returnObj(ArrayList<Employee> obj){
 
         Log.d("test", "intest");
 
         rObj = obj;
+        return rObj;
 
     }
 

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Farm;
+import com.calftracker.project.models.Firebase;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
         farmLocation = (TextView) findViewById(R.id.farmLocationChangeText);
 
 
+
         saveFieldsButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
@@ -49,7 +52,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
 
                 if(!requirementsNotMet) {
-                    SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                    /*SharedPreferences sharedPref = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     Gson gson = new Gson();
                     String json;
@@ -62,7 +65,12 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
                     json = gson.toJson(farmLocation.getText().toString());
                     editor.putString("farmLocation", json);
-                    editor.apply();
+                    editor.apply();*/
+
+                    Firebase fb = (Firebase) getApplicationContext();
+                    fb.saveData("farmName", farmName.getText().toString());
+                    fb.saveData("farmOwner", farmOwner.getText().toString());
+                    fb.saveData("farmLocation", farmLocation.getText().toString());
 
                     back();
                 }
