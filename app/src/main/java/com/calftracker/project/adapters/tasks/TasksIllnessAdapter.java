@@ -31,9 +31,10 @@ public class TasksIllnessAdapter extends BaseAdapter {
         LinearLayout days;
     }
 
-    public TasksIllnessAdapter(ArrayList<ArrayList<IllnessTask>> data, Context context) {
+    public TasksIllnessAdapter(ArrayList<ArrayList<IllnessTask>> data, Context context, TasksMethods TM) {
         this.dataSet = data;
         this.mContext = context;
+        this.TM = TM;
     }
 
     @Override
@@ -87,6 +88,8 @@ public class TasksIllnessAdapter extends BaseAdapter {
 
                             Toast toast = Toast.makeText(view.getContext(), dataSet.get(getdata).get(j).getIllness().getName(), duration);
                             toast.show();
+
+                            TM.gotoIllnessDetails(dataSet.get(getdata).get(j));
                         }
                     });
 

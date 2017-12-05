@@ -2,6 +2,7 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.fragments.TaskIllnessDetailsFragment;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Calf_Illness;
@@ -263,9 +265,29 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
 
-        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
+        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext(), TasksActivity.this);
 
         listView.setAdapter(illnessAdapter);
+    }
+
+    public void gotoIllnessDetails(IllnessTask illnessTask) {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(illnessTask);
+        prefsEditor.putString("TaskIllnessDetails",json);
+        prefsEditor.apply();
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack if needed
+        // TODO: THIS SHIT RIGHT HURR
+        transaction.add(R.id.taskParent, new TaskIllnessDetailsFragment());
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
     public void setObservationColumnNames() {

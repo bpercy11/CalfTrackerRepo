@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical55percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical45percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:textAlignment="textEnd"
+        android:text="Calf ID"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsIllness"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textAlignment="textEnd"
+        android:text="Illness"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTaskIllnessDetailsID" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsMedication"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textAlignment="textEnd"
+        android:text="Prescribed Medication"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTaskIllnessDetailsIllness" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textAlignment="textEnd"
+        android:text="Date Last Administered"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTaskIllnessDetailsMedication" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsIDValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTaskIllnessDetailsID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTaskIllnessDetailsID" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsIllnessValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTaskIllnessDetailsIllness"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTaskIllnessDetailsIllness" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsMedicationValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTaskIllnessDetailsMedication"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTaskIllnessDetailsMedication" />
+
+    <TextView
+        android:id="@+id/textViewTaskIllnessDetailsDateValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTaskIllnessDetailsDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTaskIllnessDetailsDate" />
+
+    <Button
+        android:id="@+id/buttonTaskIllnessDetailsChangeMedication"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Administer Medication"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/buttonTaskIllnessDetailsAdministerMedication"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonTaskIllnessDetailsMedicationHistory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Medication History"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/buttonTaskIllnessDetailsSymptoms"
+        app:layout_constraintStart_toEndOf="@+id/vertical55percent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonTaskIllnessDetailsAdministerMedication"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Administer Medication"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonTaskIllnessDetailsSymptoms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Symptoms Alleviated"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent" />
+
+</android.support.constraint.ConstraintLayout>
