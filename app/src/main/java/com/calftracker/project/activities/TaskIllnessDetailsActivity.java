@@ -1,4 +1,4 @@
-package com.calftracker.project.fragments;
+package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
@@ -21,7 +22,7 @@ import java.util.Calendar;
  * Created by JT on 12/5/2017.
  */
 
-public class TaskIllnessDetailsFragment extends Fragment {
+public class TaskIllnessDetailsActivity extends BaseActivity {
 
     IllnessTask illnessTask;
     Task task;
@@ -33,20 +34,25 @@ public class TaskIllnessDetailsFragment extends Fragment {
 
     int dateLastAdministered;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View v = inflater.inflate(R.layout.fragment_task_illness_details, container, false);
+        getLayoutInflater().inflate(R.layout.activity_task_illness_details, frameLayout);
+        mNavigationView.getMenu().findItem(R.id.nav_tasks).setChecked(true);
 
-        mCalfID = (TextView) v.findViewById(R.id.textViewTaskIllnessDetailsIDValue);
-        mIllness = (TextView) v.findViewById(R.id.textViewTaskIllnessDetailsIllnessValue);
-        mMedication = (TextView) v.findViewById(R.id.textViewTaskIllnessDetailsMedicationValue);
-        mDateLastAdministered = (TextView) v.findViewById(R.id.textViewTaskIllnessDetailsDateValue);
+        // Custom title
+        getSupportActionBar().setTitle(R.string.tasks_title);
+
+        mCalfID = (TextView) findViewById(R.id.textViewTaskIllnessDetailsIDValue);
+        mIllness = (TextView) findViewById(R.id.textViewTaskIllnessDetailsIllnessValue);
+        mMedication = (TextView) findViewById(R.id.textViewTaskIllnessDetailsMedicationValue);
+        mDateLastAdministered = (TextView) findViewById(R.id.textViewTaskIllnessDetailsDateValue);
 
 
         retrieveData();
 
         // Load in the IllnessTask object to view
-        SharedPreferences mPreferences = this.getActivity().getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = mPreferences.getString("TaskIllnessDetails", "");
         illnessTask = gson.fromJson(json, new TypeToken<IllnessTask>() {}.getType());
@@ -74,8 +80,6 @@ public class TaskIllnessDetailsFragment extends Fragment {
         } else {
             mDateLastAdministered.setText("Has not been administered");
         }
-
-        return v;
     }
 
     public void saveData() {
@@ -84,7 +88,7 @@ public class TaskIllnessDetailsFragment extends Fragment {
 
     public void retrieveData() {
         // Load in the Task object
-        SharedPreferences mPreferences = this.getActivity().getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = mPreferences.getString("Task", "");
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());

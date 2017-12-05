@@ -17,11 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
-import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.fragments.TaskIllnessDetailsFragment;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Calf_Illness;
@@ -278,16 +276,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         prefsEditor.putString("TaskIllnessDetails",json);
         prefsEditor.apply();
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack if needed
-        // TODO: THIS SHIT RIGHT HURR
-        transaction.add(R.id.taskParent, new TaskIllnessDetailsFragment());
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
+        Intent intent = new Intent(this, TaskIllnessDetailsActivity.class);
+        startActivity(intent);
     }
 
     public void setObservationColumnNames() {
