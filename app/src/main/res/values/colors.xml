@@ -8,4 +8,6 @@
     <color name="colorDarkGrey">#424242</color>
     <color name="colorMedGrey">#7D7D7D</color>
     <color name="colorLightGrey">#D7D7D7</color>
+    <color name="colorMaleBlue">#3DACC4</color>
+    <color name="colorFemalePink">#EB6CA1</color>
 </resources>

@@ -190,6 +190,7 @@
     <string name="title_activity_edit_illness_profile_medicine_selection">Edit Medicines</string>
 
     <string name="insights_title">Insights</string>
+    <string name="insights_chart_gender">Calf Gender</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_switch_english">Switch language to English</string>
