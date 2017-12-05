@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.MedicineSelectionItem;
@@ -119,6 +120,8 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
         prefsEditor.putString("IllnessList",json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("IllnessList", illnessList);
 
         // go to Add Illness activity
         Intent intent = new Intent(this,IllnessActivity.class);
