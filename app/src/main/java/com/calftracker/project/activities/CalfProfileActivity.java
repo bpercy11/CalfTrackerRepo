@@ -46,6 +46,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import static com.calftracker.project.activities.AddCalfActivity.REQUEST_IMAGE_CAPTURE;
@@ -883,6 +884,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
                 mWeightValue.setText(Double.toString(weight) + " lbs");
 
+                Collections.sort(calf.getPhysicalHistory());
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {
                         calfList.set(j, calf);
@@ -988,6 +990,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
                 mHeightValue.setText(Double.toString(height) + " in");
 
+                Collections.sort(calf.getPhysicalHistory());
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {
                         calfList.set(j, calf);

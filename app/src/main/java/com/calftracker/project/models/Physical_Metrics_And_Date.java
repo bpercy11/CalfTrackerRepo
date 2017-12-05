@@ -1,9 +1,11 @@
 package com.calftracker.project.models;
 
+import android.support.annotation.NonNull;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Physical_Metrics_And_Date {
+public class Physical_Metrics_And_Date implements Comparable<Physical_Metrics_And_Date> {
 	private double weight;
 	private double height;
 
@@ -113,5 +115,10 @@ public class Physical_Metrics_And_Date {
 		this.year = dateRecorded.get(Calendar.YEAR);
 		this.month = dateRecorded.get(Calendar.MONTH);
 		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
+	}
+
+	@Override
+	public int compareTo(@NonNull Physical_Metrics_And_Date o) {
+		return makeDateRecorded().compareTo(o.makeDateRecorded());
 	}
 }
