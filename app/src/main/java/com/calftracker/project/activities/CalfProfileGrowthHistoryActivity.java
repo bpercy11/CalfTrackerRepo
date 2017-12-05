@@ -15,8 +15,13 @@ import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
 
@@ -62,10 +67,31 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listViewGrowthHistory);
         if (calf.getPhysicalHistory().isEmpty() || noWeights) {
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.VISIBLE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
+            findViewById(R.id.graphViewWeightHistory).setVisibility(View.GONE);
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
         } else {
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
+            GraphView graph = (GraphView) findViewById(R.id.graphViewWeightHistory);
+            graph.removeAllSeries();
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+            for (int i = 0; i < calf.getPhysicalHistory().size(); i++) {
+                if (calf.getPhysicalHistory().get(i).getWeight() != -1) {
+                    Date tempDate = calf.getPhysicalHistory().get(i).makeDateRecorded().getTime();
+                    series.appendData(new DataPoint(tempDate, calf.getPhysicalHistory().get(i).getWeight()), true, calf.getPhysicalHistory().size());
+                }
+            }
+            graph.addSeries(series);
+            graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+            graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+            // set manual x bounds to have nice steps
+            graph.getViewport().setMinX(series.getLowestValueX());
+            graph.getViewport().setMaxX(series.getHighestValueX());
+            graph.getViewport().setXAxisBoundsManual(true);
+            // as we use dates as labels, the human rounding to nice readable numbers is not necessary
+            graph.getGridLabelRenderer().setHumanRounding(false);
         }
 
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
@@ -91,10 +117,32 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         if (calf.getPhysicalHistory().isEmpty() || noWeights) {
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.VISIBLE);
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
+            findViewById(R.id.graphViewWeightHistory).setVisibility(View.GONE);
         } else {
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
+            findViewById(R.id.graphViewWeightHistory).setVisibility(View.VISIBLE);
         }
+        GraphView graph = (GraphView) findViewById(R.id.graphViewWeightHistory);
+        graph.removeAllSeries();
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+        for (int i = 0; i < calf.getPhysicalHistory().size(); i++) {
+            if (calf.getPhysicalHistory().get(i).getWeight() != -1) {
+                Date tempDate = calf.getPhysicalHistory().get(i).makeDateRecorded().getTime();
+                series.appendData(new DataPoint(tempDate, calf.getPhysicalHistory().get(i).getWeight()), true, calf.getPhysicalHistory().size());
+            }
+        }
+        graph.addSeries(series);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+        // set manual x bounds to have nice steps
+        graph.getViewport().setMinX(series.getLowestValueX());
+        graph.getViewport().setMaxX(series.getHighestValueX());
+        graph.getViewport().setXAxisBoundsManual(true);
+        // as we use dates as labels, the human rounding to nice readable numbers is not necessary
+        graph.getGridLabelRenderer().setHumanRounding(false);
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
     }
@@ -104,10 +152,32 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         if (calf.getPhysicalHistory().isEmpty() || noHeights) {
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.VISIBLE);
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
+            findViewById(R.id.graphViewWeightHistory).setVisibility(View.GONE);
         } else {
             findViewById(R.id.textViewNoWeightRecorded).setVisibility(View.GONE);
             findViewById(R.id.textViewNoHeightRecorded).setVisibility(View.GONE);
+            findViewById(R.id.graphViewWeightHistory).setVisibility(View.INVISIBLE);
+            findViewById(R.id.graphViewHeightHistory).setVisibility(View.VISIBLE);
         }
+        GraphView graph = (GraphView) findViewById(R.id.graphViewHeightHistory);
+        graph.removeAllSeries();
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+        for (int i = 0; i < calf.getPhysicalHistory().size(); i++) {
+            if (calf.getPhysicalHistory().get(i).getHeight() != -1) {
+                Date tempDate = calf.getPhysicalHistory().get(i).makeDateRecorded().getTime();
+                series.appendData(new DataPoint(tempDate, calf.getPhysicalHistory().get(i).getHeight()), true, calf.getPhysicalHistory().size());
+            }
+        }
+        graph.addSeries(series);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+        // set manual x bounds to have nice steps
+        graph.getViewport().setMinX(series.getLowestValueX());
+        graph.getViewport().setMaxX(series.getHighestValueX());
+        graph.getViewport().setXAxisBoundsManual(true);
+        // as we use dates as labels, the human rounding to nice readable numbers is not necessary
+        graph.getGridLabelRenderer().setHumanRounding(false);
         heightAdapter = new GrowthHistoryHeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(heightAdapter);
     }

@@ -148,9 +148,21 @@ public class CalfProfileActivity extends AppCompatActivity {
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
 
         // Create these variables for code readability
+        mostRecentWeight = -1;
+        mostRecentHeight = -1;
         if (!calf.getPhysicalHistory().isEmpty()) {
-            mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
-            mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
+            for (int i = calf.getPhysicalHistory().size()-1; i >= 0; i--) {
+                if (calf.getPhysicalHistory().get(i).getWeight() != -1) {
+                    mostRecentWeight = calf.getPhysicalHistory().get(i).getWeight();
+                    break;
+                }
+            }
+            for (int i = calf.getPhysicalHistory().size()-1; i >= 0; i--) {
+                if (calf.getPhysicalHistory().get(i).getHeight() != -1) {
+                    mostRecentHeight = calf.getPhysicalHistory().get(i).getHeight();
+                    break;
+                }
+            }
         }
 
         // Custom layout for text dialogs
@@ -882,9 +894,17 @@ public class CalfProfileActivity extends AppCompatActivity {
                     calf.getPhysicalHistory().add(size);
                 }
 
-                mWeightValue.setText(Double.toString(weight) + " lbs");
-
                 Collections.sort(calf.getPhysicalHistory());
+
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = calf.getPhysicalHistory().size()-1; j >= 0; j--) {
+                        if (calf.getPhysicalHistory().get(j).getWeight() != -1) {
+                            mWeightValue.setText(Double.toString(calf.getPhysicalHistory().get(j).getWeight()) + " lbs");
+                            break;
+                        }
+                    }
+                }
+
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {
                         calfList.set(j, calf);
@@ -988,9 +1008,17 @@ public class CalfProfileActivity extends AppCompatActivity {
                     calf.getPhysicalHistory().add(size);
                 }
 
-                mHeightValue.setText(Double.toString(height) + " in");
-
                 Collections.sort(calf.getPhysicalHistory());
+
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = calf.getPhysicalHistory().size()-1; j >= 0; j--) {
+                        if (calf.getPhysicalHistory().get(j).getHeight() != -1) {
+                            mHeightValue.setText(Double.toString(calf.getPhysicalHistory().get(j).getHeight()) + " in");
+                            break;
+                        }
+                    }
+                }
+
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {
                         calfList.set(j, calf);

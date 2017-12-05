@@ -33,6 +33,31 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical50Percent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphViewWeightHistory"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/listViewGrowthHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphViewHeightHistory"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/listViewGrowthHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+
     <android.support.constraint.Guideline
         android:id="@+id/guidelineVertical50Percent"
         android:layout_width="wrap_content"
@@ -83,5 +108,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWeight" />
+        app:layout_constraintTop_toBottomOf="@+id/graphViewWeightHistory" />
 </android.support.constraint.ConstraintLayout>
