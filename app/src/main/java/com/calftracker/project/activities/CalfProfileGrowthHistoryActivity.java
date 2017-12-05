@@ -3,10 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.calftracker.project.adapters.calfprofile.GrowthHistoryHeightAdapter;
@@ -30,6 +33,9 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
     private boolean noHeights = true;
 
     ListView listview;
+
+    Button heightButton;
+    Button weightButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,15 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
 
+        heightButton = (Button) findViewById(R.id.buttonHeight);
+        weightButton = (Button) findViewById(R.id.buttonWeight);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void retrieveData() {
@@ -91,6 +106,15 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         }
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            heightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            heightButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void onClickHeightButton(View view) {
@@ -104,6 +128,15 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         }
         heightAdapter = new GrowthHistoryHeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(heightAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            heightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            heightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void noRecordingsCheck() {

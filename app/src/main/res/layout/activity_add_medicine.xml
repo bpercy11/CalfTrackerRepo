@@ -217,7 +217,7 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorAccent"
                 android:onClick="onMProfile_removeButton"
                 android:text="Delete Medicine"
                 android:textColor="@android:color/white"

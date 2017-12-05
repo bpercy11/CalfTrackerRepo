@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
-import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
@@ -53,6 +54,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     TextView mRightLabel;
     TextView mCenterLabel;
 
+    Button vaccinesButton;
+    Button observationsButton;
+    Button illnessesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,16 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
 
+        vaccinesButton = (Button) findViewById(R.id.buttonVaccineTasks);
+        observationsButton = (Button) findViewById(R.id.buttonObservationTasks);
+        illnessesButton = (Button) findViewById(R.id.buttonIllnessTasks);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void dumbDateChange(View view) {
@@ -125,18 +139,26 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
             if(calfList.get(i).isNeedToObserveForIllness())
                 observeCalves.add(calfList.get(i));
 
-
-
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
         listView.setAdapter(observationAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void showObservationDialog(Calf calf) {
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
-
 
         final View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
 
@@ -160,8 +182,6 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         });
 
         mIllnessSpinner.setAdapter(spinnerAdapter);
-
-
 
         final Calf calfcopy = calf;
 
@@ -258,14 +278,35 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
 
         TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
-
         listView.setAdapter(illnessAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void setObservationColumnNames() {
