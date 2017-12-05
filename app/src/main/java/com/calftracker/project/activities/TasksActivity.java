@@ -2,6 +2,7 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
-import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
@@ -263,9 +263,21 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
 
-        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
+        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext(), TasksActivity.this);
 
         listView.setAdapter(illnessAdapter);
+    }
+
+    public void gotoIllnessDetails(IllnessTask illnessTask) {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(illnessTask);
+        prefsEditor.putString("TaskIllnessDetails",json);
+        prefsEditor.apply();
+
+        Intent intent = new Intent(this, TaskIllnessDetailsActivity.class);
+        startActivity(intent);
     }
 
     public void setObservationColumnNames() {
