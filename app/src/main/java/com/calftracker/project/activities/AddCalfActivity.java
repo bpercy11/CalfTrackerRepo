@@ -37,12 +37,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddCalfActivity extends BaseActivity {
     // honestly not sure what this does -JT
     private static final String TAG = "AddCalfActivity";
+
+    private ArrayList<Calf> calfList;
 
     // variables related to date selection
     private TextView mDisplayDate;
@@ -199,8 +202,10 @@ public class AddCalfActivity extends BaseActivity {
     }
 
     public void retrieveData() {
-        // EMPTY METHOD TO KEEP CONSISTENCY
-        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPreferences.getString("CalfList","");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
     }
 
     public void setupUI(View view) {
@@ -246,8 +251,21 @@ public class AddCalfActivity extends BaseActivity {
             return;
         }
 
+        // Check to make sure a duplicate calf is not being created
+        retrieveData();
+        for (int i = 0; i < calfList.size(); i++) {
+            if (calfList.get(i).getFarmId().equals(calfID)) {
+                ID.setText("");
+                CharSequence text = "A calf with this ID already exists, please choose a new ID or delete the other calf";
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                toast.show();
+                return;
+            }
+        }
+
         // error checking on calf id input length
         if (calfID.length() > 9 || calfID.length() < 1) {
+            ID.setText("");
             CharSequence text = "ID number must be between 1 and 9 digits";
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();

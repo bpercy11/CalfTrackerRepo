@@ -134,64 +134,7 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
             for (int i = 0; i < adapterArray.size(); i++) {
                 if (adapterArray.get(i).getChecked()) {
                     calf.getNeededVaccines().add(adapterArray.get(i).getVaccine());
-
                     task.placeVaccineInTasks(adapterArray.get(i).getVaccine(), calf);
-
-//                    // Set up variables to be used in calculating dates and differences
-//                    int calfYear = calfCal.get(Calendar.YEAR);
-//                    int calfMonth = calfCal.get(Calendar.MONTH);
-//                    int calfDay = calfCal.get(Calendar.DATE);
-//                    int todayYear = Calendar.getInstance().get(Calendar.YEAR);
-//                    int todayMonth = Calendar.getInstance().get(Calendar.MONTH);
-//                    int todayDay = Calendar.getInstance().get(Calendar.DATE);
-//                    Calendar today = Calendar.getInstance();
-//                    Calendar startDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
-//                    Calendar endDate = new GregorianCalendar(calfYear, calfMonth, calfDay);
-//                    startDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
-//                    endDate.add(Calendar.DAY_OF_YEAR, adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
-//
-//                    int startYear = startDate.get(Calendar.YEAR);
-//                    int startMonth = startDate.get(Calendar.MONTH);
-//                    int startDay = startDate.get(Calendar.DATE);
-//                    int endYear = endDate.get(Calendar.YEAR);
-//                    int endMonth = endDate.get(Calendar.MONTH);
-//                    int endDay = endDate.get(Calendar.DATE);
-//
-//                    // Calculate the number of days between today and the calf's DOB
-//                    int diff = 0;
-//                    if (todayMonth == calfMonth) {
-//                        diff = Math.abs(todayDay - calfDay);
-//                    } else if (todayMonth > calfMonth) {
-//                        int monthDiff = todayMonth - calfMonth;
-//                        int daysInMonth = calfCal.getActualMaximum(Calendar.DAY_OF_MONTH);
-//                        diff += daysInMonth - calfDay;
-//                        diff += todayDay;
-//                        if (monthDiff > 1) {
-//                            for (int j = 1; j < monthDiff; j++) {
-//                                today.add(Calendar.MONTH, -1);
-//                                diff += today.getActualMaximum(Calendar.DAY_OF_MONTH);
-//                            }
-//                        }
-//                    }
-//
-//                    // Testing stuff for dates and adding days
-//                    //Log.i("", "today : " + startMonth + "/" + startDay + "/" + startYear);
-//                    Log.i("vaccine", "vaccine : " + vaccineList.get(i).getName());
-//                    Log.i("startint", "start int : " + adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[0]);
-//                    Log.i("start", "startDate : " + startMonth + "/" + startDay + "/" + startYear);
-//                    Log.i("endint", "end int : " + adapterArray.get(i).getVaccine().getToBeAdministered().get(0).getSpan()[1]);
-//                    Log.i("end", "endDate : " + endMonth + "/" + endDay + "/" + endYear);
-//
-//
-//                    VaccineTask vaccTaskStart = new VaccineTask(vaccineList.get(i), calf, true);
-//                    VaccineTask vaccTaskEnd = new VaccineTask(vaccineList.get(i), calf, false);
-//
-//                    int startIndex = vaccineList.get(i).getToBeAdministered().get(0).getSpan()[0] - diff;
-//                    int endIndex = vaccineList.get(i).getToBeAdministered().get(0).getSpan()[1] - diff;
-//
-//                    task.getVaccinesToAdminister().get(startIndex).add(vaccTaskStart);
-//                    task.getVaccinesToAdminister().get(endIndex).add(vaccTaskEnd);
-
                 }
             }
         }
@@ -202,10 +145,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
 
         // Save the calfList, task, and vaccineList to local storage, change to firebase
         saveData();
-
-
-//
-
 
         // this is a lazy way to pass the newly created calf to the calf profile but whatever.
         // in calf profile we use the string in this shared preference object to iterate through

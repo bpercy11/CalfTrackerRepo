@@ -176,16 +176,20 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         }
         weightCount = weights.size();
         heightCount = heights.size();
-        double weightDaysBetween = (double) calendarDaysBetween(weights.get(0).makeDateRecorded(), weights.get(weights.size()-1).makeDateRecorded());
-        double heightDaysBetween = (double) calendarDaysBetween(heights.get(0).makeDateRecorded(), heights.get(heights.size()-1).makeDateRecorded());
-        double weightDiff = weights.get(weights.size()-1).getWeight() - weights.get(0).getWeight();
-        double heightDiff = heights.get(heights.size()-1).getHeight() - heights.get(0).getHeight();
-        avgWeight = weightDiff/weightDaysBetween;
-        avgHeight = heightDiff/heightDaysBetween;
-        // Only show up to two decimal places
-        avgWeight = Math.floor(avgWeight * 100) / 100;
-        avgHeight = Math.floor(avgHeight * 100) / 100;
-
+        if (weights.size() >= 3) {
+            double weightDaysBetween = (double) calendarDaysBetween(weights.get(0).makeDateRecorded(), weights.get(weights.size()-1).makeDateRecorded());
+            double weightDiff = weights.get(weights.size()-1).getWeight() - weights.get(0).getWeight();
+            avgWeight = weightDiff/weightDaysBetween;
+            // Only show up to two decimal places
+            avgWeight = Math.floor(avgWeight * 100) / 100;
+        }
+        if (heights.size() >= 3) {
+            double heightDaysBetween = (double) calendarDaysBetween(heights.get(0).makeDateRecorded(), heights.get(heights.size()-1).makeDateRecorded());
+            double heightDiff = heights.get(heights.size()-1).getHeight() - heights.get(0).getHeight();
+            avgHeight = heightDiff/heightDaysBetween;
+            // Only show up to two decimal places
+            avgHeight = Math.floor(avgHeight * 100) / 100;
+        }
     }
 
     public void createWeightGraph() {
