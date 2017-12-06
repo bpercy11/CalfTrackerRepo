@@ -22,8 +22,9 @@ public class IllnessProfileActivity extends AppCompatActivity {
 
     private ArrayList<Illness> illnessList;
     private Illness illness;
-    private String illnessNotesStr;
+    private String treatmentProtocolStr;
     private int illnessPosition;
+    List<Medicine> tpMedicines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +63,12 @@ public class IllnessProfileActivity extends AppCompatActivity {
         for (int i = 0; i < illnessList.size(); i++){
             if(illnessList.get(i).getName().equals(illness.getName())){
                 illnessPosition = i;
+                tpMedicines = illnessList.get(i).getTreatmentProtocol().getMedicines();
             }
         }
 
-        String treatmentProtocolStr = "";
-        List<Medicine> tpMedicines = illness.getTreatmentProtocol().getMedicines();
+        treatmentProtocolStr = "";
+        //List<Medicine> tpMedicines = illnessList.get(illnessPosition).getTreatmentProtocol().getMedicines();
 
         //Creating Treatment String
         for (int i = 0; i < tpMedicines.size(); i++){
