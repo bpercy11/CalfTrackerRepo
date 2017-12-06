@@ -289,6 +289,14 @@ public class Firebase extends Application{
     public void saveData(String str, Object o){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(str).setValue(o);
+
+        //update last edit time w/ each save
+        Long time = Calendar.getInstance().getTimeInMillis();
+        Gson gson = new Gson();
+        String json2 = gson.toJson(time.toString());
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("LastEditTime").setValue(json2);
+
     }
 
     /**
