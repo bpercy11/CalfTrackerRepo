@@ -32,8 +32,11 @@ public class MedicineProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // Custom title
+        getSupportActionBar().setTitle(medicine.getName());
 
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked medicine
@@ -43,19 +46,6 @@ public class MedicineProfileActivity extends AppCompatActivity {
             Gson gson = new Gson();
             String json = mPreferences.getString("MedicineProfile", "");
             medicine = gson.fromJson(json, new TypeToken<Medicine>() {
-            }.getType());
-        }
-
-        // Custom title
-        getSupportActionBar().setTitle(medicine.getName());
-
-        //Load MedicineList
-        if(mPreferences.contains("MedicineList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("MedicineList", "");
-            medicineList = gson.fromJson(json, new TypeToken<ArrayList<Medicine>>() {
             }.getType());
         }
 
@@ -72,6 +62,17 @@ public class MedicineProfileActivity extends AppCompatActivity {
         medicineDosageUnits.setText(medicine.getDosage_units());
         medicineTimeActive.setText(Integer.toString(medicine.getTimeActive()) + " days");
         medicineNotes.setText(medicine.getNotes());
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void onMProfile_editButton(View view){

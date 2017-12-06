@@ -44,19 +44,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         // get needed UI elements
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
 
-        // set up shared preference variables
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-
-        json = mPreferences.getString("CalfList", "");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
-
-        json = mPreferences.getString("vaccToViewInTaskDetails","");
-        vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
-
-        json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+        retrieveData();
 
         adapterArray = new ArrayList<>();
         ArrayList<Calf> vaccineCalfList = new ArrayList<>();
@@ -91,6 +79,37 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        // Save the calf to the device
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        json = mPreferences.getString("CalfList", "");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+
+        json = mPreferences.getString("vaccToViewInTaskDetails","");
+        vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
+
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
     }
 
     public void onClickSelectAll(View view) {
@@ -142,17 +161,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
                         task.getOverdueVaccinations().remove(j);
 
 
-                // Save the calf to the device
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
-
-                json = gson.toJson(task);
-                prefsEditor.putString("Task",json);
-                prefsEditor.apply();
+                saveData();
 
                 adapter.notifyDataSetChanged();
             }

@@ -33,6 +33,9 @@ public class IllnessProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Custom title
+        getSupportActionBar().setTitle(illness.getName());
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked Illness
@@ -43,26 +46,6 @@ public class IllnessProfileActivity extends AppCompatActivity {
             String json = mPreferences.getString("IllnessProfile", "");
             illness = gson.fromJson(json, new TypeToken<Illness>() {
             }.getType());
-        }
-
-        // Custom title
-        getSupportActionBar().setTitle(illness.getName());
-
-        //Load IllnessList
-        if(mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("IllnessList", "");
-            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
-            }.getType());
-        }
-
-        //Finding position of illness object
-        for (int i = 0; i < illnessList.size(); i++){
-            if(illnessList.get(i).getName().equals(illness.getName())){
-                illnessPosition = i;
-            }
         }
 
         String treatmentProtocolStr = "";
@@ -86,6 +69,17 @@ public class IllnessProfileActivity extends AppCompatActivity {
         treatmentProtocol.setText(treatmentProtocolStr);
         illnessNotes.setText(illness.getTreatmentProtocol().getNotes());
 
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void onIllnessProfile_EditButton(View view){

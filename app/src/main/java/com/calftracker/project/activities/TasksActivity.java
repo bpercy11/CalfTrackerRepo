@@ -68,23 +68,11 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         mCenterLabel = (TextView) findViewById(R.id.textViewIllnessNameTasks);
 
 
-        // Load in the Task and CalfList
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
-        json = mPreferences.getString("CalfList", "");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
-
-        json = mPreferences.getString("IllnessList", "");
-        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        retrieveData();
 
         task.updateTasks();
 
-        SharedPreferences.Editor prefsEditor = mPreferences.edit();
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
+        saveData();
 
         // ArrayList that holds all of the Vaccine Tasks for the current day
         ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
@@ -110,6 +98,34 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
 
+    }
+
+    // TODO
+    public void saveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+        SharedPreferences.Editor prefsEditor = mPreferences.edit();
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // Load in the Task and CalfList
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+        json = mPreferences.getString("CalfList", "");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+
+        json = mPreferences.getString("IllnessList", "");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
     }
 
     public void dumbDateChange(View view) {
@@ -224,18 +240,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
             task.getIllnessTracker().get(0).add(new IllnessTask(illness, medication, calfToRemove));
         }
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-        SharedPreferences.Editor prefsEditor = mPreferences.edit();
-
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
-
-        json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
+        saveData();
 
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
