@@ -3,10 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.calftracker.project.adapters.calfprofile.MedicalHistoryAdministeredVaccineAdapter;
@@ -34,9 +37,12 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
     MedicalHistoryAdministeredVaccineAdapter administeredVacAdapter;
 
     Task task;
-
-
     ListView mlistview;
+
+    Button vaccinesButton;
+    Button illnessButton;
+    Button neededButton;
+    Button administeredButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,18 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         neededVacAdapter = new MedicalHistoryNeededVaccineAdapter(getApplicationContext(),calf.getNeededVaccines(),CalfProfileMedicalHistoryActivity.this);
 
         mlistview.setAdapter(neededVacAdapter);
+
+        vaccinesButton = (Button) findViewById(R.id.buttonVaccines);
+        illnessButton = (Button) findViewById(R.id.buttonIllneses);
+        neededButton = (Button) findViewById(R.id.buttonNeeded);
+        administeredButton = (Button) findViewById(R.id.buttonAdministered);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            neededButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            neededButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void retrieveData() {
@@ -103,11 +121,29 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
     public void clickAdministeredButton(View view) {
         administeredVacAdapter = new MedicalHistoryAdministeredVaccineAdapter(getApplicationContext(),calf.getAdministeredVaccines(), CalfProfileMedicalHistoryActivity.this);
         mlistview.setAdapter(administeredVacAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            neededButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            neededButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            administeredButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            administeredButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void clickNeededButton(View view) {
         neededVacAdapter = new MedicalHistoryNeededVaccineAdapter(getApplicationContext(),calf.getNeededVaccines(),CalfProfileMedicalHistoryActivity.this);
         mlistview.setAdapter(neededVacAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            neededButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            neededButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            administeredButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            administeredButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     @Override
@@ -153,7 +189,6 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         }
 
         saveData();
-
         administeredVacAdapter.notifyDataSetChanged();
     }
 

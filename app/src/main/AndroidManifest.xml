@@ -56,6 +56,7 @@
         <activity android:name="com.calftracker.project.activities.SettingsChangeFarmInfoActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEmployeeProfileActivity"></activity>
         <activity android:name="com.calftracker.project.activities.SettingsEditEmployeeProfileActivity"></activity>
+        <activity android:name="com.calftracker.project.activities.InsightsActivity" />
     </application>
 
 </manifest>

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewElligible"
+        android:id="@+id/textVieweligible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -39,5 +39,5 @@
         android:src="@drawable/ic_error_red_24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewElligible"/>
+        app:layout_constraintEnd_toStartOf="@+id/textVieweligible"/>
 </android.support.constraint.ConstraintLayout>

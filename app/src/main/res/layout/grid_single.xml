@@ -10,7 +10,7 @@
         android:id="@+id/grid_image"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:tint="@color/colorIcon" />
+        android:tint="@color/colorDarkGrey" />
 
     <TextView
         android:id="@+id/grid_text"

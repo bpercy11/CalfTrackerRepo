@@ -6,74 +6,64 @@
     android:layout_height="match_parent"
     tools:context="com.calftracker.project.activities.AddIllnessMedicineSelectionActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical55percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical45percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/vertical55percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.55" />
+    <ListView
+        android:id="@+id/listViewMedicineSelection"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCancelSelectMedicines"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSelectAllMedicines" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/vertical45percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45" />
+    <Button
+        android:id="@+id/buttonSelectAllMedicines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickSelectAllMedicines"
+        android:text="Select all"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <ListView
-                android:id="@+id/listViewMedicineSelection"
-                android:layout_width="0dp"
-                android:layout_height="345dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSelectAllMedicines" />
+    <Button
+        android:id="@+id/buttonCancelSelectMedicines"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClickBackMedicines"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical45percent" />
 
-            <Button
-                android:id="@+id/buttonSelectAllMedicines"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="onClickSelectAllMedicines"
-                android:text="Select all"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/buttonConfirmMedicines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onConfirmMedicines"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancelSelectMedicines"
+        app:layout_constraintStart_toStartOf="@+id/vertical55percent"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelSelectMedicines" />
 
-            <Button
-                android:id="@+id/buttonCancelSelectMedicines"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginBottom="32dp"
-                android:layout_marginTop="16dp"
-                android:onClick="onClickBackMedicines"
-                android:text="Back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/vertical45percent"
-                app:layout_constraintTop_toBottomOf="@+id/listViewMedicineSelection" />
-
-            <Button
-                android:id="@+id/buttonConfirmMedicines"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onConfirmMedicines"
-                android:text="Add"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonCancelSelectMedicines"
-                app:layout_constraintStart_toStartOf="@+id/vertical55percent"
-                app:layout_constraintTop_toTopOf="@+id/buttonCancelSelectMedicines" />
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 </android.support.constraint.ConstraintLayout>

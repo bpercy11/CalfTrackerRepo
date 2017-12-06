@@ -54,6 +54,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
                 }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_insights).isChecked()) {
+                    title = getString(R.string.insights_title);
+                }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_settings).isChecked()) {
                     title = getString(R.string.settings_title);
                 }
@@ -78,6 +81,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_protocols).isChecked()) {
                     title = getString(R.string.protocols_title);
+                }
+                else if (mNavigationView.getMenu().findItem(R.id.nav_insights).isChecked()) {
+                    title = getString(R.string.insights_title);
                 }
                 else if (mNavigationView.getMenu().findItem(R.id.nav_settings).isChecked()) {
                     title = getString(R.string.settings_title);
@@ -160,6 +166,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 if (!getIntent().filterEquals(intent)) {
                     Intent medicalIntent = new Intent(BaseActivity.this, MedicineActivity.class);
                     if (!getIntent().filterEquals(intent) && !getIntent().filterEquals(medicalIntent)) {
+                        item.setChecked(true);
+                        startActivity(intent);
+                    }
+                }
+                break;
+            case R.id.nav_insights: intent = new Intent(BaseActivity.this,InsightsActivity.class);
+                if (!getIntent().filterEquals(intent)) {
+                    if (!getIntent().filterEquals(intent) && !getIntent().filterEquals(intent)) {
                         item.setChecked(true);
                         startActivity(intent);
                     }

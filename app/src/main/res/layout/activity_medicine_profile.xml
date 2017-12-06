@@ -180,23 +180,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/medicine_profile_notes" />
 
-            <Button
-                android:id="@+id/medicine_profile_removeButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="50dp"
-                android:background="@color/colorPrimaryDark"
-                android:onClick="onMProfile_removeButton"
-                android:text="Delete Medicine"
-                android:textColor="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/medicine_profile_notesData" />
-
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

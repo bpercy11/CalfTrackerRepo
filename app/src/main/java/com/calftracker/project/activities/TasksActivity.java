@@ -5,7 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
-import com.calftracker.project.adapters.tasks.TasksIllnessListViewAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
 import com.calftracker.project.adapters.tasks.TasksVaccinationAdapter;
 import com.calftracker.project.calftracker.R;
@@ -53,6 +56,9 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     TextView mRightLabel;
     TextView mCenterLabel;
 
+    Button vaccinesButton;
+    Button observationsButton;
+    Button illnessesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +70,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         getSupportActionBar().setTitle(R.string.tasks_title);
 
         mLeftLabel = (TextView) findViewById(R.id.textViewVaccineNameTitle);
-        mRightLabel = (TextView) findViewById(R.id.textViewElligibleTitle);
+        mRightLabel = (TextView) findViewById(R.id.textVieweligibleTitle);
         mCenterLabel = (TextView) findViewById(R.id.textViewIllnessNameTasks);
-
 
         // Load in the Task and CalfList
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -110,6 +115,16 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
 
+        vaccinesButton = (Button) findViewById(R.id.buttonVaccineTasks);
+        observationsButton = (Button) findViewById(R.id.buttonObservationTasks);
+        illnessesButton = (Button) findViewById(R.id.buttonIllnessTasks);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void dumbDateChange(View view) {
@@ -125,18 +140,26 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
             if(calfList.get(i).isNeedToObserveForIllness())
                 observeCalves.add(calfList.get(i));
 
-
-
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
         listView.setAdapter(observationAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void showObservationDialog(Calf calf) {
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
-
 
         final View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
 
@@ -161,15 +184,13 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         mIllnessSpinner.setAdapter(spinnerAdapter);
 
-
-
         final Calf calfcopy = calf;
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView)
                 // Add action buttons
-                .setPositiveButton("Confirm Illness", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Illness illness = (Illness) mIllnessSpinner.getSelectedItem();
@@ -258,14 +279,35 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
         listView.setAdapter(vaccineAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
 
         TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
-
         listView.setAdapter(illnessAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            vaccinesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            vaccinesButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            observationsButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            observationsButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+            illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
     }
 
     public void setObservationColumnNames() {
@@ -277,7 +319,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     public void setVaccineColumnNames() {
         mLeftLabel.setText(R.string.tasks_vaccine_name);
-        mRightLabel.setText(R.string.tasks_vaccine_elligible);
+        mRightLabel.setText(R.string.tasks_vaccine_eligible);
         if(mCenterLabel.getVisibility() == View.VISIBLE)
             mCenterLabel.setVisibility(View.GONE);
     }
@@ -290,7 +332,12 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+        }
     }
 }

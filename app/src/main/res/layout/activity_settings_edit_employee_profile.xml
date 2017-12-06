@@ -118,7 +118,7 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorAccent"
                 android:onClick="deleteEditedEmployeeButton"
                 android:text="Delete Employee"
                 android:textAllCaps="false"

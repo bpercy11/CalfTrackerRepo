@@ -64,7 +64,7 @@ public class AddIllnessActivity extends AppCompatActivity {
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Add",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 illnessNotes = input.getText().toString();
                                 // if this button is clicked, close current activity

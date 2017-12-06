@@ -66,7 +66,7 @@
     <string name="calf_profile_feeding_history_first_button_data">Edit First Feeding</string>
     <string name="calf_profile_feeding_history_second_button_data">Edit Second Feeding</string>
     <string name="calf_profile_feeding_history_no_data">No Record</string>
-    <string name="calf_profile_feeding_history_dialog_liters_hint">Enter Liters Fed</string>
+    <string name="calf_profile_feeding_history_dialog_liters_hint">Liters Fed</string>
     <string name="calf_profile_feeding_history_dialog_liters_unit">L</string>
 
 
@@ -78,7 +78,7 @@
 
     <string name="new_calf_vaccine_selection_select_all">Select All</string>
     <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
-    <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines</string>
+    <string name="new_calf_vaccine_selection_confirm">Confirm</string>
     <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
     <string name="new_calf_vaccine_back_button">Back</string>
 
@@ -104,6 +104,7 @@
     <string name="edit_medicine_add_medicine">Add</string>
     <string name="error_login_message">Please fill any empty fields</string>
     <string name="add_medicine_successful_message">Add Medicine Successful</string>
+    <string name="update_medicine_successful_message">Update Medicine Successful</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
     <string name="edit_medicine_enter_days">Enter Days</string>
     <string name="edit_vaccine_cancel_button">Cancel</string>
@@ -157,15 +158,17 @@
     <string name="tasks_title">Tasks</string>
     <string name="tasks_vaccines_button">Vaccines</string>
     <string name="tasks_observations_button">Observations</string>
+
     <string name="tasks_vaccine_name">Vaccine Name</string>
-    <string name="tasks_vaccine_elligible">Elligible</string>
+    <string name="tasks_vaccine_eligible">Eligible</string>
     <string name="tasks_observations_calf_id">Calf ID</string>
     <string name="tasks_observations_days_observed">Days under observation</string>
     <string name="tasks_illness_calf_id">Calf ID</string>
     <string name="tasks_illness_name">Illness</string>
     <string name="tasks_illness_current_med">Current medication</string>
     <string name="tasks_illnesses_button">Illnesses</string>
-    <string name="task_details_confirm_button">Confirm Completed Vaccinations</string>
+    <string name="task_details_calf_id">Calf ID</string>
+    <string name="task_details_confirm_button">Completed Vaccinations</string>
     <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
 
     <string name="task_illness_dialog_illness">Illness</string>
@@ -189,6 +192,9 @@
     <string name="title_activity_edit_illness_profile_medicine_selection">Edit Medicines</string>
 
     <string name="insights_title">Insights</string>
+    <string name="insights_chart_gender">Calf Gender</string>
+    <string name="insights_chart_dob">Calf Births in the Last Week</string>
+    <string name="insights_chart_health">Calf Health</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_switch_english">Switch language to English</string>
