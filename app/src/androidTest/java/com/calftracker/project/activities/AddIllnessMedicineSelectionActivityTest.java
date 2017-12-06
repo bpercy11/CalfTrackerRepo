@@ -43,7 +43,7 @@ public class AddIllnessMedicineSelectionActivityTest {
     @Test
     public void testClickBackMedicinesButton() throws Exception{
         onView(withId(R.id.buttonCancelSelectMedicines)).perform(click());
-        intended(hasComponent(EditIllnessActivity.class.getName()));
+        intended(hasComponent(AddIllnessActivity.class.getName()));
     }
 
     @Test
