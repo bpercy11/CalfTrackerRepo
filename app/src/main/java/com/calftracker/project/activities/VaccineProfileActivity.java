@@ -31,9 +31,6 @@ public class VaccineProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Custom title
-        getSupportActionBar().setTitle(vaccine.getName());
-
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         //Load clicked Vaccine
@@ -45,6 +42,9 @@ public class VaccineProfileActivity extends AppCompatActivity {
             vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {
             }.getType());
         }
+
+        // Custom title
+        getSupportActionBar().setTitle(vaccine.getName());
 
         //Finding where Data needs to be displayed
         TextView vaccineName = (TextView) findViewById(R.id.vaccine_profile_vaccine_nameData);

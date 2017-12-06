@@ -33,9 +33,6 @@ public class IllnessProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Custom title
-        getSupportActionBar().setTitle(illness.getName());
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked Illness
@@ -47,6 +44,9 @@ public class IllnessProfileActivity extends AppCompatActivity {
             illness = gson.fromJson(json, new TypeToken<Illness>() {
             }.getType());
         }
+
+        // Custom title
+        getSupportActionBar().setTitle(illness.getName());
 
         String treatmentProtocolStr = "";
         List<Medicine> tpMedicines = illness.getTreatmentProtocol().getMedicines();

@@ -32,10 +32,6 @@ public class MedicineProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Custom title
-        getSupportActionBar().setTitle(medicine.getName());
-
-
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
@@ -48,6 +44,9 @@ public class MedicineProfileActivity extends AppCompatActivity {
             medicine = gson.fromJson(json, new TypeToken<Medicine>() {
             }.getType());
         }
+
+        // Custom title
+        getSupportActionBar().setTitle(medicine.getName());
 
         //Finding where Data needs to be displayed
         TextView medicineName = (TextView) findViewById(R.id.medicine_profile_medicine_nameData);
