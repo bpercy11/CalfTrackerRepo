@@ -65,8 +65,6 @@ public class IllnessActivity extends BaseActivity {
     public void retrieveData() {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if (mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
             Gson gson = new Gson();
             String json = mPreferences.getString("IllnessList", "");
             illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {

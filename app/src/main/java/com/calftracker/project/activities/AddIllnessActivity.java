@@ -145,11 +145,11 @@ public class AddIllnessActivity extends AppCompatActivity {
 
     public void retrieveData() {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-
-        json = mPreferences.getString("IllnessList","");
-        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        if (mPreferences.contains("IllnessList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        } else { illnessList = new ArrayList<>(); }
     }
 }
 
