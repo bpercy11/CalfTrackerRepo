@@ -17,6 +17,8 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
+import com.calftracker.project.calftracker.R;
+
 /**
  * Created by AlexanderGlowacki on 11/26/17.
  */

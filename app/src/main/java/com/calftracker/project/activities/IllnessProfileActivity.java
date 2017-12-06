@@ -49,6 +49,7 @@ public class IllnessProfileActivity extends AppCompatActivity {
         // Custom title
         getSupportActionBar().setTitle(illness.getName());
 
+
         //Load IllnessList
         if(mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -70,6 +71,9 @@ public class IllnessProfileActivity extends AppCompatActivity {
         treatmentProtocolStr = "";
         //List<Medicine> tpMedicines = illnessList.get(illnessPosition).getTreatmentProtocol().getMedicines();
 
+        String treatmentProtocolStr = "";
+        List<Medicine> tpMedicines = illness.getTreatmentProtocol().getMedicines();
+
         //Creating Treatment String
         for (int i = 0; i < tpMedicines.size(); i++){
             treatmentProtocolStr += tpMedicines.get(i).getName();
@@ -88,6 +92,17 @@ public class IllnessProfileActivity extends AppCompatActivity {
         treatmentProtocol.setText(treatmentProtocolStr);
         illnessNotes.setText(illness.getTreatmentProtocol().getNotes());
 
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void onIllnessProfile_EditButton(View view){

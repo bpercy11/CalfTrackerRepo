@@ -83,4 +83,15 @@ public class SettingsEmployeeProfileActivity extends AppCompatActivity {
         startActivity(intent);
         return true;
     }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
 }

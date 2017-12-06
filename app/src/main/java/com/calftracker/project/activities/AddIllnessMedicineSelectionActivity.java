@@ -44,8 +44,6 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences.contains("IllnessList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
             Gson gson = new Gson();
             String json;
             json = mPreferences.getString("IllnessList", "");
@@ -56,8 +54,6 @@ public class AddIllnessMedicineSelectionActivity extends AppCompatActivity {
         // get medicine list from shared preferences
         SharedPreferences mPreferences1 = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         if(mPreferences1.contains("MedicineList")) {
-            SharedPreferences.Editor editor = mPreferences1.edit();
-
             Gson gson1 = new Gson();
             String json1 = mPreferences1.getString("MedicineList", "");
             medicineList = gson1.fromJson(json1, new TypeToken<ArrayList<Medicine>>() {

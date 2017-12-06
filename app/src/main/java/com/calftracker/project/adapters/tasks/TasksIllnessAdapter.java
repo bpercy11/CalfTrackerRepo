@@ -1,18 +1,26 @@
 package com.calftracker.project.adapters.tasks;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.calftracker.project.activities.DashboardActivity;
+import com.calftracker.project.activities.TaskIllnessDetailsActivity;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.IllnessTask;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -31,9 +39,10 @@ public class TasksIllnessAdapter extends BaseAdapter {
         LinearLayout days;
     }
 
-    public TasksIllnessAdapter(ArrayList<ArrayList<IllnessTask>> data, Context context) {
+    public TasksIllnessAdapter(ArrayList<ArrayList<IllnessTask>> data, Context context, TasksMethods TM) {
         this.dataSet = data;
         this.mContext = context;
+        this.TM = TM;
     }
 
     @Override
@@ -70,6 +79,10 @@ public class TasksIllnessAdapter extends BaseAdapter {
                     TextView mCalfID = (TextView) view.findViewById(R.id.textViewIllnessRowCalfID);
                     TextView mIllness = (TextView) view.findViewById(R.id.textViewIllnessRowIllness);
                     TextView mMedication = (TextView) view.findViewById(R.id.textViewIllnessRowMedication);
+                    ImageView mDueMedication = (ImageView) view.findViewById(R.id.imageViewDueMedication);
+
+                    if(position == 0)
+                        mDueMedication.setVisibility(View.VISIBLE);
 
                     view.setClickable(true);
 
@@ -83,10 +96,16 @@ public class TasksIllnessAdapter extends BaseAdapter {
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            int duration = Toast.LENGTH_SHORT;
+                            SharedPreferences mPrefs = mContext.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                            Gson gson = new Gson();
+                            String json = gson.toJson(dataSet.get(getdata).get(j));
+                            prefsEditor.putString("TaskIllnessDetails",json);
+                            prefsEditor.apply();
 
-                            Toast toast = Toast.makeText(view.getContext(), dataSet.get(getdata).get(j).getIllness().getName(), duration);
-                            toast.show();
+                            Intent intent = new Intent(mContext, TaskIllnessDetailsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
                         }
                     });
 

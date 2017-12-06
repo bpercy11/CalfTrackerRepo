@@ -3,12 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TaskVaccineDetailsAdapter;
 import com.calftracker.project.calftracker.R;
@@ -31,6 +32,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
     private Vaccine vaccine;
     private ArrayList<Calf> calfList;
+    private TextView vaccName;
     private Calf calf;
     private Task task;
     ArrayList<VaccineTask> todayTasks;
@@ -46,22 +48,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
         // get needed UI elements
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
 
-        // set up shared preference variables
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-
-        json = mPreferences.getString("CalfList", "");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
-
-        json = mPreferences.getString("vaccToViewInTaskDetails","");
-        vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
+        retrieveData();
 
         // Custom title
         getSupportActionBar().setTitle(vaccine.getName());
-
-        json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
 
         adapterArray = new ArrayList<>();
         ArrayList<Calf> vaccineCalfList = new ArrayList<>();
@@ -84,6 +74,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         adapter = new TaskVaccineDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
 
+        vaccName = (TextView) findViewById(R.id.textViewTaskItemVaccineName);
+        vaccName.setText(vaccine.getName());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,6 +86,37 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        // Save the calf to the device
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // set up shared preference variables
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        json = mPreferences.getString("CalfList", "");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+
+        json = mPreferences.getString("vaccToViewInTaskDetails","");
+        vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
+
+        json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
     }
 
     public void onClickSelectAll(View view) {
@@ -145,17 +168,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
                         task.getOverdueVaccinations().remove(j);
 
 
-                // Save the calf to the device
-                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(calfList);
-                prefsEditor.putString("CalfList",json);
-                prefsEditor.apply();
-
-                json = gson.toJson(task);
-                prefsEditor.putString("Task",json);
-                prefsEditor.apply();
+                saveData();
 
                 adapter.notifyDataSetChanged();
             }

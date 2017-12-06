@@ -91,6 +91,7 @@ public class CreateFarmActivity extends AppCompatActivity {
         });
     }
 
+    // TODO
     public void saveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -98,6 +99,11 @@ public class CreateFarmActivity extends AppCompatActivity {
         String json = gson.toJson(farm);
         prefsEditor.putString("Farm",json);
         prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void setupUI(View view) {

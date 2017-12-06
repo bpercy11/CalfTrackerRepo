@@ -1,10 +1,13 @@
 package com.calftracker.project.models;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Vaccine_With_Date {
 	private Vaccine vaccine;
-	private Calendar date;
+	private int year;
+	private int month;
+	private int day;
 	
 	/**
 	 * @param vaccine
@@ -13,7 +16,33 @@ public class Vaccine_With_Date {
 	public Vaccine_With_Date(Vaccine vaccine, Calendar date) {
 		super();
 		this.vaccine = vaccine;
-		this.date = date;
+		this.year = date.get(Calendar.YEAR);
+		this.month = date.get(Calendar.MONTH);
+		this.day = date.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	/**
@@ -33,14 +62,16 @@ public class Vaccine_With_Date {
 	/**
 	 * @return the date
 	 */
-	public Calendar getDate() {
-		return date;
+	public Calendar makeDate() {
+		return new GregorianCalendar(year, month, day);
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void putDate(Calendar date) {
+		this.year = date.get(Calendar.YEAR);
+		this.month = date.get(Calendar.MONTH);
+		this.day = date.get(Calendar.DAY_OF_MONTH);
 	}
 }

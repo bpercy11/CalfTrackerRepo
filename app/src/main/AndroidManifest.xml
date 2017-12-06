@@ -36,6 +36,7 @@
         <activity android:name="com.calftracker.project.activities.CalfProfileGrowthHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.TasksActivity" />
         <activity android:name="com.calftracker.project.activities.TaskDetailsActivity" />
+        <activity android:name="com.calftracker.project.activities.TaskIllnessDetailsActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileFeedingHistoryActivity" />
         <activity android:name="com.calftracker.project.activities.VaccineProfileActivity" />
         <activity android:name="com.calftracker.project.activities.IllnessProfileActivity" />

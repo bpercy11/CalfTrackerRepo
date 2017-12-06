@@ -35,6 +35,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
 
         FloatingActionButton editFieldsButton = (FloatingActionButton) findViewById(R.id.EditFarmEditFieldsBtn);
 
+        //populateFields();
         farmName = (TextView) findViewById(R.id.settingsFarmNameText);
         farmOwner = (TextView) findViewById(R.id.settingsFarmOwnerText);
         farmLocation = (TextView) findViewById(R.id.settingsFarmLocationText);
@@ -45,17 +46,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
         mKeyListener = farmLocation.getKeyListener();
         farmLocation.setKeyListener(null);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-
-        //Load clicked Employee
-        if(mPreferences.contains("Farm")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("Farm", "");
-            farm = gson.fromJson(json, new TypeToken<Farm>() {
-            }.getType());
-        }
+        retrieveData();
 
         farmName.setText(farm.getName());
         farmOwner.setText(farm.getOwner());
@@ -68,6 +59,33 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+
+        //Load clicked Employee
+        if(mPreferences.contains("Farm")) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+
+            Gson gson = new Gson();
+            String json = mPreferences.getString("Farm", "");
+            farm = gson.fromJson(json, new TypeToken<Farm>() {
+            }.getType());
+        }
+    }
+
+    /**
+     * function to populate fields entered when farm is created
+     */
+    private void populateFields(){
+
     }
 
     @Override

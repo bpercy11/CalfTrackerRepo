@@ -2,6 +2,7 @@ package com.calftracker.project.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -10,7 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Task {
 
-    private Calendar dateLastUpdated;
+
+    private int year;
+    private int month;
+    private int day;
+
     private ArrayList<Calf> calvesToObserve;
     private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
     private ArrayList<VaccineTask> overdueVaccinations;
@@ -21,11 +26,37 @@ public class Task {
                 ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations,
                 ArrayList<ArrayList<IllnessTask>> illnessTracker) {
         super();
-        this.dateLastUpdated = dateLastUpdated;
+        this.year = dateLastUpdated.get(Calendar.YEAR);
+        this.month = dateLastUpdated.get(Calendar.MONTH);
+        this.day = dateLastUpdated.get(Calendar.DAY_OF_MONTH);
         this.calvesToObserve = calvesToObserve;
         this.vaccinesToAdminister = vaccinesToAdminister;
         this.overdueVaccinations = overdueVaccinations;
         this.illnessTracker = illnessTracker;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public ArrayList<ArrayList<IllnessTask>> getIllnessTracker() {
@@ -36,12 +67,14 @@ public class Task {
         this.illnessTracker = illnessTracker;
     }
 
-    public Calendar getDateLastUpdated() {
-        return dateLastUpdated;
+    public Calendar makeDateLastUpdated() {
+        return new GregorianCalendar(year, month, day);
     }
 
-    public void setDateLastUpdated(Calendar dateLastUpdated) {
-        this.dateLastUpdated = dateLastUpdated;
+    public void putDateLastUpdated(Calendar dateLastUpdated) {
+        this.year = dateLastUpdated.get(Calendar.YEAR);
+        this.month = dateLastUpdated.get(Calendar.MONTH);
+        this.day = dateLastUpdated.get(Calendar.DAY_OF_MONTH);
     }
 
     public ArrayList<Calf> getCalvesToObserve() {
@@ -71,9 +104,11 @@ public class Task {
     public void updateTasks()
     {
         Calendar today = Calendar.getInstance();
+        Calendar dateLastUpdated = new GregorianCalendar(year, month, day);
 
-        int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, this.dateLastUpdated));
+        int daysPassedSinceUpdate = (int) Math.abs(calendarDaysBetween(today, dateLastUpdated));
 
+        // do the stuff for vaccinetasks
         // you have to do this however many times a day has passed because I couldn't think of
         // a less confusing way to to it.
         for(int i = 0; i < daysPassedSinceUpdate; i++) {
@@ -105,6 +140,7 @@ public class Task {
             }
         }
 
+        // do the stuff for illnessTasks
         for(int i = 0; i < daysPassedSinceUpdate; i++)
             // dont touch index zero, all illnesstasks
             // at zero don't have active medicine
@@ -112,7 +148,7 @@ public class Task {
                     while(!illnessTracker.get(j).isEmpty())
                         illnessTracker.get(j - 1).add(illnessTracker.get(j).remove(0));
 
-        this.dateLastUpdated = Calendar.getInstance();
+        this.putDateLastUpdated(Calendar.getInstance());
 
     }
 
@@ -128,18 +164,48 @@ public class Task {
                 this.overdueVaccinations.get(i).setVaccine(vaccine);
     }
 
+    public void administerMedication(IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    illnessTask = this.getIllnessTracker().get(i).remove(j);
+                    break OUTER;
+                }
+
+        this.getIllnessTracker().get(illnessTask.getMedicine().getTimeActive()).add(illnessTask);
+
+    }
+
+    public void editMedication(Medicine medicine, IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    illnessTask.setMedicine(medicine);
+                    break OUTER;
+                }
+    }
+
+    public void removeIllnessTask(IllnessTask illnessTask) {
+        OUTER:for(int i = 0; i < this.getIllnessTracker().size(); i++)
+            for(int j = 0; j < this.getIllnessTracker().get(i).size(); j++)
+                if(this.getIllnessTracker().get(i).get(j).equals(illnessTask)) {
+                    this.getIllnessTracker().get(i).remove(j);
+                    break OUTER;
+                }
+    }
+
     public void placeVaccineInTasks(Vaccine vaccine, Calf calf)
     {
         Calendar today = Calendar.getInstance();
 
         Calendar vaccStart = Calendar.getInstance();
-        vaccStart.setTimeZone(calf.getDateOfBirth().getTimeZone());
-        vaccStart.setTimeInMillis(calf.getDateOfBirth().getTimeInMillis());
+        vaccStart.setTimeZone(calf.makeCalendarDOB().getTimeZone());
+        vaccStart.setTimeInMillis(calf.makeCalendarDOB().getTimeInMillis());
         vaccStart.add(Calendar.DATE, vaccine.getToBeAdministered().get(0).getSpan()[0]);
 
         Calendar vaccEnd = Calendar.getInstance();
-        vaccEnd.setTimeZone(calf.getDateOfBirth().getTimeZone());
-        vaccEnd.setTimeInMillis(calf.getDateOfBirth().getTimeInMillis());
+        vaccEnd.setTimeZone(calf.makeCalendarDOB().getTimeZone());
+        vaccEnd.setTimeInMillis(calf.makeCalendarDOB().getTimeInMillis());
         vaccEnd.add(Calendar.DATE, vaccine.getToBeAdministered().get(0).getSpan()[1]);
 
         long daysBetweenEnd = calendarDaysBetween(today, vaccEnd);

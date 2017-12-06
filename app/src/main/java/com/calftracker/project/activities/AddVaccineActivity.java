@@ -82,12 +82,28 @@ public class AddVaccineActivity extends AppCompatActivity {
         EditText dosageUnits = (EditText) findViewById(R.id.edit_vaccine_editTextDosageUnits);
         EditText adminMethod = (EditText) findViewById(R.id.edit_vaccine_editTextAdminMethod);
 
+        if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
+                || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
+                || adminMethod.getText().toString().matches("")){
+            Toast.makeText(AddVaccineActivity.this, R.string.empty_fields_message,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         String vaccineStr = vaccine.getText().toString();
         int adminStartInt = Integer.parseInt(adminStart.getText().toString());
         int adminEndInt = Integer.parseInt(adminEnd.getText().toString());
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
         String dosageUnitsStr = dosageUnits.getText().toString();
         String adminMethodString = adminMethod.getText().toString();
+
+        for (int i = 0; i < vaccineList.size(); i++) {
+            if (vaccineList.get(i).getName().equals(vaccineStr)) {
+                Toast.makeText(AddVaccineActivity.this, "A vaccine with this name already exists, please choose a new name or delete the other vaccine",
+                        Toast.LENGTH_LONG).show();
+                vaccine.setText("");
+                return;
+            }
+        }
 
         switch(dropDown.getSelectedItem().toString()){
             case "Day":
@@ -113,14 +129,7 @@ public class AddVaccineActivity extends AppCompatActivity {
                 break;
         }
 
-        if (vaccine.getText().toString().matches("") || dosage.getText().toString().matches("")
-                || adminStart.getText().toString().matches("") || adminEnd.getText().toString().matches("")
-                || adminMethod.getText().toString().matches("")){
-            Toast.makeText(AddVaccineActivity.this, R.string.empty_fields_message,
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else if(adminEndInt <= adminStartInt){
+        if(adminEndInt <= adminStartInt){
             Toast.makeText(AddVaccineActivity.this, R.string.edit_vaccine_vacc_range_error,
                     Toast.LENGTH_SHORT).show();
             return;

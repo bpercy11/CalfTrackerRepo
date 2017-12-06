@@ -33,17 +33,19 @@ import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
-import com.calftracker.project.models.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddCalfActivity extends BaseActivity {
     // honestly not sure what this does -JT
     private static final String TAG = "AddCalfActivity";
+
+    private ArrayList<Calf> calfList;
 
     // variables related to date selection
     private TextView mDisplayDate;
@@ -114,9 +116,9 @@ public class AddCalfActivity extends BaseActivity {
             ID.setText(calfFromBack.getFarmId());
             mGender.setText(calfFromBack.getGender());
 
-            int year = calfFromBack.getDateOfBirth().get(Calendar.YEAR);
-            int month = calfFromBack.getDateOfBirth().get(Calendar.MONTH) + 1;
-            int day = calfFromBack.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+            int year = calfFromBack.makeCalendarDOB().get(Calendar.YEAR);
+            int month = calfFromBack.makeCalendarDOB().get(Calendar.MONTH) + 1;
+            int day = calfFromBack.makeCalendarDOB().get(Calendar.DAY_OF_MONTH);
 
             String date = month + "/" + day + "/" + year;
             mDisplayDate.setText(date);
@@ -193,6 +195,23 @@ public class AddCalfActivity extends BaseActivity {
         alert = builder.create();
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if (mPreferences.contains("CalfList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("CalfList","");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        } else {
+            calfList = new ArrayList<>();
+        }
+    }
+
     public void setupUI(View view) {
 
         // Set up touch listener for non-text box views to hide keyboard.
@@ -236,8 +255,21 @@ public class AddCalfActivity extends BaseActivity {
             return;
         }
 
+        // Check to make sure a duplicate calf is not being created
+        retrieveData();
+        for (int i = 0; i < calfList.size(); i++) {
+            if (calfList.get(i).getFarmId().equals(calfID)) {
+                ID.setText("");
+                CharSequence text = "A calf with this ID already exists, please choose a new ID or delete the other calf";
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                toast.show();
+                return;
+            }
+        }
+
         // error checking on calf id input length
         if (calfID.length() > 9 || calfID.length() < 1) {
+            ID.setText("");
             CharSequence text = "ID number must be between 1 and 9 digits";
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();

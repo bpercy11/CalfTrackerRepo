@@ -51,10 +51,6 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calf_profile_feeding_history);
 
-        // Stylize action bar to use back button and custom title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Feeding History");
-
         mFirstFeedingButton = (Button) findViewById(R.id.buttonFirstFeeding);
         mSecondFeedingButton = (Button) findViewById(R.id.buttonSecondFeeding);
 
@@ -67,6 +63,10 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         mSecondLiters = (TextView) findViewById(R.id.textViewSecondLitersValue);
 
         retrieveData();
+
+        // Stylize action bar to use back button and custom title
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Calf " + calfID + " Feeding History");
 
         // Search through the calfList to find the correct calf by ID
         for (int i = 0; i < calfList.size(); i++) {
@@ -247,6 +247,17 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
         });
     }
 
+    // TODO
+    public void saveData() {
+        // Save the calfList to local storage
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
     public void retrieveData() {
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -264,16 +275,6 @@ public class CalfProfileFeedingHistoryActivity extends AppCompatActivity {
             employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
             }.getType());
         } else { employeeArrayList = new ArrayList<Employee>(); }
-    }
-
-    public void saveData() {
-        // Save the calfList to local storage
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
     }
 
     @Override

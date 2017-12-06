@@ -1,12 +1,16 @@
 package com.calftracker.project.models;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Calf_Illness
 {
 	private Illness illness;
-	private Calendar dateDiagnosed;
 	private String outcomeNotes;
+
+	private int year;
+	private int month;
+	private int day;
 	
 	/**
 	 * @param illness
@@ -15,8 +19,34 @@ public class Calf_Illness
 	 */
 	public Calf_Illness(Illness illness, Calendar dateDiagnosed, String outcomeNotes) {
 		this.illness = illness;
-		this.dateDiagnosed = dateDiagnosed;
 		this.outcomeNotes = outcomeNotes;
+		this.year = dateDiagnosed.get(Calendar.YEAR);
+		this.month = dateDiagnosed.get(Calendar.MONTH);
+		this.day = dateDiagnosed.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	/**
@@ -36,15 +66,17 @@ public class Calf_Illness
 	/**
 	 * @return the dateDiagnosed
 	 */
-	public Calendar getDateDiagnosed() {
-		return dateDiagnosed;
+	public Calendar makeDateDiagnosed() {
+		return new GregorianCalendar(year, month, day);
 	}
 
 	/**
 	 * @param dateDiagnosed the dateDiagnosed to set
 	 */
-	public void setDateDiagnosed(Calendar dateDiagnosed) {
-		this.dateDiagnosed = dateDiagnosed;
+	public void putDateDiagnosed(Calendar dateDiagnosed) {
+		this.year = dateDiagnosed.get(Calendar.YEAR);
+		this.month = dateDiagnosed.get(Calendar.MONTH);
+		this.day = dateDiagnosed.get(Calendar.DAY_OF_MONTH);
 	}
 
 	/**

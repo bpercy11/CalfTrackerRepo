@@ -36,7 +36,6 @@ public class MedicineProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked medicine
@@ -53,7 +52,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(medicine.getName());
 
         //Load MedicineList
-        if(mPreferences.contains("MedicineList")) {
+        if (mPreferences.contains("MedicineList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
 
             Gson gson = new Gson();
@@ -63,8 +62,8 @@ public class MedicineProfileActivity extends AppCompatActivity {
         }
 
         //Find medicine position in medicineList
-        for (int i = 0; i < medicineList.size(); i++){
-            if(medicineList.get(i).getName().equals(medicine.getName())){
+        for (int i = 0; i < medicineList.size(); i++) {
+            if (medicineList.get(i).getName().equals(medicine.getName())) {
                 medicinePosition = i;
             }
         }
@@ -84,7 +83,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
         medicineNotes.setText(medicine.getNotes());
     }
 
-    public void onMProfile_removeButton(View view){
+    public void onMProfile_removeButton(View view) {
 
         medicineList.remove(medicinePosition);
 
@@ -93,7 +92,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(medicineList);
-        prefsEditor.putString("MedicineList",json);
+        prefsEditor.putString("MedicineList", json);
         prefsEditor.apply();
 
         // if this medicine is removed, make sure that no treatment protocol calls for this
@@ -104,14 +103,14 @@ public class MedicineProfileActivity extends AppCompatActivity {
         illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
         }.getType());
 
-        for (int i = 0; i < illnessList.size(); i++){
-            if (illnessList.get(i).getTreatmentProtocol().getMedicines().contains(medicine)){
-               // illnessList.get(i).getTreatmentProtocol().getMedicines().remove(medicine);
+        for (int i = 0; i < illnessList.size(); i++) {
+            if (illnessList.get(i).getTreatmentProtocol().getMedicines().contains(medicine)) {
+                // illnessList.get(i).getTreatmentProtocol().getMedicines().remove(medicine);
                 tempMedicineList = illnessList.get(i).getTreatmentProtocol().getMedicines();
                 tempMedicineList.remove(medicine);
                 Treatment_Protocol tempTP = new Treatment_Protocol
-                        (tempMedicineList,illnessList.get(i).getTreatmentProtocol().getNotes());
-                Illness tempIllness = new Illness(illnessList.get(i).getName(),tempTP);
+                        (tempMedicineList, illnessList.get(i).getTreatmentProtocol().getNotes());
+                Illness tempIllness = new Illness(illnessList.get(i).getName(), tempTP);
                 illnessList.remove(i);
                 illnessList.add(tempIllness);
             }
@@ -119,11 +118,22 @@ public class MedicineProfileActivity extends AppCompatActivity {
 
 
         json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
+        prefsEditor.putString("IllnessList", json);
         prefsEditor.apply();
 
-        Intent intent = new Intent(MedicineProfileActivity.this,MedicineActivity.class);
+        Intent intent = new Intent(MedicineProfileActivity.this, MedicineActivity.class);
         startActivity(intent);
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void onMProfile_editButton(View view){

@@ -31,8 +31,8 @@ public class VaccineProfileActivity extends AppCompatActivity {
         // Stylize action bar to use back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         //Load clicked Vaccine
         if(mPreferences.contains("VaccineProfile")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -45,23 +45,6 @@ public class VaccineProfileActivity extends AppCompatActivity {
 
         // Custom title
         getSupportActionBar().setTitle(vaccine.getName());
-
-        //Load VaccineList
-        if(mPreferences.contains("VaccineList")) {
-            SharedPreferences.Editor editor = mPreferences.edit();
-
-            Gson gson = new Gson();
-            String json = mPreferences.getString("VaccineList", "");
-            vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
-            }.getType());
-        }
-
-        //Find Vaccine position in VaccineList
-        for (int i = 0; i < vaccineList.size(); i++){
-            if(vaccineList.get(i).getName().equals(vaccine.getName())){
-                vaccinePosition = i;
-            }
-        }
 
         //Finding where Data needs to be displayed
         TextView vaccineName = (TextView) findViewById(R.id.vaccine_profile_vaccine_nameData);
@@ -100,6 +83,18 @@ public class VaccineProfileActivity extends AppCompatActivity {
         vaccineAdminMethod.setText(vaccine.getMethodOfAdministration());
 
     }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
+
     public void onVProfile_editButton(View view){
         Intent intent = new Intent(VaccineProfileActivity.this,EditVaccineProfileActivity.class);
         startActivity(intent);

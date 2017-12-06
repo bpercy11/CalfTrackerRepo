@@ -219,9 +219,9 @@ public class InsightsActivity extends BaseActivity {
 
         if (calfList != null) {
             for (int i = 0; i < calfList.size(); i++) {
-                int calfYear = calfList.get(i).getDateOfBirth().get(Calendar.YEAR);
-                int calfMonth = calfList.get(i).getDateOfBirth().get(Calendar.MONTH) + 1;
-                int calfDay = calfList.get(i).getDateOfBirth().get(Calendar.DATE);
+                int calfYear = calfList.get(i).getCalfyear();
+                int calfMonth = calfList.get(i).getCalfmonth() + 1;
+                int calfDay = calfList.get(i).getCalfday();
 
                 if (calfYear == year1 && calfMonth == month1 && calfDay == day1) {
                     countDay1++;
