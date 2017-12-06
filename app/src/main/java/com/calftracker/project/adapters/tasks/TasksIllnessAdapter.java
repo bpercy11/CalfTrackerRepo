@@ -98,6 +98,7 @@ public class TasksIllnessAdapter extends BaseAdapter {
                             prefsEditor.apply();
 
                             Intent intent = new Intent(mContext, TaskIllnessDetailsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mContext.startActivity(intent);
                         }
                     });
