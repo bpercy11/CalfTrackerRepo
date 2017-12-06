@@ -27,7 +27,7 @@ public class SettingsActivity extends BaseActivity {
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
         //Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
         //Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
-        final Button languageButton = (Button) findViewById(R.id.languageButton);
+        /*final Button languageButton = (Button) findViewById(R.id.languageButton);
 
         languageButton.setOnClickListener(new View.OnClickListener() {
             Intent intent;
@@ -39,7 +39,7 @@ public class SettingsActivity extends BaseActivity {
                     languageButton.setText(R.string.settings_switch_english);
                 }
             }
-        });
+        });*/
 
         editFarmButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
