@@ -190,7 +190,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView)
                 // Add action buttons
-                .setPositiveButton("Confirm Illness", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Illness illness = (Illness) mIllnessSpinner.getSelectedItem();

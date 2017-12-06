@@ -105,7 +105,7 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
         AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
         builderDelete.setMessage("Are you sure you want to delete this employee? This action cannot be undone.")
                 .setTitle("Delete Employee");
-        builderDelete.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builderDelete.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Remove the employee from the list and save the new list to local storage
@@ -133,7 +133,7 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        builderDelete.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builderDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Do nothing
