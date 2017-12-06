@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +79,10 @@ public class TasksIllnessAdapter extends BaseAdapter {
                     TextView mCalfID = (TextView) view.findViewById(R.id.textViewIllnessRowCalfID);
                     TextView mIllness = (TextView) view.findViewById(R.id.textViewIllnessRowIllness);
                     TextView mMedication = (TextView) view.findViewById(R.id.textViewIllnessRowMedication);
+                    ImageView mDueMedication = (ImageView) view.findViewById(R.id.imageViewDueMedication);
+
+                    if(position == 0)
+                        mDueMedication.setVisibility(View.VISIBLE);
 
                     view.setClickable(true);
 
