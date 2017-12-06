@@ -49,6 +49,9 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_calf_vaccine_selection);
 
+        // Custom title
+        getSupportActionBar().setTitle(R.string.new_calf_vaccine_instructions_title);
+
         // get needed UI elements
         listView = (ListView) findViewById(R.id.listViewVaccineSelection);
         mNoVaccines = (TextView) findViewById(R.id.textViewNoVaccines);
@@ -56,8 +59,6 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         mSelectAll = (Button) findViewById(R.id.buttonSelectAll);
 
         retrieveData();
-
-
 
         // get stuff from shared preferences that isn't supposed to go in firebase
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);

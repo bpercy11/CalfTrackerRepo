@@ -3,12 +3,12 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.calftracker.project.adapters.tasks.TaskVaccineDetailsAdapter;
 import com.calftracker.project.calftracker.R;
@@ -31,7 +31,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
     private Vaccine vaccine;
     private ArrayList<Calf> calfList;
-    private TextView vaccName;
     private Calf calf;
     private Task task;
     ArrayList<VaccineTask> todayTasks;
@@ -40,6 +39,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
+
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // get needed UI elements
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
@@ -54,6 +56,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         json = mPreferences.getString("vaccToViewInTaskDetails","");
         vaccine = gson.fromJson(json, new TypeToken<Vaccine>() {}.getType());
+
+        // Custom title
+        getSupportActionBar().setTitle(vaccine.getName());
 
         json = mPreferences.getString("Task", "");
         task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
@@ -79,8 +84,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         adapter = new TaskVaccineDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
 
-        vaccName = (TextView) findViewById(R.id.textViewTaskItemVaccineName);
-        vaccName.setText(vaccine.getName());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -162,7 +165,17 @@ public class TaskDetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
+        startActivity(intent);
+        return true;
+    }
 }
 
 

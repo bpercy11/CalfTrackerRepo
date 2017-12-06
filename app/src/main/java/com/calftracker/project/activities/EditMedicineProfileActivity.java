@@ -116,7 +116,7 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
             return;
         }
         else {
-            Toast.makeText(EditMedicineProfileActivity.this, R.string.add_medicine_successful_message,
+            Toast.makeText(EditMedicineProfileActivity.this, R.string.update_medicine_successful_message,
                     Toast.LENGTH_SHORT).show();
         }
 
