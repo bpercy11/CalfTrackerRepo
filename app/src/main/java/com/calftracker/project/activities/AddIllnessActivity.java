@@ -23,7 +23,9 @@ import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddIllnessActivity extends AppCompatActivity {
@@ -100,6 +102,16 @@ public class AddIllnessActivity extends AppCompatActivity {
             return;
         }
 
+        retrieveData();
+        for (int i = 0; i < illnessList.size(); i++) {
+            if (illnessList.get(i).getName().equals(illnessNameStr)) {
+                Toast.makeText(this, "An illness with this name already exists, please choose a new name or delete the other illness",
+                        Toast.LENGTH_LONG).show();
+                illnessName.setText("");
+                return;
+            }
+        }
+
         // save the illness name/notes to local storage
         saveData();
 
@@ -132,8 +144,12 @@ public class AddIllnessActivity extends AppCompatActivity {
     }
 
     public void retrieveData() {
-        // EMPTY METHOD TO KEEP CONSISTENCY
-        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+
+        json = mPreferences.getString("IllnessList","");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
     }
 }
 

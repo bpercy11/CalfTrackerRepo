@@ -68,10 +68,18 @@ public class AddMedicineActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        else {
-            Toast.makeText(AddMedicineActivity.this, R.string.add_medicine_successful_message,
-                    Toast.LENGTH_SHORT).show();
+
+        for (int i = 0; i < medicineList.size(); i++) {
+            if (medicineList.get(i).getName().equals(medicineName.getText().toString())) {
+                Toast.makeText(this, "A medicine with this name already exists, please choose a new name or delete the other medicine",
+                        Toast.LENGTH_LONG).show();
+                medicineName.setText("");
+                return;
+            }
         }
+
+        Toast.makeText(AddMedicineActivity.this, R.string.add_medicine_successful_message,
+                Toast.LENGTH_SHORT).show();
 
         String nameStr = medicineName.getText().toString();
         Double dosageDbl = Double.parseDouble(dosage.getText().toString());
