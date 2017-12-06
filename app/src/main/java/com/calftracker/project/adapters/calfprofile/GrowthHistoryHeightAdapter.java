@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -57,9 +56,9 @@ public class GrowthHistoryHeightAdapter extends BaseAdapter {
         }
         Physical_Metrics_And_Date size = this.sizes.get(position);
 
-        int year = size.getDateRecorded().get(Calendar.YEAR);
-        int month = size.getDateRecorded().get(Calendar.MONTH) + 1;
-        int day = size.getDateRecorded().get(Calendar.DAY_OF_MONTH);
+        int year = size.makeDateRecorded().get(Calendar.YEAR);
+        int month = size.makeDateRecorded().get(Calendar.MONTH) + 1;
+        int day = size.makeDateRecorded().get(Calendar.DAY_OF_MONTH);
 
         holder.height.setText(Double.toString(sizes.get(position).getHeight()) + " in");
         holder.date.setText(month + "/" + day + "/" + year);

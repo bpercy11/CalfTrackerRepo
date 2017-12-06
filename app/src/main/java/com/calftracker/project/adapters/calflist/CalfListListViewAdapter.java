@@ -77,6 +77,7 @@ public class CalfListListViewAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(!arrayExists) {
                     Intent intent = new Intent(mCon,AddCalfActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mCon.startActivity(intent);
                 } else {
                     SharedPreferences mPrefs = mCon.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -86,6 +87,7 @@ public class CalfListListViewAdapter extends BaseAdapter {
                     prefsEditor.putString("calfToViewInProfile", json);
                     prefsEditor.apply();
                     Intent intent = new Intent(mCon, CalfProfileActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mCon.startActivity(intent);
                 }
             }

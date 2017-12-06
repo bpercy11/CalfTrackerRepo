@@ -1,13 +1,13 @@
 package com.calftracker.project.models;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Calf {
 	private String photo;
 	private String farmId;
 	private int internalId;
 	private String gender;
-	private Calendar dateOfBirth;
 	private ArrayList<String> calfAllergies;
 	private Sire sire;
 	private String dam;
@@ -19,6 +19,10 @@ public class Calf {
 	private Feeding[] feedingHistory;
 	private ArrayList<Note> notes;
 	private boolean needToObserveForIllness;
+
+	private int calfyear;
+	private int calfmonth;
+	private int calfday;
 	
 	/**
 	 * @param farmId
@@ -35,7 +39,9 @@ public class Calf {
 		this.farmId = farmId;
 		this.internalId = internalId;
 		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
+		this.calfyear = dateOfBirth.get(Calendar.YEAR);
+		this.calfmonth = dateOfBirth.get(Calendar.MONTH);
+		this.calfday = dateOfBirth.get(Calendar.DAY_OF_MONTH);
 		this.neededVaccines = neededVaccines;
 		
 		// SET UP REST OF FIELDS FOR LATER USE
@@ -57,7 +63,9 @@ public class Calf {
         this.photo = photo;
 		this.farmId = farmId;
 		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
+		this.calfyear = dateOfBirth.get(Calendar.YEAR);
+		this.calfmonth = dateOfBirth.get(Calendar.MONTH);
+		this.calfday = dateOfBirth.get(Calendar.DAY_OF_MONTH);
 		this.neededVaccines = new ArrayList<Vaccine>();
 
 		// SET UP REST OF FIELDS FOR LATER USE
@@ -70,6 +78,30 @@ public class Calf {
 		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
+	}
+
+	public int getCalfyear() {
+		return calfyear;
+	}
+
+	public void setCalfyear(int calfyear) {
+		this.calfyear = calfyear;
+	}
+
+	public int getCalfmonth() {
+		return calfmonth;
+	}
+
+	public void setCalfmonth(int calfmonth) {
+		this.calfmonth = calfmonth;
+	}
+
+	public int getCalfday() {
+		return calfday;
+	}
+
+	public void setCalfday(int calfday) {
+		this.calfday = calfday;
 	}
 
 	/**
@@ -129,15 +161,17 @@ public class Calf {
 	/**
 	 * @return the dateOfBirth
 	 */
-	public Calendar getDateOfBirth() {
-		return dateOfBirth;
+	public Calendar makeCalendarDOB() {
+		return new GregorianCalendar(this.calfyear, this.calfmonth, this.calfday);
 	}
 
 	/**
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
-	public void setDateOfBirth(Calendar dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void placeCalendarDOB(Calendar dateOfBirth) {
+		this.calfyear = dateOfBirth.get(Calendar.YEAR);
+		this.calfmonth = dateOfBirth.get(Calendar.MONTH);
+		this.calfday = dateOfBirth.get(Calendar.DAY_OF_MONTH);
 	}
 
 	/**

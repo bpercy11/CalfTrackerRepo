@@ -79,13 +79,6 @@ public class TasksVaccinationAdapter extends BaseAdapter{
         final Vaccine currVacc = task.getVaccineTask().getVaccine();
 
         if (!vaccUsed) {
-//            for (int i = 0; i < calfList.size(); i++) {
-//                for (int j = 0; j < calfList.get(i).getNeededVaccines().size(); j++) {
-//                    if (calfList.get(i).getNeededVaccines().get(j).getName().equals((currVacc).getName())) {
-//                        eligibleCount++;
-//                    }
-//                }
-//            }
             for (int i = 0; i < todayTasks.size(); i++) {
                 if (todayTasks.get(i).getVaccineTask().getVaccine().getName().equals(currVacc.getName())) {
                     for (int j = 0; j < todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().size(); j++) {
@@ -112,6 +105,7 @@ public class TasksVaccinationAdapter extends BaseAdapter{
                     prefsEditor.putString("vaccToViewInTaskDetails", json);
                     prefsEditor.apply();
                     Intent intent = new Intent(context, TaskDetailsActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });

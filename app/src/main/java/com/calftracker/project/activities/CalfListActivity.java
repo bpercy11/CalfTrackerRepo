@@ -48,7 +48,7 @@ public class CalfListActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.calf_list_title);
 
         // set UI to hide keyboard when user clicks anywhere off the keyboard
-        setupUI(findViewById(R.id.calfListParent));
+        setupUI(findViewById(R.id.taskParent));
 
         retrieveData();
 
@@ -83,6 +83,12 @@ public class CalfListActivity extends BaseActivity {
 
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
     }
 
     public void retrieveData() {

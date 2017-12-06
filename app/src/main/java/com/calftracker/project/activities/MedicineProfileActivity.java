@@ -84,6 +84,17 @@ public class MedicineProfileActivity extends AppCompatActivity {
         medicineNotes.setText(medicine.getNotes());
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
+
     public void onMProfile_removeButton(View view){
 
         medicineList.remove(medicinePosition);

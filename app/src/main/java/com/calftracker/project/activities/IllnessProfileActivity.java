@@ -90,6 +90,17 @@ public class IllnessProfileActivity extends AppCompatActivity {
 
     }
 
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
+
     public void onIllnessProfile_EditButton(View view){
         Intent intent = new Intent(IllnessProfileActivity.this, EditIllnessProfileActivity.class);
         startActivity(intent);

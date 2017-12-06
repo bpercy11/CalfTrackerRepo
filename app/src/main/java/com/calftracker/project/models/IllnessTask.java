@@ -38,4 +38,27 @@ public class IllnessTask {
     public void setCalf(Calf calf) {
         this.calf = calf;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof IllnessTask)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        IllnessTask task = (IllnessTask) o;
+
+        if(task.getCalf().getFarmId().equals(this.getCalf().getFarmId()) && task.getMedicine().getName().equals(this.getMedicine().getName())
+                && task.getIllness().getName().equals(this.getIllness().getName()))
+            return true;
+        else
+            return false;
+    }
 }

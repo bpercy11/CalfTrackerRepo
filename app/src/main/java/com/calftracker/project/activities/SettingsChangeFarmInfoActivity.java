@@ -72,12 +72,7 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
                     farm.setOwner(farmOwner.getText().toString());
                     farm.setLocation(farmLocation.getText().toString());
 
-                    SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                    Gson gson = new Gson();
-                    String json = gson.toJson(farm);
-                    prefsEditor.putString("Farm",json);
-                    prefsEditor.apply();
+                    saveData();
 
                     back();
                 } else {
@@ -85,6 +80,22 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(farm);
+        prefsEditor.putString("Farm",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS METHOD (AS OF RIGHT NOW)
+        // TODO: farm data needs to be retrieved to show user what the current farm information is
     }
 
     @Override

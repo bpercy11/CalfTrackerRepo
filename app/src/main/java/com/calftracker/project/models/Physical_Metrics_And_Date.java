@@ -1,11 +1,17 @@
 package com.calftracker.project.models;
 
-import java.util.Calendar;
+import android.support.annotation.NonNull;
 
-public class Physical_Metrics_And_Date {
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Physical_Metrics_And_Date implements Comparable<Physical_Metrics_And_Date> {
 	private double weight;
 	private double height;
-	private Calendar dateRecorded;
+
+	private int year;
+	private int month;
+	private int day;
 	
 	/**
 	 * @param weight
@@ -15,14 +21,18 @@ public class Physical_Metrics_And_Date {
 		super();
 		this.weight = weight;
 		this.height = -1;
-		this.dateRecorded = dateRecorded;
+		this.year = dateRecorded.get(Calendar.YEAR);
+		this.month = dateRecorded.get(Calendar.MONTH);
+		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
 	}
 
 	public Physical_Metrics_And_Date(Calendar dateRecorded, double height) {
 		super();
 		this.height = height;
 		this.weight = -1;
-		this.dateRecorded = dateRecorded;
+		this.year = dateRecorded.get(Calendar.YEAR);
+		this.month = dateRecorded.get(Calendar.MONTH);
+		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
 	}
 
 	/**
@@ -34,7 +44,33 @@ public class Physical_Metrics_And_Date {
 		super();
 		this.weight = weight;
 		this.height = height;
-		this.dateRecorded = dateRecorded;
+		this.year = dateRecorded.get(Calendar.YEAR);
+		this.month = dateRecorded.get(Calendar.MONTH);
+		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	/**
@@ -68,14 +104,21 @@ public class Physical_Metrics_And_Date {
 	/**
 	 * @return the dateRecorded
 	 */
-	public Calendar getDateRecorded() {
-		return dateRecorded;
+	public Calendar makeDateRecorded() {
+		return new GregorianCalendar(year, month, day);
 	}
 
 	/**
 	 * @param dateRecorded the dateRecorded to set
 	 */
-	public void setDateRecorded(Calendar dateRecorded) {
-		this.dateRecorded = dateRecorded;
+	public void putDateRecorded(Calendar dateRecorded) {
+		this.year = dateRecorded.get(Calendar.YEAR);
+		this.month = dateRecorded.get(Calendar.MONTH);
+		this.day = dateRecorded.get(Calendar.DAY_OF_MONTH);
+	}
+
+	@Override
+	public int compareTo(@NonNull Physical_Metrics_And_Date o) {
+		return makeDateRecorded().compareTo(o.makeDateRecorded());
 	}
 }

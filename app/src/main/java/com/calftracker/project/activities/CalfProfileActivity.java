@@ -46,6 +46,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import static com.calftracker.project.activities.AddCalfActivity.REQUEST_IMAGE_CAPTURE;
@@ -81,6 +82,10 @@ public class CalfProfileActivity extends AppCompatActivity {
     private Calf calf;
     private String calfID;
     private ArrayList<Calf> calfList;
+
+    private Calendar tempSizeDate;
+    private boolean weightSet;
+    private boolean heightSet;
 
     private Calf tempCalf;
     private String tempID;
@@ -143,9 +148,21 @@ public class CalfProfileActivity extends AppCompatActivity {
         mHeightValue = (TextView) findViewById(R.id.textViewHeightValue);
 
         // Create these variables for code readability
+        mostRecentWeight = -1;
+        mostRecentHeight = -1;
         if (!calf.getPhysicalHistory().isEmpty()) {
-            mostRecentWeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight();
-            mostRecentHeight = calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight();
+            for (int i = calf.getPhysicalHistory().size()-1; i >= 0; i--) {
+                if (calf.getPhysicalHistory().get(i).getWeight() != -1) {
+                    mostRecentWeight = calf.getPhysicalHistory().get(i).getWeight();
+                    break;
+                }
+            }
+            for (int i = calf.getPhysicalHistory().size()-1; i >= 0; i--) {
+                if (calf.getPhysicalHistory().get(i).getHeight() != -1) {
+                    mostRecentHeight = calf.getPhysicalHistory().get(i).getHeight();
+                    break;
+                }
+            }
         }
 
         // Custom layout for text dialogs
@@ -180,9 +197,9 @@ public class CalfProfileActivity extends AppCompatActivity {
         String farmID = calf.getFarmId();
         mIDValue.setText(farmID);
         mGenderValue.setText(calf.getGender());
-        int year = calf.getDateOfBirth().get(Calendar.YEAR);
-        int month = calf.getDateOfBirth().get(Calendar.MONTH) + 1;
-        int day = calf.getDateOfBirth().get(Calendar.DAY_OF_MONTH);
+        int year = calf.makeCalendarDOB().get(Calendar.YEAR);
+        int month = calf.makeCalendarDOB().get(Calendar.MONTH) + 1;
+        int day = calf.makeCalendarDOB().get(Calendar.DAY_OF_MONTH);
         mDOBValue.setText(month + "/" + day + "/" + year);
         if (calf.getSire().getId() != null) {mSireValue.setText(calf.getSire().getId());}
         if (calf.getSire().getName() != null) { mSireNameValue.setText(calf.getSire().getName()); }
@@ -213,13 +230,14 @@ public class CalfProfileActivity extends AppCompatActivity {
                 if(calf.getNotesSize() == 0) return;
 
                 AlertDialog noteContentPopup;
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
                 View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog_text, null);
                 final TextView output = (TextView) dialogLayout_Note.findViewById(R.id.dialogTextView);
                 output.setText(calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
-                Calendar noteDate = calf.getNoteNdx(position).getDateEntered();
+                Calendar noteDate = calf.getNoteNdx(position).makeDateEntered();
                 int year = noteDate.get(Calendar.YEAR);
                 int month = noteDate.get(Calendar.MONTH) + 1;
                 int day = noteDate.get(Calendar.DAY_OF_MONTH);
@@ -252,6 +270,16 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     }
 
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
     public void retrieveData() {
         // try and get calf object made by main activity
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
@@ -260,15 +288,6 @@ public class CalfProfileActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = mPreferences.getString("CalfList","");
         calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
-    }
-
-    public void saveData() {
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
     }
 
     public void updateNoteListView(Calf calf) {
@@ -415,7 +434,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = month + "/" + day + "/" + year;
                 mDOBValue.setText(date);
-                tempCalf.setDateOfBirth(tempDOB);
+                tempCalf.placeCalendarDOB(tempDOB);
             }
         };
 
@@ -793,44 +812,98 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddWeight(View view) {
         AlertDialog.Builder builderWeight = new AlertDialog.Builder(this);
-        View dialogLayout_Weight = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
+        View dialogLayout_Weight = inflater.inflate(R.layout.calf_profile_weight_height_dialog, null);
         final EditText dialogText_Weight = (EditText) dialogLayout_Weight.findViewById(R.id.dialogTextInput);
+        final TextView dateText = (TextView) dialogLayout_Weight.findViewById(R.id.textViewDate);
+        tempSizeDate = null;
 
         builderWeight.setTitle("Record Weight Measurement");
 
         dialogText_Weight.setHint("Weight (lbs)");
+        dateText.setText("Select a date");
         builderWeight.setView(dialogLayout_Weight);
+
+        // Allows clicking the date field to bring up a date picker dialog
+        dateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        CalfProfileActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        // this happens when the user has selected a date in the dialog and presses "OK"
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                tempSizeDate = new GregorianCalendar(year,month,day);
+                month = month + 1;
+                String date = month + "/" + day + "/" + year;
+                dateText.setText(date);
+            }
+        };
+
         builderWeight.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(dialogText_Weight.getText().toString().matches("")) {
+                // Make toast if all weight and date are not entered
+                if(dialogText_Weight.getText().toString().matches("") || tempSizeDate == null) {
                     Context context = getApplicationContext();
-                    CharSequence text = "No weight entered";
+                    CharSequence text = "Must enter both weight and date, weight was not recorded";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     return;
                 }
 
+                weightSet = false;
                 double weight = Double.parseDouble(dialogText_Weight.getText().toString());
-                Calendar today = Calendar.getInstance();
-                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, Calendar.getInstance());
-                if (!calf.getPhysicalHistory().isEmpty()
-                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
-                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
-                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
-                    if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getWeight() != -1) {
-                        Context context = getApplicationContext();
-                        CharSequence text = "Previous weight recording from this day overwritten";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
+                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(weight, tempSizeDate);
+
+                // If the calf already has size recordings, check to see if any of them are the same day as the new recording and overwrite
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = 0; j < calf.getPhysicalHistory().size(); j++) {
+                        if (tempSizeDate.get(Calendar.YEAR) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.YEAR)
+                                && tempSizeDate.get(Calendar.MONTH) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.MONTH)
+                                && tempSizeDate.get(Calendar.DATE) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.DATE)) {
+                            if (calf.getPhysicalHistory().get(j).getWeight() != -1) {
+                                Context context = getApplicationContext();
+                                CharSequence text = "Previous weight recording from this day overwritten";
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                            }
+                            calf.getPhysicalHistory().get(j).setWeight(weight);
+                            weightSet = true;
+                            break;
+                        }
                     }
-                    calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setWeight(weight);
-                } else {
+                }
+                // If there haven't been previous size recordings or the weight was not already set, add a new size recording.
+                if (calf.getPhysicalHistory().isEmpty() || !weightSet) {
                     calf.getPhysicalHistory().add(size);
                 }
-                mWeightValue.setText(Double.toString(weight) + " lbs");
+
+                Collections.sort(calf.getPhysicalHistory());
+
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = calf.getPhysicalHistory().size()-1; j >= 0; j--) {
+                        if (calf.getPhysicalHistory().get(j).getWeight() != -1) {
+                            mWeightValue.setText(Double.toString(calf.getPhysicalHistory().get(j).getWeight()) + " lbs");
+                            break;
+                        }
+                    }
+                }
 
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {
@@ -855,45 +928,95 @@ public class CalfProfileActivity extends AppCompatActivity {
 
     public void onClickAddHeight(View view) {
         AlertDialog.Builder builderHeight = new AlertDialog.Builder(this);
-        View dialogLayout_Height = inflater.inflate(R.layout.calf_profile_simple_edittext_dialog, null);
+        View dialogLayout_Height = inflater.inflate(R.layout.calf_profile_weight_height_dialog, null);
         final EditText dialogText_Height = (EditText) dialogLayout_Height.findViewById(R.id.dialogTextInput);
+        final TextView dateText = (TextView) dialogLayout_Height.findViewById(R.id.textViewDate);
+        tempSizeDate = null;
 
         builderHeight.setTitle("Record Height Measurement");
         dialogText_Height.setHint("Height (in)");
+        dateText.setText("Select a date");
         builderHeight.setView(dialogLayout_Height);
+
+        // Allows clicking the date field to bring up a date picker dialog
+        dateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        CalfProfileActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        // this happens when the user has selected a date in the dialog and presses "OK"
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                tempSizeDate = new GregorianCalendar(year,month,day);
+                month = month + 1;
+                String date = month + "/" + day + "/" + year;
+                dateText.setText(date);
+            }
+        };
         builderHeight.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(dialogText_Height.getText().toString().matches("")) {
+                // Make toast if all weight and date are not entered
+                if(dialogText_Height.getText().toString().matches("") || tempSizeDate == null) {
                     Context context = getApplicationContext();
-                    CharSequence text = "No weight entered";
+                    CharSequence text = "Must enter both height and date, height was not recorded";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     return;
                 }
 
+                heightSet = false;
                 double height = Double.parseDouble(dialogText_Height.getText().toString());
-                Calendar today = Calendar.getInstance();
-                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(Calendar.getInstance(), height);
-
-                if (!calf.getPhysicalHistory().isEmpty()
-                        && today.get(Calendar.YEAR) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.YEAR)
-                        && today.get(Calendar.MONTH) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.MONTH)
-                        && today.get(Calendar.DATE) == calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getDateRecorded().get(Calendar.DATE)) {
-                    if (calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).getHeight() != -1) {
-                        Context context = getApplicationContext();
-                        CharSequence text = "Previous height recording from this day overwritten";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
+                Physical_Metrics_And_Date size = new Physical_Metrics_And_Date(tempSizeDate, height);
+                // If the calf already has size recordings, check to see if any of them are the same day as the new recording and overwrite
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = 0; j < calf.getPhysicalHistory().size(); j++) {
+                        if (tempSizeDate.get(Calendar.YEAR) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.YEAR)
+                                && tempSizeDate.get(Calendar.MONTH) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.MONTH)
+                                && tempSizeDate.get(Calendar.DATE) == calf.getPhysicalHistory().get(j).makeDateRecorded().get(Calendar.DATE)) {
+                            if (calf.getPhysicalHistory().get(j).getHeight() != -1) {
+                                Context context = getApplicationContext();
+                                CharSequence text = "Previous height recording from this day overwritten";
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                            }
+                            calf.getPhysicalHistory().get(j).setHeight(height);
+                            heightSet = true;
+                            break;
+                        }
                     }
-                    calf.getPhysicalHistory().get(calf.getPhysicalHistory().size()-1).setHeight(height);
-
-                } else {
+                }
+                // If there haven't been previous size recordings or the height was not already set, add a new size recording.
+                if (calf.getPhysicalHistory().isEmpty() || !heightSet) {
                     calf.getPhysicalHistory().add(size);
                 }
-                mHeightValue.setText(Double.toString(height) + " in");
+
+                Collections.sort(calf.getPhysicalHistory());
+
+                if (!calf.getPhysicalHistory().isEmpty()) {
+                    for (int j = calf.getPhysicalHistory().size()-1; j >= 0; j--) {
+                        if (calf.getPhysicalHistory().get(j).getHeight() != -1) {
+                            mHeightValue.setText(Double.toString(calf.getPhysicalHistory().get(j).getHeight()) + " in");
+                            break;
+                        }
+                    }
+                }
 
                 for (int j = 0; j < calfList.size(); j++) {
                     if (calfList.get(j).getFarmId().equals(calfID)) {

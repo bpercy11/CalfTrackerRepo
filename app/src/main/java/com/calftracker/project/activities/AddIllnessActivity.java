@@ -11,16 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.calftracker.project.models.Medicine;
+import com.calftracker.project.models.Illness;
 import com.calftracker.project.adapters.protocols.MedicineAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddIllnessActivity extends AppCompatActivity {
@@ -97,21 +102,18 @@ public class AddIllnessActivity extends AppCompatActivity {
             return;
         }
 
+        retrieveData();
+        for (int i = 0; i < illnessList.size(); i++) {
+            if (illnessList.get(i).getName().equals(illnessNameStr)) {
+                Toast.makeText(this, "An illness with this name already exists, please choose a new name or delete the other illness",
+                        Toast.LENGTH_LONG).show();
+                illnessName.setText("");
+                return;
+            }
+        }
+
         // save the illness name/notes to local storage
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.serializeNulls();
-        Gson gson = gsonBuilder.create();
-        String json;
-
-        json = gson.toJson(illnessName.getText().toString());
-        prefsEditor.putString("thisIllnessName", json);
-        prefsEditor.apply();
-
-        json = gson.toJson(illnessNotes);
-        prefsEditor.putString("illnessNotes", json);
-        prefsEditor.apply();
+        saveData();
 
         Intent intent = new Intent(this, AddIllnessMedicineSelectionActivity.class);
         startActivity(intent);
@@ -121,6 +123,33 @@ public class AddIllnessActivity extends AppCompatActivity {
     public void clickEditIllnessCancelButton(View view){
         Intent intent = new Intent(AddIllnessActivity.this, IllnessActivity.class);
         startActivity(intent);
+    }
+
+    // TODO
+    public void saveData() {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.serializeNulls();
+        Gson gson = gsonBuilder.create();
+        String json;
+
+        json = gson.toJson(illnessNameStr);
+        prefsEditor.putString("thisIllnessName", json);
+        prefsEditor.apply();
+
+        json = gson.toJson(illnessNotes);
+        prefsEditor.putString("illnessNotes", json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        if (mPreferences.contains("IllnessList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("IllnessList", "");
+            illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        } else { illnessList = new ArrayList<>(); }
     }
 }
 

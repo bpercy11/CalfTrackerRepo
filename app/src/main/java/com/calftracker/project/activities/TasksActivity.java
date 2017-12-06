@@ -2,6 +2,7 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -73,23 +74,12 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         mRightLabel = (TextView) findViewById(R.id.textVieweligibleTitle);
         mCenterLabel = (TextView) findViewById(R.id.textViewIllnessNameTasks);
 
-        // Load in the Task and CalfList
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = mPreferences.getString("Task", "");
-        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
-        json = mPreferences.getString("CalfList", "");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
 
-        json = mPreferences.getString("IllnessList", "");
-        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+        retrieveData();
 
         task.updateTasks();
 
-        SharedPreferences.Editor prefsEditor = mPreferences.edit();
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
+        saveData();
 
         // ArrayList that holds all of the Vaccine Tasks for the current day
         ArrayList<VaccineTaskItem> todayTasks = new ArrayList<VaccineTaskItem>();
@@ -127,6 +117,34 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         }
     }
 
+    // TODO
+    public void saveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json;
+        SharedPreferences.Editor prefsEditor = mPreferences.edit();
+        json = gson.toJson(task);
+        prefsEditor.putString("Task",json);
+        prefsEditor.apply();
+
+        json = gson.toJson(calfList);
+        prefsEditor.putString("CalfList",json);
+        prefsEditor.apply();
+    }
+
+    public void retrieveData() {
+        // Load in the Task and CalfList
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPreferences.getString("Task", "");
+        task = gson.fromJson(json, new TypeToken<Task>() {}.getType());
+        json = mPreferences.getString("CalfList", "");
+        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
+
+        json = mPreferences.getString("IllnessList", "");
+        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+    }
+
     public void dumbDateChange(View view) {
         startActivity(new Intent(android.provider.Settings.ACTION_DATE_SETTINGS));
     }
@@ -139,6 +157,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         for(int i = 0; i < calfList.size(); i++)
             if(calfList.get(i).isNeedToObserveForIllness())
                 observeCalves.add(calfList.get(i));
+
+
 
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
@@ -160,6 +180,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
+
 
         final View dialogView = inflater.inflate(R.layout.tasks_observation_dialog, null);
 
@@ -183,6 +204,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         });
 
         mIllnessSpinner.setAdapter(spinnerAdapter);
+
+
 
         final Calf calfcopy = calf;
 
@@ -245,18 +268,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
             task.getIllnessTracker().get(0).add(new IllnessTask(illness, medication, calfToRemove));
         }
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json;
-        SharedPreferences.Editor prefsEditor = mPreferences.edit();
-
-        json = gson.toJson(task);
-        prefsEditor.putString("Task",json);
-        prefsEditor.apply();
-
-        json = gson.toJson(calfList);
-        prefsEditor.putString("CalfList",json);
-        prefsEditor.apply();
+        saveData();
 
         observationAdapter = new TasksObservationAdapter(observeCalves, getApplicationContext(), TasksActivity.this);
 
@@ -295,7 +307,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     public void onClickIllnessTasks(View view) {
         setIllnessColumnNames();
 
-        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext());
+        TasksIllnessAdapter illnessAdapter = new TasksIllnessAdapter(task.getIllnessTracker(), getApplicationContext(), TasksActivity.this);
+
         listView.setAdapter(illnessAdapter);
 
         // Background tint only works on 15 & up.
@@ -308,6 +321,18 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
             illnessesButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
             illnessesButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         }
+    }
+
+    public void gotoIllnessDetails(IllnessTask illnessTask) {
+        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(illnessTask);
+        prefsEditor.putString("TaskIllnessDetails",json);
+        prefsEditor.apply();
+
+        Intent intent = new Intent(this, TaskIllnessDetailsActivity.class);
+        startActivity(intent);
     }
 
     public void setObservationColumnNames() {

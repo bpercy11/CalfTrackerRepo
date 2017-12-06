@@ -43,25 +43,7 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
         Button addEmployeeButton = (Button) findViewById(R.id.addEmployeeBtn);
         mListView = (ListView) findViewById(R.id.employeesList);
 
-        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-        Gson gson = new Gson();
-        String json;
-
-        if(mPreferences.contains("EmployeeList")) {
-            json = mPreferences.getString("EmployeeList", "");
-            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
-            }.getType());
-        } else { employeeArrayList = new ArrayList<Employee>(); }
-
-        if(mPreferences.contains("FarmProfile")){
-            //Log.d("TAG", "THE FARM PROFILE EXISTS");
-            json = mPreferences.getString("FarmProfile", "");
-            farm = gson.fromJson(json, Farm.class);
-            farm.setEmployeeList(employeeArrayList);
-            //Employee n = (Employee) farm.getEmployees().get(0);
-            //Log.d("Employee 1", n.getName());
-        }
+        retrieveData();
 
         String[] listItems = new String[employeeArrayList.size()];
 
@@ -98,6 +80,34 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
+
+    public void retrieveData() {
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        Gson gson = new Gson();
+        String json;
+
+        if(mPreferences.contains("EmployeeList")) {
+            json = mPreferences.getString("EmployeeList", "");
+            employeeArrayList = gson.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+            }.getType());
+        } else { employeeArrayList = new ArrayList<Employee>(); }
+
+        if(mPreferences.contains("FarmProfile")){
+            //Log.d("TAG", "THE FARM PROFILE EXISTS");
+            json = mPreferences.getString("FarmProfile", "");
+            farm = gson.fromJson(json, Farm.class);
+            farm.setEmployeeList(employeeArrayList);
+            //Employee n = (Employee) farm.getEmployees().get(0);
+            //Log.d("Employee 1", n.getName());
+        }
     }
 
     @Override
