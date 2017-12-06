@@ -203,9 +203,13 @@ public class AddCalfActivity extends BaseActivity {
 
     public void retrieveData() {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        if (mPreferences.contains("CalfList")) {
+            Gson gson = new Gson();
+            String json = mPreferences.getString("CalfList","");
+            calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>(){}.getType());
+        } else {
+            calfList = new ArrayList<>();
+        }
     }
 
     public void setupUI(View view) {
