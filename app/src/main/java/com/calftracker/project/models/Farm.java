@@ -12,8 +12,8 @@ public class Farm {
     private String name;
     private String owner;
     private String location;
-    private int passcode;
-    private HashMap<Integer, Calf> calfProfileMap;
+    //private int passcode;
+    //private HashMap<Integer, Calf> calfProfileMap;
     //change to arrayList possibly
     private Integer currInternalID;
     //TODO Medical_Procedures
@@ -32,9 +32,9 @@ public class Farm {
         this.location = location;
 
         this.currInternalID = 0;
-        passcode = -1;
+        //passcode = -1;
         //employees = new ArrayList<Employee>();
-        calfProfileMap = new HashMap<Integer, Calf>();
+        //calfProfileMap = new HashMap<Integer, Calf>();
 
         //TODO set up anything else we need
     }
@@ -57,26 +57,26 @@ public class Farm {
      *
      * @param passcode
      */
-    public void setPasscode(int passcode) { this.passcode = passcode; }
+    //public void setPasscode(int passcode) { this.passcode = passcode; }
 
     /**
      *
      * @param passcode
      * @return
      */
-    public boolean checkPasscode(int passcode) { return this.passcode == passcode; }
+    //public boolean checkPasscode(int passcode) { return this.passcode == passcode; }
 
     /**
      *
      * @return
      */
-    public HashMap getCalfProfileMap() { return this.calfProfileMap; }
+    //public HashMap getCalfProfileMap() { return this.calfProfileMap; }
 
     /**
      *
      * @param calf
      */
-    public void addCalf(Calf calf) { calfProfileMap.put(currInternalID++ , calf); }
+    //public void addCalf(Calf calf) { calfProfileMap.put(currInternalID++ , calf); }
 
     //public void removeCalf()
 

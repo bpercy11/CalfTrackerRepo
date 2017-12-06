@@ -161,9 +161,13 @@ public class Firebase extends Application{
 
     public void saveToFirebase(String str, Object obj){
 
+        DatabaseReference mDatabse = FirebaseDatabase.getInstance().getReference();
+        mDatabse.child(str).setValue(obj);
+
     }
 
     public void saveData(String id, String json){
+
 
 
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_MULTI_PROCESS);
@@ -302,7 +306,15 @@ public class Firebase extends Application{
     // update LastEditTime in firebase each time we write to it
     // add LastEditTimes to each diff list stored in fb so we aren't pulling things we don't need to
     public void setDataChangeListeners(){
+
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        Log.d("DatabaseRef", mDatabase.toString());
+
+        mDatabase.child("TestValueSet").setValue("testValue");
+        Log.d("DatabaseRef", "testValue");
+
+        mDatabase = mDatabase.getRoot();
 
         /////// CALF LIST DATABASE LISTENER ////////////////////////
         mDatabase = mDatabase.child("CalfList");
@@ -330,6 +342,9 @@ public class Firebase extends Application{
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("EmployeeList", "OnDataChange");
+
                 GenericTypeIndicator<ArrayList<Employee>> t = new GenericTypeIndicator<ArrayList<Employee>>() {};
                 ArrayList<Employee> employeeList = dataSnapshot.getValue(t);
 
@@ -410,11 +425,13 @@ public class Firebase extends Application{
             public void onCancelled(DatabaseError databaseError) { }
         });
 
-        mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
-        mDatabase = mDatabase.child("Farm");
+        //mDatabase = FirebaseDatabase.getInstance().getReference(); //reset the reference to the root
+        mDatabase = mDatabase.getRoot().child("Farm");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("FarmLog", dataSnapshot.getValue().toString());
                 GenericTypeIndicator<Farm> t = new GenericTypeIndicator<Farm>() {};
                 Farm farm = dataSnapshot.getValue(t);
 
@@ -429,6 +446,59 @@ public class Firebase extends Application{
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+
+
+        /*
+        ArrayList<ArrayList<Integer>> testArLst = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+
+        temp.add(2);
+        temp.add(45);
+
+        testArLst.add(temp);
+        temp.add(null);
+        temp.add(2);
+
+        testArLst.add(temp);
+
+        mDatabase.getRoot().child("testNestedArrayList").setValue(testArLst);
+        */
+
+        /*
+        mDatabase = mDatabase.getRoot().child("Task");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("TaksVal", dataSnapshot.getValue().toString());
+
+                GenericTypeIndicator<Task> t = new GenericTypeIndicator<Task>() {};
+                GenericTypeIndicator<Map<String, ArrayList<VaccineTask>>> t1 = new GenericTypeIndicator<Map<String, ArrayList<VaccineTask>>>() {};
+
+                Map<String, ArrayList<VaccineTask>> test = dataSnapshot.child("vaccinesToAdminister").getValue(t1);
+
+                //ArrayList<Map<String, VaccineTask>> test = dataSnapshot.child("vaccinesToAdminister").getValue(t1);
+
+                //Task task = dataSnapshot.getValue(t);
+
+                //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                //SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                //String json = gson.toJson(task);
+                //prefsEditor.putString("Task",json);
+                //prefsEditor.apply();
+
+                String json = gson.toJson(test);
+                Log.d("Task", json);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });*/
+
+
+
 
     }
 

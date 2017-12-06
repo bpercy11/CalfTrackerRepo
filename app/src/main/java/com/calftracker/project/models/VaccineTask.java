@@ -7,8 +7,8 @@ import java.util.Calendar;
  */
 
 public class VaccineTask {
-    private Vaccine vaccine;
-    private Calf calf;
+    private Vaccine vaccine = new Vaccine();
+    private Calf calf = new Calf();
     private boolean start;
 
     public VaccineTask(){}

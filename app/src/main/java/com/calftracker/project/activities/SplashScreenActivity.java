@@ -102,6 +102,10 @@ public class SplashScreenActivity extends Activity {
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Task", task);
+
     }
 
     public void retrieveData() {

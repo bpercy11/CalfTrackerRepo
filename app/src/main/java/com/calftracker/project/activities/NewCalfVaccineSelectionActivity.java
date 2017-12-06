@@ -237,16 +237,20 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         prefsEditor.apply();
 
         Firebase fb = (Firebase) getApplicationContext();
-        fb.saveData("calfList", calfList);
+        fb.saveData("CalfList", calfList);
 
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
 
+        fb.saveData("Task", task);
+
         if(containsVaccineList) {
             json = gson.toJson(vaccineList);
             prefsEditor.putString("VaccineList", json);
             prefsEditor.apply();
+
+            fb.saveData("VaccineList", vaccineList);
         }
 
 
