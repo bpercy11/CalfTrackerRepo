@@ -193,6 +193,7 @@
 
     <string name="insights_title">Insights</string>
     <string name="insights_chart_gender">Calf Gender</string>
+    <string name="insights_chart_dob">Calf Births in the Last Week</string>
     <string name="insights_chart_health">Calf Health</string>
 
     <string name="settings_title">Settings</string>
