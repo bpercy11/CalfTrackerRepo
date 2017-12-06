@@ -98,6 +98,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
 
         // if this medicine is removed, make sure that no treatment protocol calls for this
         ArrayList<Illness> illnessList;
+        List<Medicine> tempMedicineList;
 
         json = mPrefs.getString("IllnessList", "");
         illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
@@ -106,7 +107,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
         for (int i = 0; i < illnessList.size(); i++){
             if (illnessList.get(i).getTreatmentProtocol().getMedicines().contains(medicine)){
                // illnessList.get(i).getTreatmentProtocol().getMedicines().remove(medicine);
-                List<Medicine> tempMedicineList = illnessList.get(i).getTreatmentProtocol().getMedicines();
+                tempMedicineList = illnessList.get(i).getTreatmentProtocol().getMedicines();
                 tempMedicineList.remove(medicine);
                 Treatment_Protocol tempTP = new Treatment_Protocol
                         (tempMedicineList,illnessList.get(i).getTreatmentProtocol().getNotes());
@@ -115,6 +116,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
                 illnessList.add(tempIllness);
             }
         }
+
 
         json = gson.toJson(illnessList);
         prefsEditor.putString("IllnessList",json);
