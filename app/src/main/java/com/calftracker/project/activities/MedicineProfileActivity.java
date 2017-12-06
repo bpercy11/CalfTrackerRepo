@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
+import com.calftracker.project.models.Treatment_Protocol;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -96,7 +97,6 @@ public class MedicineProfileActivity extends AppCompatActivity {
         prefsEditor.apply();
 
         // if this medicine is removed, make sure that no treatment protocol calls for this
-        Illness tempIllness;
         ArrayList<Illness> illnessList;
 
         json = mPrefs.getString("IllnessList", "");
@@ -104,11 +104,21 @@ public class MedicineProfileActivity extends AppCompatActivity {
         }.getType());
 
         for (int i = 0; i < illnessList.size(); i++){
-            tempIllness = illnessList.get(i);
-            if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
-                tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
+            if (illnessList.get(i).getTreatmentProtocol().getMedicines().contains(medicine)){
+               // illnessList.get(i).getTreatmentProtocol().getMedicines().remove(medicine);
+                List<Medicine> tempMedicineList = illnessList.get(i).getTreatmentProtocol().getMedicines();
+                tempMedicineList.remove(medicine);
+                Treatment_Protocol tempTP = new Treatment_Protocol
+                        (tempMedicineList,illnessList.get(i).getTreatmentProtocol().getNotes());
+                Illness tempIllness = new Illness(illnessList.get(i).getName(),tempTP);
+                illnessList.remove(i);
+                illnessList.add(tempIllness);
             }
         }
+
+        json = gson.toJson(illnessList);
+        prefsEditor.putString("IllnessList",json);
+        prefsEditor.apply();
 
         Intent intent = new Intent(MedicineProfileActivity.this,MedicineActivity.class);
         startActivity(intent);
