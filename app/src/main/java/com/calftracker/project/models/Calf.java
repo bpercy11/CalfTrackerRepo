@@ -10,16 +10,16 @@ public class Calf {
 	private String farmId;
 	private int internalId;
 	private String gender;
-	private ArrayList<String> calfAllergies;
-	private Sire sire;
+	private ArrayList<String> calfAllergies = new ArrayList<String>();
+	private Sire sire = new Sire();
 	private String dam;
 	private boolean active;
-	private ArrayList<Vaccine_With_Date> administeredVaccines;
-	private ArrayList<Vaccine> neededVaccines;
-	private ArrayList<Calf_Illness> illnessHistory;
-	private ArrayList<Physical_Metrics_And_Date> physicalHistory;
-	private Feeding[] feedingHistory;
-	private ArrayList<Note> notes;
+	private ArrayList<Vaccine_With_Date> administeredVaccines = new ArrayList<Vaccine_With_Date>();
+	private ArrayList<Vaccine> neededVaccines = new ArrayList<Vaccine>();
+	private ArrayList<Calf_Illness> illnessHistory = new ArrayList<Calf_Illness>();
+	private ArrayList<Physical_Metrics_And_Date> physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
+	private Feeding[] feedingHistory = new Feeding[2];
+	private ArrayList<Note> notes = new ArrayList<Note>();
 	private boolean needToObserveForIllness;
 
 	private int calfyear;
