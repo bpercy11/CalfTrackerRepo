@@ -18,11 +18,13 @@
         android:id="@+id/textViewIllnessDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/task_illness_dialog_illness"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewMedicationDialog"/>
+        app:layout_constraintLeft_toLeftOf="@+id/textViewMedicationDialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintForIllnessSpinner"
@@ -48,16 +50,17 @@
     </android.support.constraint.ConstraintLayout>
 
 
-
     <TextView
         android:id="@+id/textViewMedicationDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/task_illness_dialog_medication"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewIllnessDialog"
-        app:layout_constraintEnd_toStartOf="@+id/vertical30percentobservationdialog"/>
+        app:layout_constraintEnd_toStartOf="@+id/vertical30percentobservationdialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIllnessDialog" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintForMedicationSpinner"
@@ -86,14 +89,13 @@
 
     <Button
         android:id="@+id/buttonUnmarkObservationDialog"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/calf_profile_unmark_oberservation"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/constraintForMedicationSpinner"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMedicationDialog" />
 
 

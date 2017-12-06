@@ -227,14 +227,13 @@ public class CalfProfileActivity extends AppCompatActivity {
         mNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                if(calf.getNotesSize() == 0)
-                    return;
+                if(calf.getNotesSize() == 0) return;
 
                 AlertDialog noteContentPopup;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CalfProfileActivity.this);
-                final TextView output = new TextView(CalfProfileActivity.this);
-                // Space at the start to make notes easier to read
+                View dialogLayout_Note = inflater.inflate(R.layout.custom_dialog_text, null);
+                final TextView output = (TextView) dialogLayout_Note.findViewById(R.id.dialogTextView);
                 output.setText(calf.getNoteNdx(position).getMessage());
                 output.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
@@ -243,7 +242,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 int month = noteDate.get(Calendar.MONTH) + 1;
                 int day = noteDate.get(Calendar.DAY_OF_MONTH);
                 builder.setTitle("Note entered " + month + "/" + day + "/" + year);
-                builder.setView(output);
+                builder.setView(dialogLayout_Note);
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -781,7 +780,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
         builderDelete.setMessage("Are you sure you want to delete this calf? This action cannot be undone.")
                 .setTitle("Delete Calf");
-        builderDelete.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builderDelete.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Remove the calf from the list and save the new list to local storage
@@ -800,7 +799,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        builderDelete.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builderDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Do nothing
@@ -819,6 +818,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         tempSizeDate = null;
 
         builderWeight.setTitle("Record Weight Measurement");
+
         dialogText_Weight.setHint("Weight (lbs)");
         dateText.setText("Select a date");
         builderWeight.setView(dialogLayout_Weight);
@@ -853,7 +853,7 @@ public class CalfProfileActivity extends AppCompatActivity {
             }
         };
 
-        builderWeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builderWeight.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Make toast if all weight and date are not entered
@@ -967,8 +967,7 @@ public class CalfProfileActivity extends AppCompatActivity {
                 dateText.setText(date);
             }
         };
-
-        builderHeight.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builderHeight.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Make toast if all weight and date are not entered

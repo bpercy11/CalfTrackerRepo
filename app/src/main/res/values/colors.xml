@@ -2,8 +2,15 @@
 <resources>
     <color name="colorPrimary">#991602</color>
     <color name="colorPrimaryDark">#6E0F00</color>
-    <color name="colorAccent">#b51800</color>
+    <color name="colorAccent">#991602</color>
     <color name="colorBackground">#dbdbdb</color>
     <color name="colorTileBackground">#FFF</color>
-    <color name="colorIcon">#424242</color>
+    <color name="colorDarkGrey">#424242</color>
+    <color name="colorMedGrey">#7D7D7D</color>
+    <color name="colorLightGrey">#D7D7D7</color>
+    <color name="colorMaleBlue">#3DACC4</color>
+    <color name="colorFemalePink">#EB6CA1</color>
+    <color name="colorObserveOrange">#FF8800</color>
+    <color name="colorHealthyGreen">#0EEDA3</color>
+    <color name="colorLinePurple">#9536F5</color>
 </resources>

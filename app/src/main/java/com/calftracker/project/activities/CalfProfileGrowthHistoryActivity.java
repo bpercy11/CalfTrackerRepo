@@ -3,10 +3,13 @@ package com.calftracker.project.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +48,9 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
     ListView listview;
     TextView averageGrowth;
 
+    Button heightButton;
+    Button weightButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +62,8 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         Gson gson = new Gson();
-        String json = mPreferences.getString("CalfList","");
-        json = mPreferences.getString("calfToViewInProfile","");
+        String json = mPreferences.getString("CalfList", "");
+        json = mPreferences.getString("calfToViewInProfile", "");
         calfID = gson.fromJson(json, String.class);
 
         // Search through the calfList to find the correct calf by ID
@@ -98,10 +104,20 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
                 findViewById(R.id.graphViewHeightHistory).setVisibility(View.GONE);
             }
         }
-        weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
-        listview.setAdapter(weightAdapter);
-    }
 
+        weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(), calf.getPhysicalHistory());
+        listview.setAdapter(weightAdapter);
+
+        heightButton = (Button) findViewById(R.id.buttonHeight);
+        weightButton = (Button) findViewById(R.id.buttonWeight);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        }
+    }
     // TODO
     public void saveData() {
         // EMPTY METHOD TO KEEP CONSISTENCY
@@ -138,6 +154,15 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         }
         weightAdapter = new GrowthHistoryWeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(weightAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            heightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            heightButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void onClickHeightButton(View view) {
@@ -163,6 +188,15 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         }
         heightAdapter = new GrowthHistoryHeightAdapter(getApplicationContext(),calf.getPhysicalHistory());
         listview.setAdapter(heightAdapter);
+
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            heightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+            heightButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            weightButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorLightGrey));
+            weightButton.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        }
     }
 
     public void getCountsAndAverages() {

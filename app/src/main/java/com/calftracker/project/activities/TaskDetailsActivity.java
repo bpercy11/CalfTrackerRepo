@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -41,10 +42,16 @@ public class TaskDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
+        // Stylize action bar to use back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // get needed UI elements
         ListView listView = (ListView) findViewById(R.id.listViewVaccineSelection);
 
         retrieveData();
+
+        // Custom title
+        getSupportActionBar().setTitle(vaccine.getName());
 
         adapterArray = new ArrayList<>();
         ArrayList<Calf> vaccineCalfList = new ArrayList<>();
@@ -171,7 +178,17 @@ public class TaskDetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), TasksActivity.class);
+        startActivity(intent);
+        return true;
+    }
 }
 
 

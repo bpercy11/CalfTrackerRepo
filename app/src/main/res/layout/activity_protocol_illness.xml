@@ -34,7 +34,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/colorIcon"
+        android:backgroundTint="@color/colorMedGrey"
         android:onClick="onIllness_IllnessButtonClick"
         android:text="Illness"
         android:textColor="@android:color/white"

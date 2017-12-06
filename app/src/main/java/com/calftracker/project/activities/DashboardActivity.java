@@ -71,7 +71,9 @@ public class DashboardActivity extends BaseActivity {
                     case 3: intent = new Intent(DashboardActivity.this,VaccineActivity.class);
                             startActivity(intent);
                             break;
-                    case 4: break;
+                    case 4: intent = new Intent(DashboardActivity.this,InsightsActivity.class);
+                            startActivity(intent);
+                            break;
                     case 5: intent = new Intent(DashboardActivity.this,SettingsActivity.class);
                             startActivity(intent);
                             break;

@@ -44,6 +44,7 @@ dependencies {
         // Necessary to avoid version conflicts
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

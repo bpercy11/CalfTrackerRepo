@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:backgroundTint="@color/colorIcon"
+        android:backgroundTint="@color/colorMedGrey"
         android:onClick="onMedicine_MedicineButtonClick"
         android:text="Medicine"
         android:textColor="@android:color/white"

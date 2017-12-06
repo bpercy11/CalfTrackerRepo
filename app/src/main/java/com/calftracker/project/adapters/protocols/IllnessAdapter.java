@@ -29,7 +29,6 @@ public class IllnessAdapter extends BaseAdapter {
         this.illnessList = illnessList;
         this.layoutInflater = LayoutInflater.from(context);
         this.treatmentProtocol = treatmentProtocol;
-
     }
 
     public class ViewHolder {
@@ -52,12 +51,14 @@ public class IllnessAdapter extends BaseAdapter {
             holder =  new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.illness_list, null);
             holder.illnessName = (TextView) convertView.findViewById(R.id.illness_name);
+            holder.treatmentNotes = (TextView) convertView.findViewById(R.id.treatment_notes);
             convertView.setTag(holder);
         }
         else{
             holder = (ViewHolder) convertView.getTag();
         }
         holder.illnessName.setText(illnessList.get(position).getName());
+        holder.treatmentNotes.setText(illnessList.get(position).getTreatmentProtocol().getNotes());
         return convertView;
     }
 }
