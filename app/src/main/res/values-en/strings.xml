@@ -179,12 +179,12 @@
         <item>Week</item>
         <item>Month</item>
     </string-array>
-    <string name="title_activity_add_illness_medicine_selection">AddIllnessMedicineSelectionActivity</string>
+    <string name="title_activity_add_illness_medicine_selection"> AddIllnessMedicineSelectionActivity </string>
     <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines</string>
     <string name="IllnessProfile_EditButtonName">Edit</string>
     <string name="IllnessProfile_RemoveButtonName">Remove</string>
     <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity</string>
-    <string name="title_activity_edit_illness_profile_medicine_selection">EditIllnessProfileMedicineSelectionActivity</string>
+    <string name="title_activity_edit_illness_profile_medicine_selection"> EditIllnessProfileMedicineSelectionActivity</string>
 
     <string name="insights_title">Insights</string>
 
