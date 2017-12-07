@@ -14,6 +14,7 @@ import com.calftracker.project.models.Farm;
 import com.calftracker.project.models.Firebase;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
 
@@ -33,32 +34,42 @@ public class SettingsChangeFarmInfoActivity extends AppCompatActivity {
         farmOwner = (TextView) findViewById(R.id.farmOwnerChangeText);
         farmLocation = (TextView) findViewById(R.id.farmLocationChangeText);
 
+        SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+        String json;
+        if(mPreferences.contains("Farm")) {
+            json = mPreferences.getString("Farm", "");
+            Gson gson = new Gson();
+            farm = gson.fromJson(json, new TypeToken<Farm>() {
+            }.getType());
+
+            farmName.setHint(farm.getName());
+            farmOwner.setHint(farm.getOwner());
+            farmLocation.setHint(farm.getLocation());
+        }
+
 
 
         saveFieldsButton.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
 
-                boolean requirementsNotMet = false;
+                boolean requirementsMet = true;
 
                 if(farmName.getText().toString().equals("")){
-                    requirementsNotMet = true;
+                    requirementsMet = false;
                 }
                 if(farmOwner.getText().toString().equals("")) {
-                    requirementsNotMet = true;
+                    requirementsMet = false;
                 }
                 if(farmLocation.getText().toString().equals("")) {
-                    requirementsNotMet = true;
+                    requirementsMet = false;
                 }
 
 
-                if(!requirementsNotMet) {
+                if(requirementsMet) {
                     saveData();
                     back();
                 }
-
-
-
 
             }
         });

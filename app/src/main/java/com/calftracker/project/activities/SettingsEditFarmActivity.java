@@ -120,6 +120,7 @@ public class SettingsEditFarmActivity extends AppCompatActivity {
                 intent = new Intent(SettingsEditFarmActivity.this, SettingsChangeFarmInfoActivity.class);
                 startActivity(intent);
             }
+
         });
     }
 
