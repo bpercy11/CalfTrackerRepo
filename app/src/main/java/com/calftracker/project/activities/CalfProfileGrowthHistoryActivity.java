@@ -257,8 +257,10 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         graph.getViewport().setMinX(series.getLowestValueX());
         graph.getViewport().setMaxX(series.getHighestValueX());
         // set manual y bounds
-        graph.getViewport().setMinY(series.getLowestValueY());
-        graph.getViewport().setMaxY(series.getHighestValueY());
+        double lowestY = Math.floor(series.getLowestValueY() / 10) * 10;
+        double highestY = Math.ceil(series.getHighestValueY() / 10) * 10;
+        graph.getViewport().setMinY(lowestY);
+        graph.getViewport().setMaxY(highestY);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
         // as we use dates as labels, the human rounding to nice readable numbers is not necessary
@@ -294,8 +296,10 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         graph.getViewport().setMinX(series.getLowestValueX());
         graph.getViewport().setMaxX(series.getHighestValueX());
         // set manual y bounds
-        graph.getViewport().setMinY(series.getLowestValueY());
-        graph.getViewport().setMaxY(series.getHighestValueY());
+        double lowestY = Math.floor(series.getLowestValueY() / 10) * 10;
+        double highestY = Math.ceil(series.getHighestValueY() / 10) * 10;
+        graph.getViewport().setMinY(lowestY);
+        graph.getViewport().setMaxY(highestY);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
         // as we use dates as labels, the human rounding to nice readable numbers is not necessary
