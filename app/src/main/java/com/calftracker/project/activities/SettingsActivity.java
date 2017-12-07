@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,9 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Locale;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends BaseActivity implements View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
+
 
 
     @Override
@@ -36,11 +38,20 @@ public class SettingsActivity extends BaseActivity {
         // Custom title
         getSupportActionBar().setTitle(R.string.settings_title);
 
+        // initialize the 5 buttons in settings screen
         Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
         Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
         Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
         Button signOutButton = (Button) findViewById(R.id.SignOutButton);
+
+        // set onclick listeners for the buttons
+        // upon a click, action is performed in onClick() method
+        editFarmButton.setOnClickListener(this);
+        editEmployeesButton.setOnClickListener(this);
+        englishButton.setOnClickListener(this);
+        spanishButton.setOnClickListener(this);
+        signOutButton.setOnClickListener(this);
 
         // set up for the sign out activity
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -51,42 +62,30 @@ public class SettingsActivity extends BaseActivity {
                 .build();
         mGoogleApiClient.connect();
 
+    }
 
-        editFarmButton.setOnClickListener(new View.OnClickListener(){
-            Intent intent;
-            public void onClick(View v){
+    /**
+     * method using switch statement to act on which button is pressed
+     * @param v
+     */
+    public void onClick(View v){
+        Intent intent;
+        switch(v.getId()) {
+            case R.id.settingsFarmButton:
                 intent = new Intent(SettingsActivity.this, SettingsEditFarmActivity.class);
                 startActivity(intent);
-
-            }
-        });
-
-        editEmployeesButton.setOnClickListener(new View.OnClickListener(){
-            Intent intent;
-            public void onClick(View v){
+                break;
+            case R.id.settingsEmployeeButton:
                 intent = new Intent(SettingsActivity.this, SettingsEditEmployeesActivity.class);
                 startActivity(intent);
-
-            }
-        });
-
-        englishButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-
+                break;
+            case R.id.settingsEnglishButton:
                 setLocale("en");
-            }
-        });
-
-        spanishButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+                break;
+            case R.id.settingsSpanishButton:
                 setLocale("es");
-            }
-        });
-
-        // sign out activity
-        signOutButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.SignOutButton:
                 FirebaseAuth.getInstance().signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                         new ResultCallback<Status>() {
@@ -94,42 +93,13 @@ public class SettingsActivity extends BaseActivity {
                             public void onResult(Status status) {
                                 // ...
                                 Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), SplashScreenActivity.class);
-                                startActivity(i);
+                                Intent intent = new Intent(getApplicationContext(), SplashScreenActivity.class);
+                                startActivity(intent);
                             }
                         });
-            }
-        });
+                break;
 
-
-
-        //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        //Map<String, ?> allEntries = mPrefs.getAll();
-        //for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            //Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-         //   mDatabase.child("child").setValue(entry.getKey() + ": " + entry.getValue().toString());
-        //}
-        //ArrayList<Calf> calfList;
-        //String json;
-        //Gson gson = new Gson();
-        //json = mPrefs.getString("CalfList", "");
-        //calfList = gson.fromJson(json, new TypeToken<ArrayList<Calf>>() {}.getType());
-        //mDatabase.child("Root").child("key").setValue("test");
-
-
-        //mDatabaseRead = FirebaseDatabase.getInstance().getReference().child("Farm Name");
-
-
-        //mInfoView = (TextView) findViewById(R.id.info_view);
-
-        //mFirebaseButton = (Button) findViewById(R.id.firebase_btn);
-        //mFirebaseReadButton = (Button) findViewById(R.id.firebase_read_btn);
-
-
-        //mFarmName = (EditText) findViewById(R.id.farmNameText);
-        //mFarmOwner = (EditText) findViewById(R.id.farmOwnerText);
-        //mFarmLocation = (EditText) findViewById(R.id.farmLocationText);
-
+        }
     }
 
     public void setLocale(String lang) {
