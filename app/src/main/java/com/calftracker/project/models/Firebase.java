@@ -472,7 +472,7 @@ public class Firebase extends Application{
         mDatabase.getRoot().child("testNestedArrayList").setValue(testArLst);
         */
 
-        /*
+
         mDatabase = mDatabase.getRoot().child("Task");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -482,28 +482,125 @@ public class Firebase extends Application{
 
                 GenericTypeIndicator<Task> t = new GenericTypeIndicator<Task>() {};
                 GenericTypeIndicator<Map<String, ArrayList<VaccineTask>>> t1 = new GenericTypeIndicator<Map<String, ArrayList<VaccineTask>>>() {};
+                GenericTypeIndicator<Map<String, ArrayList<IllnessTask>>> t2 = new GenericTypeIndicator<Map<String, ArrayList<IllnessTask>>>() {};
+                GenericTypeIndicator<Integer> t3 = new GenericTypeIndicator<Integer>() {};
+                GenericTypeIndicator<ArrayList<VaccineTask>> t4 = new GenericTypeIndicator<ArrayList<VaccineTask>>() {};
+                GenericTypeIndicator<ArrayList<ArrayList<IllnessTask>>> t5 = new GenericTypeIndicator<ArrayList<ArrayList<IllnessTask>>>() {};
+                GenericTypeIndicator<ArrayList<ArrayList<VaccineTask>>> t6 = new GenericTypeIndicator<ArrayList<ArrayList<VaccineTask>>>() {};
 
-                Map<String, ArrayList<VaccineTask>> test = dataSnapshot.child("vaccinesToAdminister").getValue(t1);
 
                 //ArrayList<Map<String, VaccineTask>> test = dataSnapshot.child("vaccinesToAdminister").getValue(t1);
 
                 //Task task = dataSnapshot.getValue(t);
 
-                //SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-                //SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                //String json = gson.toJson(task);
-                //prefsEditor.putString("Task",json);
-                //prefsEditor.apply();
+                ArrayList<ArrayList<VaccineTask>> vaccineTask;
 
-                String json = gson.toJson(test);
+                try{
+
+                    ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister = dataSnapshot.child("vaccinesToAdminister").getValue(t6);
+                    vaccineTask = vaccinesToAdminister;
+                    for(int i = vaccinesToAdminister.size(); i < 365; i++){
+                        vaccineTask.add(new ArrayList<VaccineTask>());
+                    }
+                }catch (Exception e) {
+
+                    Map<String, ArrayList<VaccineTask>> vaccinesToAdminister = dataSnapshot.child("vaccinesToAdminister").getValue(t1);
+
+                    vaccineTask = new ArrayList<ArrayList<VaccineTask>>();
+
+                    if (vaccinesToAdminister == null) {
+                        Log.d("NULL", "NULL");
+                        for (int i = 0; i < 365; i++) {
+                            vaccineTask.add(new ArrayList<VaccineTask>());
+                        }
+
+                    } else {
+
+                        for (int i = 0; i < 365; i++) {
+
+                            // Log.d(Integer.toString(i), vaccinesToAdminister.get(Integer.toString(i)).toString());
+
+                            if (vaccinesToAdminister.get(Integer.toString(i)) == null) {
+                                Log.d("Got null", Integer.toString(i));
+
+                                vaccineTask.add(new ArrayList<VaccineTask>());
+
+                            } else {
+                                Log.d("Not null", vaccinesToAdminister.get(Integer.toString(i)).toString());
+                                vaccineTask.add(vaccinesToAdminister.get(Integer.toString(i)));
+
+                            }
+                        }
+                    }
+
+                }
+                    ArrayList<ArrayList<IllnessTask>> illnessTask = new ArrayList<ArrayList<IllnessTask>>();
+
+                try {
+                    ArrayList<ArrayList<IllnessTask>> illnessTracker = dataSnapshot.child("illnessTracker").getValue(t5);
+
+                    illnessTask = illnessTracker;
+                    for(int i = illnessTracker.size(); i < 40; i++){
+                        illnessTask.add(new ArrayList<IllnessTask>());
+                    }
+
+                }catch (Exception e) {
+
+                    //READS IN AS ARRAYLIST NOW. CAN USE THIS IF NEED MAP
+                    Map<String, ArrayList<IllnessTask>> illnessTracker = dataSnapshot.child("illnessTracker").getValue(t2);
+
+                if(illnessTracker == null){
+                    for(int i = 0; i < 40; i++){
+                        illnessTask.add(new ArrayList<IllnessTask>());
+                    }
+
+
+                }else {
+                    for (int i = 0; i < 40; i++) {
+
+                        if (illnessTracker.get(Integer.toString(i)) == null) {
+                            Log.d("Illness Null", Integer.toString(i));
+                            illnessTask.add(new ArrayList<IllnessTask>());
+                        } else {
+                            Log.d("Illness not null", Integer.toString(i));
+                            illnessTask.add(illnessTracker.get(Integer.toString(i)));
+                        }
+                    }
+                }
+
+
+                }
+                Integer day = dataSnapshot.child("day").getValue(t3);
+                Integer month = dataSnapshot.child("month").getValue(t3);
+                Integer year = dataSnapshot.child("year").getValue(t3);
+
+                ArrayList<VaccineTask> overdue = dataSnapshot.child("overdueVaccinations").getValue(t4);
+
+                if(overdue == null){
+                    overdue = new ArrayList<VaccineTask>();
+                }
+
+                Task task = new Task(Calendar.getInstance(), new ArrayList<Calf>(), vaccineTask, overdue, illnessTask);
+                task.setDay(dataSnapshot.child("day").getValue(t3));
+                task.setMonth(dataSnapshot.child("month").getValue(t3));
+                task.setYear(dataSnapshot.child("year").getValue(t3));
+
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(task);
+                prefsEditor.putString("Task",json);
+                prefsEditor.apply();
+
+                //String json = gson.toJson(task);
                 Log.d("Task", json);
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) { }
-        });*/
+        });
+
 
 
 
