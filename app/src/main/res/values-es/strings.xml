@@ -1,0 +1,208 @@
+<resources>
+    <string name="app_name">Calf Tracker-spanish</string>
+    <string name="title_activity_menu">menu-spanish</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer-spanish</string>
+    <string name="navigation_drawer_close">Close navigation drawer-spanish</string>
+
+    <string name="add_calf_title">Add Calf-spanish</string>
+    <string name="add_calf_ID_Number">ID Number-spanish</string>
+    <string name="add_calf_gender">Gender-spanish</string>
+    <string name="add_calf_DOB">Date of Birth-spanish</string>
+    <string name="add_calf_add_button">Next-spanish</string>
+    <string name="add_calf_get_ID">Enter ID Number-spanish</string>
+    <string name="add_calf_select_date">Select a date-spanish</string>
+    <string name="add_calf_select_gender">Select gender-spanish</string>
+    <string name="add_calf_take_photo">Add photo-spanish</string>
+
+
+    <string name="calf_profile_add_photo">Add Photo-spanish</string>
+    <string name="calf_profile_delete_photo">Delete Photo-spanish</string>
+    <string name="calf_profile_change_photo">Change Photo-spanish</string>
+    <string name="calf_profile_ID_field">ID Number-spanish</string>
+    <string name="calf_profile_gender_field">Gender-spanish</string>
+    <string name="calf_profile_DOB_field">Date of Birth-spanish</string>
+    <string name="calf_profile_sire_field">Sire ID-spanish</string>
+    <string name="calf_profile_dam_field">Dam ID-spanish</string>
+    <string name="calf_profile_weight_field">Current Weight-spanish</string>
+    <string name="calf_profile_height_field">Current Height-spanish</string>
+    <string name="calf_profile_notes_field">Notes-spanish</string>
+    <string name="calf_profile_growth_history_button">Growth History-spanish</string>
+    <string name="calf_profile_feeding_history_button">Feeding History-spanish</string>
+    <string name="calf_profile_medical_history_button">Medical History-spanish</string>
+    <string name="calf_profile_create_note_button">Add Note-spanish</string>
+    <string name="calf_profile_cancel_button">Cancel-spanish</string>
+    <string name="calf_profile_apply_button">Apply-spanish</string>
+    <string name="calf_profile_delete_button">Remove Calf-spanish</string>
+    <string name="calf_profile_record_weight_button">Record Weight-spanish</string>
+    <string name="calf_profile_record_height_button">Record Height-spanish</string>
+    <string name="calf_profile_no_sire">No Record-spanish</string>
+    <string name="calf_profile_no_dam">No Record-spanish</string>
+    <string name="calf_profile_no_weight">No Record-spanish</string>
+    <string name="calf_profile_no_height">No Record-spanish</string>
+    <string name="calf_profile_delete_calf">Delete Calf-spanish</string>
+    <string name="calf_profile_mark_oberservation">Mark need observations-spanish</string>
+    <string name="calf_profile_unmark_oberservation">Unmark need observations-spanish</string>
+
+
+    <string name="calf_profile_medical_history_vaccine_button">Vaccines-spanish</string>
+    <string name="calf_profile_medical_history_illness_button">Illnesses-spanish</string>
+    <string name="calf_profile_medical_history_vac_administered_button">Administered-spanish</string>
+    <string name="calf_profile_medical_history_vac_needed_button">Needed-spanish</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administer-spanish</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">View-spanish</string>
+
+    <string name="calf_profile_growth_history_weight_button">Weight-spanish</string>
+    <string name="calf_profile_growth_history_height_button">Height-spanish</string>
+
+    <string name="calf_profile_feeding_history_title">Feeding History-spanish</string>
+    <string name="calf_profile_feeding_history_first_feeding">First Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_second_feeding">Second Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_feeder">Feeder-spanish</string>
+    <string name="calf_profile_feeding_history_method">Method-spanish</string>
+    <string name="calf_profile_feeding_history_liters">Liters-spanish</string>
+    <string name="calf_profile_feeding_history_first_button_no_data">Add First Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_second_button_no_data">Add Second Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_first_button_data">Edit First Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_second_button_data">Edit Second Feeding-spanish</string>
+    <string name="calf_profile_feeding_history_no_data">No Record-spanish</string>
+    <string name="calf_profile_feeding_history_dialog_liters_hint">Enter Liters Fed-spanish</string>
+    <string name="calf_profile_feeding_history_dialog_liters_unit">L-spanish</string>
+
+
+    <string name="options_menu_calf_list_search">Search-spanish</string>
+    <string name="options_menu_calf_list_search_hint">Search-spanish</string>
+
+    <string name="calf_list_title">Calf List-spanish</string>
+    <string name="calf_list_search_bar_hint">Search-spanish</string>
+
+    <string name="new_calf_vaccine_selection_select_all">Select All-spanish</string>
+    <string name="new_calf_vaccine_instructions_title">Select Required Vaccines-spanish</string>
+    <string name="new_calf_vaccine_selection_confirm">Confirm Required Vaccines-spanish</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined-spanish</string>
+    <string name="new_calf_vaccine_back_button">Back-spanish</string>
+
+    <string name="action_settings">Action Settings-spanish</string>
+
+    <string name="edit_medicine_medicine_name">Medicine-spanish</string>
+    <string name="edit_medicine_treatment_name">Treatment-spanish</string>
+    <string name="edit_medicine_dosage">Dosage-spanish</string>
+    <string name="edit_medicine_dosage_units">Dosage Units-spanish</string>
+    <string name="edit_medicine_time_active">Time Active-spanish</string>
+    <string name="edit_medicine_enter_medicine">Enter Medicine-spanish</string>
+    <string name="edit_medicine_enter_treatment">Enter Treatment-spanish</string>
+    <string name="edit_medicine_cancel_button">Cancel-spanish</string>
+    <string name="edit_medicine_enter_dosage">Enter Dosage-spanish</string>
+    <string name="edit_medicine_enter_units">Enter Units-spanish</string>
+    <string name="edit_medicine_add_button">Add-spanish</string>
+    <string name="edit_medicine_notes_button">Add Note-spanish</string>
+    <string name="edit_medicine_notes">Notes-spanish</string>
+
+    <string name="enter_range">Range-spanish</string>
+
+    <string name="edit_vaccine_enter_admin_method">Enter Method-spanish</string>
+    <string name="edit_medicine_add_medicine">Add-spanish</string>
+    <string name="error_login_message">Please fill any empty fields-spanish</string>
+    <string name="add_medicine_successful_message">Add Medicine Successful-spanish</string>
+    <string name="empty_fields_message">Please fill any empty fields-spanish</string>
+    <string name="edit_medicine_enter_days">Enter Days-spanish</string>
+    <string name="edit_vaccine_cancel_button">Cancel-spanish</string>
+    <string name="edit_medicine">Edit Medicine-spanish</string>
+    <string name="edit_vaccine_edit_vaccine">Edit Vaccine-spanish</string>
+    <string name="edit_vaccine_vaccine_name">Vaccine Name-spanish</string>
+    <string name="edit_vaccine_enter_vaccine">Enter Name-spanish</string>
+
+    <string name="medicine_list_medicine">Medicine-spanish</string>
+    <string name="medicine_list_time_active">Time Active-spanish</string>
+
+    <string name="edit_vaccine_administration_start">Start-spanish</string>
+    <string name="edit_vaccine_administration_end">End-spanish</string>
+    <string name="edit_vaccine_administration_hint_start">Calf Age-spanish</string>
+    <string name="edit_vaccine_administration_hint_end">Calf Age-spanish</string>
+    <string name="edit_vaccine_vaccine_dosage">Dosage-spanish</string>
+    <string name="edit_vaccine_enter_vaccine_dosage">Enter Dosage-spanish</string>
+    <string name="edit_vaccine_dosage_units">Dosage Units-spanish</string>
+    <string name="edit_vaccine_admin_method">Administration-spanish</string>
+    <string name="vaccine_successful">Add Vaccine Successful-spanish</string>
+    <string name="edit_vaccine_vacc_range_error">Inappropriate Vaccine Range-spanish</string>
+    <string name="edit_vaccine_enter_units">Enter Units-spanish</string>
+    <string name="EditIllness_editIllness">Edit Illness-spanish</string>
+    <string name="EditIllness_enterName">Enter Name-spanish</string>
+    <string name="EditIllness_illnessName">Illness-spanish</string>
+    <string name="EditIllness_TreatmentProtocol">Treatment Protocol-spanish</string>
+    <string name="EditIllness_cancelButton">Cancel-spanish</string>
+    <string name="EditIllness_AddButton">Add-spanish</string>
+    <string name="EditIllnessActivity_emptyFieldMsg">Please enter illness name-spanish</string>
+    <string name="EditIllness_notes">Please enter notes for your Treatment Protocol.-spanish</string>
+
+    <string name="vaccine_profile_name">Vaccine:-spanish</string>
+    <string name="vaccine_profile_vacc_range">Vaccine Range:-spanish</string>
+    <string name="vaccine_profile_adminStart">Starting Calf Age:-spanish</string>
+    <string name="vaccine_profile_adminEnd">Ending Calf Age:-spanish</string>
+    <string name="vaccine_profile_dosage">Dosage:-spanish</string>
+    <string name="vaccine_profile_dosageUnits">Dosage Units:-spanish</string>
+    <string name="vaccine_profile_adminMethod">Administration Method:-spanish</string>
+
+    <string name="medicine_profile_name">Medicine:-spanish</string>
+    <string name="medicine_profile_dosage">Dosage:-spanish</string>
+    <string name="medicine_profile_dosageUnits">Dosage Units:-spanish</string>
+    <string name="medicine_profile_timeActive">Time Active:-spanish</string>
+    <string name="medicine_profile_notes">Notes:-spanish</string>
+    <string name="illness_profile_name">Illness Name:-spanish</string>
+    <string name="illness_profile_treatment">Treatment:-spanish</string>
+    <string name="illness_profile_notes">Notes:-spanish</string>
+
+    <string name="tasks_title">Tasks-spanish</string>
+    <string name="tasks_vaccines_button">Vaccines-spanish</string>
+    <string name="tasks_observations_button">Observations-spanish</string>
+    <string name="tasks_vaccine_name">Vaccine Name-spanish</string>
+    <string name="tasks_vaccine_elligible">Elligible-spanish</string>
+    <string name="tasks_observations_calf_id">Calf ID-spanish</string>
+    <string name="tasks_observations_days_observed">Days under observation-spanish</string>
+    <string name="tasks_illness_calf_id">Calf ID-spanish</string>
+    <string name="tasks_illness_name">Illness-spanish</string>
+    <string name="tasks_illness_current_med">Current medication-spanish</string>
+    <string name="tasks_illnesses_button">Illnesses-spanish</string>
+    <string name="task_details_confirm_button">Confirm Completed Vaccinations-spanish</string>
+    <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration-spanish</string>
+
+    <string name="task_illness_dialog_illness">Illness-spanish</string>
+    <string name="task_illness_dialog_medication">Medication-spanish</string>
+
+    <string name="protocols_title">Protocols-spanish</string>
+    <string name="protocols_vaccine_edit">Edit Vaccine-spanish</string>
+    <string name="protocols_medicine_edit">Edit Medicine-spanish</string>
+    <string name="protocols_illness_edit">Edit Illness-spanish</string>
+
+    <string-array name="vacc_range_spinner">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
+    <string name="title_activity_add_illness_medicine_selection">AddIllnessMedicineSelectionActivity-spanish</string>
+    <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines-spanish</string>
+    <string name="IllnessProfile_EditButtonName">Edit-spanish</string>
+    <string name="IllnessProfile_RemoveButtonName">Remove-spanish</string>
+    <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity-spanish</string>
+    <string name="title_activity_edit_illness_profile_medicine_selection">
+        EditIllnessProfileMedicineSelectionActivity
+    -spanish</string>
+
+    <string name="insights_title">Insights-spanish</string>
+
+    <string name="settings_title">Settings-spanish</string>
+    <string name="title_activity_sign_in">Sign in-spanish</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email-spanish</string>
+    <string name="prompt_password">Password (optional)-spanish</string>
+    <string name="action_sign_in">Sign in or register-spanish</string>
+    <string name="action_sign_in_short">Sign in-spanish</string>
+    <string name="error_invalid_email">This email address is invalid-spanish</string>
+    <string name="error_invalid_password">This password is too short-spanish</string>
+    <string name="error_incorrect_password">This password is incorrect-spanish</string>
+    <string name="error_field_required">This field is required-spanish</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    -spanish</string>
+</resources>
