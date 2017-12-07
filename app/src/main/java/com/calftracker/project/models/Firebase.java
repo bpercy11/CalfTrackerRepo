@@ -64,6 +64,13 @@ public class Firebase extends Application{
 
     public Firebase(){}
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    /* Enable disk persistence  */
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
+
     public void compareToFirebase(){
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -548,6 +555,7 @@ public class Firebase extends Application{
 
                     //READS IN AS ARRAYLIST NOW. CAN USE THIS IF NEED MAP
                     Map<String, ArrayList<IllnessTask>> illnessTracker = dataSnapshot.child("illnessTracker").getValue(t2);
+                    illnessTask = new ArrayList<ArrayList<IllnessTask>>();
 
                 if(illnessTracker == null){
                     for(int i = 0; i < 40; i++){

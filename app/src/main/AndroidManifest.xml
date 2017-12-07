@@ -39,6 +39,7 @@
         <activity android:name="com.calftracker.project.activities.NewCalfVaccineSelectionActivity" />
         <activity android:name="com.calftracker.project.activities.CalfProfileMedicalHistoryActivity" />
         android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.calftracker.project.activities.SignInActivity" />
         <activity android:name="com.calftracker.project.activities.VaccineActivity" />
         <activity android:name="com.calftracker.project.activities.EditMedicineActivity" />
         <activity android:name="com.calftracker.project.activities.EditVaccineActivity" />
