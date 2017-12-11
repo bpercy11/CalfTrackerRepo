@@ -295,10 +295,7 @@ public class CalfProfileActivity extends AppCompatActivity {
         for(int i = 0; i < calf.getNotesSize(); i++) {
             noteContents.add(calf.getNotes().get(i).getMessage());
         }
-
-        if(calf.getNotesSize() == 0)
-            noteContents.add("No Notes!");
-
+        
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteContents);
         mNoteListView = (ListView) findViewById(R.id.listViewNotes);
         mNoteListView.setAdapter(itemsAdapter);

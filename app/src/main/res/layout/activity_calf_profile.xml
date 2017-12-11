@@ -279,18 +279,18 @@
             <ListView
                 android:id="@+id/listViewNotes"
                 android:layout_width="0dp"
-                android:layout_height="197dp"
+                android:layout_height="185dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:divider="#99000000"
                 android:dividerHeight="2px"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewNote" />
 
             <TextView
                 android:id="@+id/textViewDamValue"
@@ -464,16 +464,14 @@
                 android:id="@+id/buttonCreateNewNote"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:onClick="clickNewNoteButton"
                 android:text="@string/calf_profile_create_note_button"
                 android:textAllCaps="false"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewNotes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/CenterLine"
-                app:layout_constraintTop_toTopOf="@+id/textViewNotes" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
