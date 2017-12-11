@@ -1,7 +1,9 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -114,17 +116,41 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
     }
 
     public void onIllnessProfile_RemoveButton(View view){
-        illnessList.remove(illnessPosition);
+        AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
+        builderDelete.setMessage("Are you sure you want to delete this illness? This action cannot be undone.")
+                .setTitle("Delete Illness");
+        builderDelete.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                illnessList.remove(illnessPosition);
 
-        //Save updated IllnessList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(illnessList);
-        prefsEditor.putString("IllnessList",json);
-        prefsEditor.apply();
+                //Save updated IllnessList
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(illnessList);
+                prefsEditor.putString("IllnessList",json);
+                prefsEditor.apply();
 
-        Intent intent = new Intent(EditIllnessProfileActivity.this,IllnessActivity.class);
-        startActivity(intent);
+                // Show a toast saying that the vaccine was removed
+                Context context = getApplicationContext();
+                CharSequence text = "Illness successfully deleted";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                Intent intent = new Intent(EditIllnessProfileActivity.this,IllnessActivity.class);
+                startActivity(intent);
+            }
+        });
+        builderDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing
+            }
+        });
+
+        AlertDialog alertDelete = builderDelete.create();
+        alertDelete.show();
     }
 }

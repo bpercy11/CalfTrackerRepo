@@ -786,7 +786,7 @@ public class CalfProfileActivity extends AppCompatActivity {
 
                 // Show a toast saying that the calf was removed
                 Context context = getApplicationContext();
-                CharSequence text = "Calf " + calfID + " successfully removed";
+                CharSequence text = "Calf " + calfID + " successfully deleted";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

@@ -1,6 +1,9 @@
 package com.calftracker.project.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -188,19 +191,42 @@ public class EditVaccineProfileActivity extends AppCompatActivity {
     }
 
     public void onVProfile_removeButton(View view){
+        AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
+        builderDelete.setMessage("Are you sure you want to delete this vaccine? This action cannot be undone.")
+                .setTitle("Delete Vaccine");
+        builderDelete.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                vaccineList.remove(vaccinePosition);
 
-        vaccineList.remove(vaccinePosition);
+                //Save Updated VaccineList
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(vaccineList);
+                prefsEditor.putString("VaccineList",json);
+                prefsEditor.apply();
 
-        //Save Updated VaccineList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(vaccineList);
-        prefsEditor.putString("VaccineList",json);
-        prefsEditor.apply();
+                // Show a toast saying that the vaccine was removed
+                Context context = getApplicationContext();
+                CharSequence text = "Vaccine successfully deleted";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
-        Intent intent = new Intent(EditVaccineProfileActivity.this,VaccineActivity.class);
-        startActivity(intent);
+                Intent intent = new Intent(EditVaccineProfileActivity.this,VaccineActivity.class);
+                startActivity(intent);
+            }
+        });
+        builderDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing
+            }
+        });
+
+        AlertDialog alertDelete = builderDelete.create();
+        alertDelete.show();
     }
 
     public void clickCancelVaccineButton(View view){

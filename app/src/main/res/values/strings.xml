@@ -103,8 +103,8 @@
     <string name="edit_vaccine_enter_admin_method">Enter Method</string>
     <string name="edit_medicine_add_medicine">Add</string>
     <string name="error_login_message">Please fill any empty fields</string>
-    <string name="add_medicine_successful_message">Add Medicine Successful</string>
-    <string name="update_medicine_successful_message">Update Medicine Successful</string>
+    <string name="add_medicine_successful_message">Medicine successfully added</string>
+    <string name="update_medicine_successful_message">Medicine successfully updated</string>
     <string name="empty_fields_message">Please fill any empty fields</string>
     <string name="edit_medicine_enter_days">Enter Days</string>
     <string name="edit_vaccine_cancel_button">Cancel</string>
@@ -124,7 +124,7 @@
     <string name="edit_vaccine_enter_vaccine_dosage">Enter Dosage</string>
     <string name="edit_vaccine_dosage_units">Dosage Units</string>
     <string name="edit_vaccine_admin_method">Administration</string>
-    <string name="vaccine_successful">Add Vaccine Successful</string>
+    <string name="vaccine_successful">Vaccine successfully added</string>
     <string name="edit_vaccine_vacc_range_error">Inappropriate Vaccine Range</string>
     <string name="edit_vaccine_enter_units">Enter Units</string>
     <string name="EditIllness_editIllness">Edit Illness</string>

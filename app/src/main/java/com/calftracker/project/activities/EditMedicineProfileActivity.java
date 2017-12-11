@@ -2,6 +2,7 @@ package com.calftracker.project.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -152,32 +153,56 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
 
 
     public void onMProfile_removeButton(View view){
-        medicineList.remove(medicinePosition);
+        android.app.AlertDialog.Builder builderDelete = new android.app.AlertDialog.Builder(this);
+        builderDelete.setMessage("Are you sure you want to delete this medicine? This action cannot be undone.")
+                .setTitle("Delete Medicine");
+        builderDelete.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                medicineList.remove(medicinePosition);
 
-        //Save updated medicineList
-        SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(medicineList);
-        prefsEditor.putString("MedicineList",json);
-        prefsEditor.apply();
+                //Save updated medicineList
+                SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(medicineList);
+                prefsEditor.putString("MedicineList",json);
+                prefsEditor.apply();
 
-        // if this medicine is removed, make sure that no treatment protocol calls for this
-        Illness tempIllness;
-        ArrayList<Illness> illnessList;
+                // if this medicine is removed, make sure that no treatment protocol calls for this
+                Illness tempIllness;
+                ArrayList<Illness> illnessList;
 
-        json = mPrefs.getString("IllnessList", "");
-        illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
-        }.getType());
+                json = mPrefs.getString("IllnessList", "");
+                illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
+                }.getType());
 
-        for (int i = 0; i < illnessList.size(); i++){
-            tempIllness = illnessList.get(i);
-            if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
-                tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
+                for (int j = 0; i < illnessList.size(); j++){
+                    tempIllness = illnessList.get(j);
+                    if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
+                        tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
+                    }
+                }
+
+                // Show a toast saying that the medicine was removed
+                Context context = getApplicationContext();
+                CharSequence text = "Medicine successfully deleted";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                Intent intent = new Intent(EditMedicineProfileActivity.this,MedicineActivity.class);
+                startActivity(intent);
             }
-        }
+        });
+        builderDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing
+            }
+        });
 
-        Intent intent = new Intent(EditMedicineProfileActivity.this,MedicineActivity.class);
-        startActivity(intent);
+        android.app.AlertDialog alertDelete = builderDelete.create();
+        alertDelete.show();
     }
 }
