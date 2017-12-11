@@ -19,7 +19,7 @@ import com.calftracker.project.calftracker.R;
 public class IllnessActivityTest {
 
     @Rule
-    public ActivityTestRule<IllnessActivity> mActivityTestRule = new ActivityTestRule(EditVaccineActivity.class);
+    public ActivityTestRule<IllnessActivity> mActivityTestRule = new ActivityTestRule(AddVaccineActivity.class);
     private IllnessActivity mActivity = null;
 
     @Before

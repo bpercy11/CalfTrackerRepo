@@ -36,6 +36,7 @@ public class MedicineProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         SharedPreferences mPreferences = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
 
         //Load clicked medicine
@@ -83,8 +84,18 @@ public class MedicineProfileActivity extends AppCompatActivity {
         medicineNotes.setText(medicine.getNotes());
     }
 
-    public void onMProfile_removeButton(View view) {
+    // TODO
+    public void saveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS SAVED IN THIS ACTIVITY
+    }
 
+    public void retrieveData() {
+        // EMPTY METHOD TO KEEP CONSISTENCY
+        // NO DATA IS RETRIEVED IN THIS ACTIVITY
+    }
+
+    public void onMProfile_removeButton(View view){
         medicineList.remove(medicinePosition);
 
         //Save updated medicineList
@@ -123,17 +134,6 @@ public class MedicineProfileActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MedicineProfileActivity.this, MedicineActivity.class);
         startActivity(intent);
-    }
-
-    // TODO
-    public void saveData() {
-        // EMPTY METHOD TO KEEP CONSISTENCY
-        // NO DATA IS SAVED IN THIS ACTIVITY
-    }
-
-    public void retrieveData() {
-        // EMPTY METHOD TO KEEP CONSISTENCY
-        // NO DATA IS RETRIEVED IN THIS ACTIVITY
     }
 
     public void onMProfile_editButton(View view){

@@ -116,6 +116,7 @@ public class InsightsActivity extends BaseActivity {
         }
 
         float observeCount = 0;
+        float healthyCount = 0;
 
         if (calfList != null) {
             for (int i = 0; i < calfList.size(); i++) {
@@ -123,9 +124,9 @@ public class InsightsActivity extends BaseActivity {
                     observeCount++;
                 }
             }
+            healthyCount = calfList.size() - observeCount;
         }
 
-        float healthyCount = calfList.size() - observeCount;
         float observePercent = (observeCount/(observeCount + healthyCount)) * 100;
         float healthyPercent = (healthyCount/(observeCount + healthyCount)) * 100;
 

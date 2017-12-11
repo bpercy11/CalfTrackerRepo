@@ -32,11 +32,11 @@ public class VaccineProfileActivityTest {
         Intents.init();
     }
 
-    @Test
-    public void testVProfileEditButton() throws Exception {
-        onView(withId(R.id.vaccine_profile_editButton)).perform(click());
-        intended(hasComponent(EditVaccineProfileActivity.class.getName()));
-    }
+//    @Test
+//    public void testVProfileEditButton() throws Exception {
+//        onView(withId(R.id.vaccine_profile_editButton)).perform(click());
+//        intended(hasComponent(EditVaccineProfileActivity.class.getName()));
+//    }
 
     @Test
     public void testVProfileRemoveButton() throws Exception {

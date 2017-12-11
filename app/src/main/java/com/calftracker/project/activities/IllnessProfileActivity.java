@@ -49,7 +49,6 @@ public class IllnessProfileActivity extends AppCompatActivity {
         // Custom title
         getSupportActionBar().setTitle(illness.getName());
 
-
         //Load IllnessList
         if(mPreferences.contains("IllnessList")) {
             SharedPreferences.Editor editor = mPreferences.edit();
@@ -70,9 +69,6 @@ public class IllnessProfileActivity extends AppCompatActivity {
 
         treatmentProtocolStr = "";
         //List<Medicine> tpMedicines = illnessList.get(illnessPosition).getTreatmentProtocol().getMedicines();
-
-        String treatmentProtocolStr = "";
-        List<Medicine> tpMedicines = illness.getTreatmentProtocol().getMedicines();
 
         //Creating Treatment String
         for (int i = 0; i < tpMedicines.size(); i++){
