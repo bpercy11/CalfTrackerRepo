@@ -20,6 +20,7 @@ import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -241,8 +242,11 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
                 series.appendData(new DataPoint(tempDate, calf.getPhysicalHistory().get(i).getWeight()), true, calf.getPhysicalHistory().size());
             }
         }
+        // Draw individual data points
+        series.setDrawDataPoints(true);
         graph.addSeries(series);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+
         // Set the number of horizontal labels to 4 unless there are only 3 recordings to avoid duplicate labels
         if (weightCount == 3) {
             graph.getGridLabelRenderer().setNumHorizontalLabels(3);
@@ -252,7 +256,13 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         // set manual x bounds to have nice steps
         graph.getViewport().setMinX(series.getLowestValueX());
         graph.getViewport().setMaxX(series.getHighestValueX());
+        // set manual y bounds
+        double lowestY = Math.floor(series.getLowestValueY() / 10) * 10;
+        double highestY = Math.ceil(series.getHighestValueY() / 10) * 10;
+        graph.getViewport().setMinY(lowestY);
+        graph.getViewport().setMaxY(highestY);
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
         // as we use dates as labels, the human rounding to nice readable numbers is not necessary
         graph.getGridLabelRenderer().setHumanRounding(false);
     }
@@ -272,6 +282,8 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
                 series.appendData(new DataPoint(tempDate, calf.getPhysicalHistory().get(i).getHeight()), true, calf.getPhysicalHistory().size());
             }
         }
+        // Draw individual data points
+        series.setDrawDataPoints(true);
         graph.addSeries(series);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
         // Set the number of horizontal labels to 4 unless there are only 3 recordings to avoid duplicate labels
@@ -283,7 +295,13 @@ public class CalfProfileGrowthHistoryActivity extends AppCompatActivity {
         // set manual x bounds to have nice steps
         graph.getViewport().setMinX(series.getLowestValueX());
         graph.getViewport().setMaxX(series.getHighestValueX());
+        // set manual y bounds
+        double lowestY = Math.floor(series.getLowestValueY() / 10) * 10;
+        double highestY = Math.ceil(series.getHighestValueY() / 10) * 10;
+        graph.getViewport().setMinY(lowestY);
+        graph.getViewport().setMaxY(highestY);
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
         // as we use dates as labels, the human rounding to nice readable numbers is not necessary
         graph.getGridLabelRenderer().setHumanRounding(false);
     }

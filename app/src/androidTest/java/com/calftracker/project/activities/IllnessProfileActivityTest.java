@@ -34,11 +34,11 @@ public class IllnessProfileActivityTest {
         Intents.init();
     }
 
-    @Test
-    public void testIProfileEditButton() throws Exception {
-        onView(withId(R.id.illnessProfileEditButton)).perform(click());
-        intended(hasComponent(EditIllnessProfileActivity.class.getName()));
-    }
+//    @Test
+//    public void testIProfileEditButton() throws Exception {
+//        onView(withId(R.id.illnessProfileEditButton)).perform(click());
+//        intended(hasComponent(EditIllnessProfileActivity.class.getName()));
+//    }
 
     @Test
     public void testIProfileRemoveButton() throws Exception {
