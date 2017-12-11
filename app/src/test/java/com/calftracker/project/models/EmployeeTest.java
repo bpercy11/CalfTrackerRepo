@@ -6,7 +6,7 @@ public class EmployeeTest {
     @Test
     public void testEmployee() {
         String name = "Dan";
-        Employee employee = new Employee(name);
+        Employee employee = new Employee(name, null, null);
         assert(employee.getName().equals(name));
 
         name = "Jose";

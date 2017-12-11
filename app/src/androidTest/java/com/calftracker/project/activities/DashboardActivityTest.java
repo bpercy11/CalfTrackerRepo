@@ -9,6 +9,7 @@ import android.view.Gravity;
 
 import com.calftracker.project.calftracker.R;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -117,5 +118,10 @@ public class DashboardActivityTest {
         onView(ViewMatchers.withId(R.id.grid)).perform(ViewActions.swipeUp());  // Scroll to bottom so settings is visible
         onView(allOf(withText(R.string.settings_title), withId(R.id.grid_text))).perform(click());
         intended(hasComponent(SettingsActivity.class.getName()));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        mIntentsTestRuleDashboard = null;
     }
 }

@@ -164,7 +164,7 @@ public class CalfTest {
 
     @Test
     public void testCalfFeedingHistory() throws Exception {
-        Feeding feeding = new Feeding(new Employee("Dan"), "bottle", 2);
+        Feeding feeding = new Feeding(new Employee("Dan", null, null), "bottle", 2);
         Feeding[] feedings = new Feeding[1];
         feedings[0] = feeding;
         calf.setFeedingHistory(feedings);

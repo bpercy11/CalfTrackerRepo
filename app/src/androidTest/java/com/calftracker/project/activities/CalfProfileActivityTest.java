@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import com.calftracker.project.calftracker.R;
 
 import org.hamcrest.Matchers;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -254,7 +255,9 @@ public class CalfProfileActivityTest {
                 .perform(scrollTo())
                 .perform(click());
         onView(withId(R.id.dialogTextInput)).perform(ViewActions.typeText(newWeight), closeSoftKeyboard());
-        onView(withText("Ok")).perform(click());
+        onView(withText(R.string.add_calf_select_date)).perform(click());
+        onView(withText("OK")).perform(click());
+        onView(withText("Add")).perform(click());
         onView(withId(R.id.textViewWeightValue)).check(matches(withText(newWeight + " lbs")));
     }
 
@@ -265,7 +268,9 @@ public class CalfProfileActivityTest {
                 .perform(scrollTo())
                 .perform(click());
         onView(withId(R.id.dialogTextInput)).perform(ViewActions.typeText(newHeight), closeSoftKeyboard());
-        onView(withText("Ok")).perform(click());
+        onView(withText(R.string.add_calf_select_date)).perform(click());
+        onView(withText("OK")).perform(click());
+        onView(withText("Add")).perform(click());
         onView(withId(R.id.textViewHeightValue)).check(matches(withText(newHeight + " in")));
     }
 
@@ -340,5 +345,10 @@ public class CalfProfileActivityTest {
 
         onView(withText("Note entered " + date)).check(matches(isDisplayed()));
         onView(withText(newNote)).check(matches(isDisplayed()));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        mIntentsTestRule = null;
     }
 }

@@ -3,20 +3,21 @@ package com.calftracker.project.activities;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
+import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Medicine;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-
-import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Medicine;
-
-import java.util.ArrayList;
 
 /**
  * Created by Lisa on 11/27/2017.
@@ -52,9 +53,10 @@ public class AddIllnessMedicineSelectionActivityTest {
         tempMedicineList.add(new Medicine("medicine1",12,"liters",5,"none"));
 
         onView(withId(R.id.buttonSelectAllMedicines)).perform(click());
-
     }
 
-
-
+    @After
+    public void tearDown() throws Exception {
+        Intents.release();
+    }
 }

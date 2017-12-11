@@ -129,5 +129,7 @@ public class AddCalfActivityTest {
     }*/
 
     @After
-    public void tearDown() throws Exception { }
+    public void tearDown() throws Exception {
+        mIntentsTestRuleDashboard = null;
+    }
 }

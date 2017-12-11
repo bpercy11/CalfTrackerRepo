@@ -29,8 +29,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * Created by AlexanderGlowacki on 11/25/17.
  */
-public class EditVaccineActivityTest {
-
+public class AddVaccineActivityTest {
 
     @Rule
     public ActivityTestRule<AddVaccineActivity> mActivityTestRule = new ActivityTestRule(AddVaccineActivity.class);
@@ -53,6 +52,7 @@ public class EditVaccineActivityTest {
     @Test
     public void testEditVaccineRangeStart()  throws Exception {
         int rangeStart = 4;
+        onView(withId(R.id.edit_vaccine_editTextName)).perform(closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextAdminStart)).perform(click());
         onView(withId(R.id.edit_vaccine_editTextAdminStart)).perform(ViewActions.typeText(Integer.toString(rangeStart)),closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextAdminStart)).check(matches(withText(Integer.toString(rangeStart))));
@@ -61,6 +61,7 @@ public class EditVaccineActivityTest {
     @Test
     public void testEditVaccineRangeStartSpinner()  throws Exception {
         String week = "Week";
+        onView(withId(R.id.edit_vaccine_editTextName)).perform(closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(week))).perform(click());
         onView(withId(R.id.edit_vaccine_spinner)).check(matches(withSpinnerText(containsString(week))));
@@ -69,6 +70,7 @@ public class EditVaccineActivityTest {
     @Test
     public void testEditVaccineRangeEndSpinner()  throws Exception {
         String week = "Week";
+        onView(withId(R.id.edit_vaccine_editTextName)).perform(closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_spinner1)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(week))).perform(click());
         onView(withId(R.id.edit_vaccine_spinner1)).check(matches(withSpinnerText(containsString(week))));
@@ -77,10 +79,10 @@ public class EditVaccineActivityTest {
     @Test
     public void testEditVaccineRangeEnd() throws Exception {
         int rangeEnd = 8;
+        onView(withId(R.id.edit_vaccine_editTextName)).perform(closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextAdminEnd)).perform(click());
         onView(withId(R.id.edit_vaccine_editTextAdminEnd)).perform(ViewActions.typeText(Integer.toString(rangeEnd)),closeSoftKeyboard());
         onView(withId(R.id.edit_vaccine_editTextAdminEnd)).check(matches(withText(Integer.toString(rangeEnd))));
-
     }
 
     @Test
