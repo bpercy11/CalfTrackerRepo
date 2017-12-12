@@ -94,7 +94,7 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
         prefsEditor.apply();
 
         Firebase fb = (Firebase) getApplicationContext();
-        fb.saveData("EmployeesList", employeeArrayList);
+        fb.saveData("EmployeeList", employeeArrayList);
 
         Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
         startActivity(intent);
@@ -126,7 +126,7 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
                 prefsEditor.apply();
 
                 Firebase fb = (Firebase) getApplicationContext();
-                fb.saveData("EmployeesList", employeeArrayList);
+                fb.saveData("EmployeeList", employeeArrayList);
 
                 // Show a toast saying that the employee was removed
                 Context context = getApplicationContext();

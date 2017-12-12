@@ -115,7 +115,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+        //Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+        Toast.makeText(getApplicationContext(), "Syncing... This may take a moment", Toast.LENGTH_SHORT).show();
+
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)

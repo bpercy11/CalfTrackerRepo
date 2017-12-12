@@ -17,6 +17,7 @@ import com.calftracker.project.adapters.calflist.CalfListListViewAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Employee;
 import com.calftracker.project.models.Farm;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -65,6 +66,9 @@ public class SettingsEditEmployeesActivity extends AppCompatActivity {
                 String json = gson.toJson(employeeArrayList.get(position));
                 prefsEditor.putString("EmployeeProfile",json);
                 prefsEditor.apply();
+
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("EmployeeProfile", employeeArrayList);
 
                 Intent intent = new Intent(SettingsEditEmployeesActivity.this, SettingsEmployeeProfileActivity.class);
                 startActivity(intent);

@@ -44,10 +44,7 @@ public class DashboardActivity extends BaseActivity {
                 R.drawable.ic_settings_black_24dp
         };
 
-        retrieveData();
 
-        TextView mFarmName = (TextView) findViewById(R.id.textViewFarmNameDashboard);
-        mFarmName.setText(farm.getName());
 
         DashboardGridAdapter adapter = new DashboardGridAdapter(DashboardActivity.this, dashboard_items, imageId);
         grid=(GridView)findViewById(R.id.grid);
@@ -80,6 +77,11 @@ public class DashboardActivity extends BaseActivity {
                 }
             }
         });
+
+        retrieveData();
+
+        TextView mFarmName = (TextView) findViewById(R.id.textViewFarmNameDashboard);
+        mFarmName.setText(farm.getName());
     }
 
     // TODO
