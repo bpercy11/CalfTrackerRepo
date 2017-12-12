@@ -9,7 +9,9 @@ public class Note {
 	private int year;
 	private int month;
 	private int day;
-	
+
+	public Note(){}
+
 	/**
 	 * @param message
 	 * @param dateEntered

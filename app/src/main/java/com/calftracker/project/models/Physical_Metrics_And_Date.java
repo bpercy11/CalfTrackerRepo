@@ -12,7 +12,9 @@ public class Physical_Metrics_And_Date implements Comparable<Physical_Metrics_An
 	private int year;
 	private int month;
 	private int day;
-	
+
+	public Physical_Metrics_And_Date(){}
+
 	/**
 	 * @param weight
 	 * @param dateRecorded

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -91,13 +92,22 @@ public class EditIllnessProfileActivity extends AppCompatActivity {
         prefsEditor.putString("illnessName",json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("illnessName", illnessNameStr);
+
         json = gson.toJson(illnessNotesStr);
         prefsEditor.putString("illnessNotes", json);
         prefsEditor.apply();
 
+        fb.saveData("illnessNotes", illnessNotesStr);
+
+
         json = gson.toJson(illnessList);
         prefsEditor.putString("IllnessList",json);
         prefsEditor.apply();
+
+        fb.saveData("IllnessList", illnessList);
+
     }
 
     public void retrieveData() {

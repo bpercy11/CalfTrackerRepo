@@ -8,7 +8,9 @@ import java.util.List;
 public class Treatment_Protocol {
 	private List<Medicine> medicines;
 	private String notes;
-	
+
+	public Treatment_Protocol(){}
+
 	/**
 	 * @param medicines
 	 * @param notes

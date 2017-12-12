@@ -10,6 +10,9 @@ public class VaccineSelectionItem {
     private Vaccine vaccine;
     private boolean checked;
 
+    // empty constructor for firebase
+    public VaccineSelectionItem(){}
+
     public VaccineSelectionItem(Vaccine vaccine, boolean checked){
         this.vaccine = vaccine;
         this.checked = checked;

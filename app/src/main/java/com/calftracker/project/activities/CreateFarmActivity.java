@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Farm;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 
 
@@ -99,6 +100,9 @@ public class CreateFarmActivity extends AppCompatActivity {
         String json = gson.toJson(farm);
         prefsEditor.putString("Farm",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Farm", farm);
     }
 
     public void retrieveData() {

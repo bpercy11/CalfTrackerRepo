@@ -1,26 +1,16 @@
 package com.calftracker.project.adapters.tasks;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.calftracker.project.activities.CalfProfileFeedingHistoryActivity;
-import com.calftracker.project.adapters.calfprofile.FeedingHistoryEmployeeSpinnerAdapter;
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
-import com.calftracker.project.models.Employee;
-import com.calftracker.project.models.Feeding;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 

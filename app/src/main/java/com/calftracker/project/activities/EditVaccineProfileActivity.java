@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Vacc_Range;
 import com.calftracker.project.models.Vaccine;
 import com.google.gson.Gson;
@@ -186,6 +187,9 @@ public class EditVaccineProfileActivity extends AppCompatActivity {
         prefsEditor.putString("VaccineList",json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("VaccineList", vaccineList);
+
         Intent intent = new Intent(this,VaccineActivity.class);
         startActivity(intent);
     }
@@ -206,6 +210,9 @@ public class EditVaccineProfileActivity extends AppCompatActivity {
                 String json = gson.toJson(vaccineList);
                 prefsEditor.putString("VaccineList",json);
                 prefsEditor.apply();
+
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("VaccineList", vaccineList);
 
                 // Show a toast saying that the vaccine was removed
                 Context context = getApplicationContext();

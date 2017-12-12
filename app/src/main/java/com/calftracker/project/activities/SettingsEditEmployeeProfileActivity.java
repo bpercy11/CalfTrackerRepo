@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Employee;
+import com.calftracker.project.models.Firebase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -92,6 +93,9 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
         prefsEditor.putString("EmployeeList",json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("EmployeesList", employeeArrayList);
+
         Intent intent = new Intent(this, SettingsEditEmployeesActivity.class);
         startActivity(intent);
     }
@@ -120,6 +124,9 @@ public class SettingsEditEmployeeProfileActivity extends AppCompatActivity {
                 String json = gson.toJson(employeeArrayList);
                 prefsEditor.putString("EmployeeList",json);
                 prefsEditor.apply();
+
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("EmployeesList", employeeArrayList);
 
                 // Show a toast saying that the employee was removed
                 Context context = getApplicationContext();

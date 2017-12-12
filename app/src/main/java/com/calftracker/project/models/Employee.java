@@ -6,6 +6,9 @@ public class Employee
 	private String id;
 	private String position;
 
+	// empty constructor for firebase
+	public Employee(){}
+
 	/**
 	 * @param name
 	 */

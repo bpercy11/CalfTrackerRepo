@@ -8,7 +8,10 @@ public class Vaccine_With_Date {
 	private int year;
 	private int month;
 	private int day;
-	
+
+	// empty constructor for firebase
+	public Vaccine_With_Date(){}
+
 	/**
 	 * @param vaccine
 	 * @param date

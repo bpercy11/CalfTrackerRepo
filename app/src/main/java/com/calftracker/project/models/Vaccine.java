@@ -10,6 +10,9 @@ public class Vaccine
 	private String methodOfAdministration;
 	private ArrayList<Calf> vaccineCalves;
 
+	// empty constructor for firebase
+	public Vaccine(){}
+
 	/**
 	 * @param name
 	 * @param dosage

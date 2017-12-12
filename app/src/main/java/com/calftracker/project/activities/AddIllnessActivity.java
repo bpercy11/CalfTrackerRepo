@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.adapters.protocols.MedicineAdapter;
@@ -138,9 +139,16 @@ public class AddIllnessActivity extends AppCompatActivity {
         prefsEditor.putString("thisIllnessName", json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("thisIllnessName", illnessNameStr);
+
         json = gson.toJson(illnessNotes);
         prefsEditor.putString("illnessNotes", json);
         prefsEditor.apply();
+
+        fb.saveData("illnessNotes", illnessNotes);
+
+
     }
 
     public void retrieveData() {

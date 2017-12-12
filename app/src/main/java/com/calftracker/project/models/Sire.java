@@ -8,6 +8,9 @@ public class Sire {
     private String name;
     private String id;
 
+    // empty constructor for firebase
+    public Sire(){}
+
     public Sire(String name, String id) {
         this.name = name;
         this.id = id;

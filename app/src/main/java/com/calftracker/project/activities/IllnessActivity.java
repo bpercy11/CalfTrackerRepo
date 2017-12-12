@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.calftracker.project.adapters.protocols.IllnessAdapter;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.calftracker.R;
 import com.google.gson.Gson;
@@ -49,6 +50,9 @@ public class IllnessActivity extends BaseActivity {
                 String json = gson.toJson(illnessList.get(position));
                 prefsEditor.putString("IllnessProfile",json);
                 prefsEditor.apply();
+
+                Firebase fb = (Firebase) getApplicationContext();
+                fb.saveData("IllnessProfile", illnessList);
 
                 Intent intent = new Intent(IllnessActivity.this, IllnessProfileActivity.class);
                 startActivity(intent);

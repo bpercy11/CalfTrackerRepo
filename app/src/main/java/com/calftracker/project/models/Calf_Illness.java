@@ -11,7 +11,10 @@ public class Calf_Illness
 	private int year;
 	private int month;
 	private int day;
-	
+
+	// empty constructor for firebase
+	public Calf_Illness(){}
+
 	/**
 	 * @param illness
 	 * @param dateDiagnosed

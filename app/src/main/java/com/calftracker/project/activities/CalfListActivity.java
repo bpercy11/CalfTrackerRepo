@@ -17,8 +17,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.calftracker.project.adapters.calflist.CalfListListViewAdapter;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Calf;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

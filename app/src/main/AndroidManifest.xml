@@ -6,7 +6,15 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
+        android:name="com.calftracker.project.models.Firebase"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -50,14 +58,16 @@
         <activity
             android:name="com.calftracker.project.activities.EditIllnessProfileMedicineSelectionActivity"
             android:label="@string/title_activity_edit_illness_profile_medicine_selection"></activity>
-        <activity android:name="com.calftracker.project.activities.SettingsActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEditFarmActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEditEmployeesActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsAddEmployee" />
+        <activity android:name="com.calftracker.project.activities.SettingsActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsChangeFarmInfoActivity" />
         <activity android:name="com.calftracker.project.activities.SettingsEmployeeProfileActivity"></activity>
         <activity android:name="com.calftracker.project.activities.SettingsEditEmployeeProfileActivity"></activity>
         <activity android:name="com.calftracker.project.activities.InsightsActivity" />
+        <activity android:name="com.calftracker.project.activities.SignInActivity" />
+
     </application>
 
 </manifest>

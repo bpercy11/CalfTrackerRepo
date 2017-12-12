@@ -9,6 +9,10 @@ public class IllnessTask {
     private Medicine prescribedMedicine;
     private Calf calf;
 
+    // empty constructor for firebase
+    public IllnessTask(){}
+
+
     public IllnessTask(Illness illness, Medicine medicine, Calf calf) {
         this.illness = illness;
         this.prescribedMedicine = medicine;

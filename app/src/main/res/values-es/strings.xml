@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rastreador de terneros</string>
+    <string name="title_activity_menu">menú</string>
+
+    <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
+    <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
+
+    <string name="add_calf_title">Añadir becerro</string>
+    <string name="add_calf_ID_Number">Número de identificación</string>
+    <string name="add_calf_gender">Género</string>
+    <string name="add_calf_DOB">Fecha de nacimiento</string>
+    <string name="add_calf_add_button">Siguiente</string>
+    <string name="add_calf_get_ID">Ingrese el número de identificación</string>
+    <string name="add_calf_select_date">Seleccione una fecha</string>
+    <string name="add_calf_select_gender">Seleccione género</string>
+    <string name="add_calf_take_photo">Añadir foto</string>
+
+
+    <string name="calf_profile_add_photo">Añadir foto</string>
+    <string name="calf_profile_delete_photo">Borrar foto</string>
+    <string name="calf_profile_change_photo">Cambiar Fotografía</string>
+    <string name="calf_profile_ID_field">Número de identificación</string>
+    <string name="calf_profile_gender_field">Género</string>
+    <string name="calf_profile_DOB_field">Fecha de nacimiento</string>
+    <string name="calf_profile_sire_field">ID del padre</string>
+    <string name="calf_profile_dam_field">Dam ID</string>
+    <string name="calf_profile_weight_field">Peso actual</string>
+    <string name="calf_profile_height_field">Altura actual</string>
+    <string name="calf_profile_notes_field">Notas</string>
+    <string name="calf_profile_growth_history_button">Historia de crecimiento</string>
+    <string name="calf_profile_feeding_history_button">Historia de alimentación</string>
+    <string name="calf_profile_medical_history_button">Historial médico</string>
+    <string name="calf_profile_create_note_button">Añadir la nota</string>
+    <string name="calf_profile_cancel_button">Cancelar</string>
+    <string name="calf_profile_apply_button">Aplicar</string>
+    <string name="calf_profile_delete_button">Eliminar ternero</string>
+    <string name="calf_profile_record_weight_button">Grabar peso</string>
+    <string name="calf_profile_record_height_button">Altura de registro</string>
+    <string name="calf_profile_no_sire">Sin registro</string>
+    <string name="calf_profile_no_dam">Sin registro</string>
+    <string name="calf_profile_no_weight">Sin registro</string>
+    <string name="calf_profile_no_height">Sin registro</string>
+    <string name="calf_profile_delete_calf">Eliminar ternero</string>
+    <string name="calf_profile_mark_oberservation">Mark necesita observaciones</string>
+    <string name="calf_profile_unmark_oberservation">Desmarcar necesita observaciones</string>
+
+
+    <string name="calf_profile_medical_history_vaccine_button">Vacunas</string>
+    <string name="calf_profile_medical_history_illness_button">Enfermedades</string>
+    <string name="calf_profile_medical_history_vac_administered_button">Administrado</string>
+    <string name="calf_profile_medical_history_vac_needed_button">Necesario</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administrar</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">Ver</string>
+
+    <string name="calf_profile_growth_history_weight_button">Peso</string>
+    <string name="calf_profile_growth_history_height_button">Altura</string>
+
+    <string name="calf_profile_feeding_history_title">Historia de alimentación</string>
+    <string name="calf_profile_feeding_history_first_feeding">Primera alimentación</string>
+    <string name="calf_profile_feeding_history_second_feeding">Segunda alimentación</string>
+    <string name="calf_profile_feeding_history_feeder">Alimentador</string>
+    <string name="calf_profile_feeding_history_method">Método</string>
+    <string name="calf_profile_feeding_history_liters">Litros</string>
+    <string name="calf_profile_feeding_history_first_button_no_data">Agregar primera alimentación</string>
+    <string name="calf_profile_feeding_history_second_button_no_data">Agregar segunda alimentación</string>
+    <string name="calf_profile_feeding_history_first_button_data">Editar la primera alimentación</string>
+    <string name="calf_profile_feeding_history_second_button_data">Editar segunda alimentación</string>
+    <string name="calf_profile_feeding_history_no_data">Sin registro</string>
+    <string name="calf_profile_feeding_history_dialog_liters_hint">Litros Fed</string>
+    <string name="calf_profile_feeding_history_dialog_liters_unit">L</string>
+
+
+    <string name="options_menu_calf_list_search">Buscar</string>
+    <string name="options_menu_calf_list_search_hint">Buscar</string>
+
+    <string name="calf_list_title">Lista de terneros</string>
+    <string name="calf_list_search_bar_hint">Buscar</string>
+
+    <string name="new_calf_vaccine_selection_select_all">Seleccionar todo</string>
+    <string name="new_calf_vaccine_instructions_title">Seleccione las vacunas requeridas</string>
+    <string name="new_calf_vaccine_selection_confirm">Confirmar</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No hay vacunas definidas</string>
+    <string name="new_calf_vaccine_back_button">Espalda</string>
+
+    <string name="action_settings">Configuración de acción</string>
+
+    <string name="edit_medicine_medicine_name">Nombre de la medicina</string>
+    <string name="edit_medicine_treatment_name">Tratamiento</string>
+    <string name="edit_medicine_dosage">Dosificación</string>
+    <string name="edit_medicine_dosage_units">Unidades de dosificación</string>
+    <string name="edit_medicine_time_active">Tiempo activo</string>
+    <string name="edit_medicine_enter_medicine">Ingresa Medicina</string>
+    <string name="edit_medicine_enter_treatment">Ingrese el tratamiento</string>
+    <string name="edit_medicine_cancel_button">Cancelar</string>
+    <string name="edit_medicine_enter_dosage">Ingrese la dosis</string>
+    <string name="edit_medicine_enter_units">Ingresar unidades</string>
+    <string name="edit_medicine_add_button">Añadir</string>
+    <string name="edit_medicine_notes_button">Añadir la nota</string>
+    <string name="edit_medicine_notes">Notas</string>
+
+    <string name="enter_range">Distancia</string>
+
+    <string name="edit_vaccine_enter_admin_method">Entrar método</string>
+    <string name="edit_medicine_add_medicine">Añadir</string>
+    <string name="error_login_message">Por favor complete cualquier campo vacío</string>
+    <string name="add_medicine_successful_message">Medicina añadida con éxito</string>
+    <string name="update_medicine_successful_message">Medicina actualizada con éxito</string>
+    <string name="empty_fields_message">Por favor complete cualquier campo vacío</string>
+    <string name="edit_medicine_enter_days">Ingresa los días</string>
+    <string name="edit_vaccine_cancel_button">Cancelar</string>
+    <string name="edit_medicine">Editar medicina</string>
+    <string name="edit_vaccine_edit_vaccine">Editar vacuna</string>
+    <string name="edit_vaccine_vaccine_name">Nombre de la vacuna</string>
+    <string name="edit_vaccine_enter_vaccine">Ingrese su nombre</string>
+
+    <string name="medicine_list_medicine">Medicina</string>
+    <string name="medicine_list_time_active">Tiempo activo</string>
+
+    <string name="edit_vaccine_administration_start">comienzo</string>
+    <string name="edit_vaccine_administration_end">Fin</string>
+    <string name="edit_vaccine_administration_hint_start">La edad del becerro</string>
+    <string name="edit_vaccine_administration_hint_end">La edad del becerro</string>
+    <string name="edit_vaccine_vaccine_dosage">Dosificación</string>
+    <string name="edit_vaccine_enter_vaccine_dosage">Ingrese la dosis</string>
+    <string name="edit_vaccine_dosage_units">Unidades de dosificación</string>
+    <string name="edit_vaccine_admin_method">Administración</string>
+    <string name="vaccine_successful">La vacuna se agregó con éxito</string>
+    <string name="edit_vaccine_vacc_range_error">Rango de vacuna inapropiado</string>
+    <string name="edit_vaccine_enter_units">Ingresar unidades</string>
+    <string name="EditIllness_editIllness">Editar enfermedad</string>
+    <string name="EditIllness_enterName">Ingrese su nombre</string>
+    <string name="EditIllness_illnessName">Nombre de la enfermedad</string>
+    <string name="EditIllness_TreatmentProtocol">Protocolo de tratamiento</string>
+    <string name="EditIllness_cancelButton">Cancelar</string>
+    <string name="EditIllness_nextButton">Siguiente</string>
+    <string name="EditIllness_AddButton">Añadir</string>
+    <string name="EditIllnessActivity_emptyFieldMsg">Por favor introduce el nombre de la enfermedad</string>
+    <string name="EditIllness_notes">Por favor ingrese notas para su protocolo de tratamiento.</string>
+
+    <string name="vaccine_profile_name">Vacuna</string>
+    <string name="vaccine_profile_vacc_range">Rango de vacuna</string>
+    <string name="vaccine_profile_adminStart">A partir de la edad de terneros</string>
+    <string name="vaccine_profile_adminEnd">Terminar la edad del becerro</string>
+    <string name="vaccine_profile_dosage">Dosificación</string>
+    <string name="vaccine_profile_dosageUnits">Unidades de dosificación</string>
+    <string name="vaccine_profile_adminMethod">Método de administración</string>
+
+    <string name="medicine_profile_name">Nombre de la medicina</string>
+    <string name="medicine_profile_dosage">Dosificación</string>
+    <string name="medicine_profile_dosageUnits">Unidades de dosificación</string>
+    <string name="medicine_profile_timeActive">Tiempo activo</string>
+    <string name="medicine_profile_notes">Notas</string>
+    <string name="medicine_profile_delete">Eliminar medicina</string>
+    <string name="illness_profile_name">Nombre de la enfermedad</string>
+    <string name="illness_profile_treatment">Tratamiento</string>
+    <string name="illness_profile_notes">Notas</string>
+
+    <string name="tasks_title">Tareas</string>
+    <string name="tasks_vaccines_button">Vacunas</string>
+    <string name="tasks_observations_button">Observaciones</string>
+
+    <string name="tasks_vaccine_name">Nombre de la vacuna</string>
+    <string name="tasks_vaccine_eligible">Elegible</string>
+    <string name="tasks_observations_calf_id">Calf ID</string>
+    <string name="tasks_observations_days_observed">Días bajo observación</string>
+    <string name="tasks_illness_calf_id">Calf ID</string>
+    <string name="tasks_illness_name">Enfermedad</string>
+    <string name="tasks_illness_current_med">Medicación actual</string>
+    <string name="tasks_illnesses_button">Enfermedades</string>
+    <string name="task_details_calf_id">Calf ID</string>
+    <string name="task_details_confirm_button">Vacunas completadas</string>
+    <string name="task_details_text_prompt">Seleccione terneros con administración de vacunas completa</string>
+
+    <string name="task_illness_dialog_illness">Enfermedad</string>
+    <string name="task_illness_dialog_medication">Medicación</string>
+
+    <string name="protocols_title">Protocolos</string>
+    <string name="protocols_vaccine_add">Agregar vacuna</string>
+    <string name="protocols_medicine_add">Añadir medicina</string>
+    <string name="protocols_illness_add">Agregar enfermedad</string>
+
+    <string-array name="vacc_range_spinner">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
+    <string name="title_activity_add_illness_medicine_selection">Añadir medicamentos</string>
+    <string name="AddIllnessMedicineSelection_selectMedicineTitle">Seleccione las medicinas requeridas</string>
+    <string name="IllnessProfile_EditButtonName">Editar</string>
+    <string name="IllnessProfile_RemoveButtonName">Eliminar enfermedad</string>
+    <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity</string>
+    <string name="title_activity_edit_illness_profile_medicine_selection">Editar medicinas</string>
+
+    <string name="insights_title">Insights</string>
+    <string name="insights_chart_gender">Género de becerro</string>
+    <string name="insights_chart_dob">Nacimientos de terneros en la última semana</string>
+    <string name="insights_chart_health">Salud de la pantorrilla</string>
+
+    <string name="settings_title">Configuraciones</string>
+    <string name="settings_switch_english">Cambiar el idioma al inglés</string>
+    <string name="settings_switch_spanish">Cambiar el idioma al Español</string>
+    <string name="settings_employee_name">Nombre</string>
+    <string name="settings_employee_id">CARNÉ DE IDENTIDAD</string>
+    <string name="settings_employee_position">Posición</string>
+    <string name="settings_employee_enter_name">Ingrese su nombre</string>
+    <string name="settings_employee_enter_id">Ingresar ID</string>
+    <string name="settings_employee_enter_position">Entrar en la posición</string>
+    <string name="settings_employee_no_name">Sin nombre ingresado</string>
+    <string name="settings_employee_no_id">Sin identificación ingresada</string>
+    <string name="settings_employee_no_position">Sin posición ingresada</string>
+
+
+</resources>

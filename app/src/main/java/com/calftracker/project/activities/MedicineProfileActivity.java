@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Treatment_Protocol;
@@ -106,6 +107,9 @@ public class MedicineProfileActivity extends AppCompatActivity {
         prefsEditor.putString("MedicineList", json);
         prefsEditor.apply();
 
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("MedicineList", medicineList);
+
         // if this medicine is removed, make sure that no treatment protocol calls for this
         ArrayList<Illness> illnessList;
         List<Medicine> tempMedicineList;
@@ -131,6 +135,8 @@ public class MedicineProfileActivity extends AppCompatActivity {
         json = gson.toJson(illnessList);
         prefsEditor.putString("IllnessList", json);
         prefsEditor.apply();
+
+        fb.saveData("IllnessList", illnessList);
 
         Intent intent = new Intent(MedicineProfileActivity.this, MedicineActivity.class);
         startActivity(intent);

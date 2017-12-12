@@ -16,11 +16,13 @@ public class Task {
     private int month;
     private int day;
 
-    private ArrayList<Calf> calvesToObserve;
-    private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister;
-    private ArrayList<VaccineTask> overdueVaccinations;
+    private ArrayList<Calf> calvesToObserve = new ArrayList<Calf>();
+    private ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister = new ArrayList<ArrayList<VaccineTask>>();
+    private ArrayList<VaccineTask> overdueVaccinations = new ArrayList<VaccineTask>();
+    private ArrayList<ArrayList<IllnessTask>> illnessTracker = new ArrayList<ArrayList<IllnessTask>>();
 
-    private ArrayList<ArrayList<IllnessTask>> illnessTracker;
+    // empty no arg constructor
+    public Task(){}
 
     public Task(Calendar dateLastUpdated, ArrayList<Calf> calvesToObserve,
                 ArrayList<ArrayList<VaccineTask>> vaccinesToAdminister, ArrayList<VaccineTask> overdueVaccinations,

@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Employee;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -74,6 +76,10 @@ public class SettingsAddEmployee extends AppCompatActivity {
         String json = gson.toJson(employeeList);
         prefsEditor.putString("EmployeeList",json);
         prefsEditor.apply();
+
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        root.child("EmployeeList").setValue(employeeList);
+
     }
 
     public void retrieveData() {

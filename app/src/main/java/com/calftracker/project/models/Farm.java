@@ -12,8 +12,8 @@ public class Farm {
     private String name;
     private String owner;
     private String location;
-    private int passcode;
-    private HashMap<Integer, Calf> calfProfileMap;
+    //private int passcode;
+    //private HashMap<Integer, Calf> calfProfileMap;
     //change to arrayList possibly
     private Integer currInternalID;
     //TODO Medical_Procedures
@@ -32,53 +32,32 @@ public class Farm {
         this.location = location;
 
         this.currInternalID = 0;
-        passcode = -1;
+        //passcode = -1;
         //employees = new ArrayList<Employee>();
-        calfProfileMap = new HashMap<Integer, Calf>();
+        //calfProfileMap = new HashMap<Integer, Calf>();
 
         //TODO set up anything else we need
     }
+
+    public Farm(){}
 
     public String getName() {
         return this.name;
     }
 
-    public void setName(String name) { this.name = name; }
+    public String getOwner() {
+        return this.owner;
+    }
 
-    public String getOwner() { return this.owner; }
+    public String getLocation() {
+        return this.location;
+    }
 
-    public void setOwner(String owner) { this.owner = owner; }
+    public void setName(String s){ this.name = s; }
 
-    public String getLocation() { return this.location; }
+    public void setOwner(String s){ this.owner = s; }
 
-    public void setLocation(String location) { this.location = location; }
-
-    /***
-     *
-     * @param passcode
-     */
-    public void setPasscode(int passcode) { this.passcode = passcode; }
-
-    /**
-     *
-     * @param passcode
-     * @return
-     */
-    public boolean checkPasscode(int passcode) { return this.passcode == passcode; }
-
-    /**
-     *
-     * @return
-     */
-    public HashMap getCalfProfileMap() { return this.calfProfileMap; }
-
-    /**
-     *
-     * @param calf
-     */
-    public void addCalf(Calf calf) { calfProfileMap.put(currInternalID++ , calf); }
-
-    //public void removeCalf()
+    public void setLocation(String s){ this.location = s; }
 
     /**
      *

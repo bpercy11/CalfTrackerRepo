@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Task;
@@ -97,6 +98,10 @@ public class TaskIllnessDetailsActivity extends BaseActivity {
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Task", task);
+
     }
 
     public void retrieveData() {

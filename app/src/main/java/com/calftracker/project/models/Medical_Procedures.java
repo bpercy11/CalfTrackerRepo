@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class Medical_Procedures {
 
-    private ArrayList<Vaccine> vaccines;
-    private ArrayList<Illness> illnesses;
+    private ArrayList<Vaccine> vaccines = new ArrayList<Vaccine>() ;
+    private ArrayList<Illness> illnesses = new ArrayList<Illness>();
 
     public Medical_Procedures(){
-       this.vaccines = new ArrayList<>();
-       this.illnesses = new ArrayList<>();
+       this.vaccines = new ArrayList<Vaccine>();
+       this.illnesses = new ArrayList<Illness>();
     }
 
     public Medical_Procedures(ArrayList<Vaccine> vaccines, ArrayList<Illness> illnesses){

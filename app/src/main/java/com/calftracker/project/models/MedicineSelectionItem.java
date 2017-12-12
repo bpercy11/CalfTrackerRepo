@@ -9,6 +9,9 @@ public class MedicineSelectionItem {
     private Medicine medicine;
     private boolean checked;
 
+    // empty constructor for firebase
+    public MedicineSelectionItem(){}
+
     public MedicineSelectionItem(Medicine medicine, boolean checked){
         this.medicine = medicine;
         this.checked = checked;

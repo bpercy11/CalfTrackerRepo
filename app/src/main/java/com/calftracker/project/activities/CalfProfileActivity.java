@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Note;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
 import com.google.gson.Gson;
@@ -278,6 +279,9 @@ public class CalfProfileActivity extends AppCompatActivity {
         String json = gson.toJson(calfList);
         prefsEditor.putString("CalfList",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("CalfList", calfList);
     }
 
     public void retrieveData() {

@@ -5,7 +5,10 @@ public class Feeding
 	private Employee fedBy;
 	private String methodOfFeeding;
 	private double litersFed;
-	
+
+	// empty constructor for firebase
+	public Feeding(){}
+
 	/**
 	 * @param fedBy
 	 * @param methodOfFeeding

@@ -20,7 +20,6 @@ import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Physical_Metrics_And_Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;

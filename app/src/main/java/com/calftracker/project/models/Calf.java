@@ -1,4 +1,6 @@
 package com.calftracker.project.models;
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -8,22 +10,32 @@ public class Calf {
 	private String farmId;
 	private int internalId;
 	private String gender;
-	private ArrayList<String> calfAllergies;
-	private Sire sire;
+	private ArrayList<String> calfAllergies = new ArrayList<String>();
+	private Sire sire = new Sire();
 	private String dam;
 	private boolean active;
-	private ArrayList<Vaccine_With_Date> administeredVaccines;
-	private ArrayList<Vaccine> neededVaccines;
-	private ArrayList<Calf_Illness> illnessHistory;
-	private ArrayList<Physical_Metrics_And_Date> physicalHistory;
-	private Feeding[] feedingHistory;
-	private ArrayList<Note> notes;
+	private ArrayList<Vaccine_With_Date> administeredVaccines = new ArrayList<Vaccine_With_Date>();
+	private ArrayList<Vaccine> neededVaccines = new ArrayList<Vaccine>();
+	private ArrayList<Calf_Illness> illnessHistory = new ArrayList<Calf_Illness>();
+	private ArrayList<Physical_Metrics_And_Date> physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
+	private Feeding[] feedingHistory = new Feeding[2];
+	private ArrayList<Feeding> feedingArrayList = new ArrayList<Feeding>(2);
+	private ArrayList<Note> notes = new ArrayList<Note>();
 	private boolean needToObserveForIllness;
 
 	private int calfyear;
 	private int calfmonth;
 	private int calfday;
-	
+
+	public Calf(){
+		feedingHistory = new Feeding[2];
+		feedingHistory[0] = null;
+		feedingHistory[1] = null;
+		feedingArrayList = new ArrayList<Feeding>(2);
+		feedingArrayList.add(null);
+		feedingArrayList.add(null);
+	}
+
 	/**
 	 * @param farmId
 	 * @param internalId
@@ -32,7 +44,7 @@ public class Calf {
 	 * @param neededVaccines
 	 */
 	public Calf(String photo, String farmId, int internalId, String gender, Calendar dateOfBirth,
-			ArrayList<Vaccine> neededVaccines) {
+				ArrayList<Vaccine> neededVaccines) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
 		this.photo = photo;
@@ -43,7 +55,7 @@ public class Calf {
 		this.calfmonth = dateOfBirth.get(Calendar.MONTH);
 		this.calfday = dateOfBirth.get(Calendar.DAY_OF_MONTH);
 		this.neededVaccines = neededVaccines;
-		
+
 		// SET UP REST OF FIELDS FOR LATER USE
 		this.active = true;
 		this.calfAllergies = new ArrayList<String>();
@@ -51,6 +63,7 @@ public class Calf {
 		this.illnessHistory = new ArrayList<Calf_Illness>();
 		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
 		this.feedingHistory = new Feeding[2];
+		this.feedingArrayList = new ArrayList<Feeding>(2);
 		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
@@ -60,7 +73,7 @@ public class Calf {
 	public Calf(String photo, String farmId, String gender, Calendar dateOfBirth) {
 		super();
 		// FROM CONSTRUCTOR ARGUMENTS
-        this.photo = photo;
+		this.photo = photo;
 		this.farmId = farmId;
 		this.gender = gender;
 		this.calfyear = dateOfBirth.get(Calendar.YEAR);
@@ -75,6 +88,7 @@ public class Calf {
 		this.illnessHistory = new ArrayList<Calf_Illness>();
 		this.physicalHistory = new ArrayList<Physical_Metrics_And_Date>();
 		this.feedingHistory = new Feeding[2];
+		this.feedingArrayList = new ArrayList<Feeding>(2);
 		this.notes = new ArrayList<Note>();
 
 		this.needToObserveForIllness = false;
@@ -289,15 +303,39 @@ public class Calf {
 	/**
 	 * @return the feedingHistory
 	 */
+	@Exclude
 	public Feeding[] getFeedingHistory() {
+
+		if(feedingArrayList.get(0) != null && feedingHistory[0] == null){
+			feedingHistory[0] = feedingArrayList.get(0);
+		}
+		if(feedingArrayList.get(1) != null && feedingHistory[1] == null){
+			feedingHistory[1] = feedingArrayList.get(1);
+		}
+		if(feedingArrayList.get(0) == null && feedingHistory[0] != null){
+			feedingArrayList.set(0, feedingHistory[0]);
+		}
+		if(feedingArrayList.get(1) == null && feedingHistory[1] != null){
+			feedingArrayList.set(1, feedingHistory[1]);
+		}
+
 		return feedingHistory;
+	}
+
+	public ArrayList<Feeding> getFeedingArrayList(){
+		return feedingArrayList;
 	}
 
 	/**
 	 * @param feedingHistory the feedingHistory to set
 	 */
 	public void setFeedingHistory(Feeding[] feedingHistory) {
+
 		this.feedingHistory = feedingHistory;
+		this.feedingArrayList = new ArrayList<Feeding>();
+		for(int i = 0; i < 0; i++){
+			feedingArrayList.add(feedingHistory[i]);
+		}
 	}
 
 	/**
@@ -316,6 +354,7 @@ public class Calf {
 
 	public Note getNoteNdx(int i) { return this.notes.get(i); }
 
+	@Exclude
 	public int getNotesSize() { return this.notes.size(); }
 
 	/**
@@ -324,7 +363,7 @@ public class Calf {
 	public void setNotes(ArrayList<Note> notes) {
 		this.notes = notes;
 	}
-	
+
 	/**
 	 * @return the needToObserveForIllness
 	 */
@@ -340,14 +379,14 @@ public class Calf {
 	}
 
 	/**
-	 * This function deletes the vaccine given by the function argument from 
+	 * This function deletes the vaccine given by the function argument from
 	 * the neededVaccines field and adds a Vaccine_With_Date to the administeredVaccines
 	 * field. Vaccines that need to be administered multiple times over the calf's life
 	 * need to entered twice in the neededVaccines ArrayList because this function
 	 * just searches for the first entry in neededVaccines that matches the vaccine
 	 * function argument and removes it, with no knowledge of if that vaccine
 	 * needs to be administered 2+ times.
-	 * 
+	 *
 	 * @param vaccine
 	 * @param dateAdministered
 	 */
@@ -360,7 +399,7 @@ public class Calf {
 					this.neededVaccines.remove(i);
 					break;
 				}
-					
+
 		Vaccine_With_Date administeredVaccine = new Vaccine_With_Date(vaccine, dateAdministered);
 		this.administeredVaccines.add(administeredVaccine);
 	}

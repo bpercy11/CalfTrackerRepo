@@ -7,12 +7,14 @@ import android.content.SharedPreferences;
 
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.VaccineTask;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -20,18 +22,25 @@ import java.util.Calendar;
  * Created by project on 10/31/17.
  */
 public class SplashScreenActivity extends Activity {
-    boolean hasBeenUsed;
     Task task;
+    FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+      //  enable offline usability
+      //  DatabaseReference employeeList = FirebaseDatabase.getInstance().getReference("EmployeeList");
+      //  employeeList.keepSynced(true);
+
         //final SharedPreferences sharedPref = getSharedPreferences("test",Activity.MODE_PRIVATE);
         //final SharedPreferences.Editor editor = sharedPref.edit();
         //editor.putBoolean("usedApp", false);
         //editor.commit();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.setDataChangeListeners();
 
         Thread timerThread = new Thread(){
             public void run(){
@@ -58,16 +67,17 @@ public class SplashScreenActivity extends Activity {
 
                     task = new Task(Calendar.getInstance(), emptyCalfList, emptyTaskList, emptyOverdueList, emptyIllnessTaskList);
 
-                    if(!hasBeenUsed) {
-                        Intent intent = new Intent(SplashScreenActivity.this, CreateFarmActivity.class);
+                    if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Intent intent = new Intent(SplashScreenActivity.this, SignInActivity.class);
 
                         saveData();
 
                         startActivity(intent);
                     }else{
+                        //Intent intent = new Intent(SplashScreenActivity.this, DashboardActivity.class);
+                        //startActivity(intent);
                         Intent intent = new Intent(SplashScreenActivity.this, DashboardActivity.class);
                         startActivity(intent);
-
                     }
                 }
             }
@@ -83,18 +93,20 @@ public class SplashScreenActivity extends Activity {
         String json;
         prefsEditor = mPrefs.edit();
 
-        prefsEditor.putBoolean("usedApp", true);
-        prefsEditor.commit();
 
         // Save the initial Task Object to system
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("Task", task);
+
     }
 
     public void retrieveData() {
         SharedPreferences mPrefs = getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
-        hasBeenUsed = mPrefs.getBoolean("usedApp", false);
+
     }
 
     @Override

@@ -1,0 +1,211 @@
+<resources>
+    <string name="app_name">Calf Tracker</string>
+    <string name="title_activity_menu">menu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="add_calf_title">Add Calf</string>
+    <string name="add_calf_ID_Number">ID Number</string>
+    <string name="add_calf_gender">Gender</string>
+    <string name="add_calf_DOB">Date of Birth</string>
+    <string name="add_calf_add_button">Next</string>
+    <string name="add_calf_get_ID">Enter ID Number</string>
+    <string name="add_calf_select_date">Select a date</string>
+    <string name="add_calf_select_gender">Select gender</string>
+    <string name="add_calf_take_photo">Add photo</string>
+
+
+    <string name="calf_profile_add_photo">Add Photo</string>
+    <string name="calf_profile_delete_photo">Delete Photo</string>
+    <string name="calf_profile_change_photo">Change Photo</string>
+    <string name="calf_profile_ID_field">ID Number</string>
+    <string name="calf_profile_gender_field">Gender</string>
+    <string name="calf_profile_DOB_field">Date of Birth</string>
+    <string name="calf_profile_sire_field">Sire ID</string>
+    <string name="calf_profile_dam_field">Dam ID</string>
+    <string name="calf_profile_weight_field">Current Weight</string>
+    <string name="calf_profile_height_field">Current Height</string>
+    <string name="calf_profile_notes_field">Notes</string>
+    <string name="calf_profile_growth_history_button">Growth History</string>
+    <string name="calf_profile_feeding_history_button">Feeding History</string>
+    <string name="calf_profile_medical_history_button">Medical History</string>
+    <string name="calf_profile_create_note_button">Add Note</string>
+    <string name="calf_profile_cancel_button">Cancel</string>
+    <string name="calf_profile_apply_button">Apply</string>
+    <string name="calf_profile_delete_button">Delete Calf</string>
+    <string name="calf_profile_record_weight_button">Record Weight</string>
+    <string name="calf_profile_record_height_button">Record Height</string>
+    <string name="calf_profile_no_sire">No Record</string>
+    <string name="calf_profile_no_dam">No Record</string>
+    <string name="calf_profile_no_weight">No Record</string>
+    <string name="calf_profile_no_height">No Record</string>
+    <string name="calf_profile_delete_calf">Delete Calf</string>
+    <string name="calf_profile_mark_oberservation">Mark need observations</string>
+    <string name="calf_profile_unmark_oberservation">Unmark need observations</string>
+
+
+    <string name="calf_profile_medical_history_vaccine_button">Vaccines</string>
+    <string name="calf_profile_medical_history_illness_button">Illnesses</string>
+    <string name="calf_profile_medical_history_vac_administered_button">Administered</string>
+    <string name="calf_profile_medical_history_vac_needed_button">Needed</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_admin_button">Administer</string>
+    <string name="calf_profile_medical_history_vacc_listitem_vac_view_button">View</string>
+
+    <string name="calf_profile_growth_history_weight_button">Weight</string>
+    <string name="calf_profile_growth_history_height_button">Height</string>
+
+    <string name="calf_profile_feeding_history_title">Feeding History</string>
+    <string name="calf_profile_feeding_history_first_feeding">First Feeding</string>
+    <string name="calf_profile_feeding_history_second_feeding">Second Feeding</string>
+    <string name="calf_profile_feeding_history_feeder">Feeder</string>
+    <string name="calf_profile_feeding_history_method">Method</string>
+    <string name="calf_profile_feeding_history_liters">Liters</string>
+    <string name="calf_profile_feeding_history_first_button_no_data">Add First Feeding</string>
+    <string name="calf_profile_feeding_history_second_button_no_data">Add Second Feeding</string>
+    <string name="calf_profile_feeding_history_first_button_data">Edit First Feeding</string>
+    <string name="calf_profile_feeding_history_second_button_data">Edit Second Feeding</string>
+    <string name="calf_profile_feeding_history_no_data">No Record</string>
+    <string name="calf_profile_feeding_history_dialog_liters_hint">Liters Fed</string>
+    <string name="calf_profile_feeding_history_dialog_liters_unit">L</string>
+
+
+    <string name="options_menu_calf_list_search">Search</string>
+    <string name="options_menu_calf_list_search_hint">Search</string>
+
+    <string name="calf_list_title">Calf List</string>
+    <string name="calf_list_search_bar_hint">Search</string>
+
+    <string name="new_calf_vaccine_selection_select_all">Select All</string>
+    <string name="new_calf_vaccine_instructions_title">Select Required Vaccines</string>
+    <string name="new_calf_vaccine_selection_confirm">Confirm</string>
+    <string name="new_calf_vaccine_no_vaccines_defined">No Vaccines Defined</string>
+    <string name="new_calf_vaccine_back_button">Back</string>
+
+    <string name="action_settings">Action Settings</string>
+
+    <string name="edit_medicine_medicine_name">Medicine Name</string>
+    <string name="edit_medicine_treatment_name">Treatment</string>
+    <string name="edit_medicine_dosage">Dosage</string>
+    <string name="edit_medicine_dosage_units">Dosage Units</string>
+    <string name="edit_medicine_time_active">Time Active</string>
+    <string name="edit_medicine_enter_medicine">Enter Medicine</string>
+    <string name="edit_medicine_enter_treatment">Enter Treatment</string>
+    <string name="edit_medicine_cancel_button">Cancel</string>
+    <string name="edit_medicine_enter_dosage">Enter Dosage</string>
+    <string name="edit_medicine_enter_units">Enter Units</string>
+    <string name="edit_medicine_add_button">Add</string>
+    <string name="edit_medicine_notes_button">Add Note</string>
+    <string name="edit_medicine_notes">Notes</string>
+
+    <string name="enter_range">Range</string>
+
+    <string name="edit_vaccine_enter_admin_method">Enter Method</string>
+    <string name="edit_medicine_add_medicine">Add</string>
+    <string name="error_login_message">Please fill any empty fields</string>
+    <string name="add_medicine_successful_message">Medicine successfully added</string>
+    <string name="update_medicine_successful_message">Medicine successfully updated</string>
+    <string name="empty_fields_message">Please fill any empty fields</string>
+    <string name="edit_medicine_enter_days">Enter Days</string>
+    <string name="edit_vaccine_cancel_button">Cancel</string>
+    <string name="edit_medicine">Edit Medicine</string>
+    <string name="edit_vaccine_edit_vaccine">Edit Vaccine</string>
+    <string name="edit_vaccine_vaccine_name">Vaccine Name</string>
+    <string name="edit_vaccine_enter_vaccine">Enter Name</string>
+
+    <string name="medicine_list_medicine">Medicine</string>
+    <string name="medicine_list_time_active">Time Active</string>
+
+    <string name="edit_vaccine_administration_start">Start</string>
+    <string name="edit_vaccine_administration_end">End</string>
+    <string name="edit_vaccine_administration_hint_start">Calf Age</string>
+    <string name="edit_vaccine_administration_hint_end">Calf Age</string>
+    <string name="edit_vaccine_vaccine_dosage">Dosage</string>
+    <string name="edit_vaccine_enter_vaccine_dosage">Enter Dosage</string>
+    <string name="edit_vaccine_dosage_units">Dosage Units</string>
+    <string name="edit_vaccine_admin_method">Administration</string>
+    <string name="vaccine_successful">Vaccine successfully added</string>
+    <string name="edit_vaccine_vacc_range_error">Inappropriate Vaccine Range</string>
+    <string name="edit_vaccine_enter_units">Enter Units</string>
+    <string name="EditIllness_editIllness">Edit Illness</string>
+    <string name="EditIllness_enterName">Enter Name</string>
+    <string name="EditIllness_illnessName">Illness Name</string>
+    <string name="EditIllness_TreatmentProtocol">Treatment Protocol</string>
+    <string name="EditIllness_cancelButton">Cancel</string>
+    <string name="EditIllness_nextButton">Next</string>
+    <string name="EditIllness_AddButton">Add</string>
+    <string name="EditIllnessActivity_emptyFieldMsg">Please enter illness name</string>
+    <string name="EditIllness_notes">Please enter notes for your Treatment Protocol.</string>
+
+    <string name="vaccine_profile_name">Vaccine</string>
+    <string name="vaccine_profile_vacc_range">Vaccine Range</string>
+    <string name="vaccine_profile_adminStart">Starting Calf Age</string>
+    <string name="vaccine_profile_adminEnd">Ending Calf Age</string>
+    <string name="vaccine_profile_dosage">Dosage</string>
+    <string name="vaccine_profile_dosageUnits">Dosage Units</string>
+    <string name="vaccine_profile_adminMethod">Administration Method</string>
+
+    <string name="medicine_profile_name">Medicine Name</string>
+    <string name="medicine_profile_dosage">Dosage</string>
+    <string name="medicine_profile_dosageUnits">Dosage Units</string>
+    <string name="medicine_profile_timeActive">Time Active</string>
+    <string name="medicine_profile_notes">Notes</string>
+    <string name="medicine_profile_delete">Delete Medicine</string>
+    <string name="illness_profile_name">Illness Name</string>
+    <string name="illness_profile_treatment">Treatment</string>
+    <string name="illness_profile_notes">Notes</string>
+
+    <string name="tasks_title">Tasks</string>
+    <string name="tasks_vaccines_button">Vaccines</string>
+    <string name="tasks_observations_button">Observations</string>
+
+    <string name="tasks_vaccine_name">Vaccine Name</string>
+    <string name="tasks_vaccine_eligible">Eligible</string>
+    <string name="tasks_observations_calf_id">Calf ID</string>
+    <string name="tasks_observations_days_observed">Days under observation</string>
+    <string name="tasks_illness_calf_id">Calf ID</string>
+    <string name="tasks_illness_name">Illness</string>
+    <string name="tasks_illness_current_med">Current medication</string>
+    <string name="tasks_illnesses_button">Illnesses</string>
+    <string name="task_details_calf_id">Calf ID</string>
+    <string name="task_details_confirm_button">Completed Vaccinations</string>
+    <string name="task_details_text_prompt">Select Calves With Completed Vaccine Administration</string>
+
+    <string name="task_illness_dialog_illness">Illness</string>
+    <string name="task_illness_dialog_medication">Medication</string>
+
+    <string name="protocols_title">Protocols</string>
+    <string name="protocols_vaccine_add">Add Vaccine</string>
+    <string name="protocols_medicine_add">Add Medicine</string>
+    <string name="protocols_illness_add">Add Illness</string>
+
+    <string-array name="vacc_range_spinner">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
+    <string name="title_activity_add_illness_medicine_selection">Add Medicines</string>
+    <string name="AddIllnessMedicineSelection_selectMedicineTitle">Select Required Medicines</string>
+    <string name="IllnessProfile_EditButtonName">Edit</string>
+    <string name="IllnessProfile_RemoveButtonName">Delete Illness</string>
+    <string name="title_activity_edit_illness_profile">EditIllnessProfileActivity</string>
+    <string name="title_activity_edit_illness_profile_medicine_selection">Edit Medicines</string>
+
+    <string name="insights_title">Insights</string>
+    <string name="insights_chart_gender">Calf Gender</string>
+    <string name="insights_chart_dob">Calf Births in the Last Week</string>
+    <string name="insights_chart_health">Calf Health</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_switch_english">Switch language to English</string>
+    <string name="settings_switch_spanish">Cambiar el idioma al Español</string>
+    <string name="settings_employee_name">Name</string>
+    <string name="settings_employee_id">ID</string>
+    <string name="settings_employee_position">Position</string>
+    <string name="settings_employee_enter_name">Enter Name</string>
+    <string name="settings_employee_enter_id">Enter ID</string>
+    <string name="settings_employee_enter_position">Enter Position</string>
+    <string name="settings_employee_no_name">No Name Entered</string>
+    <string name="settings_employee_no_id">No ID Entered</string>
+    <string name="settings_employee_no_position">No Position Entered</string>
+</resources>

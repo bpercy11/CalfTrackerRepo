@@ -7,9 +7,12 @@ import java.util.Calendar;
  */
 
 public class VaccineTask {
-    private Vaccine vaccine;
-    private Calf calf;
+    private Vaccine vaccine = new Vaccine();
+    private Calf calf = new Calf();
     private boolean start;
+
+    // empty constructor for firebase
+    public VaccineTask(){}
 
     public VaccineTask(Vaccine vaccine, Calf calf, boolean start) {
         this.vaccine = vaccine;

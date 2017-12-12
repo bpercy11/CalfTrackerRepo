@@ -6,7 +6,10 @@ package com.calftracker.project.models;
 
 public class VaccineTaskItem {
     boolean overdue;
-    VaccineTask vaccineTask;
+    VaccineTask vaccineTask = new VaccineTask();
+
+    // empty constructor for firebase
+    public VaccineTaskItem(){}
 
     public VaccineTaskItem(boolean overdue, VaccineTask vaccineTask) {
         this.overdue = overdue;

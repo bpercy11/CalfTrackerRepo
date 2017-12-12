@@ -1,6 +1,5 @@
 package com.calftracker.project.adapters.tasks;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -11,10 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.calftracker.project.calftracker.R;
-import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.TaskDetailsCalfSelectionItem;
 import com.calftracker.project.models.Vaccine;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 

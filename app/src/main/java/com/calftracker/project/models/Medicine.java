@@ -8,6 +8,8 @@ public class Medicine {
 	private int timeActive;
 	private String notes;
 
+	// empty constructor for firebase
+	public Medicine(){}
 	
 	/**
 	 * @param name

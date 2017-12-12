@@ -17,6 +17,7 @@ import com.calftracker.project.adapters.calfprofile.MedicalHistoryNeededVaccineA
 import com.calftracker.project.calftracker.R;
 import com.calftracker.project.interfaces.MedicalHistoryVaccineMethods;
 import com.calftracker.project.models.Calf;
+import com.calftracker.project.models.Firebase;
 import com.calftracker.project.models.Task;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.Vaccine_With_Date;
@@ -103,6 +104,10 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
         json = gson.toJson(task);
         prefsEditor.putString("Task",json);
         prefsEditor.apply();
+
+        Firebase fb = (Firebase) getApplicationContext();
+        fb.saveData("CalfList", calfList);
+        fb.saveData("Task", task);
     }
 
     public void retrieveData() {
