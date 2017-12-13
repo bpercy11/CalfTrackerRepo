@@ -143,6 +143,9 @@ public class NewCalfVaccineSelectionActivity extends AppCompatActivity {
         calf.setFeedingHistory(new Feeding[2]);
         calf.setSire(new Sire(null,null));
         // gotta add it to the list
+        if (calfList == null) {
+            calfList = new ArrayList<Calf>();
+        }
         calfList.add(calf);
 
         // Save the calfList, task, and vaccineList to local storage, change to firebase

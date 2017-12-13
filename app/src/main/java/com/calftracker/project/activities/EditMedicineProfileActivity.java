@@ -181,7 +181,7 @@ public class EditMedicineProfileActivity extends AppCompatActivity {
                 illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {
                 }.getType());
 
-                for (int j = 0; i < illnessList.size(); j++){
+                for (int j = 0; j < illnessList.size(); j++){
                     tempIllness = illnessList.get(j);
                     if (tempIllness.getTreatmentProtocol().getMedicines().contains(medicine)){
                         tempIllness.getTreatmentProtocol().getMedicines().remove(medicine);
