@@ -40,8 +40,8 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
     Task task;
     ListView mlistview;
 
-    Button vaccinesButton;
-    Button illnessButton;
+    //Button vaccinesButton;
+    //Button illnessButton;
     Button neededButton;
     Button administeredButton;
 
@@ -79,8 +79,8 @@ public class CalfProfileMedicalHistoryActivity extends AppCompatActivity impleme
 
         mlistview.setAdapter(neededVacAdapter);
 
-        vaccinesButton = (Button) findViewById(R.id.buttonVaccines);
-        illnessButton = (Button) findViewById(R.id.buttonIllneses);
+        //vaccinesButton = (Button) findViewById(R.id.buttonVaccines);
+        //illnessButton = (Button) findViewById(R.id.buttonIllneses);
         neededButton = (Button) findViewById(R.id.buttonNeeded);
         administeredButton = (Button) findViewById(R.id.buttonAdministered);
 
