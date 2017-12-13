@@ -10,4 +10,5 @@ import com.calftracker.project.models.IllnessTask;
 public interface TasksMethods {
     void showObservationDialog(Calf calf);
     void gotoIllnessDetails(IllnessTask illnessTask);
+    void gotoTaskVaccDetails();
 }

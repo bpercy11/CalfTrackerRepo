@@ -74,8 +74,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         adapter = new TaskVaccineDetailsAdapter(adapterArray, getApplicationContext(), vaccine);
 
-        vaccName = (TextView) findViewById(R.id.textViewTaskItemVaccineName);
-        vaccName.setText(vaccine.getName());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

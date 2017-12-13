@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calftracker.project.activities.TaskDetailsActivity;
 import com.calftracker.project.calftracker.R;
+import com.calftracker.project.interfaces.TasksMethods;
 import com.calftracker.project.models.Calf;
 import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineTaskItem;
@@ -31,6 +33,8 @@ public class TasksVaccinationAdapter extends BaseAdapter{
     private boolean isElligble = false;
     private ArrayList<Calf> calfList;
     private ArrayList<String> usedVaccNames = new ArrayList<>();
+    private ArrayList<Vaccine> vaccineList;
+    private TasksMethods TM;
 
     public class ViewHolder {
         TextView vaccine;
@@ -38,17 +42,19 @@ public class TasksVaccinationAdapter extends BaseAdapter{
         ImageView overdueNotification;
     }
 
-    public TasksVaccinationAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Calf> calfList) {
+    public TasksVaccinationAdapter(Context context, ArrayList<VaccineTaskItem> tasks, ArrayList<Vaccine> vaccineList, ArrayList<Calf> calfList, TasksMethods TM) {
         this.context = context;
         this.todayTasks = tasks;
         this.inflater = LayoutInflater.from(context);
         this.calfList = calfList;
+        this.vaccineList = vaccineList;
+        this.TM = TM;
     }
 
     @Override
-    public int getCount() {return todayTasks.size();}
+    public int getCount() {return vaccineList.size();}
     @Override
-    public VaccineTaskItem getItem(int i) {return todayTasks.get(i);}
+    public Vaccine getItem(int i) {return vaccineList.get(i);}
     @Override
     public long getItemId(int i) {return i;}
     @Override
@@ -76,9 +82,8 @@ public class TasksVaccinationAdapter extends BaseAdapter{
         }
 
         int eligibleCount = 0;
-        final Vaccine currVacc = task.getVaccineTask().getVaccine();
+        final Vaccine currVacc = vaccineList.get(position);
 
-        if (!vaccUsed) {
             for (int i = 0; i < todayTasks.size(); i++) {
                 if (todayTasks.get(i).getVaccineTask().getVaccine().getName().equals(currVacc.getName())) {
                     for (int j = 0; j < todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().size(); j++) {
@@ -91,13 +96,18 @@ public class TasksVaccinationAdapter extends BaseAdapter{
                 }
             }
 
+            final int count = eligibleCount;
 
-            holder.vaccine.setText(todayTasks.get(position).getVaccineTask().getVaccine().getName());
+            holder.vaccine.setText(currVacc.getName());
             holder.eligible.setText(Integer.toString(eligibleCount));
             usedVaccNames.add(currVacc.getName());
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(count == 0) {
+                        Toast.makeText(context, "No calves eligible", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     SharedPreferences mPrefs = context.getSharedPreferences("CalfTracker", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = mPrefs.edit();
                     Gson gson = new Gson();
@@ -109,10 +119,6 @@ public class TasksVaccinationAdapter extends BaseAdapter{
                     context.startActivity(intent);
                 }
             });
-        } else {
-            holder.vaccine.setVisibility(View.GONE);
-            holder.eligible.setVisibility(View.GONE);
-        }
 
         return convertView;
     }
