@@ -1,19 +1,18 @@
 package com.calftracker.project.activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.calftracker.project.calftracker.R;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -38,8 +37,8 @@ public class SettingsActivity extends BaseActivity {
 
         Button editFarmButton = (Button) findViewById(R.id.settingsFarmButton);
         Button editEmployeesButton = (Button) findViewById(R.id.settingsEmployeeButton);
-        Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
-        Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
+        final Button englishButton = (Button) findViewById(R.id.settingsEnglishButton);
+        final Button spanishButton = (Button) findViewById(R.id.settingsSpanishButton);
         Button signOutButton = (Button) findViewById(R.id.SignOutButton);
 
         // set up for the sign out activity
@@ -70,17 +69,33 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
-
         englishButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-
                 setLocale("en");
+
+                // Background tint only works on 15 & up.
+                // This should probably be changed to Background Color but that overrides styles and I'm lazy
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    spanishButton.setBackgroundTintList(ContextCompat.getColorStateList(SettingsActivity.this, R.color.colorLightGrey));
+                    spanishButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, android.R.color.black));
+                    englishButton.setBackgroundTintList(ContextCompat.getColorStateList(SettingsActivity.this, R.color.colorMedGrey));
+                    englishButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, android.R.color.white));
+                }
             }
         });
 
         spanishButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 setLocale("es");
+
+                // Background tint only works on 15 & up.
+                // This should probably be changed to Background Color but that overrides styles and I'm lazy
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    englishButton.setBackgroundTintList(ContextCompat.getColorStateList(SettingsActivity.this, R.color.colorLightGrey));
+                    englishButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, android.R.color.black));
+                    spanishButton.setBackgroundTintList(ContextCompat.getColorStateList(SettingsActivity.this, R.color.colorMedGrey));
+                    spanishButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, android.R.color.white));
+                }
             }
         });
 
@@ -102,7 +117,22 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
-
+        // Background tint only works on 15 & up.
+        // This should probably be changed to Background Color but that overrides styles and I'm lazy
+        // Also - on app open locale is not set, but by default this is English
+        Locale myLocale = new Locale("es");
+        if (getResources().getConfiguration().locale.equals(myLocale)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                spanishButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+                spanishButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            }
+        }
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                englishButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorMedGrey));
+                englishButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+            }
+        }
     }
 
     public void setLocale(String lang) {

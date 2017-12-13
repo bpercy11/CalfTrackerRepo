@@ -56,8 +56,10 @@ public class CalfListActivity extends BaseActivity {
 
         // Load the calf IDs into an ArrayList
         if(arrayExists) {
-            for (int i = 0; i < calfList.size(); i++) {
-                idArrayList.add(calfList.get(i).getFarmId());
+            if (calfList != null) {
+                for (int i = 0; i < calfList.size(); i++) {
+                    idArrayList.add(calfList.get(i).getFarmId());
+                }
             }
         } else { idArrayList.add("No calves exist. Click here to get started!"); }
 

@@ -257,13 +257,15 @@ public class AddCalfActivity extends BaseActivity {
 
         // Check to make sure a duplicate calf is not being created
         retrieveData();
-        for (int i = 0; i < calfList.size(); i++) {
-            if (calfList.get(i).getFarmId().equals(calfID)) {
-                ID.setText("");
-                CharSequence text = "A calf with this ID already exists, please choose a new ID or delete the other calf";
-                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-                toast.show();
-                return;
+        if (calfList != null) {
+            for (int i = 0; i < calfList.size(); i++) {
+                if (calfList.get(i).getFarmId().equals(calfID)) {
+                    ID.setText("");
+                    CharSequence text = "A calf with this ID already exists, please choose a new ID or delete the other calf";
+                    Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                    toast.show();
+                    return;
+                }
             }
         }
 
