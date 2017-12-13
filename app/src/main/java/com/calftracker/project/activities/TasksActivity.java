@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
@@ -159,6 +160,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     public void onClickObservations(View view) {
         setObservationColumnNames();
 
+
+
         observeCalves = new ArrayList<Calf>();
 
         for(int i = 0; i < calfList.size(); i++)
@@ -184,6 +187,14 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     }
 
     public void showObservationDialog(Calf calf) {
+        if(illnessList == null) {
+            Toast.makeText(getApplicationContext(), "No illnesses defined", Toast.LENGTH_SHORT).show();
+            return;
+        } else if(illnessList.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No illnesses defined", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
@@ -225,6 +236,16 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
                     public void onClick(DialogInterface dialog, int id) {
                         Illness illness = (Illness) mIllnessSpinner.getSelectedItem();
                         Medicine medicine = (Medicine) mMedicationSpinner.getSelectedItem();
+
+                        if(illness == null) {
+                            Toast.makeText(getApplicationContext(), "No illness defined", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if(medicine == null) {
+                            Toast.makeText(getApplicationContext(), "No medicine defined", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         removeCalfFromObservations(illness, medicine, calfcopy.getFarmId());
 
