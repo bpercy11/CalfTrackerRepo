@@ -56,7 +56,7 @@ public class SplashScreenActivity extends Activity {
                     ArrayList<VaccineTask> emptyOverdueList = new ArrayList<>();
                     ArrayList<ArrayList<IllnessTask>> emptyIllnessTaskList = new ArrayList<ArrayList<IllnessTask>>();
 
-                    // Create emptyTaskList to hold a full year of entries
+                    // Create  emptyTaskList to hold a full year of entries
                     for (int i = 0; i < 365; i++) {
                         emptyTaskList.add(new ArrayList<VaccineTask>());
                     }
