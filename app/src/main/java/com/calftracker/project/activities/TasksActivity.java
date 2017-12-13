@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calftracker.project.adapters.tasks.TasksIllnessAdapter;
 import com.calftracker.project.adapters.tasks.TasksObservationAdapter;
@@ -31,6 +32,7 @@ import com.calftracker.project.models.Illness;
 import com.calftracker.project.models.IllnessTask;
 import com.calftracker.project.models.Medicine;
 import com.calftracker.project.models.Task;
+import com.calftracker.project.models.Vaccine;
 import com.calftracker.project.models.VaccineTaskItem;
 import com.calftracker.project.models.Vaccine_With_Count;
 import com.google.gson.Gson;
@@ -50,6 +52,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     private ArrayList<Calf> observeCalves;
     private ArrayList<Illness> illnessList;
+    private ArrayList<Vaccine> vaccineList;
 
     private TasksObservationAdapter observationAdapter;
 
@@ -102,7 +105,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         date = (TextView) findViewById(R.id.textViewTaskDate);
         date.setText("Tasks for " + dateStr);
 
-        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
+        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, vaccineList, calfList, TasksActivity.this);
         listView.setAdapter(vaccineAdapter);
 
         vaccinesButton = (Button) findViewById(R.id.buttonVaccineTasks);
@@ -149,6 +152,11 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
         json = mPreferences.getString("IllnessList", "");
         illnessList = gson.fromJson(json, new TypeToken<ArrayList<Illness>>() {}.getType());
+
+        json = mPreferences.getString("VaccineList", "");
+        vaccineList = gson.fromJson(json, new TypeToken<ArrayList<Vaccine>>() {
+        }.getType());
+
     }
 
     public void dumbDateChange(View view) {
@@ -157,6 +165,8 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
 
     public void onClickObservations(View view) {
         setObservationColumnNames();
+
+
 
         observeCalves = new ArrayList<Calf>();
 
@@ -183,6 +193,14 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
     }
 
     public void showObservationDialog(Calf calf) {
+        if(illnessList == null) {
+            Toast.makeText(getApplicationContext(), "No illnesses defined", Toast.LENGTH_SHORT).show();
+            return;
+        } else if(illnessList.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No illnesses defined", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(TasksActivity.this);
 
         LayoutInflater inflater = TasksActivity.this.getLayoutInflater();
@@ -224,6 +242,16 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
                     public void onClick(DialogInterface dialog, int id) {
                         Illness illness = (Illness) mIllnessSpinner.getSelectedItem();
                         Medicine medicine = (Medicine) mMedicationSpinner.getSelectedItem();
+
+                        if(illness == null) {
+                            Toast.makeText(getApplicationContext(), "No illness defined", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if(medicine == null) {
+                            Toast.makeText(getApplicationContext(), "No medicine defined", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         removeCalfFromObservations(illness, medicine, calfcopy.getFarmId());
 
@@ -295,7 +323,7 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         for(int i = 0; i < task.getOverdueVaccinations().size(); i++)
             todayTasks.add(new VaccineTaskItem(true, task.getOverdueVaccinations().get(i)));
 
-        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, calfList);
+        vaccineAdapter = new TasksVaccinationAdapter(getApplicationContext(), todayTasks, vaccineList, calfList, TasksActivity.this);
         listView.setAdapter(vaccineAdapter);
 
         // Background tint only works on 15 & up.
@@ -359,6 +387,11 @@ public class TasksActivity extends BaseActivity implements TasksMethods {
         mLeftLabel.setText(R.string.tasks_illness_calf_id);
         mRightLabel.setText(R.string.tasks_illness_current_med);
         mCenterLabel.setVisibility(View.VISIBLE);
+    }
+
+    public void gotoTaskVaccDetails() {
+        Intent intent = new Intent(this, TaskDetailsActivity.class);
+        startActivity(intent);
     }
 
     @Override
