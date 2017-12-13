@@ -60,14 +60,14 @@ public class TasksVaccinationAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        VaccineTaskItem task = this.todayTasks.get(position);
-        boolean vaccUsed = false;
-        for (int i = 0; i < usedVaccNames.size(); i++) {
-            if (usedVaccNames.get(i).equals(task.getVaccineTask().getVaccine().getName())) {
-                vaccUsed = true;
-                break;
-            }
-        }
+//        VaccineTaskItem task = this.todayTasks.get(position);
+//        boolean vaccUsed = false;
+//        for (int i = 0; i < usedVaccNames.size(); i++) {
+//            if (usedVaccNames.get(i).equals(task.getVaccineTask().getVaccine().getName())) {
+//                vaccUsed = true;
+//                break;
+//            }
+//        }
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.tasks_vaccine_item, null);
@@ -84,17 +84,19 @@ public class TasksVaccinationAdapter extends BaseAdapter{
         int eligibleCount = 0;
         final Vaccine currVacc = vaccineList.get(position);
 
+        if(!todayTasks.isEmpty() || todayTasks != null) {
             for (int i = 0; i < todayTasks.size(); i++) {
                 if (todayTasks.get(i).getVaccineTask().getVaccine().getName().equals(currVacc.getName())) {
                     for (int j = 0; j < todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().size(); j++) {
                         if (todayTasks.get(i).getVaccineTask().getCalf().getNeededVaccines().get(j).getName().equals(currVacc.getName())) {
                             eligibleCount++;
-                            if(todayTasks.get(i).isOverdue())
+                            if (todayTasks.get(i).isOverdue())
                                 holder.overdueNotification.setVisibility(View.VISIBLE);
                         }
                     }
                 }
             }
+        }
 
             final int count = eligibleCount;
 
